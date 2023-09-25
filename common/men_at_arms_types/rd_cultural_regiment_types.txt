@@ -1,0 +1,122 @@
+﻿@maa_buy_cost = 150
+@maa_low_maintenance_cost = 1.0
+@maa_high_maintenance_cost = 5.0
+@cultural_maa_extra_ai_score = 100900 # Equivalent to having 2.5 extra regiments beyond what the code scoring would indicate (see NEGATIVE_SCORE_PER_EXISTING_REGIMENT)
+@cultural_maa_extra_ai_scorea = 100650
+@cultural_maa_extra_ai_scoreb = 100650
+
+rd_light_calary_archers = {
+	type = light_cavalry
+	
+	damage = 42
+	toughness = 30
+	pursuit = 36
+	screen = 55
+		can_recruit = {
+		culture = { has_innovation = innovation_rd_compound_bows
+					
+				
+				}
+			kol_is_han_trigger = yes
+	}
+	terrain_bonus = {
+		farmlands = {damage = 20 toughness = 25}
+		steppe = { damage = 15 toughness = 35}
+		plains = { damage = 20 toughness = 35}
+		drylands = { damage = 20 toughness = 35}
+		jungle = { damage = -20 pursuit = -20 }
+		wetlands = { damage = -30 pursuit = -30 }
+		mountains = { damage = -30 pursuit = -30 }
+		desert_mountains = { damage = -30 pursuit = -30 }
+	}
+
+	counters = {
+		archers = 3
+		skirmishers = 2
+		archer_cavalry = 4
+	}
+
+	buy_cost = { gold = 120 }
+	low_maintenance_cost = { gold = 0.75}
+	high_maintenance_cost = { gold = 1.5 }
+	
+	stack = 100
+	ai_quality = { value = @cultural_maa_extra_ai_scorea }
+	icon = light_cavalry
+}
+rd_han_palace_guards = {
+	type = heavy_infantry
+	
+	damage = 42
+	toughness = 36
+	pursuit = 0
+	screen = 5
+		can_recruit = {
+		culture = { has_innovation = innovation_rd_compound_bows
+				has_cultural_pillar = heritage_chinese}
+	kol_is_han_trigger = yes
+	}
+	terrain_bonus = {
+		farmlands = {damage = 15 toughness = 25}
+		steppe = {damage = 15 toughness = 10}
+		plains = {damage = 15 toughness = 15}
+		drylands = {damage = 15  toughness = 10}
+		hills = {  toughness = 15 }
+		mountains = { toughness = 25 }
+
+	}
+	
+	counters = {
+		heavy_infantry = 2
+		skirmishers = 3
+		pikemen = 2
+	}
+	
+	buy_cost = { gold = heavy_infantry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_infantry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_infantry_high_maint_cost }
+	
+    ai_quality = { value = @cultural_maa_extra_ai_score }
+	stack = 150
+	icon = heavy_infantry
+}
+
+rd_han_shenwu_army = {
+	type = heavy_cavalry
+	
+	damage = 107
+	toughness = 55
+	pursuit = 10
+	screen = 0
+		can_recruit = {
+		culture = { has_innovation = innovation_rd_compound_bows
+				has_cultural_pillar = heritage_chinese}
+	kol_is_han_trigger = yes
+	}
+	terrain_bonus = {
+		farmlands = {damage = 30 toughness = 25}
+		steppe = {damage = 30 toughness = 22 pursuit = 25}
+		plains = { damage = 30 pursuit = 15 screen = 10}
+		drylands = { damage = 30 pursuit = 15 screen = 10}
+		hills = { damage = -10 }
+		jungle = { damage = -25 }
+		mountains = { damage = -50 }
+		desert_mountains = { damage = -50}
+		wetlands = { damage = -75 }
+	}
+
+	counters = {
+		skirmishers = 3
+		archer_cavalry = 6
+        archers = 3
+		light_cavalry = 2
+	}
+
+	buy_cost = { gold = 225 }
+	low_maintenance_cost = { gold = 1.5 }
+	high_maintenance_cost = { gold = 2.25 }
+	
+	stack = 50
+	ai_quality = { value = @cultural_maa_extra_ai_scoreb }
+	icon = heavy_cavalry
+}

@@ -1,0 +1,16 @@
+﻿l_simp_chinese:
+    kol_culture_self_identity_decision:0 "我是谁"
+    kol_culture_self_identity_decision_tooltip:0 "决定文化的认同归属。"
+    kol_culture_self_identity_decision_desc:0 "新的融合文化往往会面临一个认同困境，我们的人民究竟属于那种母文化，还是成为了一种全新的文化，都应当尽快做出决断。"
+        kol_culture_self_identity_decision_confirm:0 "做出决断！"
+     rd_the_build_land_decision_confirm:0 "特殊决议"
+     kol_culture_event.315.t:0 "我是谁"
+     kol_you_are_han_tooltip:0 "你是汉人"
+     kol_base_culture_cap_tooltip:0 "与所选文化基础文化接受度提升40（需要KOL mod）"
+     kol_culture_event.315.desc:0 "新的融合文化往往会面临一个认同困境，我们的人民是[kol_rd_han_trigger_this_culture.GetNameNoTooltip]文化所传承的[kol_trigger_culture_1.GetNameNoTooltip]人，还是我们所学习的[kol_trigger_culture_2.GetNameNoTooltip]，甚至说[kol_trigger_culture_2.GetNameNoTooltip]成为了一种全新的文化。"
+     kol_culture_event.315.a:0 "[kol_trigger_culture_1.GetNameNoTooltip]人是我们的过去的全部、现在的一切和未来的所有！"
+     kol_culture_event.315.b:0 "我们是光荣的[kol_trigger_culture_2.GetNameNoTooltip]人！一点[kol_trigger_culture_1.GetNameNoTooltip]文化改变不了我们！"
+     kol_culture_event.315.c:0 "[kol_rd_han_trigger_this_culture.GetNameNoTooltip]谁都不是，[kol_rd_han_trigger_this_culture.GetNameNoTooltip]是一种全新的文化！"
+      kol_no_branch_can_be_great_tooltip:0 "文化可以使用KOLmod升格根基文化"
+     kol_culture_self_identity_decision.tt:0 "触发事件，决定我们的文化的认同归属。"
+   

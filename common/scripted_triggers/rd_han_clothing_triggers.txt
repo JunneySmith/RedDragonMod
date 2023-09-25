@@ -1,0 +1,340 @@
+﻿portrait_rd_han_clothing_trigger = {
+	#NOT = { has_game_rule =  rd_han_temp_clothing_no_at_all}
+	NOT = { has_game_rule =  rd_han_temp_clothing_no_at_all_2}
+			scope:culture  = {
+		portrait_rd_han_clothing_contents_trigger = yes
+	}
+}
+portrait_religious_buddhist_trigger = {
+    OR = {
+        religion = religion:buddhism_religion
+        faith = faith:bon
+    }	
+
+}
+portrait_wear_armor_trigger = {
+	exists = this
+	OR = {
+		AND = {
+			is_ruler = yes
+			has_government = mercenary_government
+		}
+		is_commanding_army = yes
+		exists = knight_army
+		AND = {
+			is_knight = yes
+			is_councillor = no
+			OR = {
+				is_landed = no
+				liege = {
+					is_at_war = yes
+				}
+			}
+		}
+		AND = {
+			has_council_position = councillor_marshal
+			OR = {
+				is_landed = no
+				primary_title.tier < tier_kingdom
+			}
+		}
+		has_character_flag = is_currently_varangian
+		has_character_flag = single_combat_duel_armor
+	}
+}
+
+portrait_wear_armor_currently_in_army_trigger = {
+	exists = this
+	OR = {
+		is_commanding_army = yes
+		exists = knight_army
+	}
+}
+
+
+portrait_wear_helmet_trigger = { # Different from Armor, as Counts+ should show their crowns!
+	exists = this
+	OR = {
+		AND = {
+			is_ruler = yes
+			has_government = mercenary_government
+		}
+		AND = {
+			is_ruler = yes
+			has_government = holy_order_government
+		}
+		has_trait = order_member
+		AND = {
+			is_commanding_army = yes
+			OR = {
+				is_landed = no
+				AND = {
+					exists = primary_title
+					primary_title.tier < tier_duchy
+				}
+			}
+		}
+		exists = knight_army
+		AND = {
+			is_knight = yes
+			is_councillor = no
+			OR = {
+				is_landed = no
+				AND = {
+					exists = primary_title
+					primary_title.tier < tier_duchy
+					liege = {
+						is_at_war = yes
+					}
+				}
+			}
+		}
+		AND = {
+			has_council_position = councillor_marshal
+			OR = {
+				is_landed = no
+				primary_title.tier < tier_duchy
+			}
+		}	
+		has_character_flag = is_currently_varangian
+		has_character_flag = single_combat_duel_armor
+	}
+	NAND = {
+		has_trait = peasant_leader
+		OR = {
+			is_ruler = no
+			is_leading_faction_type = peasant_faction
+			AND = {
+				is_ruler = yes
+				is_landed = no
+				OR = {
+					has_government = feudal_government
+					has_government = clan_government
+				}
+			}
+		}
+	}
+}
+
+portrait_rd_han_clothing_spouse_trigger = {
+	culture = {
+		portrait_rd_han_clothing_contents_trigger = yes
+	}
+}
+
+portrait_rd_han_clothing_contents_trigger = {
+	has_clothing_gfx = rd_han_clothing_gfx
+
+}
+can_keep_single_heir_succession_law_trigger = {
+	# The 'can_keep' triggers are dependent on actually having the law. If they aren't, the trigger breakdown for the player breaks and shows incomplete information.
+	trigger_if = {
+		limit = {
+			has_realm_law = single_heir_succession_law
+		}
+		OR = {
+			can_have_single_heir_succession_law_trigger = yes
+			# Byzantine Empire
+			historical_succession_access_single_heir_succession_law_trigger = yes
+		}
+	}
+}
+
+can_have_single_heir_succession_law_trigger = {
+OR = {
+	culture = {
+		has_innovation = innovation_rd_han_culture
+	}
+	culture = {
+		has_innovation = innovation_primogeniture
+	}
+	historical_succession_access_single_heir_succession_law_trigger = yes
+	}
+	# Non-tribals only
+	custom_description = {
+		text = succession_laws_must_have_organised_government_tooltip
+		OR = {
+			has_government = feudal_government
+			has_government = clan_government
+		}
+	}
+}
+culture_has_heavy_infantry_maa = {
+	OR = {
+kol_culture_is_han_trigger = yes
+		has_cultural_parameter = unlock_maa_ayyar
+		has_cultural_parameter = unlock_maa_mubarizun
+		has_cultural_parameter = unlock_maa_druzhina
+		has_cultural_parameter = unlock_maa_khandayat
+		has_cultural_parameter = unlock_maa_garudas
+		has_cultural_parameter = unlock_maa_palace_guards
+		has_cultural_parameter = unlock_maa_huscarls
+		has_cultural_parameter = unlock_maa_mountaineer
+		has_cultural_parameter = unlock_maa_zbrojnosh
+		has_innovation = innovation_sarawit #Sarawit - Later Era MAA
+		has_innovation = innovation_legionnaires #Praetorian
+	}
+}
+
+culture_has_light_cavalry_maa = {
+	OR = {
+kol_culture_is_han_trigger = yes
+		has_cultural_parameter = unlock_maa_mulaththamun
+		has_cultural_parameter = unlock_maa_hussar #Konni
+		has_innovation = innovation_desert_tactics #Chasseur
+		has_innovation = innovation_caballeros #Caballero
+		has_innovation = innovation_hobbies #Hobelar
+		has_innovation = innovation_sahel_horsemen #Sahel Horsemen
+	}
+}
+kol_culture_is_han_trigger = {
+	OR = {
+		this = culture:han
+	AND = {
+	is_divergent_culture = yes
+	NOT = {
+
+	any_parent_culture_or_above= {
+	NOT = { this = culture:han }
+	
+	}
+	
+	}
+	
+	}
+	}
+}
+culture_has_heavy_cavalry_maa = {
+	OR = {
+kol_culture_is_han_trigger = yes
+		has_cultural_parameter = unlock_maa_cataphract
+		has_cultural_parameter = unlock_maa_monaspa
+		has_innovation = innovation_valets #Gendarme - Later Era MAA
+	}
+}
+
+portrait_rd_step_clothing_trigger = {
+	#NOT = { has_game_rule =  rd_han_temp_clothing_no_at_all}
+	NOT = { has_game_rule =  rd_han_temp_clothing_no_at_all_2}
+		scope:culture  = {
+		portrait_rd_step_clothing_contents_trigger = yes
+	}
+
+}
+
+portrait_rd_step_clothing_spouse_trigger = {
+	#NOT = { has_game_rule =  rd_han_temp_clothing_no_at_all}
+	NOT = { has_game_rule =  rd_han_temp_clothing_no_at_all_2}
+	culture = {
+		portrait_rd_step_clothing_contents_trigger = yes
+	}
+}
+portrait_rd_step_clothing_contents_trigger = {
+	has_clothing_gfx = mongol_clothing_gfx
+}
+portrait_wear_helmet_trigger = { # Different from Armor, as Counts+ should show their crowns!
+	exists = this
+	OR = {
+		AND = {
+			is_ruler = yes
+			has_government = mercenary_government
+		}
+		AND = {
+			is_ruler = yes
+			has_government = holy_order_government
+		}
+		has_trait = order_member
+		AND = {
+			is_commanding_army = yes
+			OR = {
+			AND = {
+				culture = culture:han
+					#NOT = { has_game_rule =  rd_han_temp_clothing_no_at_all}
+	NOT = { has_game_rule =  rd_han_temp_clothing_no_at_all_2}
+				
+				}
+				is_landed = no
+				AND = {
+					exists = primary_title
+					primary_title.tier < tier_duchy
+				}
+			}
+		}
+		exists = knight_army
+		AND = {
+			is_knight = yes
+			is_councillor = no
+			OR = {
+				is_landed = no
+				AND = {
+					exists = primary_title
+					primary_title.tier < tier_duchy
+					liege = {
+						is_at_war = yes
+					}
+				}
+			}
+		}
+		AND = {
+			has_council_position = councillor_marshal
+			OR = {
+				is_landed = no
+				primary_title.tier < tier_duchy
+			}
+		}	
+		has_character_flag = is_currently_varangian
+		has_character_flag = single_combat_duel_armor
+	}
+	NAND = {
+		has_trait = peasant_leader
+		OR = {
+			is_ruler = no
+			is_leading_faction_type = peasant_faction
+			AND = {
+				is_ruler = yes
+				is_landed = no
+				OR = {
+					has_government = feudal_government
+					has_government = clan_government
+				}
+			}
+		}
+	}
+}
+
+
+portrait_steppe_clothing_trigger = {
+	scope:culture = {
+		portrait_steppe_clothing_contents_trigger = yes
+	}
+			OR = {
+	 has_game_rule =  rd_han_temp_clothing_no_at_all_2
+	  has_game_rule =  rd_han_temp_clothing_no_at_all
+	 }
+
+}
+
+portrait_steppe_clothing_spouse_trigger = {
+		OR = {
+	 has_game_rule =  rd_han_temp_clothing_no_at_all_2
+	  has_game_rule =  rd_han_temp_clothing_no_at_all
+	 }
+	culture = {
+		portrait_steppe_clothing_contents_trigger = yes
+	}
+	
+}
+
+portrait_steppe_clothing_contents_trigger = {
+		OR = {
+	 has_game_rule =  rd_han_temp_clothing_no_at_all_2
+	  has_game_rule =  rd_han_temp_clothing_no_at_all
+	 }
+	 OR = {
+ has_clothing_gfx =  mongol_clothing_gfx 
+
+	has_clothing_gfx = rd_han_clothing_gfx
+	
+
+	}
+}

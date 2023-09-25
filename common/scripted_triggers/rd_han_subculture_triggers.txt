@@ -1,0 +1,66 @@
+﻿
+kol_is_han_trigger = {
+OR = {
+	culture = culture:han
+	culture = {
+has_game_rule = rd_han_land_hyb_yes
+	save_temporary_scope_as = kol_culture_is_han_temp_test_trigger
+			culture:han = {
+				is_target_in_variable_list = {
+				name = kol_branch_culture_list
+				target = prev
+			}
+			}
+				has_same_culture_language = culture:han
+	has_cultural_pillar = heritage_chinese
+	has_name_list = name_list_han
+	}
+	AND = {
+	culture = {
+	is_divergent_culture = yes
+	}
+	NOT = {
+	culture = {
+	any_parent_culture_or_above= {
+	NOT = { this = culture:han }
+	
+	}
+	
+	}
+	}
+	}
+}
+}
+
+kol_culture_is_han_trigger = {
+OR = {
+	this = culture:han
+	this = {
+has_game_rule = rd_han_land_hyb_yes
+	save_temporary_scope_as = kol_culture_is_han_temp_test_trigger
+			culture:han = {
+				is_target_in_variable_list = {
+				name = kol_branch_culture_list
+				target = prev
+			}
+			}
+				has_same_culture_language = culture:han
+	has_cultural_pillar = heritage_chinese
+	has_name_list = name_list_han
+	}
+	AND = {
+	this = {
+	is_divergent_culture = yes
+	}
+	NOT = {
+	this = {
+	any_parent_culture_or_above= {
+	NOT = { this = culture:han }
+	
+	}
+	
+	}
+	}
+	}
+}
+}

@@ -1,0 +1,10 @@
+﻿l_simp_chinese:
+ DIVERGE_NAME_FORMAT_0:0 "[CULTURE.GetCollectiveNounNoTooltip]（[TITLE.GetNameNoTooltip]）"
+ DIVERGE_COLLECTIVE_NOUN_FORMAT_0:0 "[CULTURE.GetCollectiveNounNoTooltip]（[TITLE.GetNameNoTooltip]）"
+ DIVERGE_PREFIX_FORMAT_0:0 "[CULTURE.GetPrefixNoTooltip]（[TITLE.GetNameNoTooltip]）"
+ DIVERGE_NAME_FORMAT_1:0 "[CULTURE.GetCollectiveNounNoTooltip]（[TITLE.GetAdjectiveNoTooltip]）"
+ DIVERGE_COLLECTIVE_NOUN_FORMAT_1:0 "新[CULTURE.GetCollectiveNounNoTooltip]（[TITLE.GetNameNoTooltip]）"
+ DIVERGE_PREFIX_FORMAT_1:0 "新[CULTURE.GetPrefixNoTooltip]（[TITLE.GetNameNoTooltip]）"
+ DIVERGE_NAME_FORMAT_2:0 "新[CULTURE.GetNameNoTooltip]"
+ DIVERGE_COLLECTIVE_NOUN_FORMAT_2:0 "新[CULTURE.GetCollectiveNounNoTooltip]"
+ DIVERGE_PREFIX_FORMAT_2:0 "新[CULTURE.GetPrefixNoTooltip]"

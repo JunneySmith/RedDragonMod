@@ -1,0 +1,185 @@
+﻿
+tradition_han_farming = {
+	category = regional
+
+	layers = {
+		0 = steward
+		1 = indian
+		4 = farmland.dds
+	}
+	is_shown = {
+		has_cultural_pillar = heritage_chinese
+kol_culture_is_han_trigger = yes
+	}
+	can_pick = {
+		has_cultural_pillar = heritage_chinese
+	}
+	parameters = {
+	hard_working_traits_more_valued = yes
+grants_to_lowborns_bonuses = yes
+pastures_building_bonuses = yes
+plantations_building_bonuses = yes
+peat_quarries_building_bonuses = yes
+hill_farms_building_bonuses = yes
+logging_camps_building_bonuses = yes
+	}
+	character_modifier = {
+	men_at_arms_cap = 1
+	development_growth_factor = 0.2
+	}
+	county_modifier = {
+		farmlands_development_growth_factor = 0.15
+		farmlands_construction_gold_cost = -0.1
+		floodplains_development_growth_factor = 0.15
+		floodplains_construction_gold_cost = -0.1
+	}
+	
+	cost = {
+		prestige = {
+			add = {
+				value = tradition_base_cost
+				desc = BASE
+				format = "BASE_VALUE_FORMAT"
+			}
+			if = {
+				limit = {
+					any_in_list = { list = traits this = flag:ethos_bellicose }
+				}
+				add = {
+					value = tradition_incompatible_ethos_penalty
+					desc = culture_not_bellicose
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						any_culture_county = {
+							count >= 5
+							any_county_province = {
+								OR = {
+									terrain = farmlands
+									terrain = floodplains
+								}
+							}
+						}
+					}
+				}
+				add = {
+					value = tradition_unfulfilled_criteria_penalty
+					desc = culture_in_farmlands_or_floodplains_terrain_count_desc
+				}
+			}
+			
+			multiply = tradition_replacement_cost_if_relevant
+		}
+	}
+	
+	ai_will_do = {
+		value = 100
+		if = {
+			limit = {
+				NOT = {
+					scope:character = {
+						any_sub_realm_county = {
+							count >= 2
+							culture = scope:character.culture
+							any_county_province = {
+								OR = {
+									terrain = farmlands
+									terrain = floodplains
+								}
+							}
+						}
+					}
+				}
+			}
+			multiply = 0
+		}
+		if = {
+			limit = {
+				scope:character = {
+					has_government = tribal_government
+				}
+			}
+			multiply = 0
+		}
+	}
+}
+tradition_rd_han_legacy = {
+	category = regional
+
+	layers = {
+		0 = martial
+		1 = indian
+		4 = battle.dds
+	}
+	
+	is_shown = {
+		has_cultural_pillar = heritage_chinese
+kol_culture_is_han_trigger = yes
+	}
+	can_pick = {
+	
+		has_cultural_pillar = heritage_chinese
+	}
+	parameters = {
+		strong_traits_more_common = yes
+		martial_education_more_valued = yes
+		prowess_traits_more_valued = yes
+		blademaster_trait_bonuses = yes
+		wanderers_gain_extra_combat_skills = yes
+		can_duel_rivals = yes
+		expensive_convert_to_local_culture = yes
+		harder_to_hybridize = yes
+		can_host_joust_contests = yes
+	}
+
+	character_modifier = {
+		prowess_per_piety_level = 1
+		negate_prowess_penalty_add = 5
+		knight_limit = 2
+	}
+	
+	cost = {
+		prestige = {
+			add = {
+				value = tradition_base_cost
+				desc = BASE
+				format = "BASE_VALUE_FORMAT"
+			}
+			if = {
+				limit = {
+					NOR = {
+						any_in_list = { list = traits this = flag:ethos_bellicose }
+						any_in_list = { list = traits this = flag:ethos_courtly }
+						any_in_list = { list = traits this = flag:ethos_communal }
+					}
+				}
+				add = {
+					value = tradition_incompatible_ethos_penalty
+					desc = not_bellicose_courtly_or_communal_desc
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						scope:character = {
+							any_knight = {
+								count >= 6
+								prowess >= 12
+							}
+						}
+					}
+				}
+				add = {
+					value = tradition_unfulfilled_criteria_penalty
+					desc = knights_with_prowess_desc
+				}
+			}
+			
+			multiply = tradition_replacement_cost_if_relevant
+		}
+	}
+
+	ai_will_do = { value = 100 }
+}

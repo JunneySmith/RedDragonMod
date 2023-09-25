@@ -1,0 +1,273 @@
+﻿e_rdwestchina_protector = {
+	type = character
+	special = holder
+	gender = male
+	tier = empire
+	priority = 301
+	titles = { e_rdwestchina }
+	top_liege = no
+}
+
+e_rdwestchina_female_protector = {
+	type = character
+	special = holder
+	gender = female
+	tier = empire
+	priority = 301
+	titles = { e_rdwestchina }
+	top_liege = no
+}
+
+
+rd_han_baron = {
+	type = character
+	gender = male
+	special = holder
+	tier = barony
+	heritages = { heritage_chinese }
+	priority = 8
+}
+rd_han_baron_female = {
+	type = character
+	gender = female
+	special = holder
+	tier = barony
+	heritages = { heritage_chinese }
+	priority = 8
+}
+
+rd_han_barony = {
+	type = title
+	tier = barony
+	heritages = { heritage_chinese }
+	priority = 8
+}
+
+rd_han_count = {
+	type = character
+	gender = male
+	special = holder
+	tier = county
+	heritages = { heritage_chinese }
+	priority = 20
+}
+rd_han_count_female = {
+	type = character
+	gender = female
+	special = holder
+	tier = county
+	heritages = { heritage_chinese }
+	priority = 20
+}
+rd_han_county = {
+	type = title
+	tier = county
+	heritages = { heritage_chinese }
+	priority = 20
+}
+
+rd_han_duke = {
+	type = character
+	gender = male
+	special = holder
+	tier = duchy
+	heritages = { heritage_chinese }
+	priority = 30
+}
+rd_han_duke_female = {
+	type = character
+	gender = female
+	special = holder
+	tier = duchy
+	heritages = { heritage_chinese }
+	priority = 30
+}
+
+rd_han_duchy = {
+	type = title
+	tier = duchy
+	heritages = { heritage_chinese }
+	priority = 30
+}
+rd_han_king = {
+	type = character
+	gender = male
+	special = holder
+	tier = kingdom
+	heritages = { heritage_chinese }
+	priority = 52
+}
+
+rd_han_king_guiyi = {
+	type = character
+	gender = male
+	special = holder
+	tier = kingdom
+	titles = { k_guiyi }
+	priority = 60
+}
+rd_han_king_female_guiyi = {
+	type = character
+	gender = female
+	special = holder
+	tier = kingdom
+	titles = { k_guiyi }
+	priority = 52
+}
+rd_han_king_female = {
+	type = character
+	gender = female
+	special = holder
+	tier = kingdom
+	heritages = { heritage_chinese }
+	priority = 52
+}
+rd_han_kingdom = {
+	type = title
+	tier = kingdom
+	heritages = { heritage_chinese }
+	priority = 50
+}
+title_k_guiyi_f = {
+	type = title
+	top_liege = no
+	tier = kingdom
+	titles = { k_guiyi }
+	priority = 60
+}
+
+
+rd_han_baron_republic_male = {
+	type = character
+	gender = male
+	special = holder
+	tier = barony
+	heritages = { heritage_chinese }
+	priority = 15
+	top_liege = no
+	governments = { republic_government }
+}
+rd_han_baron_republic_female = {
+	type = character
+	gender = female
+	special = holder
+	tier = barony
+	priority = 15
+	heritages = { heritage_chinese }
+	top_liege = no
+	governments = { republic_government }
+}
+rd_han_barony_republic = {
+	type = title
+	tier = barony
+	priority = 15
+	heritages = { heritage_chinese }
+	governments = { republic_government }
+}
+rd_han_count_republic_male = {
+	type = character
+	gender = male
+	special = holder
+	tier = county
+	priority = 25
+	heritages = { heritage_chinese }
+	top_liege = no
+	governments = { republic_government }
+}
+rd_han_count_republic_female = {
+	type = character
+	gender = female
+	special = holder
+	tier = county
+	priority = 25
+	heritages = { heritage_chinese }
+	top_liege = no
+	governments = { republic_government }
+}
+rd_han_county_republic = {
+	type = title
+	tier = county
+	priority = 30
+	heritages = { heritage_chinese }
+	governments = { republic_government }
+}
+rd_han_duke_republic_male = {
+	type = character
+	gender = male
+	special = holder
+	tier = duchy
+	priority = 35
+	heritages = { heritage_chinese }
+	top_liege = no
+	governments = { republic_government }
+}
+rd_han_duke_republic_female = {
+	type = character
+	gender = female
+	special = holder
+	tier = duchy
+	priority = 35
+	heritages = { heritage_chinese }
+	top_liege = no
+	governments = { republic_government }
+}
+rd_han_duchy_republic = {
+	type = title
+	tier = duchy
+	priority = 35
+	heritages = { heritage_chinese }
+	governments = { republic_government }
+}
+rd_han_king_republic_male = {
+	type = character
+	gender = male
+	special = holder
+	tier = kingdom
+	heritages = { heritage_chinese }
+	priority = 55
+	governments = { republic_government }
+}
+rd_han_king_republic_female = {
+	type = character
+	gender = female
+	special = holder
+	tier = kingdom
+	heritages = { heritage_chinese }
+	priority = 55
+	governments = { republic_government }
+}
+rd_han_kingdom_republic = {
+	type = title
+	tier = kingdom
+	heritages = { heritage_chinese }
+	priority = 55
+	governments = { republic_government }
+}
+rd_han_emperor_republic_male = {
+	type = character
+	gender = male
+	special = holder
+	tier = empire
+	priority = 110
+	heritages = { heritage_chinese }
+	top_liege = no
+	governments = { republic_government }
+}
+rd_han_emperor_republic_female = {
+	type = character
+	gender = female
+	special = holder
+	tier = empire
+	priority = 110
+	heritages = { heritage_chinese }
+	top_liege = no
+	governments = { republic_government }
+}
+rd_han_empire_republic = {
+	type = title
+	tier = empire
+	top_liege = no
+	priority = 110
+	heritages = { heritage_chinese }
+	governments = { republic_government }
+}

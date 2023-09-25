@@ -1,0 +1,5 @@
+﻿
+house_Sassanid= {
+	name = "dynn_Sassanid"
+	dynasty = 1029100
+}

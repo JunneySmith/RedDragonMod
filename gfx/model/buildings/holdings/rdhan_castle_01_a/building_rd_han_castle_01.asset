@@ -1,0 +1,48 @@
+pdxmesh = {
+	name = "cose_asian_fort_01_mesh"
+	file = "cose_asian_fort.mesh"
+	scale = 0.9
+
+	lod_percentages = {
+		lod = { index = 1 percent = 2.0 }
+		lod = { index = 2 percent = 1.0 }
+	}
+
+	meshsettings = {
+		name = "building_cose_asian_fort_01_LOD_0Shape"
+		index = 0
+		texture_diffuse = "cosmi_asian_fort_diffuse.dds"
+		texture_normal = "cosmi_asian_fort_normal.dds"
+		texture_specular = "cosmi_asian_fort_spec.dds"
+		texture = { file = "cosmi_asian_fort_diffuse.dds" index = 5 }
+		shader = "standard_atlas"
+		shader_file = "gfx/FX/pdxmesh.shader"
+	}
+
+	meshsettings = {
+		name = "building_cose_asian_fort_01_LOD_1Shape"
+		index = 0
+		texture_diffuse = "cosmi_asian_fort_diffuse.dds"
+		texture_normal = "cosmi_asian_fort_normal.dds"
+		texture_specular = "cosmi_asian_fort_spec.dds"
+		texture = { file = "cosmi_asian_fort_diffuse.dds" index = 5 }
+		shader = "standard_atlas"
+		shader_file = "gfx/FX/pdxmesh.shader"
+	}
+
+	meshsettings = {
+		name = "building_cose_asian_fort_01_LOD_2Shape"
+		index = 0
+		texture_diffuse = "cosmi_asian_fort_diffuse.dds"
+		texture_normal = "cosmi_asian_fort_normal.dds"
+		texture_specular = "cosmi_asian_fort_spec.dds"
+		texture = { file = "cosmi_asian_fort_diffuse.dds" index = 5 }
+		shader = "standard_atlas"
+		shader_file = "gfx/FX/pdxmesh.shader"
+	}
+}
+
+entity = {
+	name = "building_cose_asian_fort_entity"
+	pdxmesh = "cose_asian_fort_01_mesh"
+}

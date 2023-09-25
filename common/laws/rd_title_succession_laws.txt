@@ -1,0 +1,35 @@
+﻿title_succession_laws = {
+	#Default Feudal Elective
+	rd_army_elective_succession_law = {
+		can_have = {
+		kol_is_han_trigger = yes
+			has_government = feudal_government
+			highest_held_title_tier >= tier_kingdom
+			NOR = { #Cultures have their special flavor.
+				culture = { has_cultural_parameter = witenagemot_succession_enabled }
+				culture = { has_cultural_parameter = scandinavian_elective_enabled }
+			}
+		}
+		can_pass = {
+				kol_is_han_trigger = yes
+			can_change_title_law_trigger = yes
+		}
+		can_title_have = {
+			can_title_have_law_general_trigger = yes
+			tier >= tier_kingdom
+		}
+		succession = {
+			order_of_succession = election
+			election_type = rd_han_elective
+		}
+		flag = elective_succession_law
+		title_allegiance_opinion = 15
+		revoke_cost = {
+			prestige = change_hre_title_succession_law_prestige_cost
+		}
+		pass_cost = {
+			prestige = change_title_succession_law_prestige_cost
+		}
+	}
+
+}

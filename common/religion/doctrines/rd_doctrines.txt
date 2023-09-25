@@ -1,0 +1,209 @@
+﻿doctrine_rd_taoist_organization = {
+group = "main_group"
+		rd_tenet_pacifism = {
+		icon = core_tenet_pacifism
+		piety_cost = {
+			if = {
+				limit = {
+					religion_tag = christianity_religion
+					religion_tag = taoism_religion
+				}
+				value = faith_tenet_cost_low
+			}
+			else_if = {
+				limit = {
+					religion_tag = islam_religion
+				}
+				value = faith_tenet_cost_high
+			}
+			else = {
+				value = faith_tenet_cost_mid
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_pacifism }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+religion_tag = taoism_religion
+has_doctrine = rd_tenet_pacifism
+		}
+
+		can_pick = {
+			custom_description = {
+				text = incompatible_tenet_human_sacrifice_trigger
+				NOT = { flag:tenet_human_sacrifice = { is_in_list = selected_doctrines } }
+			}
+			custom_description = {
+				text = incompatible_tenet_armed_pilgrimages_trigger
+				NOT = { flag:tenet_armed_pilgrimages = { is_in_list = selected_doctrines } }
+			}
+			custom_description = {
+				text = incompatible_tenet_gruesome_festivals_trigger
+				NOT = {
+					flag:tenet_gruesome_festivals = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+
+		parameters = {
+			holy_wars_forbidden = yes
+			pacifist_opinion_active = yes
+			opinion_of_pacifist_opinion_active = 10
+			piety_from_long_peace = 1
+		}
+
+		traits = {
+			virtues = { calm }
+			sins = { wrathful }
+		}
+		
+		character_modifier = {
+			domain_limit = 1
+		}
+	}
+}
+doctrine_rd_taoist = {
+	group = "main_group"
+
+		rd_shufa_fulu = {
+		icon = core_tenet_bigbook
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = buddhism_religion
+						religion_tag = jainism_religion
+					}
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_low
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_communal_identity }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			religion_tag = taoism_religion
+		}
+				parameters = {
+							hostility_same_religion = 0
+			combatant_can_be_either_gender = yes
+		}
+	character_modifier = {
+health = 0.15
+
+	}
+	}
+	
+			rd_daoshi_school = {
+		icon = core_tenet_bigbook
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = buddhism_religion
+						religion_tag = jainism_religion
+					}
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_low
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_communal_identity }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			religion_tag = taoism_religion
+		}
+				parameters = {
+							hostility_same_religion = 0
+			combatant_can_be_either_gender = yes
+						hostility_same_family = 0
+			hostility_others = 3
+		}
+	character_modifier = {
+health = 0.25
+learning_per_piety_level = 1
+	}
+	}
+			rd_shengdao_rushi = {
+		icon = core_tenet_bigbook
+				is_shown = {
+			religion_tag = taoism_religion
+		}
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = buddhism_religion
+						religion_tag = jainism_religion
+					}
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_low
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_communal_identity }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+
+		parameters = {
+				allowed_holding_type_city_holding = yes
+			combatant_can_be_either_gender = yes
+										hostility_same_religion = 0
+		}
+	}
+					rd_guojiazhuguan = {
+		icon = core_tenet_bigbook
+				is_shown = {
+			religion_tag = taoism_religion
+		}
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = buddhism_religion
+						religion_tag = jainism_religion
+					}
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_low
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_communal_identity }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		parameters = {
+			allowed_holding_type_church_holding = yes
+			combatant_can_be_either_gender = yes
+										hostility_same_religion = 0
+		}
+	}
+	}

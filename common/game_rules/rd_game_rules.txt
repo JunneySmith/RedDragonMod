@@ -1,0 +1,47 @@
+﻿rd_han_temp_clothing = {
+	default = rd_han_temp_clothing_no
+
+	rd_han_temp_clothing_no = {
+
+	}
+	
+		#rd_han_temp_clothing_no_at_all = {
+#
+#	}
+		rd_han_temp_clothing_no_at_all_2 = {
+
+	}
+
+	
+}
+
+#rd_han_temp_hat = {
+#	default = rd_han_temp_hat_no
+#
+#	rd_han_temp_hat_no = {
+#
+#	}
+#}
+
+rd_han_land_enchant = {
+	default = rd_han_land_enchant_yes
+
+	rd_han_land_enchant_no = {
+
+	}
+		rd_han_land_enchant_yes = {
+	}
+
+	
+}
+rd_han_allow_hybrid_cul = {
+	default = rd_han_land_hyb_yes
+
+	rd_han_land_hyb_no = {
+
+	}
+		rd_han_land_hyb_yes	= {
+	}
+
+	
+}

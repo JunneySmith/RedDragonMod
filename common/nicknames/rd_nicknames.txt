@@ -1,0 +1,8 @@
+﻿#############################################
+# CHARACTER NICKNAMES
+#############################################
+
+# Exclusively Historical Nicknames
+nick_rd_savior = {}
+nick_rd_expander = {}
+nick_rd_gouhanjian = {}

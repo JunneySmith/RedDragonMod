@@ -1,0 +1,23 @@
+﻿rd_han_learn_from_india= {
+	index = 301
+	development_growth = 0.015
+}
+rd_han_learn_from_tubo= {
+	index = 302
+	
+				mountains_advantage = 5
+			mountains_attrition_mult = -0.3
+			hills_advantage = 5
+			hills_attrition_mult = -0.3
+	
+	
+}
+rd_han_learn_from_bosi= {
+	index = 303
+	learning_per_piety_level = 1
+}
+rd_han_faith_warrior= {
+	index = 304
+	prowess = 3
+	same_culture_opinion = 5
+}

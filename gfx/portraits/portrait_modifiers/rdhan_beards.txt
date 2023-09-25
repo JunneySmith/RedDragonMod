@@ -1,0 +1,131 @@
+﻿# Make sure the weights here match up best as possible with the custom_beards set
+rd_han_beard = {
+
+	usage = game
+
+    selection_behavior = weighted_random
+
+    rd_han_beards = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = beards
+                template = rd_han_beards
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }   
+        # outfit_tags = { no_clothes }
+        weight = {
+            base = 0
+            modifier = {exists = this
+                add = 70
+
+                    portrait_rd_han_clothing_trigger = yes
+                
+            }
+            modifier = {exists = this # Muslims should always have a beard
+                add = 200
+                religion = religion:islam_religion
+                portrait_rd_han_clothing_trigger = yes
+            }
+            modifier = {exists = this
+                add = -100
+                OR = {
+                    is_from_ruler_designer = yes
+                    has_character_flag = has_scripted_appearance
+                }
+            }
+        }
+    }
+	
+	}
+	
+	rd_step_beard = {
+
+	usage = game
+
+    selection_behavior = weighted_random
+
+    rd_steppe_straight = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = beards
+                template = steppe_beards_straight
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }   
+        # outfit_tags = { no_clothes }
+        weight = {
+            base = 0
+            modifier = {exists = this
+                add = 50
+                OR = {
+                     has_gene = {
+                        category = gene_hair_type
+                        template = hair_straight
+                    }       
+                    has_gene = {
+                        category = gene_hair_type
+                        template = hair_wavy
+                    }            
+                }
+                portrait_rd_step_clothing_trigger = yes
+            }
+            modifier = {exists = this # Muslims should always have a beard
+                add = 200
+                religion = religion:islam_religion
+                portrait_rd_step_clothing_trigger = yes
+            }
+            modifier = {exists = this
+                add = -100
+                OR = {
+                    is_from_ruler_designer = yes
+                    has_character_flag = has_scripted_appearance
+                }
+            }
+        }
+    }
+
+    rd_steppe_curly = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = beards
+                template = steppe_beards_curly
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }   
+        # outfit_tags = { no_clothes }
+        weight = {
+            base = 0
+            modifier = {exists = this
+                add = 50
+                OR = {
+                     has_gene = {
+                        category = gene_hair_type
+                        template = hair_wavy
+                    }       
+                    has_gene = {
+                        category = gene_hair_type
+                        template = hair_curly
+                    }            
+                }
+                portrait_rd_step_clothing_trigger = yes
+            }
+            modifier = {exists = this # Muslims should always have a beard
+                add = 200
+                religion = religion:islam_religion
+                portrait_rd_step_clothing_trigger = yes
+            }
+            modifier = {exists = this
+                add = -100
+                OR = {
+                    is_from_ruler_designer = yes
+                    has_character_flag = has_scripted_appearance
+                }
+            }
+        }
+    }
+	
+	}

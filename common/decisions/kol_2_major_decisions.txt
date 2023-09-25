@@ -1,0 +1,65 @@
+﻿kol_culture_self_identity_decision = { #by Ewan Cowhig Croft
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	desc = kol_culture_self_identity_decision_desc
+major = yes
+	ai_check_interval = 36
+
+	is_shown = {
+	has_game_rule = rd_han_land_hyb_yes
+	
+	culture = {
+	save_temporary_scope_as = kol_temp_trigger_culture
+					NOT = {
+			is_target_in_global_variable_list = {
+				name = kol_identified_culture_list
+				target = scope:kol_temp_trigger_culture
+			}
+		}
+	is_hybrid_culture = yes
+		any_parent_culture = {
+	has_same_culture_heritage = scope:kol_temp_trigger_culture
+	
+	}
+	}
+
+
+	}
+
+	is_valid = {
+		culture = {
+	is_hybrid_culture = yes
+	}
+ 
+		
+	}
+
+	cost = {
+		prestige = 500
+	}
+
+	effect = {
+			show_as_tooltip = {
+			custom_tooltip = kol_culture_self_identity_decision.tt
+		}
+	culture ={
+	save_scope_as = kol_identified_trigger_culture
+	}
+			add_to_global_variable_list = {
+			name = kol_identified_culture_list
+			target = scope:kol_identified_trigger_culture
+		}
+		trigger_event = kol_culture_event.315
+	}
+
+	ai_potential = {
+			culture = {
+		culture_is_not_historical_hybrid_trigger = yes
+		
+		}
+	}
+
+	ai_will_do = {
+		base = 100
+		
+	}
+}

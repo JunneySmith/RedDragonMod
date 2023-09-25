@@ -1,0 +1,173 @@
+﻿@baby_hair_age = 5
+@african_clothing_no_hair_chance = 6.5
+
+# Make sure the weights here match up best as possible with the custom_hair set
+rd_han_hairstyle = {
+
+    usage = game
+    selection_behavior = weighted_random
+    rd_han_style = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = rd_han_hairstyles
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }   
+        weight = {
+            base = 0
+            modifier = {exists = this
+                add = 55
+			
+		
+                portrait_rd_han_clothing_trigger = yes
+            }
+            modifier = {exists = this
+                add = -100
+                OR = {
+                    is_from_ruler_designer = yes
+                    has_character_flag = has_scripted_appearance
+                }
+            }
+        }
+    }
+   
+}
+
+rd_step_hairstyle = {
+
+    usage = game
+    selection_behavior = weighted_random
+   
+    rd_step_straight = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = steppe_hairstyles_straight
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }   
+        weight = {
+            base = 0
+            modifier = {
+                add = 55
+				OR = {
+                    NOT = { exists = this }
+					has_gene = {
+						category = gene_hair_type
+						template = hair_straight
+					}
+					has_gene = {
+						category = gene_hair_type
+						template = hair_straight_thin_beard
+					}
+				}
+                portrait_rd_step_clothing_trigger = yes
+            }
+            modifier = {
+                add = -100
+                exists = this
+                OR = {
+                    is_from_ruler_designer = yes
+                    has_character_flag = has_scripted_appearance
+                }
+            }
+        }
+    }
+
+    rd_step_wavy = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = steppe_hairstyles_wavy
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }   
+        weight = {
+            base = 0
+            modifier = {
+                add = 55
+                exists = this
+                has_gene = {
+                    category = gene_hair_type
+                    template = hair_wavy
+                }
+                portrait_rd_step_clothing_trigger = yes
+            }
+            modifier = {
+                add = -100
+                exists = this
+                OR = {
+                    is_from_ruler_designer = yes
+                    has_character_flag = has_scripted_appearance
+                }
+            }
+        }
+    }
+
+    rd_step_curly = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = steppe_hairstyles_curly
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }   
+        weight = {
+            base = 0
+            modifier = {
+                add = 55
+                exists = this
+                has_gene = {
+                    category = gene_hair_type
+                    template = hair_curly
+                }
+                portrait_rd_step_clothing_trigger = yes
+            }
+            modifier = {
+                add = -100
+                exists = this
+                OR = {
+                    is_from_ruler_designer = yes
+                    has_character_flag = has_scripted_appearance
+                }
+            }
+        }
+    }
+
+    rd_step_afro = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = steppe_hairstyles_afro
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }   
+        weight = {
+            base = 0
+            modifier = {
+                add = 55
+                exists = this
+                has_gene = {
+                    category = gene_hair_type
+                    template = hair_afro
+                }
+                portrait_rd_step_clothing_trigger = yes
+            }
+            modifier = {
+                add = -100
+                exists = this
+                OR = {
+                    is_from_ruler_designer = yes
+                    has_character_flag = has_scripted_appearance
+                }
+            }
+        }
+    }
+   
+}

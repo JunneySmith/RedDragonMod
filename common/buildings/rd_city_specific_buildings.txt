@@ -1,0 +1,492 @@
+﻿
+rd_city_han_buildings_01 = {
+	construction_time = quick_construction_time
+
+	can_construct = {
+	 	has_holding_type = city_holding 
+		
+			scope:holder = {
+OR = {
+any_liege_or_above = {
+
+		any_stewardship_councillor  = {
+		kol_is_han_trigger = yes
+		
+		}
+}
+		kol_is_han_trigger = yes
+		any_stewardship_councillor  = {
+		kol_is_han_trigger = yes
+		
+		}
+		}
+
+		}
+		
+	
+	
+		#building_military_camps_requirement_terrain = yes
+		building_requirement_castle_city_church = { LEVEL = 01 }
+	}
+		on_complete = {
+	if = {
+	limit = { NOT = { has_province_modifier =rd_han_mil_modifier  }}
+	add_building_slot = 1
+	}
+	add_province_modifier = rd_han_mil_modifier
+	
+	
+	}
+	can_construct_showing_failures_only = {
+		building_requirement_tribal = no
+	}
+	
+	cost_gold = cheap_building_tier_1_cost
+	
+	province_modifier = {
+		garrison_size = 0.25
+		fort_level = 1
+		monthly_income = 0.5
+				stationed_archers_damage_add = 12
+		stationed_archers_toughness_add = 12
+	}
+	character_modifier = {
+
+	}
+	max_garrison = good_building_max_garrison_tier_1
+	next_building = rd_city_han_buildings_02
+
+	type_icon = "icon_building_leisure_palace.dds"
+	flag = rd_han_dipl_building
+	ai_value = {
+		base = 100
+	}
+	#type = special
+}
+
+rd_city_han_buildings_02 = {
+	construction_time = quick_construction_time
+	flag = rd_han_dipl_building
+	can_construct = {
+	 	has_holding_type = city_holding 
+		
+			scope:holder = {
+OR = {
+any_liege_or_above = {
+
+		any_stewardship_councillor  = {
+		kol_is_han_trigger = yes
+		
+		}
+}
+		kol_is_han_trigger = yes
+		any_stewardship_councillor  = {
+		kol_is_han_trigger = yes
+		
+		}
+		}
+
+		}
+		
+		
+
+	
+		#building_military_camps_requirement_terrain = yes
+		building_requirement_castle_city_church = { LEVEL = 01 }
+		scope:holder.culture = {
+			has_innovation = innovation_barracks
+		}
+	}
+
+	can_construct_showing_failures_only = {
+		building_requirement_tribal = no
+	}
+	
+	cost_gold = cheap_building_tier_2_cost
+max_garrison = good_building_max_garrison_tier_2
+	province_modifier = {
+	development_growth_factor = 0.1
+		garrison_size = 0.25
+		fort_level = 1
+				stationed_archers_damage_add = 15
+		stationed_archers_toughness_add = 15
+		stationed_skirmishers_screen_add = 15
+		stationed_skirmishers_damage_add = 15
+	}
+	character_modifier = {
+
+	}
+
+	next_building = rd_city_han_buildings_03
+	#type = special
+	ai_value = {
+		base = 9
+	}
+}
+
+rd_city_han_buildings_03 = {
+	construction_time = quick_construction_time
+flag = rd_han_dipl_building
+	can_construct = {
+	 	has_holding_type = city_holding 
+		
+			scope:holder = {
+OR = {
+any_liege_or_above = {
+
+		any_stewardship_councillor  = {
+		kol_is_han_trigger = yes
+		
+		}
+}
+		kol_is_han_trigger = yes
+		any_stewardship_councillor  = {
+		kol_is_han_trigger = yes
+		
+		}
+		}
+
+		}
+		
+
+		building_requirement_castle_city_church = { LEVEL = 02 }
+		scope:holder.culture = {
+			has_innovation = innovation_burhs
+		}
+	}
+max_garrison = good_building_max_garrison_tier_3
+	can_construct_showing_failures_only = {
+		building_requirement_tribal = no
+	}
+	
+	cost_gold = cheap_building_tier_3_cost
+
+	province_modifier = {
+	development_growth_factor = 0.1
+		garrison_size = 0.25
+		monthly_income = 0.5
+		fort_level = 2
+				stationed_archers_damage_add = 20
+		stationed_archers_toughness_add = 20
+		stationed_skirmishers_screen_add = 20
+		stationed_skirmishers_damage_add =15
+	}
+	character_modifier = {
+
+	}
+	
+	next_building = rd_city_han_buildings_04
+	#type = special
+	ai_value = {
+		base = 8
+	}
+}
+
+rd_city_han_buildings_04 = {
+	construction_time = quick_construction_time
+	flag = rd_han_dipl_building
+	can_construct = {
+	 	has_holding_type = city_holding 
+		
+			scope:holder = {
+OR = {
+any_liege_or_above = {
+
+		any_stewardship_councillor  = {
+		kol_is_han_trigger = yes
+		
+		}
+}
+		kol_is_han_trigger = yes
+		any_stewardship_councillor  = {
+		kol_is_han_trigger = yes
+		
+		}
+		}
+
+		}
+		
+
+
+		building_requirement_castle_city_church = { LEVEL = 02 }
+		scope:holder.culture = {
+			has_innovation = innovation_burhs
+		}
+	}
+max_garrison = good_building_max_garrison_tier_4
+	can_construct_showing_failures_only = {
+		building_requirement_tribal = no
+	}
+	
+	cost_gold = cheap_building_tier_4_cost
+
+	province_modifier = {
+	development_growth_factor = 0.1
+		garrison_size = 0.25
+		tax_mult = 0.15
+		monthly_income = 0.8
+		fort_level = 4
+				stationed_archers_damage_add = 20
+		stationed_archers_toughness_add = 25
+		stationed_skirmishers_screen_add = 25
+		stationed_skirmishers_damage_add = 25
+		stationed_pikemen_toughness_add = 25
+	}
+	character_modifier = {
+
+	}
+	next_building = rd_city_han_buildings_05
+	#type = special
+	ai_value = {
+		base = 7
+	}
+}
+
+rd_city_han_buildings_05 = {
+	construction_time = quick_construction_time
+	flag = rd_han_dipl_building
+	can_construct = {
+	 	has_holding_type = city_holding 
+		
+			scope:holder = {
+OR = {
+any_liege_or_above = {
+
+		any_stewardship_councillor  = {
+		kol_is_han_trigger = yes
+		
+		}
+}
+		kol_is_han_trigger = yes
+		any_stewardship_councillor  = {
+		kol_is_han_trigger = yes
+		
+		}
+		}
+
+		}
+		
+		
+		building_requirement_castle_city_church = { LEVEL = 03 }
+		scope:holder.culture = {
+			has_innovation = innovation_castle_baileys
+		}
+	}
+
+	can_construct_showing_failures_only = {
+		building_requirement_tribal = no
+	}
+	max_garrison = good_building_max_garrison_tier_5
+	cost_gold = cheap_building_tier_5_cost
+	
+	province_modifier = {
+	development_growth_factor = 0.1
+		garrison_size = 0.25
+		tax_mult = 0.15
+		monthly_income = 0.8
+		fort_level = 4
+		monthly_county_control_change_add = 0.15
+				stationed_archers_damage_add = 25
+		stationed_archers_toughness_add = 25
+		stationed_skirmishers_screen_add = 25
+		stationed_skirmishers_damage_add = 25
+		stationed_pikemen_toughness_add = 25
+	}
+	character_modifier = {
+
+	}
+	
+	next_building = rd_city_han_buildings_06
+	#type = special
+	ai_value = {
+		base = 6
+	}
+}
+
+rd_city_han_buildings_06 = {
+	construction_time = quick_construction_time
+	flag = rd_han_dipl_building
+	can_construct = {
+	 	has_holding_type = city_holding 
+		
+			scope:holder = {
+OR = {
+any_liege_or_above = {
+
+		any_stewardship_councillor  = {
+		kol_is_han_trigger = yes
+		
+		}
+}
+		kol_is_han_trigger = yes
+		any_stewardship_councillor  = {
+		kol_is_han_trigger = yes
+		
+		}
+		}
+
+		}
+		
+		
+		building_requirement_castle_city_church = { LEVEL = 03 }
+		scope:holder.culture = {
+			has_innovation = innovation_castle_baileys
+		}
+	}
+max_garrison = good_building_max_garrison_tier_6
+	can_construct_showing_failures_only = {
+		building_requirement_tribal = no
+	}
+	
+	cost_gold = cheap_building_tier_6_cost
+	
+	
+	province_modifier = {
+	development_growth_factor = 0.1
+		garrison_size = 0.25
+		tax_mult = 0.15
+		monthly_income = 1
+		fort_level = 4
+		monthly_county_control_change_add = 0.15
+				stationed_archers_damage_add = 25
+		stationed_archers_toughness_add = 28
+		stationed_skirmishers_screen_add = 28
+		stationed_skirmishers_damage_add = 28
+		stationed_pikemen_damage_add = 28
+		stationed_pikemen_toughness_add = 28
+	}
+	character_modifier = {
+
+	}
+	
+	next_building = rd_city_han_buildings_07
+	#type = special
+	ai_value = {
+		base = 5
+	}
+}
+
+rd_city_han_buildings_07 = {
+	construction_time = quick_construction_time
+	flag = rd_han_dipl_building
+	can_construct = {
+	 	has_holding_type = city_holding 
+		
+			scope:holder = {
+OR = {
+any_liege_or_above = {
+
+		any_stewardship_councillor  = {
+		kol_is_han_trigger = yes
+		
+		}
+}
+		kol_is_han_trigger = yes
+		any_stewardship_councillor  = {
+		kol_is_han_trigger = yes
+		
+		}
+		}
+
+		}
+		
+		
+		building_requirement_castle_city_church = { LEVEL = 04 }
+		scope:holder.culture = {
+			has_innovation = innovation_royal_armory
+		}
+	}
+	max_garrison = good_building_max_garrison_tier_7
+	can_construct_showing_failures_only = {
+		building_requirement_tribal = no
+	}
+
+	cost_gold = cheap_building_tier_7_cost
+	
+	
+	province_modifier = {
+		development_growth_factor = 0.15
+		garrison_size = 0.25
+		tax_mult = 0.15
+		monthly_income = 1
+		fort_level = 5
+				stationed_archers_damage_add = 25
+		stationed_archers_toughness_add = 28
+		stationed_skirmishers_screen_add = 28
+		stationed_skirmishers_damage_add = 28
+		stationed_pikemen_damage_add = 28
+		stationed_pikemen_toughness_add = 28
+	}
+	character_modifier = {
+
+	}
+	
+	next_building = rd_city_han_buildings_08
+	#type = special
+	ai_value = {
+		base = 4
+	}
+}
+
+rd_city_han_buildings_08 = {
+	construction_time = quick_construction_time
+	flag = rd_han_dipl_building
+	can_construct = {
+	 	has_holding_type = city_holding 
+		
+			scope:holder = {
+OR = {
+any_liege_or_above = {
+
+		any_stewardship_councillor  = {
+		kol_is_han_trigger = yes
+		
+		}
+}
+		kol_is_han_trigger = yes
+		any_stewardship_councillor  = {
+		kol_is_han_trigger = yes
+		
+		}
+		}
+
+		}
+		
+
+		building_requirement_castle_city_church = { LEVEL = 04 }
+		scope:holder.culture = {
+			has_innovation = innovation_royal_armory
+		}
+	}
+
+	can_construct_showing_failures_only = {
+		building_requirement_tribal = no
+	}
+	
+	cost_gold = cheap_building_tier_8_cost
+	
+	max_garrison = good_building_max_garrison_tier_8
+	province_modifier = {
+	development_growth_factor = 0.15
+		garrison_size = 0.5
+		tax_mult = 0.15
+		monthly_income = 1
+		fort_level = 6
+		monthly_county_control_change_add = 0.15
+				stationed_archers_damage_add = 25
+		stationed_archers_toughness_add = 28
+		stationed_skirmishers_screen_add = 28
+		stationed_skirmishers_damage_add = 28
+		stationed_pikemen_damage_add = 28
+		stationed_pikemen_toughness_add = 28
+	}
+	character_modifier = {
+
+	}
+
+	#type = special
+
+	ai_value = {
+		base = 3
+	}
+}

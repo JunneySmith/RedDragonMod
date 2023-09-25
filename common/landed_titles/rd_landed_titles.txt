@@ -1,0 +1,45 @@
+﻿e_rdwestchina = {
+	color = { 255 180 51 }
+	definite_form = yes
+	capital = c_suzhou
+			can_create = {
+			highest_held_title_tier >= tier_empire
+						is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:rd_unite_the_western_han_decision
+			}
+						culture = culture:han
+has_title =  title:k_guiyi
+				}
+		k_rdliang = { 
+		color = { 255 20 147 }
+		
+		capital = c_suzhou
+		
+		}
+		k_guiyi = {
+	color = { 181 135 55 }
+	
+	capital = c_shazhou # Shazhou/Dunhuang
+}
+
+	}
+	
+	e_rdwestchina_emp = {
+	color = { 167 10 100 }
+	capital = c_suzhou
+	}
+		e_rdsouthchina = {
+	color = { 64 224 208 }
+	capital = c_suzhou
+	}
+	e_rdnorthchina= {
+	color = { 128 128 128}
+	capital = c_suzhou
+	}
+
+	
+	e_huaxia = {
+	color = { 220 10 10 }
+	capital = c_suzhou
+	}

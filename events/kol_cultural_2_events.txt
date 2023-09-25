@@ -1,0 +1,81 @@
+﻿namespace = kol_culture_event
+
+kol_culture_event.315 = {
+	type = character_event
+	title = kol_culture_event.315.t
+	desc = kol_culture_event.315.desc
+	theme = realm
+	left_portrait =	{
+		character = root
+		animation = personality_rational
+	}
+	immediate ={
+	culture = {
+	save_scope_as = kol_rd_han_trigger_this_culture
+	random_parent_culture = {
+	limit = {
+	has_same_culture_heritage = scope:kol_rd_han_trigger_this_culture
+	
+	}
+	save_scope_as = kol_trigger_culture_1
+	}
+		random_parent_culture = {
+	limit = {
+	NOT = {has_same_culture_heritage = scope:kol_rd_han_trigger_this_culture}
+	
+	}
+	save_scope_as = kol_trigger_culture_2
+	}
+	
+	}
+	}
+	#Change based on my culture. Or, occasionally, dynasty.
+	option = {
+		name = kol_culture_event.315.a
+		add_prestige= 500
+		custom_tooltip = kol_base_culture_cap_tooltip
+scope:kol_trigger_culture_1 = {
+			add_to_variable_list = {
+			name = kol_branch_culture_list
+			target = scope:kol_rd_han_trigger_this_culture
+		}
+
+}
+		ai_chance = {	#The AI should always do this.
+			base = 100
+		}
+	}
+	option = {
+		name = kol_culture_event.315.b
+		add_prestige = 500
+		custom_tooltip = kol_base_culture_cap_tooltip
+scope:kol_trigger_culture_2 = {
+			add_to_variable_list = {
+			name = kol_branch_culture_list
+			target = scope:kol_rd_han_trigger_this_culture
+		}
+
+}
+		ai_chance = {	#The AI should always do this.
+			base = 0
+		}
+	}
+	
+	#Change based on my faith; not currently used, but can be set up in future if needed.
+	#Actually, no thanks.
+	option = {
+		name = kol_culture_event.315.c
+		add_prestige= 1500
+					add_to_global_variable_list = {
+			name = kol_identified_trigger_culture_can_great_list
+			target = scope:kol_rd_han_trigger_this_culture
+		}
+			custom_tooltip = kol_no_branch_can_be_great_tooltip
+		ai_chance = {	#Seriously, stay away.
+			base = 0
+		}
+		hidden_effect = { # Reimburse cost.
+			
+		}
+	}
+}

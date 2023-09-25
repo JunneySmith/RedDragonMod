@@ -1,0 +1,334 @@
+﻿
+rd_han_clothes = {
+	usage = game
+	selection_behavior = weighted_random
+	priority = 1
+
+	rd_han_no_clothes = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = clothes
+                template = no_clothes
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }   
+        outfit_tags = { no_clothes }
+        weight = {
+            base = -100
+            modifier = {
+                add = 1000
+				portrait_rd_han_clothing_trigger = yes
+                should_be_fully_naked_portrait_trigger = yes
+            }
+            modifier = {
+                add = 1000
+				portrait_rd_han_clothing_trigger = yes
+                should_be_topless_portrait_trigger = yes
+            }
+            modifier = {
+            	add = -1000
+				portrait_rd_han_clothing_trigger = yes
+            	should_show_nudity = no
+            }
+        }
+    }
+
+	rd_han_default_clothes = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = clothes
+                template = no_clothes
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }   
+        weight = {
+            base = -100
+			modifier = {
+                add = 0
+				portrait_rd_han_clothing_trigger = yes
+            }
+			
+        }
+    }
+
+## So that the Prophet Muhammad does not have a portrait ## 
+
+	rd_han_no_portrait = {
+		dna_modifiers = {
+			accessory = {
+				mode = add				
+				gene = clothes
+				template = no_clothes
+				value = 0.5
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 200
+				this = character:33922
+			}
+		}
+	}
+
+## Small children ## 
+
+rd_han_children = {
+
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = clothes
+				template = western_children_commoner_clothes
+				range = { 0 1 } # For the randomness to work correctly
+			}
+			morph = {
+				mode = modify_multiply
+				gene = gene_bs_bust
+				value = 1.0
+				template = bust_clothes
+			}
+			morph = {
+				mode = modify_multiply
+				gene = gene_bs_body_shape
+				value = 1.0
+				template = body_shape_average
+			}
+		}	
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				age < 4
+			}
+		}
+	}
+	rd_han_prison = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = clothes
+				template = mena_prison
+				range = { 0 1 } # For the randomness to work correctly
+			}
+			morph = {
+				mode = modify_multiply
+				gene = gene_bs_bust
+				value = 1.0
+				template = bust_clothes
+			}
+			morph = {
+				mode = modify_multiply
+				gene = gene_bs_body_shape
+				value = 1.0
+				template = body_shape_average_clothed
+			}
+		}	
+		weight = {
+			base = 0
+			modifier = {
+				add = 110
+				is_imprisoned = yes
+				is_in_prison_type = dungeon
+
+					portrait_rd_han_clothing_trigger = yes
+				
+			}
+		}
+	}
+	
+
+## Han ##
+
+	rd_han_commoners = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = clothes
+				template = rd_han_commoner_clothes
+				range = { 0 1 } # For the randomness to work correctly
+			}
+			morph = {
+				mode = modify_multiply
+				gene = gene_bs_bust
+				value = 0.8 # Setting this lower to reduce the exaggerated effect of large bust size when wearing clothes
+				template = bust_clothes
+			}
+
+		}	
+		weight = {
+			base = 0
+			modifier = {
+				add = 20
+				scope:highest_held_title_tier < tier_county
+				trigger_if = {
+					limit = { exists = this }
+					NOR = {
+						AND = {
+							exists = primary_spouse
+							primary_spouse = {
+								highest_held_title_tier > tier_county
+							}
+						}
+						AND = {
+							has_government = republic_government
+							primary_title.tier > 1
+						}
+						AND = { is_ruler = yes has_government = theocracy_government }
+					}
+				}
+				portrait_rd_han_clothing_trigger = yes
+			}
+		}
+	}
+
+	rd_han_low_nobles = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = clothes
+				template = rd_han_low_nobility_clothes
+				range = { 0 1 } # For the randomness to work correctly
+			}
+			morph = {
+				mode = modify_multiply
+				gene = gene_bs_bust
+				value = 0.8 # Setting this lower to reduce the exaggerated effect of large bust size when wearing clothes
+				template = bust_clothes
+			}
+
+		}	
+		weight = {
+			base = 0
+			modifier = {
+				add = 50
+				exists = court_owner
+				court_owner = {
+					has_royal_court = yes
+					amenity_level = { type = court_fashion value >= 4 }
+				}
+				portrait_rd_han_clothing_trigger = yes
+			}
+			modifier = {
+				add = 50
+				trigger_if = {
+					limit = { exists = this }
+					OR = {
+						AND = {
+							highest_held_title_tier = tier_county
+							NOR = {
+								# has_dynasty = no
+								AND = {
+									has_government = republic_government
+									primary_title.tier > 1
+								}
+								AND = { is_ruler = yes has_government = theocracy_government }
+							}
+							portrait_rd_han_clothing_trigger = yes
+						}
+						AND = {
+							exists = primary_spouse
+							OR = {
+								is_ruler = no
+								highest_held_title_tier = tier_barony
+							}
+							primary_spouse = {
+								highest_held_title_tier = tier_county
+								NOR = {
+									# has_dynasty = no
+									AND = {
+									has_government = republic_government
+										primary_title.tier > 1
+									}
+									AND = { is_ruler = yes has_government = theocracy_government }
+								}
+								portrait_rd_han_clothing_spouse_trigger = yes
+							}
+						}
+					}
+				}
+				trigger_else = {
+					scope:highest_held_title_tier = tier_county
+					portrait_rd_han_clothing_trigger = yes
+				}
+			}
+		}
+	}
+
+	rd_han_high_nobles = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = clothes
+				template = rd_han_high_nobility_clothes
+				range = { 0 1 } # For the randomness to work correctly
+			}
+			morph = {
+				mode = modify_multiply
+				gene = gene_bs_bust
+				value = 0.8 # Setting this lower to reduce the exaggerated effect of large bust size when wearing clothes
+				template = bust_clothes
+			}
+
+		}		
+		weight = {
+			base = 0
+			modifier = {
+				add = 50
+				exists = court_owner
+				court_owner = {
+					has_royal_court = yes
+					amenity_level = { type = court_fashion value = 5 }
+				}
+				portrait_rd_han_clothing_trigger = yes
+			}
+			modifier = {
+				add = 50
+				trigger_if = {
+					limit = { exists = this }
+					OR = {
+						AND = {
+							OR = {
+								highest_held_title_tier > tier_county
+								AND = {
+									has_government = republic_government
+									primary_title.tier > 1
+								}
+								AND = { is_ruler = yes has_government = theocracy_government }
+							}
+							NOT = { AND = { is_ruler = yes has_government = mercenary_government  } } # Blocked for mercenaries
+							portrait_rd_han_clothing_trigger = yes
+						}
+						AND = {
+							exists = primary_spouse
+							OR = {
+								is_ruler = no
+								highest_held_title_tier = tier_barony
+							}
+							primary_spouse = {
+								OR = {
+									highest_held_title_tier > tier_county
+									AND = {
+										has_government = republic_government
+										primary_title.tier > 1
+									}
+									AND = { is_ruler = yes has_government = theocracy_government }
+								}
+								portrait_rd_han_clothing_spouse_trigger = yes
+							}
+						}
+					}
+				}
+				trigger_else = {
+					scope:highest_held_title_tier > tier_county
+					portrait_rd_han_clothing_trigger = yes
+				}
+			}
+		}
+	}
+
+
+
+}

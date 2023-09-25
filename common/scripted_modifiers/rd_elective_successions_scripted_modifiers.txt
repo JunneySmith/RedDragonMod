@@ -1,0 +1,24 @@
+﻿rd_elector_general_voting_pattern_feudal_elective_modifier = {
+	modifier = { # Warrior society prefers warriors
+		desc = tooltip_rd_feudal_elector_vote_martial_education_low
+		NOT = { this = scope:candidate }
+		scope:candidate = {
+			NOT = {martial >= 10 }
+			NOT = {prowess >= 10 }
+		}
+		add = {
+			add = -15
+		}
+	}
+	modifier = { # Warrior society prefers warriors
+		desc = tooltip_rd_feudal_elector_vote_martial_education_fool
+		NOT = { this = scope:candidate }
+		scope:candidate = {
+			NOT = {martial >= 5 }
+			NOT = {prowess >= 5 }
+		}
+		add = {
+			add = -50
+		}
+	}
+}
