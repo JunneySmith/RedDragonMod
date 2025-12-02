@@ -1,0 +1,83 @@
+﻿portrait_rd_han_clothing_trigger = {
+	#NOT = { has_game_rule =  rd_han_temp_clothing_no_at_all}
+	NOT = { has_game_rule =  rd_han_temp_clothing_no_at_all_2}
+			scope:culture  = {
+		portrait_rd_han_clothing_contents_trigger = yes
+	}
+}
+portrait_religious_buddhist_trigger = {
+    OR = {
+        religion = religion:buddhism_religion
+        faith = faith:bon
+    }	
+
+}
+
+
+portrait_rd_han_clothing_spouse_trigger = {
+	culture = {
+		portrait_rd_han_clothing_contents_trigger = yes
+	}
+}
+
+portrait_rd_han_clothing_contents_trigger = {
+	has_clothing_gfx = rd_han_clothing_gfx
+
+}
+
+portrait_rd_step_clothing_trigger = {
+	#NOT = { has_game_rule =  rd_han_temp_clothing_no_at_all}
+	NOT = { has_game_rule =  rd_han_temp_clothing_no_at_all_2}
+		scope:culture  = {
+		portrait_rd_step_clothing_contents_trigger = yes
+	}
+
+}
+
+portrait_rd_step_clothing_spouse_trigger = {
+	#NOT = { has_game_rule =  rd_han_temp_clothing_no_at_all}
+	NOT = { has_game_rule =  rd_han_temp_clothing_no_at_all_2}
+	culture = {
+		portrait_rd_step_clothing_contents_trigger = yes
+	}
+}
+portrait_rd_step_clothing_contents_trigger = {
+	has_clothing_gfx = mongol_clothing_gfx
+}
+
+
+portrait_steppe_clothing_trigger = {
+	scope:culture = {
+		portrait_steppe_clothing_contents_trigger = yes
+	}
+			OR = {
+	 has_game_rule =  rd_han_temp_clothing_no_at_all_2
+	  has_game_rule =  rd_han_temp_clothing_no_at_all
+	 }
+
+}
+
+portrait_steppe_clothing_spouse_trigger = {
+		OR = {
+	 has_game_rule =  rd_han_temp_clothing_no_at_all_2
+	  has_game_rule =  rd_han_temp_clothing_no_at_all
+	 }
+	culture = {
+		portrait_steppe_clothing_contents_trigger = yes
+	}
+	
+}
+
+portrait_steppe_clothing_contents_trigger = {
+		OR = {
+	 has_game_rule =  rd_han_temp_clothing_no_at_all_2
+	  has_game_rule =  rd_han_temp_clothing_no_at_all
+	 }
+	 OR = {
+ has_clothing_gfx =  mongol_clothing_gfx 
+
+	has_clothing_gfx = rd_han_clothing_gfx
+	
+
+	}
+}

@@ -52,8 +52,12 @@ has_doctrine = rd_tenet_pacifism
 		parameters = {
 			holy_wars_forbidden = yes
 			pacifist_opinion_active = yes
-			opinion_of_pacifist_opinion_active = 10
+			opinion_of_pacifist_opinion_active = 25
 			piety_from_long_peace = 1
+			pluralism_pluralistic_proselytization_penalty = yes
+			pluralism_pluralistic_faction_join_chance = yes
+			pluralism_pluralistic_resistant_to_heresy = yes
+			pluralism_pluralistic_holy_wars_preserve_vassals = yes
 		}
 
 		traits = {
@@ -70,7 +74,7 @@ doctrine_rd_taoist = {
 	group = "main_group"
 
 		rd_shufa_fulu = {
-		icon = core_tenet_bigbook
+		icon = core_tenet_sun_worship
 		piety_cost = {
 			if = {
 				limit = {
@@ -106,7 +110,7 @@ health = 0.15
 	}
 	
 			rd_daoshi_school = {
-		icon = core_tenet_bigbook
+		icon = core_tenet_sun_worship
 		piety_cost = {
 			if = {
 				limit = {
@@ -143,7 +147,7 @@ learning_per_piety_level = 1
 	}
 	}
 			rd_shengdao_rushi = {
-		icon = core_tenet_bigbook
+		icon = core_tenet_sun_worship
 				is_shown = {
 			religion_tag = taoism_religion
 		}
@@ -176,7 +180,7 @@ learning_per_piety_level = 1
 		}
 	}
 					rd_guojiazhuguan = {
-		icon = core_tenet_bigbook
+		icon = core_tenet_sun_worship
 				is_shown = {
 			religion_tag = taoism_religion
 		}

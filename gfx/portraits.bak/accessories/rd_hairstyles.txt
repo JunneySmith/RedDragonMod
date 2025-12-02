@@ -1,0 +1,5 @@
+﻿male_hair_indian_03 = {
+	entity = { required_tags = "no_hair"			shared_pose_entity = head		 }
+	entity = { required_tags = ""					shared_pose_entity = head		entity = "male_hair_indian_03_entity" }
+	
+}

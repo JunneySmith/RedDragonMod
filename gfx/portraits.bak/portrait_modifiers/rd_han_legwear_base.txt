@@ -1,0 +1,119 @@
+﻿rd_han_legwear = {
+	# interface_position = 1
+	usage = game
+	selection_behavior = max
+	
+	rd_han_no_legwear = {
+		usage = game 
+		dna_modifiers = {
+			accessory = {
+				mode = add
+		
+				gene = legwear
+				template = no_legwear
+				value = 0
+			}
+		}
+        outfit_tags = { no_clothes }
+		weight = {
+			base = 0
+			modifier = {
+				add = 1000
+				AND = {
+					# Deliberately not the "fully naked" one since you'll wear a nightgown if we don't allow full nudity
+					should_be_naked_trigger = yes
+					portrait_rd_han_clothing_trigger = yes
+				}
+			}
+		}
+	}
+
+## No Leg wear for children under 4 ## 
+
+	rd_han_children_no_legwear = {
+
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = legwear
+				template = no_legwear
+				range = { 0 1 } # For the randomness to work correctly
+			}
+		}	
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				portrait_rd_han_clothing_trigger = yes
+				scope:age < 4
+			}
+		}
+	}
+
+	rd_han_default_legwear = {
+
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = legwear
+				template = mena_war_legwear
+				range = { 0 1 } # For the randomness to work correctly
+			}
+		}	
+		weight = {
+			base = -100
+			modifier = {
+				add = 101
+				OR = {
+					portrait_rd_han_clothing_trigger = yes
+											AND = {
+							exists = primary_spouse
+							
+								is_ruler = no
+								
+							
+							primary_spouse = {
+								portrait_rd_han_clothing_spouse_trigger = yes
+							}
+						}
+						}
+			}
+		}
+
+	}
+	rd_han_mena_war_legwear = {
+
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = legwear
+				template = mena_war_legwear
+				range = { 0 1 } # For the randomness to work correctly
+			}
+		}	
+		outfit_tags = { mena_war_legwear }
+		weight = {
+			base = 0
+			modifier = {
+				add = 101
+				portrait_wear_armor_trigger = yes
+				OR = {
+					portrait_rd_han_clothing_trigger = yes
+											AND = {
+							exists = primary_spouse
+							
+								is_ruler = no
+								
+							
+							primary_spouse = {
+								portrait_rd_han_clothing_spouse_trigger = yes
+							}
+						}
+						}
+					
+			}
+		}
+	}
+
+
+}

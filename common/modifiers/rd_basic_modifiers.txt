@@ -1,5 +1,5 @@
 ﻿rd_han_mil_modifier = {
-monthly_county_control_change_factor = 0.05
+heavy_infantry_damage_mult = 0.05
 }
 
 

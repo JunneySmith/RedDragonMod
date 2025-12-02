@@ -1,31 +1,160 @@
 ﻿han = {
-	color = han
-	
+	color = { 0.45 0.0 0.0 }
+
+	name_order_convention = dynasty_always_first
 	ethos = ethos_courtly
 	heritage = heritage_chinese
 	language = language_chinese
-	martial_custom = martial_custom_equal
+	martial_custom = martial_custom_male_only
+	head_determination = head_determination_domain
+	
 	traditions = {
-	tradition_rd_han_legacy
-		tradition_han_farming
-		tradition_stalwart_defenders
-		tradition_culinary_art
-		tradition_concubines
-		tradition_talent_acquisition
-		
-		
+
 	}
 	
+	dlc_tradition = {
+		trait = tradition_rd_han_legacy
+		requires_dlc_flag = all_under_heaven
+		fallback = tradition_rd_han_legacy
+	}
+	dlc_tradition = {
+		trait = tradition_tgp_art_of_war
+		requires_dlc_flag = all_under_heaven
+		fallback = tradition_stalwart_defenders
+	}
+	dlc_tradition = {
+		trait = tradition_cultural_primacy
+		requires_dlc_flag = all_under_heaven
+		fallback = tradition_talent_acquisition
+	}
+	dlc_tradition = {
+		trait = tradition_tgp_court_machinations
+		requires_dlc_flag = all_under_heaven
+		fallback = tradition_concubines
+	}
+	dlc_tradition = {
+		trait = tradition_cultivation
+		requires_dlc_flag = all_under_heaven
+		fallback = tradition_ce1_ritual_washing
+	}
+	dlc_tradition = {
+		trait = tradition_intensive_farming
+		requires_dlc_flag = all_under_heaven
+		fallback = tradition_han_farming
+	}
 	name_list = name_list_han
-		
+
 	coa_gfx = { chinese_group_coa_gfx }
-	building_gfx = { indian_building_gfx }
-	clothing_gfx = { rd_han_clothing_gfx }
-	unit_gfx = { mongol_unit_gfx }
+	building_gfx = { chinese_building_gfx }
+	clothing_gfx = { chinese_clothing_gfx }
+	unit_gfx = { chinese_unit_gfx }
+	house_coa_frame = house_china
 	
-
-
 		ethnicities = {
 			10 = rdhan
+			10 = asian_han_chinese
 		}
+}
+
+hlai = { # also known as Li
+	color = { 0.5 0.5 0.5 }
+
+	name_order_convention = dynasty_always_first
+	ethos = ethos_egalitarian
+	heritage = heritage_tai
+	language = language_tai
+	martial_custom = martial_custom_equal
+	head_determination = head_determination_domain
+
+	traditions = {
+		tradition_jungle_dwellers
+		tradition_equal_inheritance
+		tradition_charitable
+	}
+
+	dlc_tradition = {
+		trait = tradition_fp2_malleable_subjects
+		requires_dlc_flag = the_fate_of_iberia
+		fallback = tradition_xenophilic
+	}
+
+	name_list = name_list_han
+
+	coa_gfx = { chinese_group_coa_gfx }
+	building_gfx = { chinese_building_gfx }
+	clothing_gfx = { chinese_clothing_gfx }
+	unit_gfx = { chinese_unit_gfx }
+	house_coa_frame = house_china
+
+	ethnicities = {
+		10 = asian_han_chinese
+	}
+}
+
+yi = {
+	color = { 0.9 0.9 0.9 }
+
+	name_order_convention = dynasty_always_first
+	ethos = ethos_stoic
+	heritage = heritage_chinese
+	language = language_burmese
+	martial_custom = martial_custom_male_only
+	head_determination = head_determination_domain
+
+	traditions = {
+		tradition_hill_dwellers
+		tradition_highland_warriors
+	}
+
+	dlc_tradition = {
+		trait = tradition_fp2_malleable_subjects
+		requires_dlc_flag = the_fate_of_iberia
+		fallback = tradition_xenophilic
+	}
+
+	name_list = name_list_han
+
+	coa_gfx = { chinese_group_coa_gfx }
+	building_gfx = { chinese_building_gfx }
+	clothing_gfx = { chinese_clothing_gfx }
+	unit_gfx = { chinese_unit_gfx }
+	house_coa_frame = house_china
+
+	ethnicities = {
+		10 = asian_han_chinese
+	}
+}
+
+bai = {
+	color = { 0.9 0.4 0.1 }
+
+	name_order_convention = dynasty_always_first
+	ethos = ethos_courtly
+	heritage = heritage_chinese
+	language = language_chinese
+	martial_custom = martial_custom_male_only
+	head_determination = head_determination_domain
+
+	traditions = {
+		tradition_hill_dwellers
+		tradition_xenophilic
+		tradition_ruling_caste
+	}
+	
+	dlc_tradition = {
+		trait = tradition_tgp_hydraulic_builders
+		requires_dlc_flag = all_under_heaven
+	}
+
+	name_list = name_list_han
+
+	coa_gfx = { chinese_group_coa_gfx }
+	building_gfx = { chinese_building_gfx }
+	clothing_gfx = { chinese_clothing_gfx }
+	unit_gfx = { chinese_unit_gfx }
+	house_coa_frame = house_china
+
+	ethnicities = {
+		10 = asian_han_chinese
+	}
 }

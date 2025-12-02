@@ -1,0 +1,142 @@
+﻿rd_han_administrative_government_opinion = {
+	decimals = 0
+}
+
+rd_han_administrative_government_vassal_opinion = {
+	decimals = 0
+}
+
+rd_han_administrative_government_opinion_same_faith = {
+	decimals = 0
+}
+
+rd_han_administrative_government_tax_contribution_add = {
+	decimals = 0
+	prefix = MOD_GOLD_PREFIX
+	percent = yes
+}
+
+rd_han_administrative_government_tax_contribution_mult = {
+	decimals = 0
+	prefix = MOD_GOLD_PREFIX
+	percent = yes
+}
+
+rd_han_administrative_government_levy_contribution_add = {
+	decimals = 0
+	prefix = MOD_SOLDIER_PREFIX
+	percent = yes
+}
+
+rd_han_administrative_government_levy_contribution_mult = {
+	decimals = 0
+	prefix = MOD_SOLDIER_PREFIX
+	percent = yes
+}
+rd_celestial_empire_government_opinion = {
+	decimals = 0
+}
+
+rd_celestial_empire_government_vassal_opinion = {
+	decimals = 0
+}
+
+rd_celestial_empire_government_opinion_same_faith = {
+	decimals = 0
+}
+
+rd_celestial_empire_government_tax_contribution_add = {
+	decimals = 0
+	prefix = MOD_GOLD_PREFIX
+	percent = yes
+}
+
+rd_celestial_empire_government_tax_contribution_mult = {
+	decimals = 0
+	prefix = MOD_GOLD_PREFIX
+	percent = yes
+}
+
+rd_celestial_empire_government_levy_contribution_add = {
+	decimals = 0
+	prefix = MOD_SOLDIER_PREFIX
+	percent = yes
+}
+
+rd_celestial_empire_government_levy_contribution_mult = {
+	decimals = 0
+	prefix = MOD_SOLDIER_PREFIX
+	percent = yes
+}
+
+rd_han_military_government_opinion = {
+	decimals = 0
+}
+
+rd_han_military_government_vassal_opinion = {
+	decimals = 0
+}
+
+rd_han_military_government_opinion_same_faith = {
+	decimals = 0
+}
+
+rd_han_military_government_tax_contribution_add = {
+	decimals = 0
+	prefix = MOD_GOLD_PREFIX
+	percent = yes
+}
+
+rd_han_military_government_tax_contribution_mult = {
+	decimals = 0
+	prefix = MOD_GOLD_PREFIX
+	percent = yes
+}
+
+rd_han_military_government_levy_contribution_add = {
+	decimals = 0
+	prefix = MOD_SOLDIER_PREFIX
+	percent = yes
+}
+
+rd_han_military_government_levy_contribution_mult = {
+	decimals = 0
+	prefix = MOD_SOLDIER_PREFIX
+	percent = yes
+}
+
+rd_han_governor_government_opinion = {
+	decimals = 0
+}
+
+rd_han_governor_government_vassal_opinion = {
+	decimals = 0
+}
+
+rd_han_governor_government_opinion_same_faith = {
+	decimals = 0
+}
+
+rd_han_governor_government_tax_contribution_add = {
+	decimals = 0
+	prefix = MOD_GOLD_PREFIX
+	percent = yes
+}
+
+rd_han_governor_government_tax_contribution_mult = {
+	decimals = 0
+	prefix = MOD_GOLD_PREFIX
+	percent = yes
+}
+
+rd_han_governor_government_levy_contribution_add = {
+	decimals = 0
+	prefix = MOD_SOLDIER_PREFIX
+	percent = yes
+}
+
+rd_han_governor_government_levy_contribution_mult = {
+	decimals = 0
+	prefix = MOD_SOLDIER_PREFIX
+	percent = yes
+}

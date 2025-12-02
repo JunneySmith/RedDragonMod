@@ -1,5 +1,4 @@
-﻿
-kol_is_han_trigger = {
+﻿kol_is_han_trigger = {
 OR = {
 	culture = culture:han
 	culture = {

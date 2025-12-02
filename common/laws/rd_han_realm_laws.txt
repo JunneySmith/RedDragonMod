@@ -4,7 +4,7 @@
 rd_han_crown_authority = {
 	default = rd_han_crown_authority_0
 	cumulative = no
-	flag = rd_han_li_law
+	flag = succession_order_laws
 	
 	rd_han_crown_authority_0 = {
 		modifier = {
@@ -13,6 +13,7 @@ rd_han_crown_authority = {
 			vassal_levy_contribution_mult = 0.1
 		}
 		can_pass = {
+			NOT = { has_government = rd_han_military_government}
 			trigger_if = {
 				limit = { has_realm_law = crown_authority_0 }
 				custom_description = {
@@ -27,96 +28,43 @@ rd_han_crown_authority = {
 				}
 			}
 		}
-		on_pass = {
-			# Increment cooldown breaker tally, if appropriate.
-			calculate_authority_cooldown_break_effect = yes
-			# Set regular cooldown.
-			change_government = feudal_government
-		}
-		
-		can_keep = { realm_law_use_crown_authority = yes }
-	}
-	
-	rd_han_crown_authority_1 = {
-		modifier = {
-		vassal_limit = 15
-		}
-
-		should_start_with = { # If these conditions are true, this is a valid law to start with. Note that it always includes the can_keep check.
-		root.culture = culture:han
-		is_independent_ruler = no
-		always = no
-		}
-		can_keep = { realm_law_use_crown_authority = yes 
-	is_independent_ruler = no
-	always = no
-		}
-	#custom = doctrine_rd_han_allow_han_war_1
-		can_pass = {
-		is_independent_ruler = no
-		 culture = {
-		 has_cultural_pillar = heritage_chinese
-		 }
-			trigger_if = {
-				limit = { has_realm_law = crown_authority_0 }
-				custom_description = {
-					subject = root
-					text = "has_crown_authority_cooldown"
-					NAND = {
-						has_variable = crown_authority_cooldown
-						NOT = {
-							culture = { has_innovation = innovation_all_things }
-						}
-					}
-				}
-			}
-		}
-
 		pass_cost = {
 			prestige = {
 				if = {
 					limit = {
-						NOR = {
-							has_realm_law = crown_authority_2
-							has_realm_law = crown_authority_3
+						OR = {
+							has_realm_law = rd_han_crown_authority_4
+							has_realm_law = rd_han_crown_authority_5
 						}
 					}
-					add = 2000
+					add = 15000
 				}
 			}
 		}
-		
 		on_pass = {
 			# Increment cooldown breaker tally, if appropriate.
 			calculate_authority_cooldown_break_effect = yes
 			# Set regular cooldown.
-			set_variable = {
-				name = crown_authority_cooldown
-				years = @crown_authority_cooldown_years
-			}
 		}
-
-		ai_will_do = {
-			if = {
-				limit = { has_realm_law = rd_han_crown_authority_0 
-				is_independent_ruler = no
-				}
-				value = 1
-			}
-		}
+		
+		can_keep = { rd_realm_law_use_han_imperial_bureaucracy = yes }
 	}
+	
 	
 	rd_han_crown_authority_2 = {
 		modifier = {
 			vassal_limit = 15
-			domain_limit = 1
+			administrative_government_tax_contribution_add = 0.15
+			
 
 		}
-		can_keep = { realm_law_use_crown_authority = yes 
+		can_keep = { rd_realm_law_use_han_imperial_bureaucracy = yes 
+		NOT = { has_government = rd_han_military_government}
 		culture = { has_innovation = innovation_rd_han_culture }
 		}
 		flag = can_change_succession_laws
 		can_pass = {
+		NOT = { has_government = rd_han_military_government}
 		culture = { has_innovation = innovation_rd_han_culture }
 			trigger_if = {
 				limit = { has_realm_law = crown_authority_0 }
@@ -137,9 +85,23 @@ rd_han_crown_authority = {
 			prestige = {
 				if = {
 					limit = {
-						NOT = { has_realm_law = crown_authority_3 }
+						OR = {
+							has_realm_law = rd_han_crown_authority_4
+							has_realm_law = rd_han_crown_authority_5
+						}
 					}
-					add = 2000
+					add = 7500
+				}
+			}
+			piety = {
+				if = {
+					limit = {
+						OR = {
+							has_realm_law = rd_han_crown_authority_4
+							has_realm_law = rd_han_crown_authority_5
+						}
+					}
+					add = 7500
 				}
 			}
 		}
@@ -164,19 +126,66 @@ rd_han_crown_authority = {
 	rd_han_crown_authority_3 = {
 		modifier = {
 men_at_arms_maintenance = -0.15
-vassal_limit = 10
+men_at_arms_title_limit = 2
 		}
-		can_keep = { realm_law_use_crown_authority = yes
+		can_keep = {
+		rd_realm_law_use_han_imperial_bureaucracy = yes
+		OR = {
 is_independent_ruler = yes
+has_government = rd_han_military_government
+}
 		}
+		
+		flag = unlocks_baggage_train_siege_engineers
+		flag = unlocks_proving_grounds_lockwagon
+		flag = unlocks_camp_perimeter_palisade
+		flag = unlocks_camp_perimeter_ditch
+				flag = unlocks_baggage_train_siege_engineers
+		flag = unlocks_barber_tent_reference_corpus
+		flag = unlocks_barber_tent_morticians_tools
+		flag = unlocks_baggage_train_scribes
+		flag = unlocks_baggage_train_ascetics
+		flag = unlocks_camp_fire_nightly_debates
+		flag = unlocks_proving_grounds_martial_study
+				flag = unlocks_supply_tent_reserve_provisions
+		flag = unlocks_supply_tent_reserve_water
+		flag = unlocks_supply_tent_climbing_gear
+		flag = unlocks_camp_fire_local_hangers_on
+		flag = unlocks_camp_perimeter_extra_watch
+				flag = unlocks_proving_grounds_lockwagon
+		flag = unlocks_barber_tent_morticians_tools
+		flag = unlocks_supply_tent_subdued_gear
+		flag = unlocks_baggage_train_ransom_cages
+		flag = unlocks_baggage_train_negotiators
+		flag = unlocks_camp_fire_juicy_rumors
+		flag = unlocks_proving_grounds_the_stick_game
+				flag = unlocks_baggage_train_scribes
+		flag = unlocks_proving_grounds_martial_study
+		flag = unlocks_baggage_train_proof_of_claims
+		flag = unlocks_baggage_train_ransom_cages
+		flag = unlocks_camp_fire_future_dreams
+		flag = unlocks_proving_grounds_bodyguard_drills
+		flag = unlocks_proving_grounds_lockwagon
+		
 		should_start_with = { # If these conditions are true, this is a valid law to start with. Note that it always includes the can_keep check.
 				 culture = {
 		 has_cultural_pillar = heritage_chinese
 		 }
-		is_independent_ruler = yes
+
+			OR = {
+				vassal_contract_has_flag = celestial_military_appointment
+				has_government = rd_han_military_government
+			}
+
 		}
 		can_pass = {
-		is_independent_ruler = yes
+			culture = {
+				 has_cultural_pillar = heritage_chinese
+			}
+			OR = {
+				vassal_contract_has_flag = celestial_military_appointment
+				has_government = rd_han_military_government
+			}
 			trigger_if = {
 				limit = { has_realm_law = crown_authority_0 }
 				custom_description = {
@@ -190,18 +199,30 @@ is_independent_ruler = yes
 					}
 				}
 			}
-				 culture = {
-		 has_cultural_pillar = heritage_chinese
-		 }
 		}
 		
+
 		pass_cost = {
 			prestige = {
 				if = {
 					limit = {
-						NOT = { has_realm_law = crown_authority_3 }
+						OR = {
+							has_realm_law = rd_han_crown_authority_4
+							has_realm_law = rd_han_crown_authority_5
+						}
 					}
-					add = 2000
+					add = 7500
+				}
+			}
+			piety = {
+				if = {
+					limit = {
+						OR = {
+							has_realm_law = rd_han_crown_authority_4
+							has_realm_law = rd_han_crown_authority_5
+						}
+					}
+					add = 7500
 				}
 			}
 		}
@@ -229,19 +250,48 @@ has_realm_law = rd_han_crown_authority_1
 				value = 1
 			}
 		}
+				ai_will_do = {
+
+				value = 1000
+			
+		}
 	}
-		rd_han_crown_authority_4 = {
+	
+	
+
+							
+	rd_han_crown_authority_4 = {
 		modifier = {
-domain_limit = 20
-stress_gain_mult = 1
+										men_at_arms_maintenance = 1
+							army_maintenance_mult = 1
+							men_at_arms_recruitment_cost = 2.5
+							mercenary_hire_cost_mult = 2.5
 vassal_limit = -20
 		}
 		flag = can_designate_heirs
 		flag = vassal_internal_wars_banned
-		can_keep = { realm_law_use_crown_authority = yes }
-
+		can_keep = { rd_realm_law_use_han_imperial_bureaucracy = yes 
+		has_title = title:h_china
+		has_government = rd_celestial_empire_government
+		}
+		should_start_with = { # If these conditions are true, this is a valid law to start with. Note that it always includes the can_keep check.
+			has_title = title:h_china
+			game_start_date >= 978.1.1 
+		}
 		can_pass = {
-		always = no
+			culture = {
+			OR = {
+			has_cultural_tradition = tradition_scholar_officials
+			NOT = { this = culture:han}
+			}
+			}
+			has_title = title:h_china
+						any_character_situation = {
+				OR = {	
+				situation_current_phase = situation_dynastic_cycle_phase_stability_expansion
+				situation_current_phase = situation_dynastic_cycle_phase_instability
+				}
+			}
 			trigger_if = {
 				limit = { has_realm_law = crown_authority_0 }
 				custom_description = {
@@ -255,9 +305,6 @@ vassal_limit = -20
 					}
 				}
 			}
-					 culture = {
-		 has_cultural_pillar = heritage_chinese
-		 }
 		}
 		
 		pass_cost = {
@@ -279,6 +326,335 @@ vassal_limit = -20
 				name = crown_authority_cooldown
 				years = @crown_authority_cooldown_years
 			}
+		}
+				ai_will_do = {
+
+				value = -1000
+			
+		}
+	}
+	
+		rd_han_crown_authority_5 = {
+		modifier = {
+
+							men_at_arms_cap = -2
+							men_at_arms_maintenance = 1.5
+							army_maintenance_mult = 1.5
+							men_at_arms_recruitment_cost = 5
+							mercenary_hire_cost_mult = 5
+vassal_limit = -20
+		}
+		should_start_with = { # If these conditions are true, this is a valid law to start with. Note that it always includes the can_keep check.
+			has_title = title:h_china
+			game_start_date >= 1072.1.1 
+		}
+		flag = can_designate_heirs
+		flag = vassal_internal_wars_banned
+		can_keep = { 
+		rd_realm_law_use_han_imperial_bureaucracy = yes 
+		has_title = title:h_china
+		has_government = rd_celestial_empire_government
+		}
+
+		can_pass = {
+					culture = {
+			OR = {
+			has_cultural_tradition = tradition_scholar_officials
+			NOT = { this = culture:han}
+			}
+			}
+			has_title = title:h_china
+						any_character_situation = {
+				situation_current_phase = situation_dynastic_cycle_phase_stability_advancement		
+			}
+			trigger_if = {
+				limit = { has_realm_law = crown_authority_0 }
+				custom_description = {
+					subject = root
+					text = "has_crown_authority_cooldown"
+					NAND = {
+						has_variable = crown_authority_cooldown
+						NOT = {
+							culture = { has_innovation = innovation_all_things }
+						}
+					}
+				}
+			}
+		}
+		
+		pass_cost = {
+			prestige = {
+				if = {
+					limit = {
+						NOT = { has_realm_law = crown_authority_3 }
+					}
+					add = increase_crown_authority_prestige_cost
+				}
+			}
+		}
+		
+		on_pass = {
+			# Increment cooldown breaker tally, if appropriate.
+			calculate_authority_cooldown_break_effect = yes
+			# Set regular cooldown.
+			set_variable = {
+				name = crown_authority_cooldown
+				years = @crown_authority_cooldown_years
+			}
+		}
+				ai_will_do = {
+
+				value = -1000
+			
+		}
+	}
+}
+
+
+rd_han_feudl_crown_authority = {
+	default = rd_hf_crown_authority_0
+	cumulative = yes
+	flag = succession_order_laws
+	
+	rd_hf_crown_authority_0 = {
+		modifier = {
+
+		}
+		flag = uses_crown_authority
+
+		can_keep = {
+			realm_law_use_rd_han_fed_crown_authority = yes
+			trigger_if = {
+				limit = {
+					government_allows = administrative
+					top_liege != this
+				}
+				liege = { has_realm_law = rd_hf_crown_authority_0 }
+			}
+		}
+
+		on_pass = {
+			# Remove modifiers.
+			#remove_law_related_modifiers_effect = yes
+		}
+	}
+	
+	rd_hf_crown_authority_1 = {
+		modifier = {
+			feudal_government_vassal_opinion = 5
+			republic_government_vassal_opinion = 5
+			theocracy_government_vassal_opinion = 5
+			clan_government_vassal_opinion = 5
+		}
+		flag = title_revocation_allowed
+		flag = vassal_retraction_allowed
+		flag = can_have_tributaries
+		flag = can_change_partition_succession_laws
+		flag = diarchs_want_to_subsidise_without_this_flag
+
+		can_keep = {
+			realm_law_use_rd_han_fed_crown_authority = yes
+			trigger_if = {
+				limit = {
+					government_allows = administrative
+					top_liege != this
+				}
+				liege = { has_realm_law = rd_hf_crown_authority_1 }
+			}
+		}
+
+		can_pass = {
+			trigger_if = {
+				limit = { has_realm_law = rd_hf_crown_authority_0 }
+				custom_description = {
+					subject = root
+					text = "has_crown_authority_cooldown"
+					NAND = {
+						has_variable = crown_authority_cooldown
+						NOT = {
+							culture = { has_innovation = innovation_all_things }
+						}
+					}
+				}
+			}
+			can_pass_law_ca1_trigger = yes
+		}
+		
+		pass_cost = {
+			prestige = {
+				if = {
+					limit = {
+						NOR = {
+							has_realm_law = rd_hf_crown_authority_2
+							has_realm_law = rd_hf_crown_authority_3
+						}
+					}
+					add = increase_crown_authority_prestige_cost
+				}
+			}
+		}
+		
+		on_pass = {
+			# Increment cooldown breaker tally, if appropriate.
+			calculate_authority_cooldown_break_effect = yes
+			# Set regular cooldown.
+			set_variable = {
+				name = crown_authority_cooldown
+				years = @crown_authority_cooldown_years
+			}
+			# Remove modifiers.
+			#remove_law_related_modifiers_effect = yes
+		}
+
+		ai_will_do = {
+			if = {
+				limit = { has_realm_law = crown_authority_0 }
+				value = 1
+			}
+		}
+	}
+	
+	rd_hf_crown_authority_2 = {
+		modifier = {
+			vassal_tax_contribution_mult = 0.1
+			vassal_levy_contribution_mult = 0.1
+		}
+		flag = vassal_internal_wars_banned
+		flag = vassal_refusal_is_treason
+		flag = can_change_succession_laws
+		flag = titles_cannot_leave_realm_on_succession # Hardcoded flag
+		
+		can_keep = {
+			realm_law_use_rd_han_fed_crown_authority = yes
+			trigger_if = {
+				limit = {
+					government_allows = administrative
+					top_liege != this
+				}
+				liege = { has_realm_law = rd_hf_crown_authority_2 }
+			}
+		}
+
+		can_pass = {
+			trigger_if = {
+				limit = {
+					NOT = { has_realm_law = rd_hf_crown_authority_3 }
+					NAND = {
+						government_allows = administrative
+						top_liege != this
+					}
+				}
+				has_realm_law = rd_hf_crown_authority_1
+				custom_description = {
+					subject = root
+					text = "has_crown_authority_cooldown"
+					NAND = {
+						has_variable = crown_authority_cooldown
+						NOT = {
+							culture = { has_innovation = innovation_all_things }
+						}
+					}
+				}
+			}
+			can_pass_law_ca2_trigger = yes
+		}
+
+		pass_cost = {
+			prestige = {
+				if = {
+					limit = {
+						NOT = { has_realm_law = rd_hf_crown_authority_3 }
+					}
+					add = increase_crown_authority_prestige_cost
+				}
+			}
+		}
+		
+		on_pass = {
+			# Increment cooldown breaker tally, if appropriate.
+			calculate_authority_cooldown_break_effect = yes
+			# Set regular cooldown.
+			set_variable = {
+				name = crown_authority_cooldown
+				years = @crown_authority_cooldown_years
+			}
+			# Remove modifiers.
+			remove_law_related_modifiers_effect = yes
+		}
+
+		ai_will_do = {
+			if = {
+				limit = { has_realm_law = crown_authority_1 }
+				value = 1
+			}
+		}
+	}
+	
+	rd_hf_crown_authority_3 = {
+		modifier = {
+			
+			vassal_tax_contribution_mult = 0.25
+			vassal_levy_contribution_mult = 0.25
+		}
+		flag = vassal_all_wars_banned
+		flag = can_designate_heirs
+		flag = max_authority_level
+		
+		can_keep = {
+			realm_law_use_rd_han_fed_crown_authority = yes
+			trigger_if = {
+				limit = {
+					government_allows = administrative
+					top_liege != this
+				}
+				liege = { has_realm_law = rd_hf_crown_authority_3 }
+			}
+		}
+
+		can_pass = {
+			trigger_if = {
+				limit = {
+					NAND = {
+						government_allows = administrative
+						top_liege != this
+					}
+				}
+				has_realm_law = rd_hf_crown_authority_2
+				custom_description = {
+					subject = root
+					text = "has_crown_authority_cooldown"
+					NAND = {
+						has_variable = crown_authority_cooldown
+						NOT = {
+							culture = { has_innovation = innovation_all_things }
+						}
+					}
+				}
+			}
+			can_pass_law_ca3_trigger = yes
+		}
+		
+		pass_cost = {
+			prestige = {
+				if = {
+					limit = {
+						NOT = { has_realm_law = rd_hf_crown_authority_3 }
+					}
+					add = increase_crown_authority_prestige_cost
+				}
+			}
+		}
+		
+		on_pass = {
+			# Increment cooldown breaker tally, if appropriate.
+			calculate_authority_cooldown_break_effect = yes
+			# Set regular cooldown.
+			set_variable = {
+				name = crown_authority_cooldown
+				years = @crown_authority_cooldown_years
+			}
+			# Remove modifiers.
+			remove_law_related_modifiers_effect = yes
 		}
 	}
 }

@@ -1,0 +1,1118 @@
+﻿rd_crush_the_north_land_decision = {
+	picture = {reference = "gfx/interface/illustrations/men_at_arms_big/keshig.dds"}
+		decision_group_type = dynastic_cycle
+	ai_check_interval = 120
+	desc = rd_crush_the_north_land_decision_desc
+
+	is_shown = {
+		custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}
+		NOT = {has_game_rule = rd_hx_more_on_limit }
+		
+		OR = {
+		NOT = { has_title = title:h_china}
+					is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:rd_new_huaxia_combined_united_decision
+			}
+			has_title = title:e_china
+		}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:rd_crush_the_north_land_decision
+			}
+		}
+	}
+	is_valid = {
+		custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}
+
+		OR = {
+		AND = {
+			completely_controls_region = world_steppe_west
+				has_title = title:d_kiev
+		}
+		
+		
+		
+		AND = {
+			completely_controls_region = world_steppe_central
+		has_title = title:d_ferghana
+		
+		}
+		
+		AND = {
+				completely_controls_region =  world_steppe_east
+		}
+		}
+		
+		
+		prestige_level >= 3
+	}
+	cost = {
+		piety = {
+			value = massive_piety_value
+		}
+		gold = {
+			value = massive_gold_value
+		}
+	}
+	is_valid_showing_failures_only = {
+		is_adult = yes
+		is_available = yes
+		is_independent_ruler = yes
+	}
+	effect = {
+		custom_tooltip = rd_crush_the_middle_north_land_decision_tooltip
+	
+			add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:rd_crush_the_north_land_decision
+		}
+		if = {
+		limit = {
+				AND = {
+			completely_controls_region = world_steppe_west
+			has_title = title:d_kiev
+		}
+		
+		}
+		title:e_russia = { add_to_list = rd_han_new_list }
+		  title:e_volga-ural= { add_to_list = rd_han_new_list }
+		     title:e_caspian-pontic_steppe = { add_to_list = rd_han_new_list }
+		}
+				if = {
+		limit = {		AND = {
+			completely_controls_region = world_steppe_central
+			has_title = title:d_ferghana
+		
+		
+		}}
+		 title:e_siberia = { add_to_list = rd_han_new_list }
+ title:e_tartaria = { add_to_list = rd_han_new_list }
+  title:e_turan = { add_to_list = rd_han_new_list }
+
+		}
+				if = {
+		limit = {		AND = {
+				completely_controls_region =  world_steppe_east
+		}}
+			title:e_mongolia= { add_to_list = rd_han_new_list }
+			title:e_andong = { add_to_list = rd_han_new_list }
+			title:e_amur = { add_to_list = rd_han_new_list }
+			    title:e_great_liao = { add_to_list = rd_han_new_list }
+      title:e_mongol_empire = { add_to_list = rd_han_new_list }
+		}
+		 
+		 
+		 #kingdom
+	capital_province.empire = {
+		if = {
+			limit = {
+				holder ?= root
+					NOR = {
+							this = title:e_rdwestchina_emp
+							this = title:e_rdsouthchina
+							this = title:e_rdnorthchina
+							this = title:e_rdeastchina
+							this = title:e_china
+							target_is_de_jure_liege_or_above = title:h_rdwestchina
+							target_is_de_jure_liege_or_above = title:h_rdsouthchina
+							target_is_de_jure_liege_or_above = title:h_rdnorthchina
+							target_is_de_jure_liege_or_above = title:h_rdeastchina
+							target_is_de_jure_liege_or_above = title:h_china
+							}
+			
+			}
+				every_in_de_jure_hierarchy = {
+			limit = {
+				tier = tier_kingdom
+				NOR = {
+				this = title:k_khotan
+				this = title:k_guiyi
+				this = title:k_dzungaria
+				this = title:k_zhetysu
+				this = title:k_xia
+				this = title:k_amdo
+				this = title:k_gyalrong
+				this = title:k_kham
+				this = title:k_u
+				this = title:k_tsang
+				this = title:k_guge
+				this = title:k_maryul
+				}
+			}
+			set_de_jure_liege_title = title:e_rdnorthchina
+		}
+		}
+
+	}
+	
+		 #empire
+	every_in_list = {
+		list = rd_han_new_list
+		limit = {
+		tier = tier_empire
+		NOR = {
+							this = title:e_rdwestchina_emp
+							this = title:e_rdsouthchina
+							this = title:e_rdnorthchina
+							this = title:e_rdeastchina
+							this = title:e_china
+							target_is_de_jure_liege_or_above = title:h_rdwestchina
+							target_is_de_jure_liege_or_above = title:h_rdsouthchina
+							target_is_de_jure_liege_or_above = title:h_rdnorthchina
+							target_is_de_jure_liege_or_above = title:h_rdeastchina
+							target_is_de_jure_liege_or_above = title:h_china
+							}
+							
+		}
+		set_de_jure_liege_title = title:h_rdnorthchina
+   }
+
+		
+		
+					every_held_title = { # Should shift all dejure of all Empires owned at the time.
+				title_tier = empire
+				limit = {
+		NOR = {
+							target_is_de_jure_liege_or_above = title:h_rdwestchina
+							target_is_de_jure_liege_or_above = title:h_rdsouthchina
+							target_is_de_jure_liege_or_above = title:h_rdnorthchina
+							target_is_de_jure_liege_or_above = title:h_rdeastchina
+							target_is_de_jure_liege_or_above = title:h_china
+							}
+				
+				}
+					set_de_jure_liege_title = title:h_rdnorthchina
+
+				
+			}
+			 #title
+				create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+	title:e_rdnorthchina = {
+		change_title_holder = {
+			holder = root
+			change = scope:change
+		}
+		copy_title_history = title:h_china
+
+	}
+	title:h_rdnorthchina = {
+		change_title_holder = {
+			holder = root
+			change = scope:change
+		}
+		copy_title_history = title:h_china
+
+	}
+								title:e_rdnorthchina = {
+						set_de_jure_liege_title = title:h_rdnorthchina
+						}
+	resolve_title_and_vassal_change = scope:change
+	trigger_event = rd_asia.0015
+	}
+	
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+rd_crush_the_middle_east_land_decision = {
+	picture = {reference = "gfx/interface/illustrations/decisions/tgp_scholars.dds"}
+decision_group_type = dynastic_cycle	ai_check_interval = 120
+	desc = rd_crush_the_middle_east_land_decision_desc
+
+	is_shown = {
+		custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}
+		NOT = {has_game_rule = rd_hx_more_on_limit }
+				OR = {
+		NOT = { has_title = title:h_china}
+					is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:rd_new_huaxia_combined_united_decision
+			}
+			has_title = title:e_china
+		}
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:rd_crush_the_middle_east_land_decision
+			}
+		}
+	}
+	is_valid = {
+	custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}
+capital_province.empire = {
+holder ?= root
+}
+is_independent_ruler = yes
+		highest_held_title_tier >= tier_kingdom
+		prestige_level >= max_prestige_level
+		OR = {
+		AND = {
+		completely_controls_region = world_europe_west_francia
+		completely_controls_region = world_europe_west_germania
+		completely_controls_region = world_europe_south_italy
+		
+		}
+		
+		AND = {
+		completely_controls_region = custom_outremer
+		has_title = title:k_thessalonika
+		has_title = title:k_hellas
+		has_title = title:k_nikaea
+		has_title = title:k_anatolia
+		}
+		
+		}
+		
+		
+	}
+	cost = {
+		piety = {
+			value = massive_piety_value
+		}
+		gold = {
+			value = massive_gold_value
+		}
+	}
+	is_valid_showing_failures_only = {
+		is_adult = yes
+		is_available = yes
+		is_independent_ruler = yes
+	}
+	effect = {
+	custom_tooltip = rd_crush_the_middle_east_land_decision_tooltip
+			add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:rd_crush_the_middle_east_land_decision
+		}
+		
+		if = {
+		
+		limit = {
+				AND = {
+		completely_controls_region = world_europe_west_francia
+		completely_controls_region = world_europe_west_germania
+		completely_controls_region = world_europe_south_italy
+		
+		}
+		}
+		 	title:e_italy = { add_to_list = rd_han_new_list }
+			title:e_france = { add_to_list = rd_han_new_list }
+			title:e_hre = { add_to_list = rd_han_new_list }
+			title:e_germany = { add_to_list = rd_han_new_list }
+				capital_province.empire = {
+		if = {
+			limit = {
+				holder ?= root
+					NOR = {
+							this = title:e_rdwestchina_emp
+							this = title:e_rdsouthchina
+							this = title:e_rdnorthchina
+							this = title:e_rdeastchina
+							this = title:e_china
+							target_is_de_jure_liege_or_above = title:h_rdwestchina
+							target_is_de_jure_liege_or_above = title:h_rdsouthchina
+							target_is_de_jure_liege_or_above = title:h_rdnorthchina
+							target_is_de_jure_liege_or_above = title:h_rdeastchina
+							target_is_de_jure_liege_or_above = title:h_china
+							}
+			
+			}
+				every_in_de_jure_hierarchy = {
+			limit = {
+				tier = tier_kingdom
+				NOR = {
+				this = title:k_khotan
+				this = title:k_guiyi
+				this = title:k_dzungaria
+				this = title:k_zhetysu
+				this = title:k_xia
+				this = title:k_amdo
+				this = title:k_gyalrong
+				this = title:k_kham
+				this = title:k_u
+				this = title:k_tsang
+				this = title:k_guge
+				this = title:k_maryul
+				}
+			}
+			set_de_jure_liege_title = title:e_rdwestchina_emp
+		}
+		}
+
+	}
+		}
+		if = {
+		
+		limit = {
+		AND = {
+		completely_controls_region = custom_outremer
+		has_title = title:k_thessalonika
+		has_title = title:k_hellas
+		has_title = title:k_nikaea
+		has_title = title:k_anatolia
+		}
+		}
+			if = {
+				limit = {
+				title:e_rdwestchina_emp = {
+				is_landless_type_title = yes
+				}
+				}
+			
+			
+			title:k_jerusalem = {
+				set_de_jure_liege_title = title:e_rdwestchina_emp
+			}
+			title:k_syria = {
+				set_de_jure_liege_title = title:e_rdwestchina_emp
+			}
+			title:k_mesopotamia = {
+				set_de_jure_liege_title = title:e_rdwestchina_emp
+			}
+			title:k_arabia = {
+				set_de_jure_liege_title = title:e_rdwestchina_emp
+			}
+			
+						title:k_thessalonika = {
+				set_de_jure_liege_title = title:e_rdwestchina_emp
+			}
+			
+						title:k_hellas = {
+				set_de_jure_liege_title = title:e_rdwestchina_emp
+			}
+			
+						title:k_nikaea = {
+				set_de_jure_liege_title = title:e_rdwestchina_emp
+			}
+			
+						title:k_anatolia = {
+				set_de_jure_liege_title = title:e_rdwestchina_emp
+			}
+			}
+			else = {
+			title:e_byzantium = { add_to_list = rd_han_new_list }
+			title:e_arabia = { add_to_list = rd_han_new_list }
+
+			
+			}
+		
+		}
+			every_in_list = {
+		list = rd_han_new_list
+		limit = {
+		tier = tier_empire
+		NOR = {
+							this = title:e_rdwestchina_emp
+							this = title:e_rdsouthchina
+							this = title:e_rdnorthchina
+							this = title:e_rdeastchina
+							this = title:e_china
+							target_is_de_jure_liege_or_above = title:h_rdwestchina
+							target_is_de_jure_liege_or_above = title:h_rdsouthchina
+							target_is_de_jure_liege_or_above = title:h_rdnorthchina
+							target_is_de_jure_liege_or_above = title:h_rdeastchina
+							target_is_de_jure_liege_or_above = title:h_china
+							}
+							
+		}
+		set_de_jure_liege_title = title:h_rdwestchina
+   }
+
+					every_held_title = { # Should shift all dejure of all Empires owned at the time.
+				title_tier = empire
+				limit = {
+		NOR = {
+							target_is_de_jure_liege_or_above = title:h_rdwestchina
+							target_is_de_jure_liege_or_above = title:h_rdsouthchina
+							target_is_de_jure_liege_or_above = title:h_rdnorthchina
+							target_is_de_jure_liege_or_above = title:h_rdeastchina
+							target_is_de_jure_liege_or_above = title:h_china
+							}
+				
+				}
+					set_de_jure_liege_title = title:h_rdwestchina
+
+				
+			}
+			 #title
+				create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+	title:e_rdwestchina_emp = {
+		change_title_holder = {
+			holder = root
+			change = scope:change
+		}
+		copy_title_history = title:h_china
+
+	}
+	title:h_rdwestchina = {
+		change_title_holder = {
+			holder = root
+			change = scope:change
+		}
+		copy_title_history = title:h_china
+
+	}
+								title:e_rdwestchina_emp = {
+						set_de_jure_liege_title = title:h_rdwestchina
+						}
+	resolve_title_and_vassal_change = scope:change
+	
+	
+	
+	
+	trigger_event = rd_asia.0015
+	}
+	
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+rd_new_huaxia_decision = {
+	picture = {reference = "gfx/interface/illustrations/decisions/tgp_great_project.dds"}
+decision_group_type = dynastic_cycle	ai_check_interval = 120
+	desc = rd_new_huaxia_decision_desc
+
+	is_shown = {
+		custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}
+		NOT = {has_game_rule = rd_hx_more_on_limit }
+				OR = {
+		NOT = { has_title = title:h_china}
+					is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:rd_new_huaxia_combined_united_decision
+			}
+			has_title = title:e_china
+		}
+			NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:rd_unite_the_western_india_han_decision
+			}
+		}
+		#highest_held_title_tier >= tier_kingdom
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		highest_held_title_tier >= tier_kingdom
+		custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}
+		OR = {
+		completely_controls_region = world_india
+		AND = {
+		completely_controls_region = world_asia_southeast_mainland
+		completely_controls_region = world_india_bengal
+		}
+		}
+	}
+
+	effect = {
+			custom_tooltip = rd_crush_the_south_land_decision_tooltip
+		save_scope_as = western_rd_west_han_uniter
+			capital_province.empire = {
+		if = {
+			limit = {
+				holder ?= root
+					NOR = {
+							this = title:e_rdwestchina_emp
+							this = title:e_rdsouthchina
+							this = title:e_rdnorthchina
+							this = title:e_rdeastchina
+							this = title:e_china
+							target_is_de_jure_liege_or_above = title:h_rdwestchina
+							target_is_de_jure_liege_or_above = title:h_rdsouthchina
+							target_is_de_jure_liege_or_above = title:h_rdnorthchina
+							target_is_de_jure_liege_or_above = title:h_rdeastchina
+							target_is_de_jure_liege_or_above = title:h_china
+							}
+			
+			}
+				every_in_de_jure_hierarchy = {
+			limit = {
+				tier = tier_kingdom
+				NOR = {
+				this = title:k_khotan
+				this = title:k_guiyi
+				this = title:k_dzungaria
+				this = title:k_zhetysu
+				this = title:k_xia
+				this = title:k_amdo
+				this = title:k_gyalrong
+				this = title:k_kham
+				this = title:k_u
+				this = title:k_tsang
+				this = title:k_guge
+				this = title:k_maryul
+				}
+			}
+			set_de_jure_liege_title = title:e_rdsouthchina
+		}
+		}
+
+	}
+	
+	if = {
+	
+		limit = {
+		completely_controls_region = world_india
+		}
+		title:h_india= {				every_in_de_jure_hierarchy = {
+			limit = {
+				tier = tier_empire
+				}
+				add_to_list = rd_han_new_list 
+				}
+				}
+		 title:e_rajastan= { add_to_list = rd_han_new_list }
+ title:e_deccan= { add_to_list = rd_han_new_list }
+  title:e_bengal= { add_to_list = rd_han_new_list }
+		}
+	if = {
+	
+		limit = {
+				completely_controls_region = world_asia_southeast_mainland
+		completely_controls_region = world_india_bengal
+		}
+		title:k_pagan = { add_to_list = rd_han_new_list }
+		 title:k_dvaravati = { add_to_list = rd_han_new_list }
+ title:k_chenla= { add_to_list = rd_han_new_list }
+  title:k_funan= { add_to_list = rd_han_new_list }
+    title:k_champa= { add_to_list = rd_han_new_list }
+	 title:e_bengal= { add_to_list = rd_han_new_list }
+		}
+		
+trigger_event = rd_asia.0015
+capital_province.empire = {
+		if = {
+			limit = {
+					NOR = {
+							this = title:e_rdwestchina_emp
+							this = title:e_rdsouthchina
+							this = title:e_rdnorthchina
+							this = title:e_rdeastchina
+							this = title:e_china
+							target_is_de_jure_liege_or_above = title:h_rdwestchina
+							target_is_de_jure_liege_or_above = title:h_rdsouthchina
+							target_is_de_jure_liege_or_above = title:h_rdnorthchina
+							target_is_de_jure_liege_or_above = title:h_rdeastchina
+							target_is_de_jure_liege_or_above = title:h_china
+							}
+			
+			}
+				every_in_de_jure_hierarchy = {
+			limit = {
+				tier = tier_kingdom
+				NOR = {
+				this = title:k_khotan
+				this = title:k_guiyi
+				this = title:k_dzungaria
+				this = title:k_zhetysu
+				this = title:k_xia
+				this = title:k_amdo
+				this = title:k_gyalrong
+				this = title:k_kham
+				this = title:k_u
+				this = title:k_tsang
+				this = title:k_guge
+				this = title:k_maryul
+				}
+			}
+			set_de_jure_liege_title = title:e_rdsouthchina
+		}
+		}
+
+	}
+	
+		 #empire
+	every_in_list = {
+		list = rd_han_new_list
+		limit = {
+		tier = tier_empire
+		NOR = {
+							this = title:e_rdwestchina_emp
+							this = title:e_rdsouthchina
+							this = title:e_rdnorthchina
+							this = title:e_rdeastchina
+							this = title:e_china
+							target_is_de_jure_liege_or_above = title:h_rdwestchina
+							target_is_de_jure_liege_or_above = title:h_rdsouthchina
+							target_is_de_jure_liege_or_above = title:h_rdnorthchina
+							target_is_de_jure_liege_or_above = title:h_rdeastchina
+							target_is_de_jure_liege_or_above = title:h_china
+							}
+							
+		}
+		set_de_jure_liege_title = title:h_rdsouthchina
+   }
+   	every_in_list = {
+		list = rd_han_new_list
+		limit = {
+		tier = tier_kingdom
+		NOR = {
+							target_is_de_jure_liege_or_above = title:h_rdwestchina
+							target_is_de_jure_liege_or_above = title:h_rdsouthchina
+							target_is_de_jure_liege_or_above = title:h_rdnorthchina
+							target_is_de_jure_liege_or_above = title:h_rdeastchina
+							target_is_de_jure_liege_or_above = title:h_china
+							}
+							
+		}
+		set_de_jure_liege_title = title:e_rdsouthchina
+   }
+					every_held_title = { # Should shift all dejure of all Empires owned at the time.
+				title_tier = empire
+				limit = {
+		NOR = {
+							target_is_de_jure_liege_or_above = title:h_rdwestchina
+							target_is_de_jure_liege_or_above = title:h_rdsouthchina
+							target_is_de_jure_liege_or_above = title:h_rdnorthchina
+							target_is_de_jure_liege_or_above = title:h_rdeastchina
+							target_is_de_jure_liege_or_above = title:h_china
+							}
+				
+				}
+					set_de_jure_liege_title = title:h_rdsouthchina
+
+				
+			}
+			 #title
+				create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+	title:e_rdsouthchina = {
+		change_title_holder = {
+			holder = root
+			change = scope:change
+		}
+		copy_title_history = title:h_china
+
+	}
+	title:h_rdsouthchina = {
+		change_title_holder = {
+			holder = root
+			change = scope:change
+		}
+		copy_title_history = title:h_china
+
+	}
+								title:e_rdsouthchina = {
+						set_de_jure_liege_title = title:h_rdsouthchina
+						}
+	resolve_title_and_vassal_change = scope:change
+
+				
+				
+	hidden_effect = { set_primary_title_to = title:e_rdsouthchina }
+		#Events
+
+		#Can only be done once
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:rd_unite_the_western_india_han_decision
+		}
+	}
+	
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+rd_new_huaxia_combined_united_decision ={
+	picture = {reference = "gfx/interface/illustrations/decisions/tgp_career.dds"}
+decision_group_type = dynastic_cycle	
+ai_check_interval = 120
+	desc = rd_new_huaxia_combined_united_decision_desc
+
+	is_shown = {
+	#always = no
+		custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}
+			NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:rd_new_huaxia_combined_united_decision
+			}
+		}
+		highest_held_title_tier > tier_empire
+	}
+
+	is_valid = {
+
+		highest_held_title_tier > tier_empire
+		custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}
+		
+		completely_controls_region = world_asia_china
+	
+	}
+
+	effect = {
+			custom_tooltip = rd_new_huaxia_combined_united_decision_tooltip
+		save_scope_as = western_rd_west_han_uniter
+
+
+		title:e_liangyi = { add_to_list = rd_han_new_list }
+		 title:e_yongliang = { add_to_list = rd_han_new_list }
+ title:e_zhongyuan= { add_to_list = rd_han_new_list }
+  title:e_jingyang = { add_to_list = rd_han_new_list }
+    title:e_lingnan= { add_to_list = rd_han_new_list }
+
+		
+		
+    #trigger_event = rd_asia.0015
+	every_in_list = {
+		list = rd_han_new_list
+		every_in_de_jure_hierarchy = {
+			limit = {
+				tier = tier_kingdom
+			}
+			set_de_jure_liege_title = title:e_china
+		}
+	}
+	 title:k_rdliang = {
+		set_de_jure_liege_title = title:e_china
+	 }
+					every_held_title = { # Should shift all dejure of all Empires owned at the time.
+				title_tier = empire
+				limit = {
+					NOR = {
+											target_is_de_jure_liege_or_above = title:h_rdwestchina
+							target_is_de_jure_liege_or_above = title:h_rdsouthchina
+							target_is_de_jure_liege_or_above = title:h_rdnorthchina
+							target_is_de_jure_liege_or_above = title:h_rdeastchina
+							target_is_de_jure_liege_or_above = title:h_china
+							}
+				
+				}
+				set_de_jure_liege_title = title:h_china
+				every_in_de_jure_hierarchy = {
+					limit = {
+						tier = tier_kingdom
+					}
+					#
+
+				}
+			}
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+	title:e_china = {
+		change_title_holder = {
+			holder = root
+			change = scope:change
+		}
+		copy_title_history = title:h_china
+		
+	}
+		title:h_rdeastchina = {
+		#change_title_holder = {
+		#	holder = root
+		#	change = scope:change
+		#}
+		copy_title_history = title:h_china
+	}
+		title:e_rdeastchina = {
+		change_title_holder = {
+			holder = root
+			change = scope:change
+		}
+		copy_title_history = title:h_china
+
+	}
+	title:e_rdeastchina ={
+set_de_jure_liege_title = title:h_rdeastchina
+			 }
+
+	resolve_title_and_vassal_change = scope:change
+		#Events
+							title:e_china = {
+						set_de_jure_liege_title = title:h_china
+						set_title_name = RD_TIANZI_CHINA
+						}
+		#Can only be done once
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:rd_new_huaxia_combined_united_decision
+		}
+	}
+	
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+
+rd_submit_to_the_great_tianzi_decision = {
+	ai_check_interval_by_tier = {
+		barony = 0
+		county = 12
+		duchy = 12
+		kingdom = 12
+		empire = 12
+		hegemony = 0
+	}
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/mpo_decision_great_khan.dds"
+	}
+	desc = submit_to_the_great_khan_decision_opening_desc
+	selection_tooltip = submit_to_the_great_khan_decision_tooltip
+	
+	sort_order = 110
+	decision_group_type = major
+
+	is_shown = {
+	always = no
+		is_landless_adventurer = no
+		is_independent_ruler = yes
+		OR = {
+			exists = global_var:mongol_empire_has_spawned
+			AND = {
+				exists = global_var:greatest_of_khans_title
+				exists = global_var:greatest_of_khans_title.holder
+			}
+		}
+		
+		OR = {
+			any_neighboring_top_liege_realm_owner = {
+				mpo_has_gok_mongol_empire_trigger = yes
+			}
+			AND = {
+				is_ai = no # this heavier check is for players, AI will only evaluate decision when immediately bordering the Mongols
+				any_neighboring_top_liege_realm_owner = {
+					any_neighboring_top_liege_realm_owner = {
+						mpo_has_gok_mongol_empire_trigger = yes
+					}
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		NOT = { highest_held_title_tier = tier_empire }
+	}
+
+	effect = {
+		hidden_effect = {
+			if = {
+				limit = {
+					exists = title:h_china.holder
+				}
+				title:h_china.holder = {
+					save_scope_as = rd_china_tianzi
+				}
+			}
+			else = {
+				random_neighboring_top_liege_realm_owner = {
+					limit = { mpo_has_gok_mongol_empire_trigger = yes }
+					save_scope_as = rd_china_tianzi
+				}
+				if = {
+					limit = {
+						NOT = {
+							exists = scope:rd_china_tianzi
+						}
+					}
+					random_neighboring_top_liege_realm_owner = {
+						limit = {
+							mpo_has_gok_mongol_empire_trigger = yes
+						}
+						random_neighboring_top_liege_realm_owner = {
+							limit = {
+								mpo_has_gok_mongol_empire_trigger = yes
+							}
+							save_scope_as = rd_china_tianzi
+						}
+					}
+				}
+			}
+		}
+		every_character_war = {
+			limit = {
+				primary_defender = root
+			}
+			end_war = white_peace
+		}
+		hidden_effect = {
+			debug_log = "A ruler submitted to the khan"
+			debug_log_scopes = yes
+		}
+		save_scope_as = recipient
+		scope:rd_china_tianzi = {
+			send_interface_message = {
+				type = event_gok_submission_with_text
+				title = mpo_greatest_of_khans.0020_title
+				left_icon = root
+	
+				root = {
+					create_title_and_vassal_change = {
+						type = swear_fealty
+						save_scope_as = title_change
+						add_claim_on_loss = no
+					}
+					change_liege = {
+						liege = scope:rd_china_tianzi
+						change = scope:title_change
+					}
+					resolve_title_and_vassal_change = scope:title_change
+					if = {
+						limit = {
+							government_has_flag = government_is_nomadic
+						}
+						pay_herd = {
+							target = scope:rd_china_tianzi
+							value = domicile.major_herd_value
+						}
+					}
+					else_if = {
+						limit = {
+							NOT = {
+								government_has_flag = government_is_herder
+							}
+						}
+						pay_short_term_gold = {
+							target = scope:rd_china_tianzi
+							gold = major_gold_value
+						}
+					}
+					if = {
+						limit = {
+							#khan is still nomadic or pluralist and thus doesn't care about religion
+							scope:rd_china_tianzi = {
+								faith = {
+									has_doctrine = doctrine_pluralism_pluralistic
+								}
+							}
+							OR = {
+								government_has_flag = government_is_feudal
+								government_has_flag = government_is_clan
+							}
+						}
+						hidden_effect = {
+							if = {
+								limit = { is_independent_ruler = no } # To avoid errors during tooltip generation (prior to the contract being generated)
+								vassal_contract_set_obligation_level = { type = religious_rights level = 1 }
+							}
+						}
+						custom_tooltip = religious_protection_tt
+					}
+				}
+			}
+		}
+	}
+
+	ai_potential = {
+		OR = {
+			exists = global_var:mongol_empire_has_spawned
+			AND = {
+				exists = global_var:greatest_of_khans_title
+				exists = global_var:greatest_of_khans_title.holder
+			}
+		}
+		is_independent_ruler = yes
+		highest_held_title_tier < tier_empire
+		trigger_if = {
+			limit = {
+				government_has_flag = government_is_nomadic
+			}
+			domicile = {
+				herd >= massive_herd_value
+			}
+		}
+		trigger_if = {
+			limit = {
+				NOR = {
+					government_has_flag = government_is_herder
+					government_has_flag = government_is_nomadic
+				}
+			}
+			gold >= medium_gold_value
+		}
+	}
+
+	ai_will_do = { # is_shown trigger means AI will only evaluate these when immediate neighbors with the Mongols
+		base = 0
+		# Very likely if you're an independent count bordering the Empire
+		modifier = {
+			add = 25
+			highest_held_title_tier = tier_county
+		}
+		# Fairly likely if you're an independent duke bordering the Empire
+		modifier = {
+			add = 10
+			highest_held_title_tier = tier_duchy
+			OR = {
+				culture = { has_cultural_pillar = heritage_mongolic }
+				culture = { has_cultural_pillar = heritage_turkic }
+			}
+		}
+		# A little bit likely if you're an independent king in the Altaic group bordering the Empire
+		modifier = {
+			add = 10
+			highest_held_title_tier = tier_duchy
+			OR = {
+				culture = { has_cultural_pillar = heritage_mongolic }
+				culture = { has_cultural_pillar = heritage_turkic }
+			}
+		}
+		# More likely if you're Craven
+		modifier = {
+			factor = 1.25
+			has_trait = craven
+		}
+		# Unlikely if you're Brave
+		modifier = {
+			factor = 0.2
+			has_trait = brave
+		}
+		# Unlikely if you're Arrogant
+		modifier = {
+			factor = 0.1
+			has_trait = arrogant
+		}
+		# Very likely if you're already allies
+		modifier = {
+			factor = 1.5
+			any_ally = {
+				mpo_has_gok_mongol_empire_trigger = yes
+			}
+		}
+		# The AI should never do this as a king or above
+		modifier = {
+			factor = 0
+			highest_held_title_tier >= tier_kingdom
+		}
+	}
+}

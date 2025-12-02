@@ -1,0 +1,198 @@
+﻿# Tags:
+# rank_headgear: any headgear that signifies a certain title. crowns, pope hat etc.
+
+
+
+rd_han_headgear = {
+	# interface_position = 1
+		usage = game
+	selection_behavior = weighted_random
+	priority = 1
+	
+	rd_han_no_hat = {
+		usage = game 
+		dna_modifiers = {
+			accessory = {
+				mode = add
+		
+				gene = headgear
+				template = no_headgear
+				value = 0
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {exists = this
+				add = 100
+				AND = {
+					should_be_naked_trigger = yes
+				}
+			}
+						modifier = {exists = this
+				factor = 49
+				portrait_rd_han_clothing_trigger = yes
+				
+			}
+			modifier = {exists = this
+				factor = 0
+				AND = {
+				OR = {
+					is_adult = no
+					
+					highest_held_title_tier >= tier_duchy # Should wear ducal or royal crown instead.
+					AND = {
+						religion = religion:christianity_religion
+						faith.religious_head = this
+					}
+				}
+				}
+				
+			}
+		}
+	}
+
+
+## So that the Prophet Muhammad does not have a portrait ## 
+
+	rd_han_no_portrait = {
+		dna_modifiers = {
+			accessory = {
+				mode = add				
+				gene = headgear
+				template = no_headgear
+				value = 0.5
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {exists = this
+				add = 200
+				this = character:33922
+			}
+		}
+	}
+
+
+## No headgear for children under 16 ## 
+
+	rd_han_children_no_headgear = {
+
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = headgear
+				template = no_headgear
+				range = { 0 1 } # For the randomness to work correctly
+			}
+		}	
+		weight = {
+			base = 0
+			modifier = {exists = this
+				add = 100
+				age < 16
+			}
+		}
+	}
+	rd_han_commoners = {
+
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = headgear
+				template = rd_han_temp_empty
+				range = { 0 1 } # For the randomness to work correctly
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 20
+				portrait_commoner_clothing_trigger = {
+					CULTURE_INPUT = rd_han # CULTURE_INPUT gets added into the trigger referenced in 00_clothing_triggers.txt so it's important the input is a correct match to an existing culture trigger
+				}
+			}
+		}
+	}
+
+	rd_han_low_nobles = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = headgear
+				template = rd_han_temp_empty
+				range = { 0 1 } # For the randomness to work correctly
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 50
+				portrait_low_nobles_clothing_trigger = {
+					CULTURE_INPUT = rd_han
+				}
+			}
+		}
+	}
+
+	rd_han_high_nobles = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = headgear
+				template = rd_han_temp_empty
+				range = { 0 1 } # For the randomness to work correctly
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 50
+				portrait_high_nobles_headgear_trigger = {
+					CULTURE_INPUT = rd_han
+				}
+			}
+		}
+	}
+
+	rd_han_royalty = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = headgear
+				template = rd_han_temp_empty
+				range = { 0 1 } # For the randomness to work correctly
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 85
+				portrait_royalty_trigger = {
+					CULTURE_INPUT = rd_han
+				}
+			}
+		}
+	}
+
+	# Reichskrone
+	rd_han_imperial = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = headgear
+				template = rd_han_temp_empty
+				range = { 0 1 } # For the randomness to work correctly
+			}
+		}
+		weight = {
+			base = 0
+			modifier = {
+				add = 90 # always pick the HRE crown over the western one
+								portrait_imperial_clothing_trigger = {
+					CULTURE_INPUT = rd_han
+				}
+			}
+		}
+	}
+	
+	}

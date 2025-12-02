@@ -7,18 +7,53 @@
 	task_progress = task_progress_percentage
 	restart_on_finish = yes
 	highlight_own_realm = yes
-	
+		is_shown = {
+liege = {	
+ kol_is_han_trigger = yes
+ }
+	}
 	is_valid_showing_failures_only = {
-scope:councillor_liege = {	
-			culture = {
+
+OR = {
+liege = {	
+	culture = {
 		has_innovation = innovation_rd_han_culture
 	}
 	}
+	liege = {	
+	has_government = rd_han_military_government
+	}
+	}
+	}
+	
+	asset = {
+		icon = "gfx/interface/icons/council_task_types/task_develop_county.dds"
+		background = "gfx/interface/buttons/button_round_bg.dds"
+		frame = "gfx/interface/buttons/button_round_frame.dds"
+		glow = "gfx/particles/halo.dds"
 	}
 
 	effect_desc = {
 		desc = task_promote_culture_effect_desc
-		
+		triggered_desc = {
+				trigger = {
+				scope:councillor_liege = {	
+
+	has_government = rd_han_military_government
+	
+	}
+	exists = scope:county
+						scope:county = {
+		any_county_province = {
+		OR = {
+		has_holding_type = nomad_holding
+	has_holding_type =	herder_holding
+		}
+		}
+		}
+				}
+				desc = task_rd_han_military_government_settle
+		}
 		desc = {
 			desc = council_task_possible_side_effects
 			triggered_desc = {
@@ -267,13 +302,47 @@ scope:councillor_liege = {
 				desc = GAME_RULE_FASTER_REASON
 			}
 		}
+		if = {
+			limit = {
+				scope:councillor_liege = {	
+					has_government = rd_han_military_government
+				}
+				scope:county = {
+					any_county_province = {
+					OR = {
+						has_holding_type = nomad_holding
+						has_holding_type =	herder_holding
+						}
+					}
+				}
+			}
+			multiply = {
+				value = significantly_faster_game_rule_value
+				desc = RD_HAN_NOMAD_GAME_RULE_SIGNIFICANTLY_FASTER_REASON
+			}
+		}
 	}
 
 	potential_county = {
 		scope:county = {
+		OR = {
 		scope:councillor_liege = {
 		has_title = scope:county
 		}
+		AND= {
+		scope:county = {
+		any_county_province = {
+		OR = {
+		has_holding_type = nomad_holding
+	has_holding_type =	herder_holding
+		}
+		}
+		}
+							scope:county.holder = {
+						target_is_liege_or_above = scope:councillor.liege 
+				}
+				}
+				}
 			NOT = { culture = culture:han }
 			OR = {
 			title_province = {
@@ -290,12 +359,36 @@ scope:councillor_liege = {
 	}
 
 	on_finish_task_county = {
+	
 			scope:county = {
-			set_county_faith = scope:councillor_liege.faith
+			set_county_faith = scope:councillor.faith
 		}
 		scope:county = {
 			set_county_culture = scope:councillor_liege.culture
 		}
+			
+		if = {
+		limit = {
+						scope:councillor_liege = {	
+
+	has_government = rd_han_military_government
+	
+	}
+		}
+		scope:county = {
+					every_county_province = {
+					limit = {
+							OR = {
+		has_holding_type = nomad_holding
+	has_holding_type =	herder_holding
+		}
+
+					}
+					set_holding_type = castle_holding
+					generate_building = yes
+					}
+					}
+					}
 		scope:councillor = {
 			start_default_task = yes
 		}
@@ -350,6 +443,14 @@ scope:councillor_liege = {
 			limit = {
 				scope:councillor = {
 					is_performing_council_task = task_promote_culture
+				}
+			}
+			add = 10000 # Always keep going if this is already chosen
+		}
+				if = {
+			limit = {
+				scope:councillor = {
+					is_performing_council_task = task_promote_culture_han_rd
 				}
 			}
 			add = 10000 # Always keep going if this is already chosen

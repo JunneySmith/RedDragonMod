@@ -1,0 +1,581 @@
+﻿#Scholar Officials
+tradition_scholar_officials = {
+	category = societal
+
+	layers = {
+		0 = intrigue
+		1 = western
+		4 = confucius.dds
+	}
+
+	is_shown = { #Available to Chinese cultures and to cultures influenced by China
+		has_tgp_dlc_trigger = yes
+		scope:character = {
+			OR = {
+				culture = { has_cultural_pillar = heritage_chinese }
+				has_trait = confucian_education
+				government_has_flag = government_has_merit
+				has_title = title:h_china #Always available to new emperors
+			}
+		}
+	}
+
+	can_pick = {
+		custom_description = {
+			text = culture_not_bellicose
+			NOT = {
+				culture_pillar:ethos_bellicose = { is_in_list = traits }
+			}
+		}
+		NOT = { has_cultural_tradition = tradition_warrior_culture }
+	}
+
+	parameters = {
+
+		content_trait_more_common = yes
+		martial_education_worse_outcomes = yes
+
+		loyal_trait_more_common = yes
+		doesnt_care_about_culture_faith_in_factions = yes
+		
+		pensive_trait_more_common = yes
+		rowdy_trait_less_common = yes
+	}
+
+	character_modifier = {
+		monthly_learning_lifestyle_xp_gain_mult = 0.2
+		men_at_arms_recruitment_cost = 0.25
+		levy_maintenance = 0.025
+		men_at_arms_maintenance = 0.2
+	}
+
+	cost = {
+		prestige = {
+			add = {
+				value = tradition_base_cost
+				desc = BASE
+				format = "BASE_VALUE_FORMAT"
+			}
+			if = {
+				limit = {
+					NOR = {
+						culture_pillar:ethos_bureaucratic = { is_in_list = traits }
+						culture_pillar:ethos_courtly = { is_in_list = traits }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
+					}
+				}
+				add = {
+					value = tradition_incompatible_ethos_penalty
+					desc = not_bureaucratic_courtly_or_spiritual_desc
+				}
+			}
+			if = {
+				limit = {
+					scope:character = {
+						has_trait = scholar
+					}
+				}
+				multiply = {
+					value = 0.75
+					#desc = 
+				}
+			}
+			if = {
+				limit = {
+					scope:character = {
+						has_trait = confucian_education
+					}
+				}
+				multiply = {
+					value = 0.5
+					#desc = 
+				}
+			}
+		}
+	}
+   ai_will_do = {
+		value = -2000
+		if = {
+			limit = { # Admin should be more into this
+				scope:character = {
+					government_allows = administrative
+				}
+			}
+			multiply = 0.5
+		}
+	}
+}
+
+tradition_tgp_art_of_war = {
+	
+	layers = {
+		0 = martial
+		1 = mediterranean
+		4 = marching_soldiers.dds 
+	}
+
+	is_shown = {
+		OR = {
+			this = culture:han
+			any_parent_culture_or_above = {
+				this = culture:han
+			}
+			has_cultural_pillar = heritage_chinese
+		}
+		# DLC check.
+		has_tgp_dlc_trigger = yes
+	}
+	can_pick = {
+	}
+
+	parameters = {
+		unlock_shenbigong_innovation = yes
+		unlock_zhanmadao = yes
+		unlock_burenjia = yes
+		unlock_maa_tiefutu = yes
+		guardians_can_transfer_commander_traits = yes
+		prowess_from_martial_education = yes
+		military_governor_appointment_score = yes
+	}
+
+	character_modifier = {
+		martial_per_merit_level = 0.5 #Formal Military Education
+		monthly_merit_per_title_maa_value = 0.002
+		heavy_infantry_max_size_add = 2
+		counter_efficiency = 0.1
+	}
+
+	cost = {
+		prestige = {
+			add = {
+				value = tradition_base_cost
+				desc = BASE
+				format = "BASE_VALUE_FORMAT"
+			}
+			if = {
+				limit = {
+					NOR = {
+						culture_pillar:ethos_bureaucratic = { is_in_list = traits }
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+					}
+				}
+				add = {
+					value = tradition_incompatible_ethos_penalty
+					desc = not_bellicose_or_bureaucratic_desc
+				}
+			}
+			if = { #Teaching a military Curriculum
+				limit = {
+					NOT = {
+						any_culture_county = {
+							count >= 5
+							any_county_province = {
+								has_building_or_higher = examination_hall_01
+							}
+						}
+					}
+				}
+				add = {
+					value = tradition_unfulfilled_criteria_penalty
+					desc = duchies_with_examination_halls_desc
+				}
+			}
+
+			if = {
+				limit = {
+					culture_tradition_reduction_trigger = { TRADITION = tradition_tgp_art_of_war }
+				}
+				multiply = {
+					value = 0.5
+					desc = inspired_by_culture_desc
+				}
+			}
+			
+			multiply = tradition_replacement_cost_if_relevant
+		}
+	}
+	
+	ai_will_do = {
+		value = 400
+		if = {
+			limit = { # Admin should be more into this
+				scope:character = {
+					government_allows = administrative
+				}
+			}
+			multiply = 2
+		}
+		else_if = {
+			limit = {
+				scope:character ?= {
+					ai_has_warlike_personality = yes
+				}
+			}
+			multiply = 4
+		}
+	}
+
+}
+
+
+tradition_cultural_primacy = {
+	category = societal
+
+	layers = {
+		0 = diplo
+		1 = western
+		4 = instrument.dds
+	}
+
+	is_shown = {
+		has_tgp_dlc_trigger = yes
+		scope:character = {
+			OR = {
+				culture = { has_cultural_pillar = heritage_chinese }
+				has_title = title:h_china #Always available to new emperors
+			}
+		}
+	}
+	
+	can_pick = {
+		# Mutually exclusive with other Isolationist
+		NOR = {
+			culture_tradition:tradition_isolationist = { is_in_list = traits }
+			culture_tradition:tradition_tgp_inward_perfection = { is_in_list = traits }
+		}
+	}
+
+	parameters = {
+		innovation_from_learning_traits = yes
+		courtiers_less_likely_to_leave_same_culture_court = yes
+		wants_to_learn_chinese = yes
+
+		reduced_marriage_acceptance_outside_culture = yes
+		reduced_marriage_acceptance_distant_realms = yes
+		ai_doesnt_marry_outside_culture = yes
+		harder_to_hybridize = yes
+		may_challenge_to_board_games = yes
+	}
+
+	character_modifier = {
+		monthly_piety_gain_per_legitimacy_level_add = 0.15
+		court_grandeur_baseline_add = 5
+
+		monthly_lifestyle_xp_gain_mult = 0.05
+		opinion_of_different_culture = -15
+		different_culture_opinion = -15
+	}
+
+	cost = {
+		prestige = {
+			add = {
+				value = tradition_base_cost
+				desc = BASE
+				format = "BASE_VALUE_FORMAT"
+			}
+			if = {
+				limit = {
+					NOR = {
+						culture_pillar:ethos_bellicose = { is_in_list = traits }
+						culture_pillar:ethos_stoic = { is_in_list = traits }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
+					}
+				}
+				add = {
+					value = tradition_incompatible_ethos_penalty
+					desc = not_spiritual_communal_or_stoic_desc
+				}
+			}
+		}
+	}
+	
+	ai_will_do = {
+		value = 50
+	}
+}
+
+
+tradition_cultivation = {
+	category = societal
+
+	layers = {
+		0 = learning
+		1 = indian
+		4 = calligraphy.dds
+	}
+
+	is_shown = { #Available to Chinese cultures and to cultures influenced by China
+		has_tgp_dlc_trigger = yes
+		scope:character = {
+			OR = {
+				culture = { has_cultural_pillar = heritage_chinese }
+				has_trait = confucian_education
+				government_has_flag = government_has_merit
+				has_title = title:h_china #Always available to new emperors
+			}
+		}
+	}
+	
+	can_pick = {
+		custom_description = {
+			text = culture_not_bellicose
+			NOT = {
+				culture_pillar:ethos_bellicose = { is_in_list = traits }
+			}
+		}
+		NOT = { has_cultural_tradition = tradition_warrior_culture }
+	}
+	
+	parameters = {
+		can_always_convert_to_taoism = yes
+		mystic_trait_from_education = yes
+		mystic_trait_more_common = yes
+
+		can_always_convert_to_confucianism = yes
+		can_author_books = yes
+
+		learn_language_success_chance_for_others = yes
+
+		scholar_official_trait_bonuses = yes #Values loyal and confucian education
+	}
+	character_modifier = {
+		life_expectancy = 5
+	}
+	
+	cost = {
+		prestige = {
+			add = {
+				value = tradition_base_cost
+				desc = BASE
+				format = "BASE_VALUE_FORMAT"
+			}
+			if = {
+				limit = {
+					NOR = {
+						culture_pillar:ethos_courtly = { is_in_list = traits }
+						culture_pillar:ethos_communal = { is_in_list = traits }
+						culture_pillar:ethos_spiritual = { is_in_list = traits }
+					}
+				}
+				add = {
+					value = tradition_incompatible_ethos_penalty
+					desc = not_courtly_communal_or_spiritual_desc
+				}
+			}
+			if = {
+				limit = {
+					trigger_if = {
+						limit = {
+							scope:character = {
+								is_ai = no
+							}
+						}
+						NOT = {
+							any_ruler = {
+								count >= 5
+								culture = prev
+								primary_title.tier >= tier_county
+								has_trait = scholar
+							}
+						}
+					}
+					trigger_else = {
+						always = no
+					}
+				}
+				add = {
+					value = tradition_unfulfilled_criteria_penalty
+					desc = rulers_with_scholar_desc
+				}
+			}
+
+			if = {
+				limit = {
+					scope:character = {
+						has_variable = tradition_philosopher_culture_travel_discount
+					}
+				}
+
+				add = {
+					value = tradition_travel_discount
+					desc = tradition_travel_discount_desc
+				}
+			}
+
+			if = {
+				limit = {
+					culture_tradition_reduction_trigger = { TRADITION = tradition_philosopher_culture }
+				}
+				multiply = {
+					value = 0.5
+					desc = inspired_by_culture_desc
+				}
+			}
+			
+			multiply = tradition_replacement_cost_if_relevant
+		}
+	}
+	
+	ai_will_do = {
+		value = 100
+		if = {
+			limit = {
+				NOR = {
+					culture_pillar:ethos_communal = { is_in_list = traits }
+					culture_pillar:ethos_courtly = { is_in_list = traits }
+					culture_pillar:ethos_spiritual = { is_in_list = traits }
+				}
+			}
+			multiply = 0
+		}
+	}
+}
+
+
+tradition_intensive_farming = {
+	category = realm
+
+	layers = {
+		0 = steward
+		1 = indian
+		4 = svamp.dds
+	}
+
+	is_shown = {
+		has_tgp_dlc_trigger = yes
+		OR = {
+			has_cultural_pillar = heritage_chinese
+			any_parent_culture_or_above = {
+				has_cultural_pillar = heritage_chinese
+			}
+		}
+		NOR = {
+			culture_tradition:tradition_agrarian = { is_in_list = traits }
+			culture_tradition:tradition_tgp_rice_cultivators = { is_in_list = traits }
+		}
+	}
+	
+	can_pick = {
+		custom_tooltip = {
+			text = culture_in_farmlands_or_floodplains_terrain_desc
+			any_culture_county = {
+				county_has_province_with_terrain = {
+					terrain = farmlands
+					terrain = floodplains
+				}
+			}
+		}
+		custom_tooltip = {
+			text = cultrad_not_nomadic_government_type
+			scope:character = {
+				NOT = {
+					government_has_flag = government_is_nomadic
+				}
+			}
+		}
+	}
+	
+	parameters = {
+		grants_to_lowborns_bonuses = yes
+		collective_lands_farms_bonuses = yes
+		hard_working_traits_more_valued = yes
+		pastures_building_bonuses = yes
+		plantations_building_bonuses = yes
+		peat_quarries_building_bonuses = yes
+		hill_farms_building_bonuses = yes
+		logging_camps_building_bonuses = yes
+
+		#hard_working_traits_more_valued = yes
+		rice_cultivators_next_level_paddy_fields = yes
+	}
+	character_modifier = {
+
+	}
+	county_modifier = {
+		farmlands_development_growth_factor = 0.3
+		farmlands_tax_mult = 0.05
+		farmlands_levy_size = 0.1
+		terraced_hills_development_growth_factor = 0.3
+		terraced_hills_tax_mult = 0.05
+		terraced_hills_levy_size = 0.1
+		floodplains_development_growth_factor = 0.1
+		floodplains_construction_gold_cost = -0.1
+	}
+	
+	cost = {
+		prestige = {
+			add = {
+				value = tradition_base_cost
+				desc = BASE
+				format = "BASE_VALUE_FORMAT"
+			}
+			if = {
+				limit = {
+					culture_pillar:ethos_bellicose = { is_in_list = traits }
+				}
+				add = {
+					value = tradition_incompatible_ethos_penalty
+					desc = culture_not_bellicose
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						any_culture_county = {
+							count >= 5
+							county_has_province_with_terrain = {
+								terrain = farmlands
+								terrain = floodplains
+							}
+						}
+					}
+				}
+				add = {
+					value = tradition_unfulfilled_criteria_penalty
+					desc = culture_in_farmlands_or_floodplains_terrain_count_desc
+				}
+			}
+
+			if = {
+				limit = {
+					culture_tradition_reduction_trigger = { TRADITION = tradition_agrarian }
+				}
+				multiply = {
+					value = 0.5
+					desc = inspired_by_culture_desc
+				}
+			}
+			
+			multiply = tradition_replacement_cost_if_relevant
+		}
+	}
+	
+	ai_will_do = {
+		value = 400
+		if = {
+			limit = {
+				NOT = {
+					scope:character = {
+						any_sub_realm_county = {
+							count >= 2
+							culture = scope:character.culture
+							county_has_province_with_terrain = {
+								terrain = farmlands
+								terrain = floodplains
+							}
+						}
+					}
+				}
+			}
+			multiply = 0
+		}
+		if = {
+			limit = {
+				scope:character = {
+					government_has_flag = government_is_tribal
+				}
+			}
+			multiply = 0
+		}
+	}
+}

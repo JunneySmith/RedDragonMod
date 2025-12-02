@@ -1,0 +1,143 @@
+﻿
+rd_war_clothes = {
+
+	usage = game
+	selection_behavior = weighted_random
+	priority = 4
+	
+	
+    rd_seppe_war_low_nobles = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = clothes
+                template = rd_steppe_war_nobility_clothes
+                accessory = m_clothes_sec_mena_war_nob_01_lo
+            }
+        }
+        outfit_tags = { military_outfit }
+        weight = {
+            base = 0
+            modifier = {
+                add = 50
+                OR = {
+                    portrait_commoner_armor_trigger = { 
+                        CULTURE_INPUT = rd_step
+                    }
+                    portrait_low_nobles_armor_trigger = { 
+                        CULTURE_INPUT = rd_step
+                    }
+                }
+            }
+            modifier = {
+                add = 21        # So priests who are actively serving in a raised army as a commander or knight wear armor instead of priest robes
+                OR = {
+                    portrait_commoner_armor_in_army_trigger = { 
+                        CULTURE_INPUT = rd_step
+                    }
+                    portrait_low_nobles_armor_in_army_trigger = { 
+                        CULTURE_INPUT = rd_step
+                    }
+                }
+            }
+        }
+    }
+
+   re_seppe_war_high_nobles = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = clothes
+                template = rd_steppe_war_nobility_clothes
+                accessory = m_clothes_sec_mena_war_nob_01_hi
+				range = { 0 1 } # For the randomness to work correctly
+            }
+        }
+        outfit_tags = { military_outfit }
+        weight = {
+            base = 0
+            modifier = {
+                add = 50
+                portrait_high_nobles_armor_trigger = {
+                    CULTURE_INPUT = rd_step
+                }
+            }
+            modifier = {
+                add = 21        # So priests who are actively serving in a raised army as a commander or knight wear armor instead of priest robes
+                portrait_high_nobles_armor_in_army_trigger = {
+                    CULTURE_INPUT = rd_step
+                }
+            }
+        }
+    }
+
+	    rd_han_war_low_nobles = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = clothes
+                template = rd_han_war_nobility_clothes
+				range = { 0 1 } # For the randomness to work correctly
+            }
+        }
+        outfit_tags = { military_outfit }
+        weight = {
+            base = 0
+            modifier = {
+                add = 50
+                OR = {
+                    portrait_commoner_armor_trigger = { 
+                        CULTURE_INPUT = rd_han
+                    }
+                    portrait_low_nobles_armor_trigger = { 
+                        CULTURE_INPUT = rd_han
+                    }
+                }
+            }
+            modifier = {
+                add = 21        # So priests who are actively serving in a raised army as a commander or knight wear armor instead of priest robes
+                OR = {
+                    portrait_commoner_armor_in_army_trigger = { 
+                        CULTURE_INPUT = rd_han
+                    }
+                    portrait_low_nobles_armor_in_army_trigger = { 
+                        CULTURE_INPUT = rd_han
+                    }
+                }
+            }
+        }
+    }
+
+    rd_han_war_high_nobles = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = clothes
+                template = rd_han_war_nobility_high_clothes
+				range = { 0 1 } # For the randomness to work correctly
+            }
+        }
+        outfit_tags = { military_outfit }
+        weight = {
+            base = 0
+            modifier = {
+                add = 50
+                portrait_high_nobles_armor_trigger = {
+                    CULTURE_INPUT = rd_han
+                }
+            }
+            modifier = {
+                add = 21        # So priests who are actively serving in a raised army as a commander or knight wear armor instead of priest robes
+                portrait_high_nobles_armor_in_army_trigger = {
+                    CULTURE_INPUT = rd_han
+                }
+            }
+        }
+    }
+
+
+  
+
+
+
+}

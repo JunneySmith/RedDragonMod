@@ -1,0 +1,65 @@
+﻿# One above calcs player strength (plus multiplier), this one is enemy strength.
+recipient_strength_root_value = {
+	value = 0
+	if = {
+		limit = { exists = scope:recipient }
+		add = scope:recipient.max_military_strength # this should be a character, probably a top liege
+		scope:recipient = {
+			every_ally = {
+				limit =	{
+					NOT = { has_truce = root }
+				}
+				add = max_military_strength
+			}
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:recipient
+			NOT = { target_is_liege_or_above = scope:recipient }
+			scope:recipient = {
+			has_government = rd_han_military_government
+			any_vassal = {
+				has_government = rd_han_military_government
+			}
+			}
+		}
+		scope:recipient = {
+		every_vassal = {
+			limit = {
+				has_government = rd_han_military_government
+			}
+			add = max_military_strength
+		}
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:recipient
+			target_is_liege_or_above = scope:recipient 
+			scope:recipient = {
+			has_government = rd_han_military_government
+			any_vassal = {
+				
+				has_government = rd_han_military_government
+				is_obedient_to = scope:recipient
+			}
+			}
+		}
+		scope:recipient = {
+		every_vassal = {
+			limit = {
+				has_government = rd_han_military_government
+				is_obedient_to = scope:recipient
+			}
+			add = max_military_strength
+		}
+		}
+	}
+}
+
+rd_direct_coutier_value = {
+	add =2 #domain_limit
+#	divide = 2
+	#max = 5
+}

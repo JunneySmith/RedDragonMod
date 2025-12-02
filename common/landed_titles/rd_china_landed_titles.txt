@@ -1,0 +1,22 @@
+﻿h_rdwestchina = {
+	color = { 167 10 100 }
+	capital = c_ile_de_france
+	ai_primary_priority = { add = 1000 }
+ 
+	}
+		h_rdeastchina = {
+	color = { 0 43 127 }
+	ai_primary_priority = { add = 1000 }
+	capital = c_bianzhou
+	}
+		h_rdsouthchina = {
+	color = { 64 224 208 }
+	ai_primary_priority = { add = 1000 }
+	capital = c_delhi
+	}
+	h_rdnorthchina= {
+	color = { 128 128 128}
+	ai_primary_priority = { add = 1000 }
+	capital = c_kiev
+	}
+

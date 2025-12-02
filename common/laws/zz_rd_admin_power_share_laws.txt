@@ -1,0 +1,629 @@
+﻿
+
+rd_celestial_bur_power_share_liege_law = {
+	# NOTE: This law is mirrored by `rd_celestial_power_share_vassal_law`!
+	# The top-liege has `rd_celestial_power_share_liege_law` and all vassals have the `rd_celestial_power_share_vassal_law` at the same level.
+
+	default = rd_celestial_power_share_liege_law_2
+	cumulative = no
+	flag = succession_order_laws
+	
+	rd_celestial_power_share_liege_law_0 = {
+		modifier = {
+			
+			
+		}
+		
+		can_keep = {
+			OR = {
+				is_ai = no
+				has_game_rule = rd_limit_yes
+			
+			}
+			rd_realm_law_use_han_imperial_bureaucracy = yes
+				OR = {
+		is_independent_ruler = yes
+		AND = {
+		highest_held_title_tier = tier_empire
+		OR = {
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		NOT = {government_allows = administrative}
+		}
+		}
+		
+		}
+		}
+		
+		can_pass = {
+		}
+
+		on_pass = {
+		}
+		pass_cost = {
+			prestige = {
+				if = {
+					limit = { is_ai = no}
+				add = admin_law_prestige_cost
+				}
+			}
+		}
+		ai_will_do = {
+			value = 0
+			if = {
+				limit = {
+					#always = no
+					has_government = rd_celestial_empire_government
+					has_game_rule = rd_limit_yes
+				}
+				add = 3
+			}
+		}
+	}
+
+
+	
+	rd_celestial_power_share_liege_law_1 = {
+		modifier = {
+			
+		}
+
+		can_keep = {
+						OR = {
+				is_ai = no
+				has_game_rule = rd_limit_yes
+			
+			}
+			rd_realm_law_use_han_imperial_bureaucracy = yes
+			OR = {
+			is_independent_ruler = yes
+			AND = {
+			highest_held_title_tier = tier_empire
+			OR = {
+			vassal_contract_has_flag = rd_admin_theme_imperial
+			NOT = {government_allows = administrative}
+			}
+			}
+			
+			}
+
+		}
+
+		can_pass = {
+				OR = {
+		is_independent_ruler = yes
+		AND = {
+		highest_held_title_tier = tier_empire
+		OR = {
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		NOT = {government_allows = administrative}
+		}
+		}
+		
+		}
+		}
+		
+		pass_cost = {
+			prestige = {
+				if = {
+					limit = { is_ai = no}
+				add = admin_law_prestige_cost
+				}
+			}
+		}
+		on_pass = {
+			## Set cooldown
+		}
+
+		ai_will_do = {
+			value = 0
+			if = {
+				limit = {
+				#always = no
+				has_government = rd_han_administrative_government
+				has_game_rule = rd_limit_yes
+				}
+				add = 3
+			}
+		}
+	}
+
+	rd_celestial_power_share_liege_law_2 = {
+		modifier = {
+			
+			
+		}
+
+		can_keep = {
+			rd_realm_law_use_han_imperial_bureaucracy = yes
+				OR = {
+		is_independent_ruler = yes
+		AND = {
+		highest_held_title_tier = tier_empire
+		OR = {
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		NOT = {government_allows = administrative}
+		}
+		}
+		
+		}
+			#NOT = { has_government = rd_celestial_empire_government }
+		}
+
+		can_pass = {
+			NOT = { has_government = rd_celestial_empire_government }
+				OR = {
+		is_independent_ruler = yes
+		AND = {
+		highest_held_title_tier = tier_empire
+		OR = {
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		NOT = {government_allows = administrative}
+		}
+		}
+		
+		}
+
+		}
+		
+		pass_cost = {
+		}
+		
+		on_pass = {
+			## Set cooldown
+		}
+
+		ai_will_do = {
+			value = 0
+			if = {
+				limit = {
+					#always = no
+					has_government = celestial_government
+					has_game_rule = rd_limit_yes
+				}
+				add = 3
+			}
+						if = {
+				limit = {
+					#always = no
+					NOT = {has_game_rule = rd_limit_yes}
+				}
+				add = 3000
+			}
+			
+		}
+	}
+	
+}
+
+rd_celestial_bur_power_share_vassal_law = {
+	default = rd_celestial_power_share_vassal_law_0
+	cumulative = no
+flag = succession_order_laws
+
+	rd_celestial_power_share_vassal_law_0 = {
+		modifier = {
+			domain_limit_max = 1 # Raised further by laws
+			stewardship_per_merit_level = 1
+			build_gold_cost = -0.15
+		}
+		
+		can_keep = {
+			rd_realm_law_use_han_imperial_bureaucracy = yes
+			vassal_contract_has_flag = celestial_civil_appointment
+			NOT = { government_has_flag = government_is_rd_han_much_more_feudal}
+		is_independent_ruler = no
+		NAND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+				NAND = {
+		highest_held_title_tier = tier_empire
+		NOT = { government_allows = administrative}
+		}
+			trigger_if = {
+				limit = {
+					liege = {			
+					OR = {
+		is_independent_ruler = yes
+		AND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+		}
+		}
+				}
+				liege = { has_realm_law = rd_celestial_power_share_liege_law_0 }
+			}
+			trigger_else_if = {
+				limit = { liege = { has_realm_law = rd_celestial_power_share_vassal_law_0 } }
+				liege = { has_realm_law = rd_celestial_power_share_vassal_law_0 }
+			}
+			trigger_else = {
+				liege = { has_realm_law = rd_celestial_power_army_share_vassal_law_0 }
+			}
+			
+			
+			
+		}
+		
+		can_pass = {
+			trigger_if = {
+				limit = {
+					liege = {
+						OR = {
+							has_realm_law = rd_celestial_power_share_liege_law_0
+							has_realm_law = rd_celestial_power_share_vassal_law_0
+						}
+					}
+				}
+				custom_tooltip = {
+					text = imperial_bureaucracy_pending_law_change
+					always = no
+				}
+			}
+		}
+
+		on_pass = {
+			## Set cooldown
+		}
+
+		ai_will_do = {
+			value = 0
+		}
+	}
+
+	rd_celestial_power_share_vassal_law_1 = {
+		modifier = {
+			domain_limit_max = 3
+			diplomacy_per_merit_level = 1
+				build_speed = -0.15
+	domicile_build_speed = -0.15
+		}
+
+		can_keep = {
+			rd_realm_law_use_han_imperial_bureaucracy = yes
+						NOT = { government_has_flag = government_is_rd_han_much_more_feudal}
+
+			vassal_contract_has_flag = celestial_civil_appointment
+			is_independent_ruler = no
+					NAND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+						NAND = {
+		highest_held_title_tier = tier_empire
+		NOT = { government_allows = administrative}
+		}
+			trigger_if = {
+				limit = {
+					liege = { 				OR = {
+		is_independent_ruler = yes
+		AND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+		} }
+				}
+				liege = { has_realm_law = rd_celestial_power_share_liege_law_1 }
+			}
+			trigger_else_if = {
+				limit = { liege = { has_realm_law = rd_celestial_power_share_vassal_law_1 } }
+				liege = { has_realm_law = rd_celestial_power_share_vassal_law_1 }
+			}
+			trigger_else = {
+				liege = { has_realm_law = rd_celestial_power_army_share_vassal_law_1 }
+			}
+		}
+
+		can_pass = {
+			trigger_if = {
+				limit = {
+					liege = {
+						OR = {
+							has_realm_law = rd_celestial_power_share_liege_law_1
+							has_realm_law = rd_celestial_power_share_vassal_law_1
+						}
+					}
+				}
+				custom_tooltip = {
+					text = imperial_bureaucracy_pending_law_change
+					always = no
+				}
+			}
+		}
+		
+		pass_cost = {
+			prestige = {
+				add = admin_law_prestige_cost
+			}
+		}
+		
+		on_pass = {
+			## Set cooldown
+
+		}
+
+		ai_will_do = {
+			value = 0
+		}
+	}
+			rd_celestial_power_share_vassal_law_2 = {
+		modifier = {
+		}
+
+		can_keep = {
+			rd_realm_law_use_han_imperial_bureaucracy = yes
+						NOT = { government_has_flag = government_is_rd_han_much_more_feudal}
+
+			vassal_contract_has_flag = celestial_civil_appointment
+			is_independent_ruler = no
+					NAND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+						NAND = {
+		highest_held_title_tier = tier_empire
+		NOT = { government_allows = administrative}
+		}
+			trigger_if = {
+				limit = {
+					liege = {				OR = {
+		is_independent_ruler = yes
+		AND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+		}}
+				}
+				liege = { has_realm_law = rd_celestial_power_share_liege_law_2 }
+			}
+			trigger_else_if = {
+				limit = { liege = { has_realm_law = rd_celestial_power_share_vassal_law_2 } }
+				liege = { has_realm_law = rd_celestial_power_share_vassal_law_2 }
+			}
+			trigger_else = {
+				liege = { has_realm_law = rd_celestial_power_army_share_vassal_law_2 }
+			}
+		}
+
+		can_pass = {
+		}
+		
+		pass_cost = {
+			prestige = {
+				add = admin_law_prestige_cost
+			}
+		}
+		
+		on_pass = {
+			## Set cooldown
+		}
+
+		ai_will_do = {
+			value = 0
+		}
+	}
+
+}
+
+
+rd_celestial_bur_army_power_share_vassal_law = {
+	default = rd_celestial_power_army_share_vassal_law_0
+	cumulative = no
+flag = succession_order_laws
+
+	rd_celestial_power_army_share_vassal_law_0 = {
+		modifier = {
+			domain_limit_max = 1 # Raised further by laws
+			stewardship_per_merit_level = 1
+			men_at_arms_recruitment_cost = -0.1
+		}
+		
+		can_keep = {
+			rd_realm_law_use_han_imperial_bureaucracy = yes
+						NOT = { government_has_flag = government_is_rd_han_much_more_feudal}
+
+			vassal_contract_has_flag = celestial_military_appointment
+		is_independent_ruler = no
+		NAND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+				NAND = {
+		highest_held_title_tier = tier_empire
+		NOT = { government_allows = administrative}
+		}
+			trigger_if = {
+				limit = {
+					liege = {				OR = {
+		is_independent_ruler = yes
+		AND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+		} }
+				}
+				liege = { has_realm_law = rd_celestial_power_share_liege_law_0 }
+			}
+			trigger_else_if = {
+				limit = { liege = { has_realm_law = rd_celestial_power_army_share_vassal_law_0 } }
+				liege = { has_realm_law = rd_celestial_power_army_share_vassal_law_0  }
+			}
+			trigger_else = {
+				liege = { has_realm_law = rd_celestial_power_share_vassal_law_0 }
+			}
+		}
+		
+		can_pass = {
+			trigger_if = {
+				limit = {
+					liege = {
+						OR = {
+							has_realm_law = rd_celestial_power_share_liege_law_0
+							has_realm_law = rd_celestial_power_army_share_vassal_law_0
+						}
+					}
+				}
+				custom_tooltip = {
+					text = imperial_bureaucracy_pending_law_change
+					always = no
+				}
+			}
+		}
+
+		on_pass = {
+			## Set cooldown
+		}
+
+		ai_will_do = {
+			value = 0
+		}
+	}
+
+	rd_celestial_power_army_share_vassal_law_1 = {
+		modifier = {
+			domain_limit_max = 3
+			army_maintenance_mult = -0.2
+			diplomacy_per_merit_level = 1
+			
+		}
+
+		can_keep = {
+		vassal_contract_has_flag = celestial_military_appointment
+					NOT = { government_has_flag = government_is_rd_han_much_more_feudal}
+
+			rd_realm_law_use_han_imperial_bureaucracy = yes
+			is_independent_ruler = no
+					NAND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+						NAND = {
+		highest_held_title_tier = tier_empire
+		NOT = { government_allows = administrative}
+		}
+			trigger_if = {
+				limit = {
+					liege = { 				OR = {
+		is_independent_ruler = yes
+		AND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+		} }
+				}
+				liege = { has_realm_law = rd_celestial_power_share_liege_law_1 }
+			}
+			trigger_else_if = {
+				limit = { liege = { has_realm_law = rd_celestial_power_army_share_vassal_law_1 } }
+				liege = { has_realm_law = rd_celestial_power_army_share_vassal_law_1  }
+			}
+			trigger_else = {
+				liege = { has_realm_law = rd_celestial_power_share_vassal_law_1 }
+			}
+		}
+
+		can_pass = {
+			trigger_if = {
+				limit = {
+					liege = {
+						OR = {
+							has_realm_law = rd_celestial_power_share_liege_law_1
+							has_realm_law = rd_celestial_power_army_share_vassal_law_1
+						}
+					}
+				}
+				custom_tooltip = {
+					text = imperial_bureaucracy_pending_law_change
+					always = no
+				}
+			}
+		}
+		
+		pass_cost = {
+			prestige = {
+				add = admin_law_prestige_cost
+			}
+		}
+		
+		on_pass = {
+			## Set cooldown
+
+		}
+
+		ai_will_do = {
+			value = 0
+		}
+	}
+			rd_celestial_power_army_share_vassal_law_2 = {
+		modifier = {
+		}
+
+		can_keep = {
+		vassal_contract_has_flag = celestial_military_appointment
+					NOT = { government_has_flag = government_is_rd_han_much_more_feudal}
+
+			rd_realm_law_use_han_imperial_bureaucracy = yes
+			is_independent_ruler = no
+					NAND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+						NAND = {
+		highest_held_title_tier = tier_empire
+		NOT = { government_allows = administrative}
+		}
+			trigger_if = {
+				limit = {
+					liege = {				OR = {
+		is_independent_ruler = yes
+		AND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+		}}
+				}
+				liege = { has_realm_law = rd_celestial_power_share_liege_law_2 }
+			}
+			trigger_else_if = {
+				limit = { liege = { has_realm_law = rd_celestial_power_army_share_vassal_law_2 } }
+				liege = { has_realm_law = rd_celestial_power_army_share_vassal_law_2  }
+			}
+			trigger_else = {
+				liege = { has_realm_law = rd_celestial_power_share_vassal_law_2 }
+			}
+		}
+
+		can_pass = {
+			trigger_if = {
+				limit = {
+					liege = {
+						OR = {
+							has_realm_law = rd_celestial_power_share_liege_law_2
+							has_realm_law = rd_celestial_power_army_share_vassal_law_2
+						}
+					}
+				}
+				custom_tooltip = {
+					text = imperial_bureaucracy_pending_law_change
+					always = no
+				}
+			}
+		}
+		
+		pass_cost = {
+			prestige = {
+				add = admin_law_prestige_cost
+			}
+		}
+		
+		on_pass = {
+			## Set cooldown
+		}
+
+		ai_will_do = {
+			value = 0
+		}
+	}
+
+}

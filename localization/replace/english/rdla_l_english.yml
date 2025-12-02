@@ -1,6 +1,8 @@
 ﻿l_english:
  # Knight wounded/slain event strings for use in battle events.
+ RD_TIANZI_CHINA:0 "Captial"
  rd_ Asia.0301.C: 0 "a unified religious organization"
+kol_you_are_han_tooltip:0 "Han-Chinese"
 invasion_war_victory_desc_rd_1:0 "Destroy the title of the target empire"
    invasion_war_desc_rd_1:0 "Destroy the title of the target empire"
    RD_HAN_INVASION_WAR_NAME_JIAOHUA:0 "Civilization Expansion"
@@ -344,3 +346,21 @@ doctrine_rd_taoist:0 "Supernatural"
  k_rdliang_adj:0 "Liang"
  
  rd_horde_invasion_war_han_land:0 "No provinces under county in realm is empty. Culture in all provinces must Han or Han's branches."
+ rd_province_war_law: "[provincial|E] [war|E] Declaration"
+ rd_province_war_law_0: "War Declaration Allowed"
+ rd_province_war_law_0_effects_not_in_prev: "$EFFECT_LIST_BULLET$#indent_newline:3 [governors|E] can wage external [wars|E]#!"
+ rd_province_war_law_1: "War Declaration Restricted"
+ rd_province_war_law_1_effects_not_in_prev: "$EFFECT_LIST_BULLET$#indent_newline:3 Only [governors|E] with [GetVassalContractType( 'administrative_themes' ).GetObligationNameShort( 'admin_theme_frontier' )] and [GetVassalContractType( 'administrative_themes' ).GetObligationNameShort( 'admin_theme_naval' )] [province_administration|E] can wage external [wars|E]#!"
+ rd_province_war_law_2: "War Declaration Approval"
+ rd_province_war_law_2_effects_not_in_prev: "$EFFECT_LIST_BULLET$#indent_newline:3 Only [governors|E] with [GetVassalContractType( 'administrative_themes' ).GetObligationNameShort( 'admin_theme_frontier' )] and [GetVassalContractType( 'administrative_themes' ).GetObligationNameShort( 'admin_theme_naval' )] [province_administration|E] can wage external [wars|E] but must request permission to do so#!"
+ rd_province_war_law_3: "War Declaration Banned"
+ rd_province_war_law_3_effects_not_in_prev: "$EFFECT_LIST_BULLET$#indent_newline:3 [governors|E] #bold cannot#! wage external [wars|E]#!"
+ 
+ rd_province_border_law: "[provincial|E] Border Policy"
+ rd_province_border_law_0: "Tentative Border Policy"
+ rd_province_border_law_0_effects_not_in_prev: "$EFFECT_LIST_BULLET$#indent_newline:3 [governors|E] are free to use the [GetScheme('dispute_border').GetTypeName] and [GetScheme('subsume_province').GetTypeName] [schemes|E]#!"
+ rd_province_border_law_1: "Limited Border Policy"
+ rd_province_border_law_1_effects_not_in_prev: "$EFFECT_LIST_BULLET$#indent_newline:3 [governors|E] can use the [GetScheme('dispute_border').GetTypeName] and [GetScheme('subsume_province').GetTypeName] [schemes|E] only if they belong to a [powerful|E] or [dominant_family|E]#!"
+ rd_province_border_law_2: "Fixed Border Policy"
+ rd_province_border_law_2_effects_not_in_prev: "$EFFECT_LIST_BULLET$#indent_newline:3 [governors|E] #bold cannot#! use the [GetScheme('dispute_border').GetTypeName] and [GetScheme('subsume_province').GetTypeName] [schemes|E]#!"
+ 

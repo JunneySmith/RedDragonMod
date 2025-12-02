@@ -1,12 +1,13 @@
 ﻿rd_adopt_special_succession_decision = { #by Ewan Cowhig Croft
-	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	picture = {reference = "gfx/interface/illustrations/men_at_arms_big/heavy_cavalry_asia.dds"}
+	decision_group_type = dynastic_cycle
 	desc = adopt_special_succession_decision_desc
-major = yes
+
 	ai_check_interval = 36
 
 	is_shown = {
-		custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes    }
-		has_realm_law = rd_han_crown_authority_3
+		has_government = rd_han_military_government
+		NOT = { has_realm_law_flag = advanced_succession_law }
 		any_held_title = {
 					tier >= tier_kingdom
 					NOR = {
@@ -24,7 +25,8 @@ major = yes
 
 	is_valid = {
 				highest_held_title_tier >= tier_kingdom
-				any_held_title = {
+				NOT = { has_realm_law_flag = advanced_succession_law }
+		any_held_title = {
 					tier >= tier_kingdom
 					NOR = {
 						custom_description = {
@@ -42,7 +44,7 @@ major = yes
 	}
 
 	cost = {
-		prestige = 300
+		prestige = 100
 	}
 
 	effect = {
@@ -71,8 +73,8 @@ major = yes
 
 
 rd_crush_the_rubo_land_decision = {
-	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
-	major = yes
+	picture = {reference = "gfx/interface/illustrations/decisions/tgp_great_project.dds"}
+	decision_group_type = dynastic_cycle
 	ai_check_interval = 120
 	desc = rd_crush_the_rubo_land_decision_desc
 
@@ -93,7 +95,9 @@ rd_crush_the_rubo_land_decision = {
 		gold >= 1000
 		OR = {
 		has_title = title:e_rdwestchina
-		has_title = title:e_rdwestchina_emp
+		has_title = title:e_liangyi
+		has_title = title:e_china
+		has_title = title:h_china
 		}
 	}
 	cost = {
@@ -106,6 +110,13 @@ rd_crush_the_rubo_land_decision = {
 	}
 	effect = {
 	custom_tooltip = rd_crush_the_rubo_land_decision_tooltip
+	if = {
+		limit = {
+					is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:rd_new_huaxia_combined_united_decision
+			}
+		}
 		title:e_tibet = {
 		every_in_de_jure_hierarchy = {
 				limit = {
@@ -113,11 +124,25 @@ rd_crush_the_rubo_land_decision = {
 
 			}
 	
-set_de_jure_liege_title = title:e_rdwestchina
+set_de_jure_liege_title = title:e_china
+				}
+		
+	}
+	}
+	else = {
+			title:e_tibet = {
+		every_in_de_jure_hierarchy = {
+				limit = {
+				tier = tier_kingdom
+
+			}
+	
+set_de_jure_liege_title = title:e_liangyi
 				}
 		
 	}
 	
+	}
 			title:e_tibet = {
 	root = { destroy_title = prev }
 	
@@ -139,8 +164,8 @@ set_de_jure_liege_title = title:e_rdwestchina
 }
 
 rd_the_build_land_decision = {
-	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
-	major = yes
+	picture = {reference = "gfx/interface/illustrations/decisions/decision_realm.dds"}
+	decision_group_type = dynastic_cycle
 	ai_check_interval = 1
 	desc = rd_crush_the_build_land_decision_desc
 
@@ -247,8 +272,8 @@ rd_the_build_land_decision = {
 	}
 }
 rd_invite_to_the_bosi_land_decision = {
-	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
-	major = yes
+	picture = {reference = "gfx/interface/illustrations/decisions/fp2_decision_struggle_compromise.dds"}
+	decision_group_type = dynastic_cycle
 	ai_check_interval = 120
 	desc = rd_invite_to_the_bosi_land_decision_desc
 
@@ -263,8 +288,14 @@ rd_invite_to_the_bosi_land_decision = {
 	}
 	is_valid = {
 		custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}
-		completely_controls = title:e_persia
+		completely_controls = title:k_persia
+		OR = {
+		 title:e_rdwestchina.holder = {
+				target_is_liege_or_above = ROOT
+		 }
+		
 		has_title = title:e_rdwestchina
+		}
 	}
 	cost = {
 		piety = {
@@ -327,13 +358,13 @@ rd_invite_to_the_bosi_land_decision = {
 	}
 }
 rd_rebuild_the_bosi_land_decision = {
-	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
-	major = yes
+	picture = {reference = "gfx/interface/illustrations/decisions/fp2_decision_struggle_conciliation.dds"}
+	decision_group_type = dynastic_cycle
 	ai_check_interval = 120
 	desc = rd_rebuild_the_bosi_land_decision_desc
 
 	is_shown = {
-								custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}
+		custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}
 		NOT = {
 			is_target_in_global_variable_list = {
 				name = unavailable_unique_decisions
@@ -349,17 +380,19 @@ rd_rebuild_the_bosi_land_decision = {
 				target = flag:flag_became_saoshyant
 			}
 		}
-		
-		
+		OR = {
+			has_primary_title = title:h_china
+			has_primary_title = title:e_rdwestchina
+			has_primary_title = title:h_rdwestchina
+		}
 		completely_controls = title:e_persia
-				any_vassal_or_below = {
-				has_title = title:k_persia 
-								faith = faith:mazdayasna
-							
-				dynasty = dynasty:1029100
-
-				
+		title:k_persia.holder  ?= {
+		AND = {
+			dynasty = dynasty:1029100
+			faith = faith:mazdayasna
+			target_is_liege_or_above = ROOT
 			}
+		}
 	}
 	cost = {
 		piety = {
@@ -384,13 +417,32 @@ rd_rebuild_the_bosi_land_decision = {
 				target = flag:flag_became_saoshyant
 			}
 		}
-		title:e_persia= {
-				every_in_de_jure_hierarchy = {
-			limit = {
-				tier = tier_kingdom
-			}
-			set_de_jure_liege_title = title:e_rdwestchina
+		if = {
+		limit = {
+
+			has_primary_title = title:h_rdwestchina
+			
+			
 		}
+		title:e_persia= {
+			set_title_name = RD_WESTCHINA_BOSI_PROTECTORATE
+			set_de_jure_liege_title = title:h_rdwestchina
+		}
+		
+		}
+				if = {
+		limit = {
+			OR = {
+						has_primary_title = title:h_china
+			has_primary_title = title:e_rdwestchina
+			
+			}
+		}
+		title:e_persia= {
+			set_title_name = RD_WESTCHINA_BOSI_PROTECTORATE
+			set_de_jure_liege_title = title:h_china
+		}
+		
 		}
 			add_to_global_variable_list = {
 			name = unavailable_unique_decisions
@@ -409,8 +461,8 @@ rd_rebuild_the_bosi_land_decision = {
 }
 
 rd_learn_from_india_land_decision = {
-	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
-	major = yes
+	picture = {reference = "gfx/interface/illustrations/decisions/decision_realm.dds"}
+	decision_group_type = dynastic_cycle
 	ai_check_interval = 120
 	desc = rd_learn_from_india_land_decision_desc
 
@@ -451,31 +503,43 @@ rd_learn_from_india_land_decision = {
 		base = 100
 	}
 }
-rd_culture_head_from_reunited_west_region_land_decision = {
-	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
-	major = yes
+rd_culture_head_from_reunited_west_region_land_decision = { #重建归义军
+	picture = {reference = "gfx/interface/illustrations/decisions/decision_realm.dds"}
+	decision_group_type = dynastic_cycle
 	ai_check_interval = 12
 	desc = rd_culture_head_from_reunited_west_region_land_decision_desc
 
 	is_shown = {
+					NOT = {	is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:rd_culture_head_from_reunited_west_region_land_decision
+			}
+			
+			}
 		custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}
+		NOT = { has_title = title:h_china }
 title:k_guiyi = {
+OR = {
 is_title_created = no
+holder = {
+is_landed = no
+is_ai = yes
 }
-
+}
+}
+	capital_province = {
+	geographical_region = tgp_silk_road_central_asia_region
+	
+	}
 	}
 	is_valid = {
 	NOT = {has_title = title:k_guiyi }
+	has_title = title:k_xia
+	has_title = title:k_hexi
+	capital_province = {
+	geographical_region = tgp_silk_road_central_asia_region
 	
-		custom_description = { text =kol_culture_group_tooltip 
-
-		culture = {
-culture_head = root
-}
-		
-		
-		}
-
+	}
 	}
 	cost = {
 	piety = 300
@@ -485,6 +549,11 @@ culture_head = root
 	}
 	effect = {
 		get_title = title:k_guiyi
+		trigger_event = rd_asia.1181
+					add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:rd_culture_head_from_reunited_west_region_land_decision
+		}
 	}
 	
 
@@ -497,8 +566,8 @@ culture_head = root
 	}
 }
 rd_learn_from_reunited_west_region_land_decision = {
-	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
-	major = yes
+	picture = {reference = "gfx/interface/illustrations/decisions/decision_realm.dds"}
+	decision_group_type = dynastic_cycle
 	ai_check_interval = 12
 	desc = rd_learn_from_reunited_west_region_land_decision_desc
 
@@ -575,8 +644,8 @@ culture_head = root
 }
 
 rd_learn_from_tubo_land_decision = {
-	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
-	major = yes
+	picture = {reference = "gfx/interface/illustrations/decisions/decision_realm.dds"}
+	decision_group_type = dynastic_cycle
 	ai_check_interval = 12
 	desc = rd_learn_from_tubo_land_decision_desc
 
@@ -618,8 +687,8 @@ rd_learn_from_tubo_land_decision = {
 	}
 }
 rd_learn_from_bosi_land_decision = {
-	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
-	major = yes
+	picture = {reference = "gfx/interface/illustrations/decisions/decision_realm.dds"}
+	decision_group_type = dynastic_cycle
 	ai_check_interval = 12
 	desc = rd_learn_from_bosi_land_decision_desc
 
@@ -662,8 +731,8 @@ rd_learn_from_bosi_land_decision = {
 }
 
 rd_learn_from_reunited_land_decision = {
-	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
-	major = yes
+	picture = {reference = "gfx/interface/illustrations/decisions/decision_realm.dds"}
+	decision_group_type = dynastic_cycle
 	ai_check_interval = 12
 	desc = rd_learn_from_reunited_land_decision_desc
 
@@ -705,14 +774,19 @@ rd_learn_from_reunited_land_decision = {
 	}
 }
 rd_crush_the_india_land_decision = {
-	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
-	major = yes
+	picture = {reference = "gfx/interface/illustrations/decisions/hindu_ruler.dds"}
+	decision_group_type = dynastic_cycle
 	ai_check_interval = 120
 	desc = rd_crush_the_india_land_decision_desc
 
 	is_shown = {
 		custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}
-	
+				NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:rd_unite_the_western_india_han_decision
+			}
+		}
 		NOT = {
 			is_target_in_global_variable_list = {
 				name = unavailable_unique_decisions
@@ -728,7 +802,7 @@ rd_crush_the_india_land_decision = {
 		completely_controls = title:e_deccan
 		completely_controls = title:e_bengal
 		
-		completely_controls = title:e_india
+		completely_controls = title:h_india
 		
 		prestige_level >= 3
 	}
@@ -770,8 +844,8 @@ trigger_event = rd_asia.0001 #I became the Chakravarti
 	}
 }
 rd_unite_the_western_han_land_decision = {
-	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
-	major = yes
+	picture = {reference = "gfx/interface/illustrations/decisions/decision_realm.dds"}
+	decision_group_type = dynastic_cycle
 	ai_check_interval = 120
 	desc = rd_unite_the_western_han_land_decision_desc
 
@@ -785,19 +859,8 @@ has_game_rule = rd_han_land_enchant_yes
 	}
 
 	effect = {
-	title:d_guiyi = {
-			every_in_de_jure_hierarchy = {
-				limit = {
-				tier = tier_county
-				NOT = {custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}}
 
-			}
-	set_county_culture =culture:han
-	
-	}
-	
-	}
-		title:e_tibet = {
+		title:k_hexi = {
 		every_in_de_jure_hierarchy = {
 				limit = {
 				tier = tier_county
@@ -873,13 +936,15 @@ has_game_rule = rd_han_land_enchant_yes
 		base = 100
 	}
 }
-rd_new_huaxia_decision = {
-	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
-	major = yes
+rd_new_huaxia_decision_a = {
+	picture = {reference = "gfx/interface/illustrations/decisions/decision_realm.dds"}
+	decision_group_type = dynastic_cycle
+	ai_goal = yes
 	ai_check_interval = 120
 	desc = rd_unite_the_western_han_decision_desc
 
 	is_shown = {
+	always = no
 		custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}
 			NOT = {
 			is_target_in_global_variable_list = {
@@ -919,6 +984,7 @@ trigger_event = rd_asia.0015
 				tier = tier_kingdom
 				NOR = {
 				this = title:k_khotan
+				this = title:k_rdliang
 				this = title:k_guiyi
 				this = title:k_dzungaria
 				this = title:k_zhetysu
@@ -974,14 +1040,16 @@ trigger_event = rd_asia.0015
 		base = 100
 	}
 }
-rd_unite_the_western_han_decision = {
-	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
-	major = yes
+rd_unite_the_western_han_decision = { #重建西域都护府
+	picture = {reference = "gfx/interface/illustrations/decisions/tgp_great_wall.dds"}
+	decision_group_type = dynastic_cycle
+	ai_goal = yes
 	ai_check_interval = 120
 	desc = rd_unite_the_western_han_decision_desc
 
 	is_shown = {
 		custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}
+		
 		NOT = {
 			is_target_in_global_variable_list = {
 				name = unavailable_unique_decisions
@@ -991,27 +1059,42 @@ rd_unite_the_western_han_decision = {
 	}
 
 	is_valid = {
-	highest_held_title_tier >= tier_empire
 		custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}
-		completely_controls = title:k_dzungaria
-		completely_controls = title:k_zhetysu 	
-		completely_controls = title:k_khotan
-		completely_controls = title:k_transoxiana
-		completely_controls = title:k_syr_darya
+		trigger_if = {
+		limit = { is_ai = yes}
+					is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:rd_unite_the_western_liang_decision
+			}
+			title:e_rdwestchina = {
+					any_in_de_jure_hierarchy = {
+			filter = {
+				tier = tier_county
+			}
+			continue = {
+				tier > tier_county
+			}
+			OR = {
+				holder = root
+				holder = {
+					target_is_liege_or_above = root
+				}
+			}
+			percent >= 0.80
+		}
+		}
+		}
+		trigger_else = {
+		completely_controls = title:d_talas_alatau
+		completely_controls = title:d_soghd
+		completely_controls = title:d_ferghana
 		completely_controls = title:k_guiyi
+		}
 	}
 
 	effect = {
 		save_scope_as = western_rd_han_uniter
 		custom_tooltip = rd_unite_the_western_han_decision_tooltip
-		title:k_dzungaria = {
-		set_de_jure_liege_title = title:e_rdwestchina
-		
-		}
-		title:k_zhetysu = {
-		set_de_jure_liege_title = title:e_rdwestchina
-		
-		}
 		title:k_khotan = {
 		set_de_jure_liege_title = title:e_rdwestchina
 		
@@ -1027,6 +1110,25 @@ rd_unite_the_western_han_decision = {
 		every_held_title = { #Completely Controlled Kingdoms as well.
 			limit = {
 				tier = tier_kingdom
+				
+					NOR = {
+							target_is_de_jure_liege_or_above = title:e_rdwestchina_emp
+							target_is_de_jure_liege_or_above = title:e_rdsouthchina
+							target_is_de_jure_liege_or_above = title:e_rdnorthchina
+							target_is_de_jure_liege_or_above = title:e_rdeastchina
+							target_is_de_jure_liege_or_above = title:e_china
+							target_is_de_jure_liege_or_above = title:h_rdwestchina
+							target_is_de_jure_liege_or_above = title:h_rdsouthchina
+							target_is_de_jure_liege_or_above = title:h_rdnorthchina
+							target_is_de_jure_liege_or_above = title:h_rdeastchina
+							target_is_de_jure_liege_or_above = title:h_china
+							target_is_de_jure_liege_or_above = 	title:e_liangyi 
+							target_is_de_jure_liege_or_above = 	 title:e_yongliang
+							target_is_de_jure_liege_or_above =  title:e_zhongyuan 
+							target_is_de_jure_liege_or_above =  title:e_jingyang 
+							target_is_de_jure_liege_or_above = 	title:e_lingnan
+							target_is_de_jure_liege_or_above = title:e_tibet
+					}
 				root = { completely_controls = prev }
 			}
 			set_de_jure_liege_title = title:e_rdwestchina
@@ -1041,9 +1143,12 @@ rd_unite_the_western_han_decision = {
 			holder = root
 			change = scope:change
 		}
-		add_title_law = rd_army_elective_succession_law
 
 	}
+	
+									title:e_rdwestchina = {
+						set_de_jure_liege_title = title:h_china
+						}
 	resolve_title_and_vassal_change = scope:change
 	hidden_effect = { set_primary_title_to = title:e_rdwestchina }
 		#Events
@@ -1061,12 +1166,13 @@ rd_unite_the_western_han_decision = {
 	}
 
 	ai_will_do = {
-		base = 100
+		base = 10000
 	}
 }
-rd_unite_the_liang_decision = {
-	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
-	major = yes
+rd_unite_the_liang_decision = { #永镇河西
+	picture = {reference = "gfx/interface/illustrations/men_at_arms_big/zhanmadao_infantry.dds"}
+	decision_group_type = dynastic_cycle
+	ai_goal = yes
 	ai_check_interval = 120
 	desc = rd_unite_the_liang_decision_desc
 
@@ -1085,18 +1191,14 @@ rd_unite_the_liang_decision = {
 		trigger_if = {
 		limit = {is_ai = no}
 		kol_is_han_trigger = yes
-		custom_description = { text =kol_culture_group_tooltip 
-
-		culture = {
-culture_head = root
-}
 		
-		
-		}
 		completely_controls = title:d_charkliq
 		completely_controls = title:d_kara_khoja
-		completely_controls = title:d_yijinai
-		
+		completely_controls = title:d_guasha
+		completely_controls = title:d_gansu
+		completely_controls = title:d_hexi
+		completely_controls = title:d_juyan
+		completely_controls = title:d_xiutu
 		}
 				trigger_if = {
 		limit = {is_ai = yes}
@@ -1110,9 +1212,64 @@ culture_head = root
 		save_scope_as = western_rd_liang_uniter
 		custom_tooltip = rd_unite_the_liang_decision_tooltip
 			title:k_guiyi = {
-	set_de_jure_liege_title = title:e_rdwestchina
+			set_de_jure_liege_title = title:e_rdwestchina
+			}
+			if = {
+			limit = {
+			culture = {
+			NOT = { has_cultural_tradition = tradition_han_farming}
+			}
+			}
+			culture = {
+			#add_culture_tradition = tradition_han_farming
+			remove_variable = tradition_cooldown 
+			}
+			}
+			if = {
+			limit = {
+			culture = {
+			NOT = { has_cultural_tradition = tradition_rd_han_legacy}
+			}
+			}
+			culture = {
+			remove_culture_tradition = tradition_scholar_officials
+			add_culture_tradition = tradition_rd_han_legacy
+			remove_variable = tradition_cooldown 
+			}
+			}
+		title:k_xia = {
+					every_in_de_jure_hierarchy = {
+				limit = {
+					tier = tier_duchy
+				}
+				set_de_jure_liege_title = title:k_rdliang
+				
+			}
+		
+		}
+		get_title = title:k_rdliang
+	if = {
+		limit = {
+					is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:rd_new_huaxia_combined_united_decision
+			}
+		}
+			 title:k_rdliang = {
+		set_de_jure_liege_title = title:e_china
+	 }
+	}
+	else = {
+	 title:k_rdliang = {
+		set_de_jure_liege_title = title:e_liangyi
+		
+	 }
 	}
 		title:k_xia = {
+	root = { destroy_title = prev }
+	
+	}
+			title:k_khotan = {
 					every_in_de_jure_hierarchy = {
 				limit = {
 					tier = tier_duchy
@@ -1122,13 +1279,28 @@ culture_head = root
 			}
 		
 		}
-		get_title = title:k_rdliang
-
-	
-		title:k_xia = {
-	root = { destroy_title = prev }
-	
-	}
+		
+					title:k_dzungaria = {
+					every_in_de_jure_hierarchy = {
+				limit = {
+					tier = tier_duchy
+				}
+				set_de_jure_liege_title = title:k_guiyi
+				
+			}
+		
+		}
+		
+					title:k_zhetysu = {
+					every_in_de_jure_hierarchy = {
+				limit = {
+					tier = tier_duchy
+				}
+				set_de_jure_liege_title = title:k_guiyi
+				
+			}
+		
+		}
 		#Events
 
 		#Can only be done once

@@ -1,0 +1,467 @@
+﻿rd_demand_feud_interaction = {
+
+	category = interaction_category_vassal
+	
+	common_interaction = yes
+	icon = demand_admin_interaction
+	ai_maybe = no
+	ai_min_reply_days = 4
+	ai_max_reply_days = 9
+	can_send_despite_rejection = yes
+	ai_accept_negotiation = yes
+	popup_on_receive = yes
+	
+
+	ai_targets = {
+		ai_recipients = liege
+	}
+	ai_target_quick_trigger = {
+		adult = yes
+	}
+
+	desc = rd_demand_feud_interaction_desc
+
+	is_shown = {
+		scope:actor = {
+		government_allows = administrative 
+		target_is_liege_or_above = scope:recipient 
+		}
+		scope:recipient = {
+			is_ai = yes
+			is_ruler = yes
+			
+		}
+		trigger_if = {
+			limit = {
+				scope:actor = {
+					is_ai = yes
+				}
+			}
+			scope:actor  = {
+				highest_held_title_tier >= tier_duchy
+			}
+		}
+	}
+
+	cooldown_against_recipient = { years = 10 }
+
+	is_valid_showing_failures_only = {
+		scope:recipient = { bp2_valid_for_standard_interactions_trigger = yes }
+		scope:recipient = { NOT = { has_strong_hook = scope:actor } }
+		scope:recipient = { is_at_war = no }
+		scope:actor = { is_at_war = no }
+		custom_tooltip = {
+			text = cannot_take_overt_hostile_actions_against_diarch.tt
+			NOT = { scope:recipient ?= scope:actor.diarch }
+		}
+		NOT = {
+			scope:recipient = { government_has_flag = government_is_tribal }
+		}
+		custom_tooltip = {
+			text = head_of_faith_unable_to_change_government_desc
+			NOT = {
+				scope:recipient = { faith.religious_head ?= this }
+			}
+		}
+	}
+
+	#Spend influence
+	send_option = {
+		flag = influence
+		is_valid = {
+			scope:actor.influence >= massive_influence_value
+		}
+		localization = SPEND_INFLUENCE
+	}
+	#Use hook
+	send_option = {
+		is_valid = {
+			scope:actor = { has_usable_hook = scope:recipient }
+		}
+		flag = hook
+		localization = SCHEME_HOOK
+	}
+	should_use_extra_icon = {
+		scope:actor = { has_usable_hook = scope:recipient }
+	}
+	extra_icon = "gfx/interface/icons/character_interactions/hook_icon.dds"
+
+	send_options_exclusive = no
+
+	auto_accept = {
+		custom_description = {
+			text = "spending_hook"
+			subject = scope:actor
+			object = scope:recipient
+			scope:hook = yes
+		}
+	}
+
+	on_send = {
+	}
+
+	on_accept = {
+		scope:actor = {
+			rd_convert_to_feudalism_from_administrative_liege_calls_effect = yes
+		}
+	}
+
+	on_decline = {
+		scope:actor = { custom_tooltip = demand_admin_interaction_vassal_refuses }
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+
+	ai_accept = {
+		base = 0
+		rd_demand_fed_acceptance_modifier = yes
+	}
+}
+
+rd_demand_feud_interaction_liege = {
+	category = interaction_category_vassal
+	icon = demand_admin_interaction
+
+	ai_maybe = no
+	ai_min_reply_days = 4
+	ai_max_reply_days = 9
+	can_send_despite_rejection = yes
+	ai_accept_negotiation = yes
+	popup_on_receive = yes
+	common_interaction = yes
+	
+	ai_targets = {
+		ai_recipients = vassals
+	}
+	ai_target_quick_trigger = {
+		adult = yes
+	}
+	ai_frequency = 12
+
+	desc = rd_demand_feud_interaction_liege_desc
+
+	is_shown = {
+		scope:actor = { 
+		#government_allows = administrative 
+		OR = {
+		has_government = rd_han_administrative_government
+		has_government = rd_han_military_government
+		}
+		}
+		scope:recipient = {
+			target_is_liege_or_above = scope:actor
+			is_ai = yes
+			is_ruler = yes
+			government_allows = administrative
+
+		}
+		trigger_if = {
+			limit = {
+				scope:actor = {
+					is_ai = yes
+				}
+			}
+			scope:recipient = {
+				highest_held_title_tier >= tier_county
+			}
+		}
+	}
+
+
+	cooldown_against_recipient = { years = 10 }
+
+	is_valid_showing_failures_only = {
+		scope:recipient = { bp2_valid_for_standard_interactions_trigger = yes }
+		scope:recipient = { NOT = { has_strong_hook = scope:actor } }
+		scope:recipient = { is_at_war = no }
+		scope:actor = { is_at_war = no }
+		custom_tooltip = {
+			text = cannot_take_overt_hostile_actions_against_diarch.tt
+			NOT = { scope:recipient ?= scope:actor.diarch }
+		}
+		NOT = {
+			scope:recipient = { government_has_flag = government_is_tribal }
+		}
+		custom_tooltip = {
+			text = head_of_faith_unable_to_change_government_desc
+			NOT = {
+				scope:recipient = { faith.religious_head ?= this }
+			}
+		}
+	}
+
+	#Spend influence
+	send_option = {
+		flag = influence
+		is_valid = {
+			scope:actor.influence >= massive_influence_value
+		}
+		localization = SPEND_INFLUENCE
+	}
+	#Use hook
+	send_option = {
+		is_valid = {
+			scope:actor = { has_usable_hook = scope:recipient }
+		}
+		flag = hook
+		localization = SCHEME_HOOK
+	}
+	should_use_extra_icon = {
+		scope:actor = { has_usable_hook = scope:recipient }
+	}
+	extra_icon = "gfx/interface/icons/character_interactions/hook_icon.dds"
+
+	send_options_exclusive = no
+
+	auto_accept = {
+		custom_description = {
+			text = "spending_hook"
+			subject = scope:actor
+			object = scope:recipient
+			scope:hook = yes
+		}
+	}
+
+	on_send = {
+		scope:recipient = {
+			primary_title = { save_scope_as = rd_demand_fed }
+			trigger_event = {
+				id = rd_asia.9001
+				days = 5
+			}
+		}
+	}
+
+	on_accept = {
+		scope:recipient = {
+			rd_convert_to_feudalism_from_administrative_liege_calls_effect = yes
+		}
+	}
+
+	on_decline = {
+		scope:recipient = { custom_tooltip = demand_admin_interaction_vassal_refuses }
+	}
+
+	ai_potential = {
+		government_allows = administrative
+		is_adult = yes
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+
+	ai_accept = {
+		base = 0
+		rd_demand_fed_acceptance_liege_modifier = yes
+	}
+}
+
+rd_change_liege_landless_interaction = {
+	category = interaction_category_vassal
+	use_diplomatic_range = yes
+	ignores_pending_interaction_block = yes
+
+	icon = find_elder_interaction
+
+	is_shown = {
+		scope:recipient = {
+			OR = {
+			top_liege = scope:actor.top_liege
+			scope:actor.top_liege = scope:actor
+			}
+			#government_has_flag = government_is_celestial
+
+		}
+	
+		scope:recipient != scope:actor
+		scope:recipient != scope:actor.liege
+		scope:actor = { 
+			is_landless_ruler = yes
+			is_governor = no
+			government_has_flag = government_is_celestial
+		}
+	}
+
+	is_valid = {
+		scope:recipient = {
+			OR = {
+				custom_tooltip = {
+						text = rd_is_minister_text
+						tgp_is_any_minister = yes
+					}
+			
+			is_landed = yes
+			is_governor = yes
+			}
+			tier_difference = {
+				target = scope:actor
+				value > 0
+			}
+		}
+	}
+
+
+	auto_accept = yes
+
+	on_accept = {
+		create_title_and_vassal_change = {
+			type = swear_fealty
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+		scope:actor = { 
+			change_liege = {
+				liege = scope:recipient
+				change = scope:change
+			}
+		}
+		resolve_title_and_vassal_change = scope:change
+	}
+		ai_will_do = {
+		base = 0
+	}
+}
+rd_go_aboard_run_landless_interaction = {
+	category = interaction_category_vassal
+	use_diplomatic_range = yes
+	ignores_pending_interaction_block = yes
+
+	icon = icon_liege
+
+	is_shown = {
+		always = no
+		scope:recipient = {
+			top_liege != scope:actor.top_liege
+			#government_has_flag = government_is_celestial
+
+		}
+	
+		scope:recipient != scope:actor
+		scope:recipient != scope:actor.liege
+		scope:actor = { 
+			is_landless_ruler = yes
+			is_governor = no
+			government_has_flag = government_is_celestial
+		}
+	}
+
+	is_valid = {
+		scope:recipient = {
+			OR = {
+			is_landed = yes
+			is_governor = yes
+			}
+			tier_difference = {
+				target = scope:actor
+				value > 0
+			}
+		}
+	}
+
+
+	auto_accept = yes
+
+	on_accept = {
+		create_title_and_vassal_change = {
+			type = swear_fealty
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+		scope:actor = { 
+			change_liege = {
+				liege = scope:recipient
+				change = scope:change
+			}
+		}
+		resolve_title_and_vassal_change = scope:change
+	}
+		ai_will_do = {
+		base = 0
+	}
+}
+
+
+release_tributary_interaction = {
+	category = interaction_category_vassal
+	common_interaction = no
+	icon = release_tributary_interaction
+
+	desc = release_tributary_interaction_desc
+
+	is_shown = {
+		scope:recipient = {
+			this != scope:actor
+			suzerain = scope:actor
+			OR = { # AI should only ever consider releasing unruly subjects
+				scope:actor = { is_ai = no }
+				NOT = { is_obedient_to = scope:actor }
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+	}
+
+	cost = {
+		prestige = {
+			value = minor_prestige_value
+			if = {
+				limit = { 
+				OR = {
+					scope:actor = { government_has_flag = government_is_celestial }
+					scope:actor = { government_has_flag = government_is_mandala }
+					}
+				}
+				multiply = 0
+			}
+		}
+		piety = {
+			value = medium_piety_value
+			if = {
+				limit = {
+					scope:actor = { 
+						NOT = { government_has_flag = government_is_mandala }
+					}
+				}
+				multiply = 0
+			}
+		}
+	}
+
+	auto_accept = yes
+	on_accept = {
+		scope:recipient = {
+			end_tributary = yes
+			save_scope_as = tributary_loc
+			scope:actor = { save_scope_as = suzerain_loc }
+			add_truce_both_ways = {
+				character = scope:actor
+				years = 5
+				name = TRUCE_TRIBUTARY_STOPPED
+			}
+			add_opinion = {
+                target = scope:actor
+                modifier = tributary_released_opinion
+                opinion = 25
+            }
+            if = {
+            	limit = { 
+            		scope:actor = { government_has_flag = government_is_mandala }
+            	}
+            	set_variable = {
+            		name = recent_mandala_suzerain
+            		value = scope:actor
+            		years = 5
+            	}
+            }
+			trigger_event = char_interaction.0380
+		}
+	}
+}

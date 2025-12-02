@@ -1,0 +1,52 @@
+﻿rd_mil_adm_contracts = {
+	contracts = {
+		administrative_themes
+		feudal_government_taxes
+		feudal_government_levies
+		rd_han_junzhen_obligations
+		rd_liege_war_participation_obligation
+	}
+	modify_contract_layout = eastern_admin
+}
+
+rd_han_adm_celestial_contracts = {
+	contracts = {
+		feudal_government_taxes
+		feudal_government_levies
+				#celestial_salary
+		#celestial_salary_rank
+		celestial_treasury
+				special_contract
+		religious_rights
+		fortification_rights
+		coinage_rights
+		succession_rights
+		war_declaration_rights
+		council_rights
+		title_revocation_rights
+		jizya_special_rights
+	}
+	#modify_contract_layout = eastern_admin
+}
+
+
+
+rd_han_adm_celestial_contracts = {
+	contracts = {
+		feudal_government_taxes
+		feudal_government_levies
+				#celestial_salary
+		#celestial_salary_rank
+		celestial_treasury
+				special_contract
+		religious_rights
+		fortification_rights
+		coinage_rights
+		succession_rights
+		war_declaration_rights
+		council_rights
+		title_revocation_rights
+		jizya_special_rights
+	}
+	#modify_contract_layout = eastern_admin
+}

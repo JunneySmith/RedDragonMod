@@ -1,0 +1,434 @@
+﻿on_war_started = {
+	on_actions = {
+	rd_army_gov_call_allies
+	}
+
+}
+on_title_gain = {
+	on_actions = {
+	rd_army_gov_culture_limitation
+	rd_army_gov_admin_convert
+	}
+
+}
+rd_army_gov_culture_limitation = {
+	effect = {
+		if = {
+		limit = {
+		NOT = {
+							any_held_title = {
+						is_nomad_title = yes
+					}
+		}
+		is_ai = yes
+		is_independent_ruler = no
+		liege = {
+		has_government = rd_han_military_government
+		}
+		NOT = {
+		culture = {
+		has_cultural_pillar = heritage_chinese
+		}
+		}
+		has_government = rd_han_military_government
+		}
+		convert_to_feudalism_from_administrative_effect = yes
+		}
+			if = {
+		limit = {
+		NOT = {
+							any_held_title = {
+						is_nomad_title = yes
+					}
+		}
+		is_ai = yes
+		is_independent_ruler = no
+		liege = {
+		has_government = rd_han_military_government
+		}
+
+		culture = {
+		has_cultural_pillar = heritage_chinese
+		}
+		
+		has_government = rd_han_military_government
+		}
+		save_scope_as = holder
+										create_nomad_title = {
+					name = RD_CAMP
+					government = rd_han_military_government
+					holder = this
+					save_scope_as = new_title
+				}
+								domicile ?= {
+					change_herd = {
+						value = 1000
+						multiply = prev.primary_title.tier
+					}
+				}
+		}
+		if = {
+		limit = {
+		is_ai = yes
+			has_variable = rd_granting_titles
+		culture = {
+		has_cultural_pillar = heritage_chinese
+		}
+		
+		has_government = rd_han_military_government
+		}
+						every_held_title = {
+					limit = {
+						tier = tier_county
+						title_province = {
+							has_holding_type = herder_holding
+						}
+					}
+					title_province = {
+						set_holding_type = nomad_holding
+					}
+				}
+	rd_create_random_maa_regiment_effect = {
+			OWNER = root
+			SIZE = scope:title.tier
+		}
+				domicile ?= {
+					change_herd = {
+						value = 1000
+						multiply = scope:title.tier
+					}
+				}
+				
+		}
+	}
+	
+}
+
+rd_army_gov_admin_convert = {
+	effect = {
+		if = {
+				limit = {
+					culture = {
+					has_innovation  = innovation_rd_compound_bows
+					}
+					liege = {
+					government_has_flag = government_is_rd_han_administrative
+					}
+					scope:previous_holder = {
+					this = root.liege
+					
+					}
+					has_variable = rd_granting_titles
+					NOT=  { has_government = rd_han_military_government}
+					scope:title = {
+											title_province = {
+							OR = {
+								has_holding_type = nomad_holding
+								has_holding_type = herder_holding
+								has_holding_type = tribal_holding
+							}
+						}
+					
+					}
+				}
+				save_scope_as = holder
+				change_government = rd_han_military_government
+				if = {
+				limit = { 												NOT = {
+							any_held_title = {
+								is_nomad_title = yes
+							}
+						}
+					}
+								create_nomad_title = {
+					name = RD_CAMP
+					government = rd_han_military_government
+					holder = this
+					save_scope_as = new_title
+				}
+				}
+				
+
+		}
+	
+	}
+	
+}
+
+rd_army_gov_call_allies = {
+	effect = {
+scope:defender = {
+	if= {
+		limit = {
+		government_has_flag = government_is_rd_han_military
+		is_ai = yes
+		}
+		scope:war = {
+		save_scope_as = target
+		}
+		save_scope_as = actor
+					every_vassal = {
+						limit = {
+												OR = {
+																	AND = {
+					culture = scope:defender.culture
+				scope:attacker = {
+				NOT = { is_vassal_of = scope:defender }
+				
+				
+				}
+				}
+																					AND = {
+				NOT = {	culture = scope:attacker.culture }
+				scope:attacker = {
+			is_vassal_of = scope:defender 
+				
+				
+				}
+				}
+					is_obedient_to = scope:defender
+					}
+					
+				
+						government_has_flag = government_is_rd_han_military
+						}
+						save_scope_as = recipient
+						scope:defender = {
+						call_ally_interaction_effect = yes
+						}
+					}
+					
+					}
+		}
+		}
+
+}
+
+on_culture_created = {
+	on_actions = {
+	rd_remove_una_inov
+	}
+
+}
+on_game_start = {
+	on_actions = {
+	rd_gov_effects
+	}
+
+}
+on_ruler_designer_finished = {
+	on_actions = {
+	rd_celestial_empire_effect
+	}
+
+}
+rd_celestial_empire_effect=  {
+
+	effect = {
+		if = {
+		limit = {
+			scope:ruler_designer = flag:landless_noble_family
+			scope:government_giver = {
+				has_government = rd_celestial_empire_government
+			
+			}
+		
+		}
+				rd_tgp_domicile_conversion_when_changing_government_type = {
+				NEW_DOMICILE_TYPE = east_asian_estate
+				NEW_GOVERNMENT_TYPE = celestial_government
+			}
+			change_government = celestial_government
+			}
+	}
+	
+}
+
+rd_gov_effects =  {
+
+	effect = {
+						add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:rd_game_started
+		}
+						title:e_rdsouthchina = {
+						set_de_jure_liege_title = title:h_rdsouthchina
+						}
+			title:e_china ={
+set_de_jure_liege_title = title:h_china
+			}
+			 title:e_rdwestchina_emp={
+set_de_jure_liege_title = title:h_rdwestchina
+			 }
+			 			 title:e_rdwestchina={
+set_de_jure_liege_title = title:h_china
+			 }
+			 title:e_rdnorthchina ={
+set_de_jure_liege_title = title:h_rdnorthchina
+			 }
+			 			 title:e_rdeastchina ={
+set_de_jure_liege_title = title:h_rdeastchina
+			 }
+	if = {
+	limit = {
+	game_start_date >= 978.1.1 
+	
+	}
+				culture:han = {
+				tgp_silk_road_innovation_setup_add_effect = { INNOVATION = innovation_land_grants }
+			}
+	culture:han = {
+	remove_culture_tradition = tradition_rd_han_legacy
+	
+	add_culture_tradition = tradition_scholar_officials
+	remove_variable = tradition_cooldown 
+	}
+	}
+
+	
+	
+			if = {
+	limit = {
+		culture:han = {
+	NOT = {  has_innovation  = innovation_rd_compound_bows}
+	}
+	}
+	culture:han = {
+	add_innovation = innovation_rd_compound_bows
+	}
+	}
+	title:k_guiyi = {
+	if = {
+				limit = {
+			
+				NOR = {
+					has_title_law_flag = advanced_succession_law
+					has_title_law_flag = elective_succession_law
+				}
+			}
+			add_title_law = rd_army_elective_succession_law
+	
+	}
+	holder = {
+	add_gold = 600
+	change_government = rd_han_military_government
+
+			every_vassal_or_below = {
+			limit = { 
+				kol_is_han_trigger = yes
+				highest_held_title_tier >= tier_county
+				OR = {
+				has_government = administrative_government
+				has_government = celestial_government
+				has_government = feudal_government
+				}
+				
+			}
+			#change_government = rd_han_military_government
+														spawn_army = {
+							men_at_arms = {
+								type = rd_light_calary_archers
+								stacks = 2
+							}
+							men_at_arms = {
+								type = rd_han_palace_guards
+								stacks = 3
+							}
+							levies = 100
+							inheritable = yes
+																	uses_supply = no
+			location = this.location
+
+							name = rd_k_guiyi_army
+						}
+		}
+							spawn_army = {
+							men_at_arms = {
+								type = rd_light_calary_archers
+								stacks = 3
+							}
+							men_at_arms = {
+								type = rd_han_palace_guards
+								stacks = 5
+							}
+							men_at_arms = {
+								type = rd_han_shenwu_army
+								stacks = 3
+							}
+							levies = 100
+							inheritable = yes
+										uses_supply = no
+			location = this.location
+							name = rd_k_guiyi_army
+						}
+	}
+	}
+			every_ruler = {
+				limit = {
+					is_landed = yes
+					government_has_flag = government_is_rd_han_military
+				}
+				set_court_type = court_warlike
+				
+											spawn_army = {
+							men_at_arms = {
+								type = rd_light_calary_archers
+								stacks = 2
+							}
+							men_at_arms = {
+								type = rd_han_palace_guards
+								stacks = 3
+							}
+							levies = 100
+							inheritable = yes
+																	uses_supply = no
+			location = this.location
+
+							name = rd_k_guiyi_army
+						}
+						
+						save_scope_as = holder
+				create_nomad_title = {
+					name = RD_CAMP
+					government = rd_han_military_government
+					holder = this
+					save_scope_as = new_title
+				}
+							if = {
+			limit = {
+				any_held_title = {
+					is_noble_family_title = yes
+				}
+				
+				}
+							random_held_title = {
+				limit = {
+					is_noble_family_title = yes
+				}
+				save_scope_as = old_nf_title
+			}
+			tgp_wipe_domicile_effect = yes
+						scope:new_title = {
+				copy_title_history = scope:old_nf_title
+			}
+			destroy_title = scope:old_nf_title
+				}
+				add_legitimacy = 200
+				}
+
+
+	}
+}
+
+rd_remove_una_inov =  {
+
+	effect = {
+					if = {
+			limit = {
+				is_hybrid_culture = yes
+				}
+				remove_innovation = innovation_rd_compound_bows
+				remove_innovation = innovation_rd_han_culture
+				}
+}
+}

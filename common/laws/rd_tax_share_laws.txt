@@ -1,0 +1,482 @@
+﻿
+rd_celestial_bank_tx_liege_law = {
+	# NOTE: This law is mirrored by `rd_celestial_tax_share_vassal_law`!
+	# The top-liege has `rd_celestial_tax_share_liege_law` and all vassals have the `rd_celestial_tax_share_vassal_law` at the same level.
+
+	default = rd_celestial_bank_tx_share_liege_law_0
+	cumulative = no
+	flag = succession_order_laws
+	
+	rd_celestial_bank_tx_share_liege_law_0 = {
+		modifier = {
+			
+		}
+		
+		can_keep = {
+		NOT = { has_realm_law = rd_celestial_tax_share_liege_law_3 }
+		NOT = { has_realm_law = rd_celestial_bank_share_liege_law_3 }
+		NOT = { has_government = rd_han_military_government }
+			rd_realm_law_use_han_imperial_bureaucracy = yes
+				OR = {
+		is_independent_ruler = yes
+				AND = {
+		has_government = rd_han_military_government
+		liege = { NOT = { has_government = rd_celestial_empire_government } }
+		}
+		AND = {
+		highest_held_title_tier = tier_empire
+		OR = {
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		NOT = {government_allows = administrative}
+		}
+		}
+		
+		}
+		}
+		
+		can_pass = {
+		}
+
+		on_pass = {
+		}
+
+		ai_will_do = {
+			value = 1000
+		}
+	}
+
+
+	
+	rd_celestial_bank_tx_share_liege_law_1 = {
+		modifier = {
+			
+		}
+
+		can_keep = {
+			rd_realm_law_use_han_imperial_bureaucracy = yes
+			NOT = { has_realm_law = rd_celestial_bank_share_liege_law_3 }
+			NOT = { has_government = rd_han_military_government }
+				OR = {
+		is_independent_ruler = yes
+		AND = {
+		highest_held_title_tier = tier_empire
+		OR = {
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		NOT = {government_allows = administrative}
+		}
+		}
+		
+		}
+		}
+
+		can_pass = {
+
+		}
+		
+		pass_cost = {
+			prestige = {
+				if = {
+					limit = { is_ai = no}
+				add = admin_law_prestige_cost
+				}
+			}
+		}
+		
+		on_pass = {
+			## Set cooldown
+		}
+
+		ai_will_do = {
+			value = 500
+		}
+	}
+
+	rd_celestial_bank_tx_share_liege_law_2 = {
+		modifier = {
+			
+		}
+
+		can_keep = {
+				NOT = { has_government = rd_han_military_government }
+			rd_realm_law_use_han_imperial_bureaucracy = yes
+				OR = {
+		is_independent_ruler = yes
+
+		AND = {
+		has_government = rd_han_military_government
+		liege = { NOT = { has_government = rd_celestial_empire_government } }
+		}
+		AND = {
+		highest_held_title_tier = tier_empire
+		OR = {
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		NOT = {government_allows = administrative}
+		}
+		}
+		
+		}
+			#NOT = { has_government = rd_celestial_empire_government }
+		}
+
+		can_pass = {
+
+		}
+		
+		pass_cost = {
+			prestige = {
+				if = {
+					limit = { is_ai = no}
+				add = admin_law_prestige_cost
+				}
+			}
+		}
+		
+		on_pass = {
+			## Set cooldown
+		}
+
+		ai_will_do = {
+			value = 0
+		}
+	}
+	
+	rd_celestial_bank_tx_share_liege_law_3 = {
+		modifier = {
+			
+		}
+	
+		can_keep = {
+		OR = {
+			rd_realm_law_use_han_imperial_bureaucracy = yes
+			rd_realm_law_use_han_junzhen_bureaucracy = yes
+			}
+				OR = {
+		is_independent_ruler = yes
+				AND = {
+		has_government = rd_han_military_government 
+		liege = {NOT= { has_government = rd_han_military_government }}
+		}
+		AND = {
+		highest_held_title_tier = tier_empire
+		OR = {
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		NOT = {government_allows = administrative}
+		}
+		}
+		
+		}
+		}
+	
+		can_pass = {
+
+		}
+		
+		pass_cost = {
+			prestige = {
+				if = {
+					limit = { is_ai = no}
+				add = admin_law_prestige_cost
+				}
+			}
+		}
+		on_pass = {
+			## Set cooldown
+		}
+	
+		ai_will_do = {
+			value = 0
+		}
+	}
+}
+
+rd_celestial_bank_tx_vassal_law = {
+	# NOTE: This law is mirrored by `rd_celestial_tax_share_vassal_law`!
+	# The top-liege has `rd_celestial_bank_share_liege_law` and all vassals have the `rd_celestial_tax_share_vassal_law` at the same level.
+
+	default = rd_celestial_bank_tx_share_vassal_law_0
+
+	cumulative = no
+flag = succession_order_laws
+
+	rd_celestial_bank_tx_share_vassal_law_0 = {
+		modifier = {
+		}
+		
+		can_keep = {
+			rd_realm_law_use_han_imperial_bureaucracy = yes
+		OR = {
+		NOT = {has_government = rd_han_military_government }
+		liege = { has_government = rd_han_military_government }
+		}
+		is_independent_ruler = no
+		NAND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+				NAND = {
+		highest_held_title_tier = tier_empire
+		NOT = { government_allows = administrative}
+		}
+			trigger_if = {
+				limit = {
+					liege = {				OR = {
+		is_independent_ruler = yes
+		AND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+		} }
+				}
+				liege = { has_realm_law = rd_celestial_bank_tx_share_liege_law_0 }
+			}
+			trigger_else = {
+				liege = { has_realm_law = rd_celestial_bank_tx_share_vassal_law_0 }
+			}
+		}
+		
+		can_pass = {
+			trigger_if = {
+				limit = {
+					liege = {
+						OR = {
+							has_realm_law = rd_celestial_bank_tx_share_liege_law_0
+							has_realm_law = rd_celestial_bank_tx_share_vassal_law_0
+						}
+					}
+				}
+				custom_tooltip = {
+					text = imperial_bureaucracy_pending_law_change
+					always = no
+				}
+			}
+		}
+
+		on_pass = {
+			## Set cooldown
+		}
+
+		ai_will_do = {
+			value = 0
+		}
+	}
+
+	rd_celestial_bank_tx_share_vassal_law_1 = {
+		modifier = {
+					monthly_treasury_from_vassals = 0.25
+			
+			
+		}
+
+		can_keep = {
+			rd_realm_law_use_han_imperial_bureaucracy = yes
+			is_independent_ruler = no
+					OR = {
+		NOT = {has_government = rd_han_military_government }
+		liege = { has_government = rd_han_military_government }
+		}
+					NAND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+						NAND = {
+		highest_held_title_tier = tier_empire
+		NOT = { government_allows = administrative}
+		}
+			trigger_if = {
+				limit = {
+					liege = { 				OR = {
+		is_independent_ruler = yes
+		AND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+		} }
+				}
+				liege = { has_realm_law = rd_celestial_bank_tx_share_liege_law_1 }
+			}
+			trigger_else = {
+				liege = { has_realm_law = rd_celestial_bank_tx_share_vassal_law_1 }
+			}
+		}
+
+		can_pass = {
+			trigger_if = {
+				limit = {
+					liege = {
+						OR = {
+							has_realm_law = rd_celestial_bank_tx_share_liege_law_1
+							has_realm_law = rd_celestial_bank_tx_share_vassal_law_1
+						}
+					}
+				}
+				custom_tooltip = {
+					text = imperial_bureaucracy_pending_law_change
+					always = no
+				}
+			}
+		}
+		
+		pass_cost = {
+			prestige = {
+				add = admin_law_prestige_cost
+			}
+		}
+		
+		on_pass = {
+			## Set cooldown
+
+		}
+
+		ai_will_do = {
+			value = 0
+		}
+	}
+			rd_celestial_bank_tx_share_vassal_law_2 = {
+		modifier = {
+			monthly_treasury_from_vassals = 0.5
+		}
+
+		can_keep = {
+			rd_realm_law_use_han_imperial_bureaucracy = yes
+					OR = {
+		NOT = {has_government = rd_han_military_government }
+		liege = { has_government = rd_han_military_government }
+		}
+			is_independent_ruler = no
+					NAND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+						NAND = {
+		highest_held_title_tier = tier_empire
+		NOT = { government_allows = administrative}
+		}
+			trigger_if = {
+				limit = {
+					liege = {				OR = {
+		is_independent_ruler = yes
+		AND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+		}}
+				}
+				liege = { has_realm_law = rd_celestial_bank_tx_share_liege_law_2 }
+			}
+			trigger_else = {
+				liege = { has_realm_law = rd_celestial_bank_tx_share_vassal_law_2 }
+			}
+		}
+
+		can_pass = {
+			trigger_if = {
+				limit = {
+					liege = {
+						OR = {
+							has_realm_law = rd_celestial_bank_tx_share_liege_law_2
+							has_realm_law = rd_celestial_bank_tx_share_vassal_law_2
+						}
+					}
+				}
+				custom_tooltip = {
+					text = imperial_bureaucracy_pending_law_change
+					always = no
+				}
+			}
+		}
+		
+		pass_cost = {
+			prestige = {
+				add = admin_law_prestige_cost
+			}
+		}
+		
+		on_pass = {
+			## Set cooldown
+		}
+
+		ai_will_do = {
+			value = 0
+		}
+	}
+
+	
+	rd_celestial_bank_tx_share_vassal_law_3 = {
+		modifier = {
+		
+		monthly_treasury_from_vassals = 0.75
+		}
+
+		can_keep = {
+		is_independent_ruler = no
+				OR = {
+		NOT = {has_government = rd_han_military_government }
+		liege = { has_government = rd_han_military_government }
+		}
+			rd_realm_law_use_han_imperial_bureaucracy = yes
+					NAND = {
+		highest_held_title_tier = tier_empire
+		vassal_contract_has_flag = rd_admin_theme_imperial
+		}
+						NAND = {
+		highest_held_title_tier = tier_empire
+		NOT = { government_allows = administrative}
+		}
+			trigger_if = {
+				limit = {
+					liege = { 		
+					OR = {
+						is_independent_ruler = yes
+						AND = {
+						highest_held_title_tier = tier_empire
+						vassal_contract_has_flag = rd_admin_theme_imperial
+						}
+						}
+						}
+				}
+				liege = { has_realm_law = rd_celestial_bank_tx_share_liege_law_3 }
+			}
+			trigger_else_if = {
+				limit ={
+					liege = { has_government = rd_han_military_government }
+				}
+				always = yes
+			}
+			trigger_else = {
+				liege = { has_realm_law = rd_celestial_bank_tx_share_vassal_law_3 }
+			}
+		}
+
+		can_pass = {
+			trigger_if = {
+				limit = {
+					liege = {
+						OR = {
+							has_realm_law = rd_celestial_bank_tx_share_liege_law_3
+							has_realm_law = rd_celestial_bank_tx_share_vassal_law_3
+						}
+					}
+				}
+				custom_tooltip = {
+					text = imperial_bureaucracy_pending_law_change
+					always = no
+				}
+			}
+		}
+		
+		pass_cost = {
+			prestige = {
+				add = admin_law_prestige_cost
+			}
+		}
+		
+		on_pass = {
+			## Set cooldown
+
+		}
+
+		ai_will_do = {
+			value = 0
+		}
+	}
+}

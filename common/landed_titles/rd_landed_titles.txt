@@ -1,7 +1,8 @@
 ﻿e_rdwestchina = {
 	color = { 255 180 51 }
 	definite_form = yes
-	capital = c_suzhou
+	capital = c_ferghana
+	ai_primary_priority = { add = 1000 }
 			can_create = {
 			highest_held_title_tier >= tier_empire
 						is_target_in_global_variable_list = {
@@ -14,32 +15,52 @@ has_title =  title:k_guiyi
 		k_rdliang = { 
 		color = { 255 20 147 }
 		
-		capital = c_suzhou
+		capital = c_lingzhou
 		
 		}
 		k_guiyi = {
 	color = { 181 135 55 }
-	
-	capital = c_shazhou # Shazhou/Dunhuang
+	ai_primary_priority = { add = 1000 }
+	capital = c_kara_khoja # Shazhou/Dunhuang
 }
 
 	}
 	
+	
+		e_rdeastchina = {
+	color = { 0 43 127 }
+	definite_form = yes
+	ai_primary_priority = { add = 1000 }
+	capital = c_bianzhou
+	}
 	e_rdwestchina_emp = {
 	color = { 167 10 100 }
-	capital = c_suzhou
+	definite_form = yes
+	ai_primary_priority = { add = 1000 }
+	capital = c_ile_de_france
 	}
 		e_rdsouthchina = {
 	color = { 64 224 208 }
-	capital = c_suzhou
+	definite_form = yes
+	ai_primary_priority = { add = 1000 }
+	capital = c_delhi
 	}
 	e_rdnorthchina= {
 	color = { 128 128 128}
-	capital = c_suzhou
+	definite_form = yes
+	ai_primary_priority = { add = 1000 }
+	capital = c_kiev
 	}
 
-	
+	e_china = {
+	color = { 220 10 10 }
+	definite_form = yes
+	ai_primary_priority = { add = 1000 }
+	capital = c_jingzhao
+	}	
 	e_huaxia = {
 	color = { 220 10 10 }
-	capital = c_suzhou
+	definite_form = yes
+	ai_primary_priority = { add = 1000 }
+	capital = c_jingzhao
 	}

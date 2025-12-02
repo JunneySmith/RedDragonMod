@@ -29,11 +29,7 @@ any_liege_or_above = {
 		building_requirement_castle_city_church = { LEVEL = 01 }
 	}
 		on_complete = {
-	if = {
-	limit = { NOT = { has_province_modifier =rd_han_mil_modifier  }}
-	add_building_slot = 1
-	}
-	add_province_modifier = rd_han_mil_modifier
+	#add_province_modifier = rd_han_mil_modifier
 	
 	
 	}
@@ -285,7 +281,7 @@ any_liege_or_above = {
 		tax_mult = 0.15
 		monthly_income = 0.8
 		fort_level = 4
-		monthly_county_control_change_add = 0.15
+		#monthly_county_control_change_add = 0.15
 				stationed_archers_damage_add = 25
 		stationed_archers_toughness_add = 25
 		stationed_skirmishers_screen_add = 25
@@ -347,7 +343,7 @@ max_garrison = good_building_max_garrison_tier_6
 		tax_mult = 0.15
 		monthly_income = 1
 		fort_level = 4
-		monthly_county_control_change_add = 0.15
+		#monthly_county_control_change_add = 0.15
 				stationed_archers_damage_add = 25
 		stationed_archers_toughness_add = 28
 		stationed_skirmishers_screen_add = 28
@@ -472,7 +468,7 @@ any_liege_or_above = {
 		tax_mult = 0.15
 		monthly_income = 1
 		fort_level = 6
-		monthly_county_control_change_add = 0.15
+		#monthly_county_control_change_add = 0.15
 				stationed_archers_damage_add = 25
 		stationed_archers_toughness_add = 28
 		stationed_skirmishers_screen_add = 28

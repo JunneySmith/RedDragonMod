@@ -1,30 +1,17 @@
-﻿rd_han_temp_clothing = {
-	default = rd_han_temp_clothing_no
+﻿
+rd_han_extra_army_government = {
+	default = rd_han_extra_army_government_disabled
 
-	rd_han_temp_clothing_no = {
+	rd_han_extra_army_government_disabled = {
 
 	}
-	
-		#rd_han_temp_clothing_no_at_all = {
-#
-#	}
-		rd_han_temp_clothing_no_at_all_2 = {
-
+		rd_han_extra_army_government_enabled = {
 	}
 
 	
 }
-
-#rd_han_temp_hat = {
-#	default = rd_han_temp_hat_no
-#
-#	rd_han_temp_hat_no = {
-#
-#	}
-#}
-
 rd_han_land_enchant = {
-	default = rd_han_land_enchant_yes
+	default = rd_han_land_enchant_no
 
 	rd_han_land_enchant_no = {
 
@@ -34,13 +21,26 @@ rd_han_land_enchant = {
 
 	
 }
-rd_han_allow_hybrid_cul = {
-	default = rd_han_land_hyb_yes
 
-	rd_han_land_hyb_no = {
+rd_ai_emperor_domain_limit = {
+	default = rd_limit_no
+
+	rd_limit_no = {
 
 	}
-		rd_han_land_hyb_yes	= {
+	rd_limit_yes = {
+	}
+
+	
+}
+
+rd_han_new_huaxia = {
+	default = rd_hx_more_no_limit
+
+	rd_hx_more_no_limit = {
+
+	}
+	rd_hx_more_on_limit = {
 	}
 
 	

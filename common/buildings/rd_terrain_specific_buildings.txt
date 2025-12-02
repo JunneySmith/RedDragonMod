@@ -1,28 +1,26 @@
 ﻿
 rd_military_camps_zhechong_01 = {
 	construction_time = quick_construction_time
-	is_enabled = {
-	 	has_holding_type = castle_holding 
-		
-				scope:holder = {
+		can_construct = {
+	 	#has_holding_type = church_holding
+		scope:holder = {
+OR = {
+		any_learning_councillor  = {
+		kol_is_han_trigger = yes
 
-		kol_is_han_trigger = yes
 		}
-		kol_is_han_trigger = yes
-	}
-	can_construct = {
-	 	has_holding_type = castle_holding 
-			scope:holder = {
 
+any_liege_or_above = {
+
+		any_learning_councillor  = {
 		kol_is_han_trigger = yes
+
 		}
-	}
-	
-	can_construct_potential = {
- 	has_holding_type = castle_holding 
-	kol_is_han_trigger = yes
-	
-	
+}
+		kol_is_han_trigger = yes
+
+}
+		}
 		#building_military_camps_requirement_terrain = yes
 		building_requirement_castle_city_church = { LEVEL = 01 }
 	}
@@ -30,29 +28,39 @@ rd_military_camps_zhechong_01 = {
 	can_construct_showing_failures_only = {
 		building_requirement_tribal = no
 	}
-	
+
 	cost_gold = cheap_building_tier_1_cost
+		is_enabled = {
+		county.duchy.holder = county.holder
+	}
 	
 	county_modifier = {
-		hostile_raid_time = 0.1
-		travel_danger = -10
+
 		#defender_advantage = normal_building_advantage_tier_1
 	}
-	province_modifier = {
+			province_modifier = {
+					stationed_heavy_infantry_damage_mult = 0.1
+		stationed_heavy_cavalry_damage_mult = 0.1
+		stationed_heavy_cavalry_toughness_mult = 0.1
+		stationed_heavy_infantry_toughness_mult = 0.15
+			}
+	duchy_capital_county_modifier = {
+			hostile_raid_time = 0.25
+		travel_danger = -15
 		garrison_size = 0.25
 		fort_level = 1
-		stationed_light_cavalry_siege_value_add = 0.1
-				stationed_heavy_infantry_damage_add = 5
-		stationed_light_cavalry_damage_add = 5
-		stationed_light_cavalry_pursuit_add = 5
-		stationed_maa_toughness_mult = 0.1
+	monthly_county_control_growth_add = 0.05
 		
 		
 		
 	}
 	character_modifier = {
-
-
+			archer_cavalry_damage_mult = 0.1
+					archer_cavalry_toughness_mult = 0.1
+			knight_limit = 2
+		knight_effectiveness_mult = 0.25
+	monthly_income_from_herd_mult = 0.1
+	herd_gain_mult = 0.1
 	}
 
 	next_building = rd_military_camps_zhechong_02
@@ -101,65 +109,80 @@ rd_military_camps_zhechong_01 = {
 			has_building_or_higher = city_01
 		}
 	}
+		type = duchy_capital
 	#type = special
 }
 
 rd_military_camps_zhechong_02 = {
 	construction_time = quick_construction_time
 	flag = rd_han_mil_building
-	is_enabled = {
-	 	has_holding_type = castle_holding 
-				scope:holder = {
+		can_construct = {
+	 	#has_holding_type = church_holding
+			scope:holder = {
+OR = {
+any_liege_or_above = {
 
+		any_learning_councillor  = {
 		kol_is_han_trigger = yes
+
 		}
-		kol_is_han_trigger = yes
-	}
-	can_construct = {
-	 	has_holding_type = castle_holding 
-		kol_is_han_trigger = yes
-	}
-	can_construct_potential = {
-	 	has_holding_type = castle_holding 
-	scope:holder = {
+}
 	kol_is_han_trigger = yes
-	}
-	
+		any_learning_councillor  = {
+	kol_is_han_trigger = yes
+
+		}
+		}
+
+		}
 		#building_military_camps_requirement_terrain = yes
 		building_requirement_castle_city_church = { LEVEL = 01 }
 		scope:holder.culture = {
 			has_innovation = innovation_barracks
 		}
 	}
-
+	is_enabled = {
+		county.duchy.holder = county.holder
+	}
+	show_disabled = yes
 	can_construct_showing_failures_only = {
 		building_requirement_tribal = no
 	}
-	
+
 	cost_gold = cheap_building_tier_2_cost
 	
 	county_modifier = {
-		hostile_raid_time = 0.2
-		travel_danger = -10
+
 		#defender_advantage = normal_building_advantage_tier_1
 	}
-		province_modifier = {
+	province_modifier = {
+					stationed_heavy_infantry_damage_mult = 0.1
+		stationed_heavy_cavalry_damage_mult = 0.1
+		stationed_heavy_cavalry_toughness_mult = 0.15
+		stationed_heavy_infantry_toughness_mult = 0.15
+
+
+	}
+		duchy_capital_county_modifier = {
+				hostile_raid_time = 0.35
+		travel_danger = -25
 		garrison_size = 0.5
 		fort_level = 2
-		stationed_light_cavalry_siege_value_add = 0.1
-				stationed_heavy_infantry_damage_add = 5
-		stationed_light_cavalry_damage_add = 10
-		stationed_light_cavalry_pursuit_add = 5
-		stationed_maa_toughness_mult = 0.15
+	monthly_county_control_growth_add = 0.05
 		
 	}
 	character_modifier = {
-
-
+				archer_cavalry_damage_mult = 0.15
+					archer_cavalry_toughness_mult = 0.15
+			knight_limit = 2
+		knight_effectiveness_mult = 0.25
+	monthly_income_from_herd_mult = 0.1
+	herd_gain_mult = 0.1
+	army_maintenance_mult = -0.025
 	}
 
 	next_building = rd_military_camps_zhechong_03
-	#type = special
+	type = duchy_capital
 	ai_value = {
 		base = 109
 	}
@@ -168,59 +191,72 @@ rd_military_camps_zhechong_02 = {
 rd_military_camps_zhechong_03 = {
 	construction_time = quick_construction_time
 flag = rd_han_mil_building
-	is_enabled = {
-	 	has_holding_type = castle_holding 
-				scope:holder = {
+		can_construct = {
+	 	#has_holding_type = church_holding
+			scope:holder = {
+OR = {
+any_liege_or_above = {
 
+		any_learning_councillor  = {
 		kol_is_han_trigger = yes
+
 		}
-		kol_is_han_trigger = yes
-	}
-	can_construct_potential = {
-	 	has_holding_type = castle_holding 
-	scope:holder = {
+}
 	kol_is_han_trigger = yes
-	}
-			#building_military_camps_requirement_terrain = yes
-	}
+		any_learning_councillor  = {
+	kol_is_han_trigger = yes
 
-	can_construct = {
-	 	has_holding_type = castle_holding 
-	kol_is_han_trigger = yes
-		building_requirement_castle_city_church = { LEVEL = 02 }
+		}
+		}
+
+		}
+		#building_military_camps_requirement_terrain = yes
+		building_requirement_castle_city_church = { LEVEL = 01 }
 		scope:holder.culture = {
-			has_innovation = innovation_burhs
+			has_innovation = innovation_barracks
 		}
 	}
-
+	is_enabled = {
+		county.duchy.holder = county.holder
+	}
+	show_disabled = yes
 	can_construct_showing_failures_only = {
 		building_requirement_tribal = no
 	}
-	
+
 	cost_gold = cheap_building_tier_3_cost
 
 	county_modifier = {
-	travel_danger = -10
-		hostile_raid_time = 0.3
+
 		#defender_advantage = normal_building_advantage_tier_1
 	}
 		province_modifier = {
+						stationed_heavy_infantry_damage_mult = 0.15
+		stationed_heavy_cavalry_damage_mult = 0.15
+		stationed_heavy_cavalry_toughness_mult = 0.15
+		stationed_heavy_infantry_toughness_mult = 0.2
+
+		}
+		duchy_capital_county_modifier = {
 		garrison_size = 0.5
+			travel_danger = -30
+		hostile_raid_time = 0.45
 		fort_level = 2
-		stationed_light_cavalry_siege_value_add = 0.1
-				stationed_heavy_infantry_damage_add = 5
-		stationed_light_cavalry_damage_add = 10
-		stationed_light_cavalry_pursuit_add = 10
-		stationed_maa_toughness_mult = 0.2
-		
+	monthly_county_control_growth_add = 0.05
 	}
 	
 	character_modifier = {
-
+				archer_cavalry_damage_mult = 0.2
+					archer_cavalry_toughness_mult = 0.2
+				knight_limit = 2
+		knight_effectiveness_mult = 0.25
+	monthly_income_from_herd_mult = 0.1
+	herd_gain_mult = 0.1
+	army_maintenance_mult = -0.025
 	}
 	
 	next_building = rd_military_camps_zhechong_04
-	#type = special
+	type = duchy_capital
 	ai_value = {
 		base = 108
 	}
@@ -229,63 +265,74 @@ flag = rd_han_mil_building
 rd_military_camps_zhechong_04 = {
 	construction_time = quick_construction_time
 	flag = rd_han_mil_building
-	is_enabled = {
-	 	has_holding_type = castle_holding 
-				scope:holder = {
+		can_construct = {
+	 	#has_holding_type = church_holding
+			scope:holder = {
+OR = {
+any_liege_or_above = {
 
+		any_learning_councillor  = {
 		kol_is_han_trigger = yes
+
 		}
-		kol_is_han_trigger = yes
-	}
-	can_construct_potential = {
-	 	has_holding_type = castle_holding 
-		scope:holder = {
+}
 	kol_is_han_trigger = yes
-	}
+		any_learning_councillor  = {
+	kol_is_han_trigger = yes
+
+		}
+		}
+
+		}
 		#building_military_camps_requirement_terrain = yes
-	}
-
-	can_construct = {
-	 	has_holding_type = castle_holding 
-	kol_is_han_trigger = yes
-		building_requirement_castle_city_church = { LEVEL = 02 }
+		building_requirement_castle_city_church = { LEVEL = 01 }
 		scope:holder.culture = {
-			has_innovation = innovation_burhs
+			has_innovation = innovation_barracks
 		}
 	}
-
+	is_enabled = {
+		county.duchy.holder = county.holder
+	}
+	show_disabled = yes
 	can_construct_showing_failures_only = {
 		building_requirement_tribal = no
 	}
-	
+
 	cost_gold = cheap_building_tier_4_cost
 	
 	county_modifier = {
-		hostile_raid_time = 0.4
-		travel_danger = -12
 		#defender_advantage = normal_building_advantage_tier_1
 	}
-		province_modifier = {
+			province_modifier = {
+									stationed_heavy_infantry_damage_mult = 0.2
+		stationed_heavy_cavalry_damage_mult = 0.2
+		stationed_heavy_cavalry_toughness_mult = 0.25
+		stationed_heavy_infantry_toughness_mult = 0.25
+		stationed_light_cavalry_siege_value_add = 0.2
+			}
+		duchy_capital_county_modifier = {
 		garrison_size = 0.5
 		fort_level = 4
-		stationed_light_cavalry_siege_value_add = 0.2
+				hostile_raid_time = 0.60
+		travel_danger = -35
+	monthly_county_control_growth_add = 0.05
 			
-		stationed_maa_toughness_mult = 0.25
-				stationed_heavy_infantry_damage_add = 10
-		stationed_heavy_cavalry_damage_add = 10
-		stationed_heavy_infantry_toughness_add = 10
-		stationed_heavy_cavalry_toughness_add = 10
-				stationed_light_cavalry_damage_add = 10
-		stationed_light_cavalry_pursuit_add = 10
+
 	
 	}
 	
 	character_modifier = {
-
+					archer_cavalry_damage_mult = 0.25
+					archer_cavalry_toughness_mult = 0.25
+			knight_limit = 2
+		knight_effectiveness_mult = 0.25
+	monthly_income_from_herd_mult = 0.12
+	herd_gain_mult = 0.12
+	army_maintenance_mult = -0.05
 	}
 	
 	next_building = rd_military_camps_zhechong_05
-	#type = special
+	type = duchy_capital
 	ai_value = {
 		base = 107
 	}
@@ -294,63 +341,75 @@ rd_military_camps_zhechong_04 = {
 rd_military_camps_zhechong_05 = {
 	construction_time = quick_construction_time
 	flag = rd_han_mil_building
-	is_enabled = {
-	 	has_holding_type = castle_holding 
-				scope:holder = {
+		can_construct = {
+	 	#has_holding_type = church_holding
+			scope:holder = {
+OR = {
+any_liege_or_above = {
 
+		any_learning_councillor  = {
 		kol_is_han_trigger = yes
+
 		}
-		kol_is_han_trigger = yes
-	}
-	can_construct_potential = {
-	 	has_holding_type = castle_holding 
-		scope:holder = {
+}
 	kol_is_han_trigger = yes
-	}
-		#building_military_camps_requirement_terrain = yes
-	}
+		any_learning_councillor  = {
+	kol_is_han_trigger = yes
 
-	can_construct = {
-	 	has_holding_type = castle_holding 
-		kol_is_han_trigger = yes
-		building_requirement_castle_city_church = { LEVEL = 03 }
+		}
+		}
+
+		}
+		#building_military_camps_requirement_terrain = yes
+		building_requirement_castle_city_church = { LEVEL = 01 }
 		scope:holder.culture = {
-			has_innovation = innovation_castle_baileys
+			has_innovation = innovation_barracks
 		}
 	}
-
+	is_enabled = {
+		county.duchy.holder = county.holder
+	}
+	show_disabled = yes
 	can_construct_showing_failures_only = {
 		building_requirement_tribal = no
 	}
-	
+
 	cost_gold = cheap_building_tier_5_cost
 	
 		county_modifier = {
-		hostile_raid_time = 0.5
-			travel_danger = -15
-		monthly_county_control_change_factor = 0.05
+
 		#defender_advantage = normal_building_advantage_tier_2
 	}
-		province_modifier = {
+	province_modifier = {
+									stationed_heavy_infantry_damage_mult = 0.25
+		stationed_heavy_cavalry_damage_mult = 0.3
+		stationed_heavy_cavalry_toughness_mult = 0.25
+		stationed_heavy_infantry_toughness_mult = 0.3
+		stationed_light_cavalry_siege_value_add = 0.25
+	}
+		duchy_capital_county_modifier = {
 		garrison_size = 0.5
 		fort_level = 4
-		stationed_maa_toughness_mult = 0.3
-				stationed_heavy_infantry_damage_add = 10
-		stationed_heavy_cavalry_damage_add = 15
-		stationed_heavy_infantry_toughness_add = 10
-		stationed_heavy_cavalry_toughness_add = 10
-				stationed_light_cavalry_damage_add = 10
-		stationed_light_cavalry_pursuit_add = 10
-				stationed_light_cavalry_siege_value_add = 0.25
+				hostile_raid_time = 0.70
+			travel_danger = -40
+		monthly_county_control_growth_add = 0.05
+
+
 		
 	}
 	
 	character_modifier = {
-
+						archer_cavalry_damage_mult = 0.3
+					archer_cavalry_toughness_mult = 0.3
+			knight_limit = 4
+		knight_effectiveness_mult = 0.5
+	monthly_income_from_herd_mult = 0.12
+	herd_gain_mult = 0.12
+	army_maintenance_mult = -0.05
 	}
 	
 	next_building = rd_military_camps_zhechong_06
-	#type = special
+	type = duchy_capital
 	ai_value = {
 		base = 106
 	}
@@ -359,65 +418,75 @@ rd_military_camps_zhechong_05 = {
 rd_military_camps_zhechong_06 = {
 	construction_time = quick_construction_time
 	flag = rd_han_mil_building
-	is_enabled = {
-	 	has_holding_type = castle_holding 
-				scope:holder = {
+		can_construct = {
+	 	#has_holding_type = church_holding
+			scope:holder = {
+OR = {
+any_liege_or_above = {
 
+		any_learning_councillor  = {
 		kol_is_han_trigger = yes
+
 		}
-		kol_is_han_trigger = yes
-	}
-	can_construct_potential = {
-	 	has_holding_type = castle_holding 
-		scope:holder = {
+}
 	kol_is_han_trigger = yes
-	}
-		#building_military_camps_requirement_terrain = yes
-	}
+		any_learning_councillor  = {
+	kol_is_han_trigger = yes
 
-	can_construct = {
-	 	has_holding_type = castle_holding 
-		kol_is_han_trigger = yes
-		building_requirement_castle_city_church = { LEVEL = 03 }
+		}
+		}
+
+		}
+		#building_military_camps_requirement_terrain = yes
+		building_requirement_castle_city_church = { LEVEL = 01 }
 		scope:holder.culture = {
-			has_innovation = innovation_castle_baileys
+			has_innovation = innovation_barracks
 		}
 	}
-
+	is_enabled = {
+		county.duchy.holder = county.holder
+	}
+	show_disabled = yes
 	can_construct_showing_failures_only = {
 		building_requirement_tribal = no
 	}
-	
+
 	cost_gold = cheap_building_tier_6_cost
 	
 	
 		county_modifier = {
-		fort_level = 1
-		travel_danger = -15
-		hostile_raid_time = 0.6
-		monthly_county_control_change_factor = 0.05
+
 		#defender_advantage = normal_building_advantage_tier_2
 	}
 		province_modifier = {
+										stationed_heavy_infantry_damage_mult = 0.3
+		stationed_heavy_cavalry_damage_mult = 0.35
+		stationed_heavy_cavalry_toughness_mult = 0.35
+		stationed_heavy_infantry_toughness_mult = 0.3
+		stationed_light_cavalry_siege_value_add = 0.3
+		}
+		duchy_capital_county_modifier = {
 		garrison_size = 0.75
 		fort_level = 4
-				stationed_light_cavalry_siege_value_add = 0.3
-			
-		stationed_maa_toughness_mult = 0.35
-				stationed_heavy_infantry_damage_add = 10
-		stationed_heavy_cavalry_damage_add = 15
-		stationed_heavy_infantry_toughness_add = 10
-		stationed_heavy_cavalry_toughness_add = 10
-				stationed_light_cavalry_damage_add = 10
-		stationed_light_cavalry_pursuit_add = 10
+
+		travel_danger = -40
+		hostile_raid_time = 0.8
+		monthly_county_control_growth_add = 0.05
+
 		
 	}
 	character_modifier = {
-
+							archer_cavalry_damage_mult = 0.3
+					archer_cavalry_toughness_mult = 0.3
+				knight_limit = 4
+		knight_effectiveness_mult = 0.5
+	monthly_income_from_herd_mult = 0.12
+	herd_gain_mult = 0.12
+	army_maintenance_mult = -0.05
 	}
 	
 	next_building = rd_military_camps_zhechong_07
-	#type = special
+	type = duchy_capital
 	ai_value = {
 		base = 105
 	}
@@ -426,31 +495,35 @@ rd_military_camps_zhechong_06 = {
 rd_military_camps_zhechong_07 = {
 	construction_time = quick_construction_time
 	flag = rd_han_mil_building
-	is_enabled = {
-	 	has_holding_type = castle_holding 
-				scope:holder = {
+		can_construct = {
+	 	#has_holding_type = church_holding
+			scope:holder = {
+OR = {
+any_liege_or_above = {
 
+		any_learning_councillor  = {
 		kol_is_han_trigger = yes
+
 		}
-		kol_is_han_trigger = yes
-	}
-	can_construct_potential = {
-	 	has_holding_type = castle_holding 
-		scope:holder = {
+}
 	kol_is_han_trigger = yes
-	}
+		any_learning_councillor  = {
+	kol_is_han_trigger = yes
+
+		}
+		}
+
+		}
 		#building_military_camps_requirement_terrain = yes
-	}
-	
-	can_construct = {
-	 	has_holding_type = castle_holding 
-		kol_is_han_trigger = yes
-		building_requirement_castle_city_church = { LEVEL = 04 }
+		building_requirement_castle_city_church = { LEVEL = 01 }
 		scope:holder.culture = {
-			has_innovation = innovation_royal_armory
+			has_innovation = innovation_barracks
 		}
 	}
-	
+	is_enabled = {
+		county.duchy.holder = county.holder
+	}
+	show_disabled = yes
 	can_construct_showing_failures_only = {
 		building_requirement_tribal = no
 	}
@@ -459,34 +532,39 @@ rd_military_camps_zhechong_07 = {
 	
 	
 		county_modifier = {
-		fort_level = 1
-		garrison_size = 0.1
-			travel_danger = -17
-		hostile_raid_time = 0.7
-		monthly_county_control_change_factor = 0.05
+
 		#defender_advantage = normal_building_advantage_tier_2
 	}
 		province_modifier = {
+										stationed_heavy_infantry_damage_mult = 0.3
+		stationed_heavy_cavalry_damage_mult = 0.35
+		stationed_heavy_cavalry_toughness_mult = 0.4
+		stationed_heavy_infantry_toughness_mult = 0.35
+		stationed_light_cavalry_siege_value_add = 0.4
+		}
+		duchy_capital_county_modifier = {
 		garrison_size = 0.75
-		fort_level = 4
-				stationed_light_cavalry_siege_value_add = 0.3
+		fort_level = 5
+			travel_danger = -40
+		hostile_raid_time = 1.0
+		monthly_county_control_growth_add = 0.1
 		
-		stationed_maa_toughness_mult = 0.4
-				stationed_heavy_infantry_damage_add = 10
-		stationed_heavy_cavalry_damage_add = 15
-		stationed_heavy_infantry_toughness_add = 10
-		stationed_heavy_cavalry_toughness_add = 10
-				stationed_light_cavalry_damage_add = 10
-		stationed_light_cavalry_pursuit_add = 10
+
 		
 	}
 	character_modifier = {
-
+								archer_cavalry_damage_mult = 0.3
+					archer_cavalry_toughness_mult = 0.3
+				knight_limit = 4
+		knight_effectiveness_mult = 0.5
+	monthly_income_from_herd_mult = 0.15
+	herd_gain_mult = 0.15
+	army_maintenance_mult = -0.075
 	}
 
 	
 	next_building = rd_military_camps_zhechong_08
-	#type = special
+	type = duchy_capital
 	ai_value = {
 		base = 104
 	}
@@ -495,64 +573,72 @@ rd_military_camps_zhechong_07 = {
 rd_military_camps_zhechong_08 = {
 	construction_time = quick_construction_time
 	flag = rd_han_mil_building
-	is_enabled = {
-	 	has_holding_type = castle_holding 
-				scope:holder = {
+		can_construct = {
+	 	#has_holding_type = church_holding
+			scope:holder = {
+OR = {
+any_liege_or_above = {
 
+		any_learning_councillor  = {
 		kol_is_han_trigger = yes
+
 		}
-		kol_is_han_trigger = yes
-	}
-	can_construct_potential = {
-	 	has_holding_type = castle_holding 
-		scope:holder = {
+}
 	kol_is_han_trigger = yes
-	}
-		#building_military_camps_requirement_terrain = yes
-	}
+		any_learning_councillor  = {
+	kol_is_han_trigger = yes
 
-	can_construct = {
-	 	has_holding_type = castle_holding 
-		kol_is_han_trigger = yes
-		building_requirement_castle_city_church = { LEVEL = 04 }
+		}
+		}
+
+		}
+		#building_military_camps_requirement_terrain = yes
+		building_requirement_castle_city_church = { LEVEL = 01 }
 		scope:holder.culture = {
-			has_innovation = innovation_royal_armory
+			has_innovation = innovation_barracks
 		}
 	}
-
+	is_enabled = {
+		county.duchy.holder = county.holder
+	}
+	show_disabled = yes
 	can_construct_showing_failures_only = {
 		building_requirement_tribal = no
 	}
-	
+
 	cost_gold = cheap_building_tier_8_cost
 	
 	
 		county_modifier = {
-		fort_level = 1
-		garrison_size = 0.2
-		travel_danger = -20
-		hostile_raid_time = 0.8
-		monthly_county_control_change_factor = 0.05
+
 		#defender_advantage = normal_building_advantage_tier_2
 	}
-		province_modifier = {
+	province_modifier = {
+									stationed_heavy_infantry_damage_mult = 0.4
+		stationed_heavy_cavalry_damage_mult = 0.45
+		stationed_heavy_cavalry_toughness_mult = 0.45
+		stationed_heavy_infantry_toughness_mult = 0.45
+		stationed_light_cavalry_siege_value_add = 0.4
+	}
+		duchy_capital_county_modifier = {
 		garrison_size = 1
-		fort_level = 4
-				stationed_light_cavalry_siege_value_add = 0.32
-			
-		stationed_maa_toughness_mult = 0.4
-				stationed_heavy_infantry_damage_add = 10
-		stationed_heavy_cavalry_damage_add = 15
-		stationed_heavy_infantry_toughness_add = 10
-		stationed_heavy_cavalry_toughness_add = 10
-				stationed_light_cavalry_damage_add = 10
-		stationed_light_cavalry_pursuit_add = 10
+		fort_level = 5
+		travel_danger = -50
+		hostile_raid_time = 1.25
+		monthly_county_control_growth_add = 0.1
+
 	}
 	
 	character_modifier = {
-
+									archer_cavalry_damage_mult = 0.3
+					archer_cavalry_toughness_mult = 0.3
+				knight_limit = 4
+		knight_effectiveness_mult = 0.75
+	monthly_income_from_herd_mult = 0.15
+	herd_gain_mult = 0.15
+	army_maintenance_mult = -0.075
 	}
-	#type = special
+	type = duchy_capital
 	
 	ai_value = {
 		base = 103

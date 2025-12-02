@@ -124,6 +124,24 @@ rd_han_elective = {
 				}
 			}
 		}
+		add = {
+			type = title_claimants
+			limit = {
+				#OR = { #Either de facto direct vassal, or independent ruler who is de jure vassal. (no sub-vassals)
+				#	is_vassal_of = scope:holder
+				#	is_independent_ruler = yes
+				#}
+				trigger_if = { #Must be true priests
+					limit = { has_government = theocracy_government }
+					trigger_if = {
+						limit = { is_female = yes }
+						faith_dominant_gender_female_or_equal = yes
+					}
+					trigger_else = { faith_dominant_gender_male_or_equal = yes }
+				}
+			}
+		}
+		
 		priority = {
 			base = 1
 			modifier = { # The Emperor is always picked.
@@ -132,7 +150,10 @@ rd_han_elective = {
 			}
 			modifier = { # Prince-Electors. (specific titles, held by rulers of the same faith as the current holder)
 				add = 75
-				faith.religion_tag = scope:holder.faith.religion_tag
+				
+				faith.religious_head = scope:holder.faith.religious_head
+				
+				
 				is_target_in_global_variable_list = { name = hre_elector_list target = primary_title }
 			}
 			modifier = { # Prince-Electors. (specific titles, held by rulers of the same faith as the current holder)
@@ -220,12 +241,12 @@ rd_han_elective = {
 		holder_voting_pattern_feudal_elective_modifier = yes
 
 		##########################	Elector voting patterns (circumstances)	##########################
-		elector_voting_pattern_circumstances_feudal_elective_modifier = yes
+		#rd_elector_voting_pattern_circumstances_feudal_elective_modifier = yes
 
 		##########################	Elector voting patterns (prestige/piety)	##########################
 		elector_voting_pattern_prestige_piety_feudal_elective_modifier = yes
 		elector_voting_pattern_circumstances_scandinavian_elective_modifier = yes
-		rd_elector_general_voting_pattern_feudal_elective_modifier=yes
+		rd_elector_voting_pattern_circumstances_tribal_elective_modifier = yes
 		##########################	Elector voting patterns (traits)	##########################
 		elector_voting_pattern_traits_feudal_elective_modifier = yes
 
@@ -286,7 +307,16 @@ rd_han_elective = {
 			type = holder_close_or_extended_family
 			limit = {
 				#is_close_family_of = scope:holder
+				OR = {
 				is_knight = yes
+
+				AND = {
+					exists = liege
+					is_diarch_of_target = liege
+				}
+				is_designated_diarch = yes
+			
+				}
 				feudal_elective_potential_landless_dynastic_candidate_trigger = yes
 			}
 		}

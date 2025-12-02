@@ -1,0 +1,67 @@
+﻿rd_han_wen_career_modifier = {
+diplomacy_per_merit_level = 1
+stewardship_per_merit_level = 0.5
+}
+rd_han_mil_career_modifier = {
+stewardship_per_merit_level = 0.5
+prowess_per_merit_level = 1
+
+
+}
+
+rd_han_tianzi_mensheng_modifier = {
+character_max_merit_level_add = 2
+}
+rd_han_junwang_mensheng_modifier = {
+character_max_merit_level_add = 2
+}
+
+merit_level_0 = { # "None"
+	icon = icon_merit_00
+	monthly_treasury_from_salary_budget_base = 0
+}
+merit_level_1 = { # "Rank 9 Merit"
+	icon = icon_merit_01
+	domicile_monthly_gold_mult = 0.1
+	monthly_treasury_from_salary_budget_base = 0
+}
+merit_level_2 = { # "Rank 8 Merit"
+	icon = icon_merit_02
+	domicile_monthly_gold_mult = 0.2
+	monthly_treasury_from_salary_budget_base = 0.05
+}
+merit_level_3 = { # "Rank 7 Merit"
+	icon = icon_merit_03
+	domicile_monthly_gold_mult = 0.3
+	monthly_treasury_from_salary_budget_base = 0.1
+}
+merit_level_4 = { # "Rank 6 Merit"
+	icon = icon_merit_04
+	domicile_monthly_gold_mult = 0.4
+	monthly_treasury_from_salary_budget_base = 0.15
+}
+merit_level_5 = { # "Rank 5 Merit"
+	icon = icon_merit_05
+	domicile_monthly_gold_mult = 0.5
+	monthly_treasury_from_salary_budget_base = 0.2
+}
+merit_level_6 = { # "Rank 4 Merit"
+	icon = icon_merit_06
+	domicile_monthly_gold_mult = 0.6
+	monthly_treasury_from_salary_budget_base = 0.25
+}
+merit_level_7 = { # "Rank 3 Merit"
+	icon = icon_merit_07
+	domicile_monthly_gold_mult = 0.7
+	monthly_treasury_from_salary_budget_base = 0.3
+}
+merit_level_8 = { # "Rank 2 Merit"
+	icon = icon_merit_08
+	domicile_monthly_gold_mult = 0.8
+	monthly_treasury_from_salary_budget_base = 0.5
+}
+merit_level_9 = { # "Rank 1 Merit"
+	icon = icon_merit_09
+	domicile_monthly_gold_mult = 0.9
+	monthly_treasury_from_salary_budget_base = 0.75
+}

@@ -25,6 +25,7 @@ rd_han_baron = {
 	special = holder
 	tier = barony
 	heritages = { heritage_chinese }
+	governments = { feudal_government }
 	priority = 8
 }
 rd_han_baron_female = {
@@ -33,6 +34,7 @@ rd_han_baron_female = {
 	special = holder
 	tier = barony
 	heritages = { heritage_chinese }
+		governments = { feudal_government }
 	priority = 8
 }
 
@@ -40,6 +42,7 @@ rd_han_barony = {
 	type = title
 	tier = barony
 	heritages = { heritage_chinese }
+		governments = { feudal_government }
 	priority = 8
 }
 
@@ -49,6 +52,7 @@ rd_han_count = {
 	special = holder
 	tier = county
 	heritages = { heritage_chinese }
+		governments = { feudal_government }
 	priority = 20
 }
 rd_han_count_female = {
@@ -57,12 +61,14 @@ rd_han_count_female = {
 	special = holder
 	tier = county
 	heritages = { heritage_chinese }
+		governments = { feudal_government }
 	priority = 20
 }
 rd_han_county = {
 	type = title
 	tier = county
 	heritages = { heritage_chinese }
+		governments = { feudal_government }
 	priority = 20
 }
 
@@ -72,6 +78,7 @@ rd_han_duke = {
 	special = holder
 	tier = duchy
 	heritages = { heritage_chinese }
+		governments = { feudal_government }
 	priority = 30
 }
 rd_han_duke_female = {
@@ -80,6 +87,7 @@ rd_han_duke_female = {
 	special = holder
 	tier = duchy
 	heritages = { heritage_chinese }
+		governments = { feudal_government }
 	priority = 30
 }
 
@@ -87,6 +95,7 @@ rd_han_duchy = {
 	type = title
 	tier = duchy
 	heritages = { heritage_chinese }
+		governments = { feudal_government }
 	priority = 30
 }
 rd_han_king = {
@@ -95,6 +104,7 @@ rd_han_king = {
 	special = holder
 	tier = kingdom
 	heritages = { heritage_chinese }
+		governments = { feudal_government }
 	priority = 52
 }
 
@@ -114,18 +124,79 @@ rd_han_king_female_guiyi = {
 	titles = { k_guiyi }
 	priority = 52
 }
+
+
+
+rd_han_king_army_kingdom_holder = {
+	type = character
+	special = holder
+	tier = kingdom
+	governments = { rd_han_military_government }
+	priority = 60
+}
+
+rd_han_king_army_kingdom = {
+	type = title
+	top_liege = no
+	tier = kingdom
+	governments = { rd_han_military_government }
+	priority = 60
+}
+
+rd_han_king_army_duchy_holder = {
+	type = character
+	special = holder
+	tier = duchy
+	governments = { rd_han_military_government }
+	priority = 50
+}
+
+rd_han_king_army_duchy = {
+	type = title
+	top_liege = no
+	tier = duchy
+	governments = { rd_han_military_government }
+	priority = 50
+}
+
+rd_han_king_army_empire_holder = {
+	type = character
+	special = holder
+	tier = empire
+	governments = { rd_han_military_government }
+	priority = 300
+}
+rd_han_king_army_county_holder = {
+	type = character
+	special = holder
+	tier = county
+	governments = { rd_han_military_government }
+	priority = 26
+}
+
+rd_han_rd_han_baron = {
+	type = character
+	special = holder
+	tier = barony
+	governments = { rd_han_military_government }
+	priority = 15
+}
+
+
 rd_han_king_female = {
 	type = character
 	gender = female
 	special = holder
 	tier = kingdom
 	heritages = { heritage_chinese }
+		governments = { feudal_government }
 	priority = 52
 }
 rd_han_kingdom = {
 	type = title
 	tier = kingdom
 	heritages = { heritage_chinese }
+		governments = { feudal_government }
 	priority = 50
 }
 title_k_guiyi_f = {

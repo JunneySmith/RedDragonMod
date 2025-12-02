@@ -1,0 +1,72 @@
+﻿
+imperial_exam_taker_intent = {
+	icon = intent_study_hard
+
+	auto_complete = yes
+
+	on_invalidated = { trigger_event = activity_system.0090 }
+
+	is_valid = {
+		custom_tooltip = {
+			text = already_taken_exam_tooltip
+			NOT = { has_character_flag = passed_palace_exam }
+		}
+		custom_tooltip = {
+			text = rd_family_name
+			#NOT = { has_character_flag = passed_palace_exam }
+
+				trigger_if = {
+				limit = {
+				is_lowborn = yes
+				exists = involved_activity
+				}
+
+					involved_activity = {
+					has_activity_option = {
+					category = rd_imperial_examination_passport
+					option = imperial_examination_passing_rd_all
+					}
+					}
+				
+				}
+			
+		}
+		custom_tooltip = {
+			text = already_landed_tooltip 
+
+			trigger_if = {
+				limit = {
+					is_landed = yes
+					exists = involved_activity
+				}
+		
+					involved_activity = {
+						has_activity_option = {
+		category = rd_imperial_examination_passport_officials
+		option = imperial_examination_passport_rd_officials
+	}
+				}
+					
+			}
+			
+			
+		}
+	}
+
+	ai_will_do = {
+		value = 100
+		# Let's make absolute sure relevant characters take this.
+		if = {
+			limit = {
+				NOT = {
+					has_character_flag = passed_metropolitan_exam
+				}
+			}
+			add = 5000
+		}
+	}
+
+	scripted_animation = {
+		animation = writing
+	}
+}

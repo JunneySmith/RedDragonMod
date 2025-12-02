@@ -1,24 +1,750 @@
-﻿rd_elector_general_voting_pattern_feudal_elective_modifier = {
-	modifier = { # Warrior society prefers warriors
-		desc = tooltip_rd_feudal_elector_vote_martial_education_low
-		NOT = { this = scope:candidate }
-		scope:candidate = {
-			NOT = {martial >= 10 }
-			NOT = {prowess >= 10 }
+﻿
+rd_elector_voting_pattern_circumstances_tribal_elective_modifier = {
+	##########################	Elector voting patterns (circumstances)	##########################
+	#Sexism
+	modifier = { #Gender weights
+		desc = tooltip_feudal_elector_vote_agnatic_woman
+		OR = {
+			scope:title = { #Title might have different law than realm's.
+				has_title_law = male_preference_law
+			}
+			AND = { #If title has neither the required law nor its opposites, check for realm law.
+				scope:holder = { has_realm_law = male_preference_law }
+				scope:title = {
+					NOR = {
+						has_title_law = female_preference_law
+						has_title_law = equal_law
+					}
+				}
+			}
+			faith = { has_doctrine = doctrine_gender_male_dominated }
 		}
+		scope:candidate = { is_female = yes }
 		add = {
-			add = -15
+			subtract = 100
+			if = { #Increase if both.
+				limit = {
+					OR = {
+						scope:title = { #Title might have different law than realm's.
+							has_title_law = male_preference_law
+						}
+						AND = { #If title has neither the required law nor its opposites, check for realm law.
+							scope:holder = { has_realm_law = male_preference_law }
+							scope:title = {
+								NOR = {
+									has_title_law = female_preference_law
+									has_title_law = equal_law
+								}
+							}
+						}
+					}
+					faith = { has_doctrine = doctrine_gender_male_dominated }
+				}
+				multiply = 1.5
+			}
+			if = { #Halve if talking about myself.
+				limit = {
+					this = scope:candidate
+					scope:candidate = scope:holder_candidate
+				}
+				multiply = 0.5
+			}
 		}
 	}
-	modifier = { # Warrior society prefers warriors
-		desc = tooltip_rd_feudal_elector_vote_martial_education_fool
-		NOT = { this = scope:candidate }
+	modifier = { #Gender weights
+		desc = tooltip_feudal_elector_vote_enatic_man
+		OR = {
+			scope:title = { #Title might have different law than realm's.
+				has_title_law = female_preference_law
+			}
+			AND = { #If title has neither the required law nor its opposites, check for realm law.
+				scope:holder = { has_realm_law = female_preference_law }
+				scope:title = {
+					NOR = {
+						has_title_law = male_preference_law
+						has_title_law = equal_law
+					}
+				}
+			}
+			faith = { has_doctrine = doctrine_gender_female_dominated }
+		}
 		scope:candidate = {
-			NOT = {martial >= 5 }
-			NOT = {prowess >= 5 }
+			is_female = no
 		}
 		add = {
-			add = -50
+			subtract = 100
+			if = { #Increase if both.
+				limit = {
+					OR = {
+						scope:title = { #Title might have different law than realm's.
+							has_title_law = female_preference_law
+						}
+						AND = { #If title has neither the required law nor its opposites, check for realm law.
+							scope:holder = { has_realm_law = female_preference_law }
+							scope:title = {
+								NOR = {
+									has_title_law = male_preference_law
+									has_title_law = equal_law
+								}
+							}
+						}
+					}
+					faith = { has_doctrine = doctrine_gender_female_dominated }
+				}
+				multiply = 1.5
+			}
+			if = { #Halve if talking about myself.
+				limit = {
+					this = scope:candidate
+					scope:candidate = scope:holder_candidate
+				}
+				multiply = 0.5
+			}
 		}
+	}
+	#Ageism
+	modifier = {
+		add = -50
+		desc = tooltip_feudal_elector_vote_baby
+		NOT = { this = scope:candidate }
+		scope:candidate = {
+			age < 5
+		}
+	}
+	modifier = {
+		desc = tooltip_feudal_elector_vote_child
+		NOT = { this = scope:candidate }
+		scope:candidate = {
+			age > 5
+			age < 16
+		}
+		add = {
+			subtract = 20
+			if = {
+				limit = {
+					age < 10
+				}
+				subtract = 15
+			}
+		}
+	}
+	modifier = { #Still too young for older rulers
+		add = -15
+		desc = tooltip_feudal_elector_vote_youngster
+		NOT = { this = scope:candidate }
+		age > 40
+		scope:candidate = {
+			age > 16
+			age < 25
+		}
+	}
+	modifier = { #but you cannot be too old! 
+		add = 5
+		desc = tooltip_tribal_elector_vote_elder
+		NOT = { this = scope:candidate }
+		scope:candidate = {
+			age > 50
+		}
+	}
+	#Culturism
+	modifier = {
+		add = 30
+		desc = tooltip_feudal_elector_vote_fellow_culture
+		NOT = { this = scope:candidate }
+		root.culture = scope:candidate.culture
+	}
+	modifier = {
+		add = -30
+		desc = tooltip_tribal_elector_vote_stranger #belongs to a different tribe! 
+		scope:holder.culture = root.culture #Only a concern if Elector and current ruler share culture.
+		NOT = { root.culture = scope:candidate.culture }
+		culture = { has_same_culture_heritage = scope:candidate.culture }
+		NOT = { is_close_family_of = scope:candidate }
+	}
+	modifier = {
+		add = -60
+		desc = tooltip_feudal_elector_vote_foreigner
+		scope:holder.culture = root.culture #Only a concern if Elector and current ruler share culture.
+		NOT = { culture = { has_same_culture_heritage = scope:candidate.culture } }
+		NOT = { is_close_family_of = scope:candidate }
+	}
+	modifier = { #Candidate is a foreigner's pet
+		add = -25
+		desc = tooltip_feudal_elector_vote_strangers_pet
+		scope:candidate = {
+			this = scope:holder_candidate
+			NOT = { this.culture = root.culture }
+			culture = { has_same_culture_heritage = root.culture }
+			this.culture = scope:holder.culture
+		}
+		NOT = { is_close_family_of = scope:candidate }
+	}
+	modifier = { #Candidate is a foreigner's pet
+		add = -30
+		desc = tooltip_feudal_elector_vote_foreigners_pet
+		scope:candidate = {
+			this = scope:holder_candidate
+			NOT = { culture = { has_same_culture_heritage = root.culture } }
+			this.culture = scope:holder.culture
+		}
+		NOT = { is_close_family_of = scope:candidate }
+	}
+	modifier = { #If candidate is elected, he will rule from a capital outside this de jure.
+		add = -30
+		desc = tooltip_feudal_elector_vote_political_concerns
+		is_playable_character = yes
+		NOT = { target_is_liege_or_above = scope:candidate }
+		exists = capital_county
+		capital_county = {
+			scope:title = {
+				is_de_jure_liege_or_above_target = prev
+			}
+		}
+
+		OR = { # If the current holder is reigning from within the title, there is no reason to believe a lower tier candidate would not.
+			scope:holder = { 
+				capital_county = {
+					scope:title = {
+						NOT = { is_de_jure_liege_or_above_target = prev }
+					}
+				}
+			}
+			scope:candidate = {
+				highest_held_title_tier >= scope:title.tier
+			}
+		}
+
+		scope:candidate = {
+			is_ruler = yes
+			#is_vassal_of = scope:holder
+			exists = capital_county
+			NOT = { capital_county = { scope:title = { is_de_jure_liege_or_above_target = prev } } }
+		}
+	}
+	modifier = { #Candidate is a foreign ruler.
+		desc = tooltip_feudal_elector_vote_encroaching_foreigner
+		is_playable_character = yes
+		exists = capital_county
+		OR = {
+		NOT = { target_is_liege_or_above = scope:candidate }
+				scope:candidate = {
+			this = scope:holder_candidate
+			NOT = { this.culture = root.culture }
+			}
+		}
+		scope:candidate = {
+			is_ruler = yes
+			NOT = { target_is_liege_or_above = scope:holder }
+		}
+		add = {
+			subtract = 100
+			if = { #Candidate is a foreign non-dejure ruler.
+				limit = {
+					NOT = { capital_county = { scope:title = { is_de_jure_liege_or_above_target = prev } } }
+				}
+				subtract = 500
+			}
+		}
+	}
+	#Faithism
+	modifier = { #Accepted but different faith. (Buddhism vs Hinduism)
+		add = -10
+		desc = tooltip_feudal_elector_vote_different_faith
+		NOT = { root.faith = scope:candidate.faith }
+		ai_zeal >= 0 #Does not care otherwise.
+		faith = {
+			faith_hostility_level = {
+				target = scope:candidate.faith
+				value = faith_fully_accepted_level
+			}
+		}
+	}
+	modifier = { #Astray (Catholic vs Orthodox)
+		add = -25
+		desc = tooltip_feudal_elector_vote_astray
+		NOT = { root.faith = scope:candidate.faith }
+		faith = {
+			faith_hostility_level = {
+				target = scope:candidate.faith
+				value = faith_astray_level
+			}
+		}
+	}
+	modifier = { #Heretic (Catholic vs Cathar)
+		desc = tooltip_feudal_elector_vote_heretic
+		add = {
+			subtract = 50
+			if = { #Further increased by AI zeal.
+				limit = {
+					ai_zeal >= low_positive_zeal
+				}
+				subtract = 25
+			}
+			if = { #Further increased by AI zeal.
+				limit = {
+					ai_zeal >= medium_positive_zeal
+				}
+				subtract = 25
+			}
+			if = { #Further increased by AI zeal.
+				limit = {
+					ai_zeal >= high_positive_zeal
+				}
+				subtract = 25
+			}
+		}
+		NOT = { root.faith = scope:candidate.faith }
+		faith = {
+			faith_hostility_level = {
+				target = scope:candidate.faith
+				value = faith_hostile_level
+			}
+		}
+	}
+	modifier = { #Infidel (Catholic vs Ashari)
+		desc = tooltip_feudal_elector_vote_evil_heathen
+		add = {
+			subtract = 100
+			if = { #Further increased by AI zeal.
+				limit = {
+					ai_zeal >= low_positive_zeal
+				}
+				subtract = 50
+			}
+			if = { #Further increased by AI zeal.
+				limit = {
+					ai_zeal >= medium_positive_zeal
+				}
+				subtract = 50
+			}
+			if = { #Further increased by AI zeal.
+				limit = {
+					ai_zeal >= high_positive_zeal
+				}
+				subtract = 50
+			}
+		}
+		NOT = { root.faith = scope:candidate.faith }
+		faith = {
+			faith_hostility_level = {
+				target = scope:candidate.faith
+				value = faith_evil_level
+			}
+		}
+	}
+	#Nepotism
+	modifier = {
+		add = 5
+		desc = tooltip_feudal_elector_vote_dynasty
+		NOT = { this = scope:candidate }
+		exists = root.dynasty
+		exists = scope:candidate.dynasty
+		root.dynasty = scope:candidate.dynasty
+		scope:candidate = {
+			NOT = { is_close_family_of = root }
+		}
+	}
+	modifier = {
+		add = 10
+		desc = tooltip_tribal_elector_vote_relative
+		NOT = { this = scope:candidate }
+		scope:candidate = {
+			is_close_family_of = root
+			NOT = { is_child_of = root }
+		}
+	}
+	modifier = {
+		desc = tooltip_feudal_elector_vote_parent
+		NOT = { this = scope:candidate }
+		scope:candidate = { is_child_of = root }
+		add = {
+			value = 10
+			if = { #Current Ruler should tend to often pick one of his own children as potential heirs.
+				limit = { this = scope:holder }
+				add = 30
+			}
+		}
+	}
+	#Educational preferences
+	modifier = { # Warrior society prefers warriors
+		add = 15
+		desc = tooltip_feudal_elector_vote_martial_education
+		NOT = { this = scope:candidate }
+		this_is_martial_society_trigger = yes
+		scope:candidate = {
+			martial >= 10
+			OR = {
+				has_trait = education_martial
+				has_lifestyle = martial_lifestyle
+				has_trait = lifestyle_blademaster
+				has_martial_lifestyle_trait_trigger = yes
+				has_trait = faith_warrior #This is particular to tribal elective - they really like 'em ghazis
+			}
+		}
+	}
+	modifier = { # Diplomatic society prefers stewards and diplomats
+		add = 15
+		desc = tooltip_feudal_elector_vote_diplomatic_education
+		NOT = { this = scope:candidate }
+		this_is_diplomatic_society_trigger = yes
+		scope:candidate = {
+			OR = {
+				AND = {
+					diplomacy >= 10
+					OR = {
+						has_trait = education_diplomacy
+						has_lifestyle = diplomacy_lifestyle
+						has_diplomacy_lifestyle_trait_trigger = yes
+						has_trait = lifestyle_reveler
+						has_trait = gallant
+					}
+				}
+				AND = {
+					stewardship >= 10
+					OR = {
+						has_trait = education_stewardship
+						has_lifestyle = stewardship_lifestyle
+						has_stewardship_lifestyle_trait_trigger = yes
+					}
+				}
+			}
+		}
+	}
+	modifier = { # Spiritual society prefers scholars
+		add = 15
+		desc = tooltip_feudal_elector_vote_spiritual_education
+		NOT = { this = scope:candidate }
+		this_is_spiritual_society_trigger = yes
+		scope:candidate = {
+			learning >= 10
+			OR = {
+				has_trait = education_learning
+				has_lifestyle = learning_lifestyle
+				has_learning_lifestyle_trait_trigger = yes
+				has_trait = lifestyle_mystic
+				has_trait = lifestyle_physician
+			}
+		}
+	}
+	#Claims
+	modifier = {
+		add = 15
+		desc = tooltip_feudal_elector_vote_strong_claimant
+		NOT = { this = scope:candidate }
+		scope:candidate = { has_strong_claim_on = scope:title }
+	}
+	modifier = {
+		add = 5
+		desc = tooltip_feudal_elector_vote_weak_claimant
+		NOT = { this = scope:candidate }
+		scope:candidate = { has_weak_claim_on = scope:title }
+	}	
+}
+
+rd_demand_fed_acceptance_modifier = {
+	opinion_modifier = { # Opinion Factor
+		who = scope:recipient
+		opinion_target = scope:actor
+		multiplier = 0.5
+		desc = AI_OPINION_REASON
+	}
+	ai_value_modifier = {
+		ai_rationality = 0.5 	#It's practical
+		ai_energy = 1 			#It's a change
+		ai_boldness = -0.25		#They might defy you
+		ai_sociability = 0.25 	#They wanna please you
+	}
+	# They are afraid of you
+	modifier = {
+		scope:recipient = {
+			has_dread_level_towards = {
+				target = scope:actor
+				level = 1
+			}
+		}
+		add = 30
+	}
+	modifier = {
+		scope:recipient = {
+			has_dread_level_towards = {
+				target = scope:actor
+				level = 2
+			}
+		}
+		add = 60
+	}
+	modifier = {
+		trigger_if = {
+			limit = { scope:recipient.highest_held_title_tier = tier_empire }
+			scope:actor.primary_title.empire = scope:recipient.primary_title
+		}
+		trigger_else = { scope:actor.primary_title.kingdom = scope:recipient.primary_title }
+		desc = rd_demand_admin_not_de_jure_liege_desc
+		add = -75
+	}
+	
+	# Imperial Bureaucracy
+	modifier = {
+		scope:actor = { has_realm_law = imperial_bureaucracy_1 }
+		add = 10
+		desc = IMPERIAL_BUREAUCRACY_LOW_AI_REASON_DESC
+	}
+	modifier = {
+		scope:actor = { has_realm_law = imperial_bureaucracy_2 }
+		add = 20
+		desc = IMPERIAL_BUREAUCRACY_HIGH_AI_REASON_DESC
+	}
+	modifier = {
+		scope:actor = { has_realm_law = imperial_bureaucracy_3 }
+		add = 30
+		desc = IMPERIAL_BUREAUCRACY_HIGH_AI_REASON_DESC
+	}
+	# De jure
+
+	# Faith hostility
+	modifier = {
+		faith = {
+			faith_hostility_level = {
+				target = scope:actor.faith
+				value >= faith_astray_level
+			}
+		}
+		add = {
+			value = "faith.faith_hostility_level(scope:actor.faith)"
+			multiply = -10
+		}
+		desc = FAITH_HOSTILITY_LEVEL
+	}
+	modifier = {
+		exists = scope:actor.top_liege.primary_title.state_faith
+		faith = {
+			faith_hostility_level = {
+				target = scope:actor.top_liege.primary_title.state_faith
+				value >= faith_astray_level
+			}
+		}
+		add = {
+			value = "faith.faith_hostility_level(scope:actor.top_liege.primary_title.state_faith)"
+			multiply = -5
+		}
+		desc = FAITH_HOSTILITY_LEVEL_STATE_FAITH
+	}
+	# Cultural acceptance
+	modifier = {
+		culture != scope:actor.culture
+		"scope:recipient.culture.cultural_acceptance(scope:actor.culture)" < 50
+		add = {
+			value = 50
+			subtract = "scope:recipient.culture.cultural_acceptance(scope:actor.culture)"
+			multiply = 0.25
+			round = yes
+		}
+		desc = CULTURAL_ACCEPTANCE
+	}
+	# Cultural acceptance
+	modifier = {
+		culture = { has_cultural_pillar = ethos_bureaucratic }
+		add = -20
+		desc = BUREAUCRATIC_ETHOS_REASON
+	}
+	# Hereditary province
+	modifier = {
+		desc = demand_admin_hereditary_reason_desc
+		add = {
+			value = 0
+			every_held_title = {
+				limit = {
+					tier = scope:recipient.highest_held_title_tier
+					is_landless_type_title = no
+					is_noble_family_title = no
+				}
+				add = 25
+			}
+		}
+	}
+	# Spend influence
+	modifier = {
+		desc = INFLUENCE_REASON
+		scope:influence = yes
+		add = {
+			value = 30
+			multiply = scope:actor.influence_level
+			min = 5
+		}
+	}
+	# HISTORICALLY ADMIN PEOPLES WANT TO BE ADMIN
+	modifier = {
+		add = -30
+		scope:actor = {
+			government_has_flag = government_is_administrative
+		}
+		scope:recipient = {
+			culture = {
+				OR = {
+					this = culture:greek
+					any_parent_culture_or_above = {
+						this = culture:greek
+					}
+					this = culture:han
+					any_parent_culture_or_above = {
+						this = culture:han
+					}
+				}
+			}
+		}
+		desc = "HISTORICAL_ADMIN_REASON"
+	}
+	# Warning
+	modifier = {
+		desc = might_ask_for_something_in_return_warning_line_break
+		add = 0
+	}
+}
+
+rd_demand_fed_acceptance_liege_modifier = {
+	opinion_modifier = { # Opinion Factor
+		who = scope:recipient
+		opinion_target = scope:actor
+		multiplier = 0.5
+		desc = AI_OPINION_REASON
+	}
+	ai_value_modifier = {
+		ai_rationality = 0.5 	#It's practical
+		ai_energy = 1 			#It's a change
+		ai_boldness = -0.25		#They might defy you
+		ai_sociability = 0.25 	#They wanna please you
+	}
+	# They are afraid of you
+	modifier = {
+		scope:recipient = {
+			has_dread_level_towards = {
+				target = scope:actor
+				level = 1
+			}
+		}
+		add = 30
+	}
+	modifier = {
+		scope:recipient = {
+			has_dread_level_towards = {
+				target = scope:actor
+				level = 2
+			}
+		}
+		add = 60
+	}
+	# Imperial Bureaucracy
+	modifier = {
+		scope:actor = { has_realm_law = imperial_bureaucracy_0 }
+		add = -10
+		desc = IMPERIAL_BUREAUCRACY_LOW_AI_REASON_DESC
+	}
+	modifier = {
+		scope:actor = { has_realm_law = imperial_bureaucracy_2 }
+		add = -20
+		desc = IMPERIAL_BUREAUCRACY_HIGH_AI_REASON_DESC
+	}
+	modifier = {
+		scope:actor = { has_realm_law = imperial_bureaucracy_3 }
+		add = -30
+		desc = IMPERIAL_BUREAUCRACY_HIGH_AI_REASON_DESC
+	}
+	# De jure
+
+	
+	modifier = {
+		trigger_if = {
+			limit = { scope:actor.highest_held_title_tier = tier_empire }
+			scope:actor.primary_title = scope:recipient.primary_title.empire
+		}
+		trigger_else = {
+			scope:recipient.primary_title.kingdom = scope:actor.primary_title 
+		}
+		desc = rd_demand_admin_not_de_jure_liege_desc
+		add = -50
+	}
+	# Faith hostility
+	modifier = {
+		faith = {
+			faith_hostility_level = {
+				target = scope:actor.faith
+				value >= faith_astray_level
+			}
+		}
+		add = {
+			value = "faith.faith_hostility_level(scope:actor.faith)"
+			multiply = -10
+		}
+		desc = FAITH_HOSTILITY_LEVEL
+	}
+	modifier = {
+		exists = scope:actor.top_liege.primary_title.state_faith
+		faith = {
+			faith_hostility_level = {
+				target = scope:actor.top_liege.primary_title.state_faith
+				value >= faith_astray_level
+			}
+		}
+		add = {
+			value = "faith.faith_hostility_level(scope:actor.top_liege.primary_title.state_faith)"
+			multiply = -5
+		}
+		desc = FAITH_HOSTILITY_LEVEL_STATE_FAITH
+	}
+	# Cultural acceptance
+	modifier = {
+		culture != scope:actor.culture
+		"scope:recipient.culture.cultural_acceptance(scope:actor.culture)" < 50
+		add = {
+			value = 50
+			subtract = "scope:recipient.culture.cultural_acceptance(scope:actor.culture)"
+			multiply = 0.25
+			round = yes
+		}
+		desc = CULTURAL_ACCEPTANCE
+	}
+	# Cultural acceptance
+	modifier = {
+		culture = { has_cultural_pillar = ethos_bureaucratic }
+		add = -20
+		desc = BUREAUCRATIC_ETHOS_REASON
+	}
+	# Hereditary province
+	# Spend influence
+	modifier = {
+		desc = INFLUENCE_REASON
+		scope:influence = yes
+		add = {
+			value = 30
+			multiply = scope:actor.influence_level
+			min = 5
+		}
+	}
+	# HISTORICALLY ADMIN PEOPLES WANT TO BE ADMIN
+	modifier = {
+		add = -30
+		scope:actor = {
+			government_has_flag = government_is_administrative
+		}
+		scope:recipient = {
+			culture = {
+				OR = {
+					this = culture:greek
+					any_parent_culture_or_above = {
+						this = culture:greek
+					}
+					this = culture:han
+					any_parent_culture_or_above = {
+						this = culture:han
+					}
+				}
+			}
+		}
+		desc = "HISTORICAL_ADMIN_REASON"
+	}
+	# Warning
+	modifier = {
+		desc = might_ask_for_something_in_return_warning_line_break
+		add = 0
 	}
 }

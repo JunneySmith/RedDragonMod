@@ -3,8 +3,10 @@
 	rd_army_elective_succession_law = {
 		can_have = {
 		kol_is_han_trigger = yes
-			has_government = feudal_government
+			has_government = rd_han_military_government
 			highest_held_title_tier >= tier_kingdom
+			
+			NOT = { has_realm_law_flag = advanced_succession_law }
 			NOR = { #Cultures have their special flavor.
 				culture = { has_cultural_parameter = witenagemot_succession_enabled }
 				culture = { has_cultural_parameter = scandinavian_elective_enabled }
@@ -17,6 +19,9 @@
 		can_title_have = {
 			can_title_have_law_general_trigger = yes
 			tier >= tier_kingdom
+			holder = {
+			NOT = { has_realm_law_flag = advanced_succession_law }
+			}
 		}
 		succession = {
 			order_of_succession = election
@@ -31,5 +36,38 @@
 			prestige = change_title_succession_law_prestige_cost
 		}
 	}
+	rd_army_power_elective_succession_law = {
+		can_have = {
+			has_government = rd_han_administrative_government
+			highest_held_title_tier > tier_kingdom
+		}
+		can_keep = {
+			always = no
+		}
+		can_pass = {
+				kol_is_han_trigger = yes
+			can_change_title_law_trigger = yes
+		}
+		can_title_have = {
+			can_title_have_law_general_trigger = yes
+			tier > tier_kingdom
+		}
 
+		succession = {
+			order_of_succession = appointment
+			appointment_type = admin_emperor
+		}
+		flag = elective_succession_law
+		title_allegiance_opinion = 15
+		modifier = {
+			vassal_limit = 20
+			minority_opinion = -15
+		}
+		revoke_cost = {
+			prestige = change_hre_title_succession_law_prestige_cost
+		}
+		pass_cost = {
+			prestige = change_hre_title_succession_law_prestige_cost
+		}
+	}
 }

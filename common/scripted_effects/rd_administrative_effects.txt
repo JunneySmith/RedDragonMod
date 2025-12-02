@@ -1,0 +1,1532 @@
+﻿rd_convert_to_feudalism_from_administrative_liege_calls_effect = {
+	#Gain some gold for selling off your estates
+	if = {
+		limit = {
+			any_vassal = {
+				any_held_title = { is_noble_family_title = yes }
+				exists = domicile
+			}
+		}
+		custom_tooltip = estates_get_bought
+		every_vassal = {
+			limit = { 
+				any_held_title = { is_noble_family_title = yes }
+				exists = domicile
+			}
+			hidden_effect = {
+				add_gold = {
+					value = {
+						value = major_gold_value
+						switch = {
+							trigger = domicile.num_domicile_buildings
+							7 = { multiply = 7 }
+							6 = { multiply = 6 }
+							5 = { multiply = 5 }
+							4 = { multiply = 4 }
+							3 = { multiply = 3 }
+							2 = { multiply = 2 }
+						}
+					}
+				}
+			}	
+		}
+	}
+
+	#Then change government
+	if = {
+		limit = { ep3_is_clan_inclined_trigger = yes }
+		change_government = clan_government
+
+		#Duchies automatically transfer, need to poke the kingdoms
+		if = {
+			limit = {
+				any_vassal = {
+					primary_title.tier >= tier_county
+					government_allows = administrative
+					NOR = {
+						government_has_flag = government_is_clan
+						government_has_flag = government_is_theocracy
+					}
+				}
+			}
+			custom_tooltip = kings_become_clan
+			every_vassal = {
+				limit = {
+					primary_title.tier >= tier_county
+					government_allows = administrative
+					NOR = {
+						government_has_flag = government_is_clan
+						government_has_flag = government_is_theocracy
+					}
+				}
+				hidden_effect = { change_government = clan_government }
+			}
+		}
+	}
+	else_if = {
+		limit = { 
+			liege = { 
+				has_government = rd_han_military_government
+			} 
+			}
+			change_government = rd_han_military_government
+
+	#Duchies automatically transfer, need to poke the kingdoms
+			if = {
+				limit = {
+					any_vassal = {
+						primary_title.tier >= tier_county
+						government_allows = administrative
+						NOR = {
+							government_has_flag = government_is_clan
+							government_has_flag = government_is_theocracy
+						}
+					}
+				}
+				custom_tooltip = kings_become_clan
+				every_vassal = {
+					limit = {
+						primary_title.tier >= tier_county
+						government_allows = administrative
+						NOR = {
+							government_has_flag = government_is_clan
+							government_has_flag = government_is_theocracy
+						}
+					}
+					hidden_effect = { change_government = rd_han_military_government }
+				}
+			}
+			
+			
+	}
+	else = {
+		change_government = feudal_government
+
+		#Duchies automatically transfer, need to poke the kingdoms
+		if = {
+			limit = {
+				any_vassal = {
+					primary_title.tier >= tier_kingdom
+					NOR = {
+						government_has_flag = government_is_feudal
+						government_has_flag = government_is_theocracy
+					}
+				}
+			}
+			custom_tooltip = kings_become_feudal
+			every_vassal = {
+				limit = {
+					primary_title.tier >= tier_kingdom
+					NOR = {
+						government_has_flag = government_is_feudal
+						government_has_flag = government_is_theocracy
+					}
+				}
+				hidden_effect = { change_government = feudal_government }
+			}
+		}
+	}
+	
+	#Governors become Dukes tooltip
+
+}
+rd_convert_to_feudalism_from_administrative_effect = {
+	#Gain some gold for selling off your estates
+	if = {
+		limit = {
+			any_vassal = {
+				any_held_title = { is_noble_family_title = yes }
+				exists = domicile
+			}
+		}
+		custom_tooltip = estates_get_bought
+		every_vassal = {
+			limit = { 
+				any_held_title = { is_noble_family_title = yes }
+				exists = domicile
+			}
+			hidden_effect = {
+				add_gold = {
+					value = {
+						value = major_gold_value
+						switch = {
+							trigger = domicile.num_domicile_buildings
+							7 = { multiply = 7 }
+							6 = { multiply = 6 }
+							5 = { multiply = 5 }
+							4 = { multiply = 4 }
+							3 = { multiply = 3 }
+							2 = { multiply = 2 }
+						}
+					}
+				}
+			}	
+		}
+	}
+
+	#Then change government
+	if = {
+		limit = { ep3_is_clan_inclined_trigger = yes }
+		change_government = clan_government
+
+		#Duchies automatically transfer, need to poke the kingdoms
+		if = {
+			limit = {
+				any_vassal = {
+					primary_title.tier >= tier_kingdom
+					NOR = {
+						government_has_flag = government_is_clan
+						government_has_flag = government_is_theocracy
+					}
+				}
+			}
+			custom_tooltip = kings_become_clan
+			every_vassal = {
+				limit = {
+					primary_title.tier >= tier_kingdom
+					NOR = {
+						government_has_flag = government_is_clan
+						government_has_flag = government_is_theocracy
+					}
+				}
+				hidden_effect = { change_government = clan_government }
+			}
+		}
+	}
+	else = {
+		change_government = feudal_government
+
+		#Duchies automatically transfer, need to poke the kingdoms
+		if = {
+			limit = {
+				any_vassal = {
+					primary_title.tier >= tier_kingdom
+					NOR = {
+						government_has_flag = government_is_feudal
+						government_has_flag = government_is_theocracy
+					}
+				}
+			}
+			custom_tooltip = kings_become_feudal
+			every_vassal = {
+				limit = {
+					primary_title.tier >= tier_kingdom
+					NOR = {
+						government_has_flag = government_is_feudal
+						government_has_flag = government_is_theocracy
+					}
+				}
+				hidden_effect = { change_government = feudal_government }
+			}
+		}
+	}
+	
+	#Governors become Dukes tooltip
+	if = {
+		limit = {
+			any_vassal = {
+				primary_title.tier = tier_duchy
+				NOT = { government_has_flag = government_is_clan }
+			}
+		}
+		custom_tooltip = governors_become_dukes
+	}
+}
+
+rd_offer_vassalization_interaction_effect = {
+	create_title_and_vassal_change = {
+		type = swear_fealty
+		save_scope_as = change
+	}
+	scope:recipient = {
+		change_liege = {
+			liege = scope:actor
+			change = scope:change
+		}
+	}
+	resolve_title_and_vassal_change = scope:change
+
+	# Special terms for feudal contracts
+
+	# Struggle catalysts.
+	hidden_effect = {
+			scope:recipient = {
+		if = {
+			limit = {
+				government_has_flag = government_is_feudal
+			}
+			if = {
+				limit = { scope:high_obligations = yes }
+				hidden_effect = {
+					if = {
+						limit = { is_independent_ruler = no } # To avoid errors during tooltip generation (prior to the contract being generated)
+						vassal_contract_set_obligation_level = { type = feudal_government_taxes level = 3 }
+						vassal_contract_set_obligation_level = { type = feudal_government_levies level = 3 }
+					}
+				}
+				custom_tooltip = high_obligations_taxes
+				custom_tooltip = high_obligations_levies
+			}
+			else_if = {
+				limit = { scope:low_obligations = yes }
+				hidden_effect = {
+					if = {
+						limit = { is_independent_ruler = no } # To avoid errors during tooltip generation (prior to the contract being generated)
+						vassal_contract_set_obligation_level = { type = feudal_government_taxes level = 1 }
+						vassal_contract_set_obligation_level = { type = feudal_government_levies level = 1 }
+					}
+				}
+				custom_tooltip = low_obligations_taxes
+				custom_tooltip = low_obligations_levies
+			}
+			else_if = {
+				limit = { scope:religious_exemption = yes }
+				hidden_effect = {
+					if = {
+						limit = { is_independent_ruler = no } # To avoid errors during tooltip generation (prior to the contract being generated)
+						vassal_contract_set_obligation_level = { type = feudal_government_taxes level = 2 }
+						vassal_contract_set_obligation_level = { type = feudal_government_levies level = 1 }
+						vassal_contract_set_obligation_level = { type = religious_rights level = 1 }
+					}
+				}
+				custom_tooltip = normal_obligations_taxes
+				custom_tooltip = low_obligations_levies
+				custom_tooltip = religious_protection_tt
+			}
+			else = {
+				hidden_effect = {
+					if = {
+						limit = { is_independent_ruler = no } # To avoid errors during tooltip generation (prior to the contract being generated)
+						vassal_contract_set_obligation_level = { type = feudal_government_taxes level = 2 }
+						vassal_contract_set_obligation_level = { type = feudal_government_levies level = 2 }
+					}
+				}
+				custom_tooltip = normal_obligations_taxes
+				custom_tooltip = normal_obligations_levies
+			}
+		}
+		else_if = {
+			limit = {
+				government_has_flag = government_is_clan
+				scope:religious_exemption_clan = yes
+			}
+			hidden_effect = {
+				if = {
+					limit = { is_independent_ruler = no } # To avoid errors during tooltip generation (prior to the contract being generated)
+					vassal_contract_set_obligation_level = { type = religious_rights level = 1 }
+				}
+			}
+			custom_tooltip = religious_protection_tt
+		}
+	}
+
+		fp3_struggle_apply_independent_vassalage_catalyst_effect = {
+			NEW_LIEGE = scope:actor
+			NEW_VASSAL = scope:recipient
+		}
+	}
+}
+
+rd_change_to_administrative_effect = {
+	save_scope_as = governor
+	if = {
+		limit = {
+			NOT = { government_has_flag = government_is_administrative }
+		}
+		change_government = administrative_government
+		save_scope_as = new_admin
+	}
+	if = {
+		limit = {
+			primary_title.tier >= tier_duchy
+			liege = {
+				is_independent_ruler = yes
+				government_allows = administrative
+			}
+			house.house_head = {
+				NOT = {
+					any_held_title = { is_noble_family_title = yes }
+				}
+			}
+		}
+		rd_create_noble_family_effect = yes
+	}
+
+	hidden_effect = {
+		if = {
+			limit = {
+				is_governor = yes
+				NOT = { has_trait = governor }
+			}
+			add_trait = governor
+		}
+	}
+	if = {
+		limit = { exists = scope:new_admin }
+		domicile ?= {
+			set_up_domicile_estate_effect = yes
+		}
+	}
+}
+
+rd_convert_to_administrative_from_feudalism_effect = {
+	save_scope_as = administrative_liege
+
+	change_government = rd_han_administrative_government
+
+
+	#Direct Vassals who fulfill the ep3_vassal_will_become_admin criteria are converted. Vassals above 25 opinion always accept
+	#Vassals are converted as a hierarchy. If a king is converted we convert all who are valid below that king (so his dukes, their counts, and their barons) are all converted.
+	#If a vassal does not convert (because of not accepting or because they are outside of the de jure empire, etc) then the vassals below them are _not_ converted either.
+
+	#Human vassals are given a choice to convert or not in the ping event, even if powerful or having very good relation.
+
+		trigger_event = {
+			id = rd_asia.9002
+			days = 3
+		}
+
+	if = {
+		limit = {
+			NOT = {
+				has_character_flag = latin_emp_force_admin_flag
+			}
+			is_independent_ruler = yes
+		}
+		add_character_modifier = {
+			modifier = first_admin_emperor
+		}
+	}
+	
+	change_influence = admin_convert_influence_value
+	if = {
+		limit = {
+			is_independent_ruler = yes
+		}
+		add_legitimacy_effect = { LEGITIMACY = admin_convert_legitimacy_value } #One Time Legitimacy Boost
+	}
+
+	custom_description_no_bullet = {
+		text = vassals_can_become_administrative
+	}
+	custom_tooltip = vassals_who_may_switch_to_administrative
+}
+
+
+rd_create_noble_family_effect = {
+	debug_log = create_noble_family_title
+
+	save_scope_as = new_noble_family_holder
+	hidden_effect = { # NF can only be held by house heads
+		if = { # Start by checking that we are not the house head already
+			limit = {
+				house ?= {
+					house_head != scope:new_noble_family_holder
+				}
+			}
+			if = { # If not, let's see if it would be reasonable to become house head...
+				limit = {
+					house ?= {
+						house_head ?= {
+							top_liege = scope:new_noble_family_holder.top_liege
+							OR = {
+								is_ruler = no
+								primary_title = {
+									tier <= tier_county
+								}
+							}
+							is_ai = yes #  Don't steal house head from a player
+						}
+					}
+				}
+				house = { set_house_head = scope:new_noble_family_holder }
+			}
+			else = { # ... Otherwise, we create a cadet branch
+				create_cadet_branch = {
+				
+				}
+			}
+		}
+	}
+	if = {
+	limit = {
+	has_government = rd_han_administrative_government
+	}
+	give_noble_family_title = {
+		name = noble_family_name
+		article = DEFAULT_TITLE_NAME_ARTICLE
+		government = rd_han_administrative_government
+		save_scope_as = new_title
+	}
+	}
+	else = {
+		give_noble_family_title = {
+		name = noble_family_name
+		article = DEFAULT_TITLE_NAME_ARTICLE
+		save_scope_as = new_title
+	}
+	}
+	
+	scope:new_title = {
+		holder = {
+			save_scope_as = noble_family_head
+		}
+		set_coa = scope:noble_family_head.house
+	}
+	custom_description = {
+		text = create_noble_family_tt
+	}
+
+	#Notifications
+	top_liege ?= {
+		every_vassal = {
+			limit = {
+				is_ai = no
+				NOT = { this = scope:new_noble_family_holder }
+			}
+			trigger_event = {
+				id = ep3_emperor_yearly.2410
+				days = 1
+			}
+		}
+	}
+
+	debug_log_scopes = yes
+}
+rd_set_up_domicile_estate_effect = {
+	if = {
+		limit = { is_domicile_type = estate }
+		# Intentionally one level lower than what you can get
+		if = {
+			limit = {
+				NOT = { has_domicile_building_or_higher = estate_main_02 }
+				owner.culture ?= { has_innovation = innovation_city_planning }
+			}
+			add_domicile_building = estate_main_02
+		}
+		if = {
+			limit = {
+				has_domicile_building = estate_main_02
+				NOT = { has_domicile_building_or_higher = estate_main_03 }
+				owner.culture ?= { has_innovation = innovation_manorialism }
+			}
+			add_domicile_building = estate_main_03
+		}
+		switch = {
+			trigger = has_domicile_building
+			estate_main_03 = {
+				while = {
+					count = 2
+					add_random_internal_estate_building = yes
+				}
+			}
+			estate_main_02 = {
+				add_random_internal_estate_building = yes
+			}
+		}
+		fill_external_estate_building_effect = yes
+	}
+}
+
+
+tgp_claim_mandate_of_heaven_effect = {
+	save_temporary_scope_as = new_emperor_temp
+	set_variable = {
+		name = claimed_mandate_var
+		value = yes
+		days = 30
+	}
+	# Grant the Hegemon title
+	create_title_and_vassal_change = {
+		type = created
+		save_scope_as = mandate_change
+		add_claim_on_loss = no
+	}
+	title:h_china = {
+		change_title_holder = {
+			holder = scope:new_emperor_temp
+			change = scope:mandate_change
+		}
+	}
+	resolve_title_and_vassal_change = scope:mandate_change
+	# Adjust tributaries
+	if = {
+		limit = {
+			number_of_tributaries > 0
+		}
+		# Vassalize tributaries within China (except if it's a player)
+		create_title_and_vassal_change = {
+			type = swear_fealty
+			save_scope_as = mandate_vassalize_tributaries_change
+		}
+		every_tributary = {
+			limit = {
+				is_ai = yes
+				primary_title = {
+					target_is_de_jure_liege_or_above = title:h_china
+				}
+			}
+			hidden_effect = { end_tributary = yes }
+			change_liege = {
+				liege = scope:new_emperor_temp
+				change = scope:mandate_vassalize_tributaries_change
+			}
+		}
+		resolve_title_and_vassal_change = scope:mandate_vassalize_tributaries_change
+		# Turn your other tributaries into hegemonic
+		every_tributary = {
+			custom = custom.every_tributary
+			limit = {
+				NAND = {
+					is_ai = yes
+					primary_title = {
+						target_is_de_jure_liege_or_above = title:h_china
+					}
+				}
+			}
+			start_tributary = {
+				contract_group = tributary_celestial
+				suzerain = scope:new_emperor_temp
+			}
+		}
+	}
+	scope:new_emperor_temp = {
+		# Get some gold back from any owned domicile
+		nomad_domicile_refund_effect = yes
+		# Become celestial
+		trigger_event = rd_asia.1180
+		# Get the de jure capital if possible
+		if = {
+			limit = {
+				title:h_china.title_capital_county.holder ?= {
+					OR = {
+						any_liege_or_above = { this = scope:new_emperor_temp }
+						this = scope:new_emperor_temp
+					}
+				}
+			}
+			if = {
+				limit = {
+					title:h_china.title_capital_county.holder = {
+						this != scope:new_emperor_temp
+					}
+				}
+				create_title_and_vassal_change = {
+					type = revoked
+					save_scope_as = mandate_capital_change
+					add_claim_on_loss = no
+				}
+				title:h_china.title_capital_county = {
+					change_title_holder = {
+						holder = scope:new_emperor_temp
+						change = scope:mandate_capital_change
+					}
+				}
+				resolve_title_and_vassal_change = scope:mandate_capital_change
+			}
+			set_realm_capital = title:h_china.title_capital_county
+		}
+		# Provide the new emperor with suitable rewards
+		hidden_effect = {
+			add_treasury = {
+				value = gold
+				min = 1000
+			}
+			change_influence = {
+				value = monumental_influence_gain
+				multiply = 4
+			}
+			add_legitimacy = mandate_legitimacy_max
+		}
+		dynasty = {
+			add_dynasty_prestige = excessive_dynasty_prestige_value
+		}
+		add_character_modifier = claim_mandate_decision_modifier
+		# Increase control of every owned county within China
+		hidden_effect = {
+			every_realm_county = {
+				custom = custom_every_realm_county
+				limit = {
+					target_is_de_jure_liege_or_above = title:h_china
+				}
+				change_county_control = 25
+			}
+		}
+		show_as_tooltip = { # We show this as a tooltip because it looks better than the above effect
+			title:h_china = { change_county_control = 25 }
+		}
+		# Populate the emperor's court with high merit characters
+		hidden_effect = {
+			while = {
+				count = 5
+				
+				create_character = {
+					template = tgp_minister_administrator_template
+					employer = scope:new_emperor_temp
+					faith = scope:new_emperor_temp.faith
+					culture = scope:new_emperor_temp.culture
+					save_scope_as = mandate_new_administrator_temp
+				}
+				scope:mandate_new_administrator_temp ?= {
+					change_merit = empire_starting_merit_value
+					assign_completed_exams_based_on_merit_effect = yes
+				}
+				create_character = {
+					template = tgp_minister_diplomat_template
+					employer = scope:new_emperor_temp
+					faith = scope:new_emperor_temp.faith
+					culture = scope:new_emperor_temp.culture
+					save_scope_as = mandate_new_diplomat_temp
+				}
+				scope:mandate_new_diplomat_temp ?= {
+					change_merit = empire_starting_merit_value
+					assign_completed_exams_based_on_merit_effect = yes
+				}
+				create_character = {
+					template = tgp_minister_scholar_template
+					employer = scope:new_emperor_temp
+					faith = scope:new_emperor_temp.faith
+					culture = scope:new_emperor_temp.culture
+					save_scope_as = mandate_new_scholar_temp
+				}
+				scope:mandate_new_scholar_temp ?= {
+					change_merit = empire_starting_merit_value
+					assign_completed_exams_based_on_merit_effect = yes
+				}
+				create_character = {
+					template = tgp_minister_scholar_template
+					employer = scope:new_emperor_temp
+					faith = scope:new_emperor_temp.faith
+					culture = scope:new_emperor_temp.culture
+					save_scope_as = mandate_new_scholar_temp
+				}
+				scope:mandate_new_scholar_temp ?= {
+					change_merit = empire_starting_merit_value
+					assign_completed_exams_based_on_merit_effect = yes
+				}
+				create_character = {
+					template = tgp_minister_commander_template
+					employer = scope:new_emperor_temp
+					faith = scope:new_emperor_temp.faith
+					culture = scope:new_emperor_temp.culture
+					save_scope_as = mandate_new_commander_temp
+				}
+				scope:mandate_new_commander_temp ?= {
+					change_merit = empire_starting_merit_value
+					assign_completed_exams_based_on_merit_effect = yes
+				}
+			}
+			every_courtier = {
+				limit = {
+					merit >= 3000
+				}
+				random = {
+					chance = 50
+					create_noble_family_effect = { GOVERNMENT_GIVER = scope:new_emperor_temp }
+				}
+			}
+		}
+	}
+	# Convert eligible vassals to celestial
+	custom_tooltip = {
+		text = claim_mandate_turn_vassal_celestial_desc
+		every_vassal_or_below = {
+			limit = {
+				highest_held_title_tier >= tier_county
+				NOR = {
+					# Don't change republics or theocracies
+					government_has_flag = government_is_republic
+					government_has_flag = government_is_theocracy
+					# And just in case, don't change any unfit governments
+					government_has_flag = cannot_be_vassal_or_liege
+					# No need to change if they are celestial already
+					government_has_flag = government_is_celestial
+				}
+				capital_province = {
+					OR = {
+						has_holding_type = castle_holding
+						has_holding_type = city_holding
+						has_holding_type = temple_citadel_holding
+					}
+				}
+			}
+			change_to_administrative_effect = yes
+			# Give characters some merit and exams based on their position
+			change_merit = {
+				value = assign_merit_based_on_tier_value
+				add = {
+					value = age
+					multiply = 2
+				}
+				add = {
+					value = sum_of_all_skills_value
+					multiply = 2
+				}
+			}
+			assign_completed_exams_based_on_merit_effect = yes
+		}
+	}
+	hidden_effect = {
+		# Vassalize any stray celestial noble families - we also give them merit to fill out the candidate pools
+		create_title_and_vassal_change = {
+			type = swear_fealty
+			save_scope_as = mandate_vassalize_celestial_families_change
+		}
+		every_independent_ruler = {
+			limit = {
+				government_has_flag = government_is_celestial
+				primary_title = { is_noble_family_title = yes }
+				NOT = {
+					any_held_title = { is_noble_family_title = no }
+				}
+				capital_province.county = {
+					target_is_de_jure_liege_or_above = title:h_china
+				}
+			}
+			change_liege = {
+				liege = scope:new_emperor_temp
+				change = scope:mandate_vassalize_celestial_families_change
+			}
+			change_merit = {
+				value = { 3000 8000 }
+				add = {
+					value = age
+					multiply = 2
+				}
+				add = {
+					value = sum_of_all_skills_value
+					multiply = 2
+				}
+			}
+			assign_completed_exams_based_on_merit_effect = yes
+		}
+		resolve_title_and_vassal_change = scope:mandate_vassalize_celestial_families_change
+		# Ensure that we get a family title and a domicile if we don't
+		change_to_administrative_effect = yes
+		# Make sure ministers are assigned correctly
+		fill_the_ministry_effect = yes
+	}
+}
+
+
+tgp_chaos_shattering_effect = {
+	hidden_effect = {
+		title:h_china = {
+			holder = { save_temporary_scope_as = old_emperor_temp }
+			# Reset imperial examination activity
+			set_variable = {
+				name = years_since_imperial_examination
+				value = 0
+			}
+		}
+		#put every vassal of the current hegemon in a list
+		situation:dynastic_cycle = {
+			every_situation_participant = {
+				limit = {
+	   				top_liege = scope:old_emperor_temp
+				}
+				add_to_list = former_vassals
+			}
+		}
+		scope:old_emperor_temp = {
+			#destroy the title of china and all Empires that the Hegemon holds
+			if = {
+				limit = {
+					title:h_china = {
+						any_in_de_jure_hierarchy = {
+						OR = {
+							this = title:e_china
+							this = title:e_rdwestchina_emp
+							this = title:e_rdsouthchina
+							this = title:e_rdnorthchina
+							this = title:e_rdeastchina
+						}
+						is_title_created = yes
+						NOT = { holder = scope:old_emperor_temp}
+						}
+						
+					}
+				
+				}
+				create_title_and_vassal_change = {
+					type = created
+					save_scope_as = change
+					add_claim_on_loss = no
+				}
+				title:h_china = {
+					random_in_de_jure_hierarchy = {
+						limit = {
+							OR = {
+								this = title:e_china
+								this = title:e_rdwestchina_emp
+								this = title:e_rdsouthchina
+								this = title:e_rdnorthchina
+								this = title:e_rdeastchina
+							}
+							is_title_created = yes
+							NOT = { holder = scope:old_emperor_temp}
+						}
+						holder = {
+						 save_temporary_scope_as = rd_new_emperor_temp
+						 }
+					}
+							change_title_holder = {
+							holder = scope:rd_new_emperor_temp
+							change = scope:change
+						}
+						resolve_title_and_vassal_change = scope:change
+						scope:rd_new_emperor_temp = {
+								tgp_claim_mandate_of_heaven_effect = yes
+								
+		custom_tooltip = claim_mandate_decision_phase_tt	
+		scope:situation = {
+			if = {
+				limit = {
+					situation_top_has_catalyst = catalyst_hegemon_gains_mandate_of_heaven
+					root = {
+						is_valid_celestial_dynasty = yes
+					}
+				}
+				trigger_situation_catalyst = catalyst_hegemon_gains_mandate_of_heaven
+			}
+			hidden_effect = {
+				every_situation_participant = {
+					every_owned_story = {
+						limit = {
+							story_type = story_take_mandate_of_heaven
+						}
+						end_story = yes
+					}
+				}
+			}
+		}
+				}
+				}
+			}
+			else = {
+					if = {
+					
+						limit = {
+							has_government = rd_celestial_empire_government
+						}
+					every_held_title = {
+						limit = {
+							tier > tier_kingdom
+						}
+						scope:old_emperor_temp = {
+							destroy_title = prev
+						}
+					}
+					
+					create_title_and_vassal_change = {
+						type = independency
+						save_scope_as = chaos_change
+						add_claim_on_loss = yes
+					}
+					every_vassal = {
+						limit = {
+							#breakaway all non-dejure vassals
+							primary_title = {
+								NOT = { target_is_de_jure_liege_or_above = scope:old_emperor_temp.primary_title }
+							}
+						}
+						becomes_independent = { change = scope:chaos_change }
+					}
+					}
+					else = {
+						every_held_title = {
+						limit = {
+							tier > tier_empire
+						}
+						scope:old_emperor_temp = {
+							destroy_title = prev
+						}
+					}
+					
+					
+					}
+					resolve_title_and_vassal_change = scope:chaos_change
+
+			}
+			
+		}
+		# destroy all empire and king level titles if holders have not enough power
+		if = {
+				limit = {
+						title:h_china = {
+						any_in_de_jure_hierarchy = {
+						OR = {
+							this = title:e_china
+							this = title:e_rdwestchina_emp
+							this = title:e_rdsouthchina
+							this = title:e_rdnorthchina
+							this = title:e_rdeastchina
+						}
+						is_title_created = yes
+						NOT = { holder = scope:old_emperor_temp}
+						}
+					}
+				
+				}
+				create_title_and_vassal_change = {
+						type = independency
+						save_scope_as = chaos_change
+						add_claim_on_loss = yes
+					}
+			scope:old_emperor_temp = {
+				every_vassal = {
+						limit = {
+							#breakaway all non-dejure vassals
+							primary_title = {
+								NOT = { target_is_de_jure_liege_or_above = scope:old_emperor_temp.primary_title }
+							}
+						}
+						becomes_independent = { change = scope:chaos_change }
+					}
+				}
+		}
+		else = {
+			if = {
+					
+				limit = {
+					has_government = rd_celestial_empire_government
+				}
+				every_in_list = {
+					list = former_vassals
+					if = {
+						limit = {
+							is_landed = yes
+							is_ai = yes
+							is_governor = yes
+							is_vassal_of = scope:old_emperor_temp
+							OR = {
+								AND = {
+									highest_held_title_tier = tier_empire
+									
+									primary_title = { 
+									OR = {
+										this = 	title:e_china
+										this = 		title:e_liangyi 
+											this = 	 title:e_yongliang
+										this =  title:e_zhongyuan 
+										 this =  title:e_jingyang 
+										this = 	title:e_lingnan
+									
+									}
+									
+									}
+									var:movement_power_individual < 100
+								}
+								AND = {
+									highest_held_title_tier = tier_kingdom
+									
+									primary_title = { 
+																OR = {
+										target_is_de_jure_liege_or_above = 		title:e_liangyi 
+											target_is_de_jure_liege_or_above = 	 title:e_yongliang
+										target_is_de_jure_liege_or_above =  title:e_zhongyuan 
+										 target_is_de_jure_liege_or_above =  title:e_jingyang 
+										target_is_de_jure_liege_or_above = 	title:e_lingnan
+										target_is_de_jure_liege_or_above = 	title:e_china
+									}
+									}
+									var:movement_power_individual < 100
+								}
+							}
+						}
+						every_held_title = {
+							limit = {
+								tier > tier_duchy
+							}
+							prev = {
+								destroy_title = prev
+							}
+						}
+					}
+				}
+			}
+			else = {
+						every_in_list = {
+				list = former_vassals
+				if = {
+					limit = {
+						is_landed = yes
+						is_ai = yes
+						is_governor = yes
+						is_vassal_of = scope:old_emperor_temp
+						OR = {
+							AND = {
+								highest_held_title_tier = tier_empire
+								
+								primary_title = { 
+								OR = {
+									this = 	title:e_china
+									this = 		title:e_liangyi 
+										this = 	 title:e_yongliang
+									this =  title:e_zhongyuan 
+									 this =  title:e_jingyang 
+									this = 	title:e_lingnan
+								
+								}
+								
+								}
+								#var:movement_power_individual < high_movement_power_value
+							}
+							AND = {
+								highest_held_title_tier = tier_kingdom
+								
+								primary_title = { 
+															OR = {
+									target_is_de_jure_liege_or_above = 		title:e_liangyi 
+										target_is_de_jure_liege_or_above = 	 title:e_yongliang
+									target_is_de_jure_liege_or_above =  title:e_zhongyuan 
+									 target_is_de_jure_liege_or_above =  title:e_jingyang 
+									target_is_de_jure_liege_or_above = 	title:e_lingnan
+									target_is_de_jure_liege_or_above = 	title:e_china
+								}
+								}
+								#var:movement_power_individual < decent_movement_power_value
+							}
+						}
+					}
+					
+										create_title_and_vassal_change = {
+						type = independency
+						save_scope_as = chaos_change
+						add_claim_on_loss = yes
+					}
+					becomes_independent = { change = scope:chaos_change }
+				}
+			}
+												create_title_and_vassal_change = {
+						type = independency
+						save_scope_as = chaos_change
+						add_claim_on_loss = yes
+					}
+				every_vassal = {
+						limit = {
+							#breakaway all non-dejure vassals
+							primary_title = {
+								NOT = { target_is_de_jure_liege_or_above = scope:old_emperor_temp.primary_title }
+							}
+						}
+						becomes_independent = { change = scope:chaos_change }
+					}
+			}
+		}
+		every_in_list = {
+			list = former_vassals
+			# Destroy any held minister title
+			destroy_held_ministry_titles_effect = yes
+		}
+		every_in_list = {
+			list = former_vassals
+			# let the former vassals of the hegemon become regular conquerors
+			ai_chance_to_become_conqueror_effect = yes
+			# put movement leaders and elders into a list
+			if = {
+				limit = {
+					OR = {
+						num_of_relation_disciple > 0
+						has_variable = former_movement_leader
+					}
+					is_independent_ruler = yes
+					is_landed = yes
+				}
+				add_to_list = new_lieges
+			}
+		}
+		# remake the hierarchy by vassalizing or tributarizing non-leader movement members and disciples
+		every_in_list = {
+			list = new_lieges
+			save_scope_as = new_liege
+			every_in_list = {
+				list = former_vassals
+				limit = {
+					OR = {
+						scope:new_liege.var:former_movement_leader ?= var:former_movement_member
+						has_relation_elder = scope:new_liege
+					}
+					this != scope:new_liege
+				}
+				save_scope_as = member
+				# if lower tier than the potential new liege and is neighboring them or anyone that is also neighboring new liege, vassalize them
+				if = {
+					limit = {
+						highest_held_title_tier < scope:new_liege.highest_held_title_tier
+						OR = {
+							primary_title = { is_neighbor_to_realm = scope:new_liege }
+							any_in_list = {
+								list = former_vassals
+								this != scope:new_liege
+								this != scope:member
+								primary_title = {
+									is_neighbor_to_realm = scope:new_liege
+									is_neighbor_to_realm = scope:member
+								}
+								is_tributary_of = scope:new_liege
+							}
+						}
+					}
+					create_title_and_vassal_change = {
+						type = swear_fealty
+						save_scope_as = elder_hierarchy_change
+						add_claim_on_loss = no
+					}
+					change_liege = {
+						liege = scope:new_liege
+						change = scope:elder_hierarchy_change
+					}
+					resolve_title_and_vassal_change = scope:elder_hierarchy_change
+				}
+				# otherwise turn into tributary
+				else_if = {
+					limit = {
+						top_liege = scope:member
+					}
+					start_tributary_interaction_effect = {
+						TRIBUTARY = scope:member
+						SUZERAIN = scope:new_liege
+					}
+				}
+			}
+		}
+		# Assign unlanded family heads to a suitable realm
+		every_in_list = {
+			list = former_vassals
+			if = {
+				limit = {
+					any_held_title = { is_noble_family_title = yes }
+					is_landed = no
+					this = top_liege
+				}
+				create_title_and_vassal_change = {
+					type = swear_fealty
+					save_scope_as = unlanded_liege_change
+					add_claim_on_loss = no
+				}
+				# Save the top liege of the domicile's location - If ruler's tier is above county
+				if = {
+					limit = {
+						domicile.domicile_location.county.holder.top_liege = {
+							highest_held_title_tier > tier_county
+						}
+					}
+					domicile.domicile_location.county.holder.top_liege = {
+						save_temporary_scope_as = unlanded_new_liege
+					}
+				}
+				# Otherwise - Try and find a neighboring ruler
+				else_if = {
+					limit = {
+						domicile.domicile_location.county.holder = {
+							any_neighboring_top_liege_realm_owner = {
+								highest_held_title_tier > tier_county
+							}
+						}
+					}
+					domicile.domicile_location.county.holder = {
+						random_neighboring_top_liege_realm_owner = {
+							limit = {
+								highest_held_title_tier > tier_county
+							}
+							save_temporary_scope_as = unlanded_new_liege
+						}
+					}
+				}
+				change_liege = {
+					liege = scope:unlanded_new_liege
+					change = scope:unlanded_liege_change
+				}
+				resolve_title_and_vassal_change = scope:unlanded_liege_change
+			}
+		}
+		# create a story that will make characters pursue taking the mandate
+		situation:dynastic_cycle = {
+			every_situation_participant = {
+				if = {
+					limit = {
+						NOR = {
+							has_trait = conqueror
+							any_owned_story = {
+						 		story_type = story_conqueror
+							}
+							any_owned_story = {
+							 	story_type = story_greatest_of_khans
+							}
+							any_owned_story = {
+								story_type = story_mongol_invasion
+							}
+						}
+						is_landed = yes
+						highest_held_title_tier >= tier_duchy
+						is_tributary = no
+						is_adult = yes
+						is_incapable = no
+						# run the ai personality triggers only for non elders and non movement leaders
+						trigger_if = {
+							limit = {
+								NOT = {
+									is_in_list = new_lieges
+								}
+							}
+							ai_has_cautious_personality = no
+							ai_boldness >= 0
+							ai_greed >= 0
+						}
+					}
+					create_story = story_take_mandate_of_heaven
+				}
+			}
+		}
+	}
+	#depose the previous hegemon from all landed titles
+					if = {
+					
+						limit = {
+						scope:old_emperor_temp = {
+							has_government = rd_celestial_empire_government
+							}
+						}
+												scope:old_emperor_temp = {
+		force_step_down_landed_titles = yes
+	}
+			}
+	hidden_effect = {
+		situation:dynastic_cycle = {
+			every_situation_participant = {
+				remove_variable = movement_member
+				recalculate_participant_group = situation:dynastic_cycle
+			}
+		}
+	}
+}
+
+change_to_administrative_effect = {
+	save_scope_as = governor
+	top_liege = { save_scope_as = governor_liege }
+	if = {
+		limit = {
+			OR = {
+				NOT = { government_allows = administrative }
+				AND = {
+					government_allows = administrative
+					scope:governor_liege = { government_has_flag = government_is_japan_administrative }
+					NOT = { government_has_flag = government_is_japan_administrative }
+				}
+				AND = {
+					government_allows = administrative
+					scope:governor_liege = { government_has_flag = government_is_meritocratic }
+					NOT = { government_has_flag = government_is_meritocratic }
+				}
+				AND = {
+					government_allows = administrative
+					scope:governor_liege = { government_has_flag = government_is_celestial }
+					NOT = { government_has_flag = government_is_celestial }
+				}
+				AND = {
+					government_allows = administrative
+					scope:governor_liege = { government_has_flag = government_is_steppe_admin }
+					NOT = { government_has_flag = government_is_steppe_admin }
+				}
+			}
+		}
+		# Only case where Estate type is shared between Admin and non-Admin
+		if = {
+			limit = {
+				NAND = {
+					government_has_flag = government_is_japan_feudal
+					scope:governor_liege = { government_has_flag = government_is_japan_administrative }
+				}
+			}
+			save_scope_as = new_admin
+		}
+		# Change government
+		if = {
+			limit = {
+				scope:governor_liege = { government_has_flag = government_is_japan_administrative }
+			}
+			tgp_domicile_conversion_when_changing_government_type = {
+				NEW_DOMICILE_TYPE = japanese_manor
+				NEW_GOVERNMENT_TYPE = japan_administrative_government
+			}
+			change_government = japan_administrative_government
+		}
+		else_if = {
+			limit = {
+				OR = {
+					#This is Mongol breakup and they are hegemon
+					AND = {
+						exists = scope:great_yuan_ruler
+						this = scope:great_yuan_ruler
+						primary_title = title:h_china
+					}
+					scope:governor_liege = { government_has_flag = government_is_celestial }
+				}
+			}
+			capital_province = {
+				if = {
+					limit = {
+						OR = {
+							has_holding_type = tribal_holding
+							has_holding_type = herder_holding
+							has_holding_type = nomad_holding
+						}
+					}
+					set_holding_type = castle_holding
+				}
+			}
+			tgp_domicile_conversion_when_changing_government_type = {
+				NEW_DOMICILE_TYPE = east_asian_estate
+				NEW_GOVERNMENT_TYPE = celestial_government
+			}
+			change_government = celestial_government
+		}
+		else_if = {
+			limit = {
+				scope:governor_liege = { government_has_flag = government_is_steppe_admin }
+			}
+			capital_province = {
+				if = {
+					limit = {
+						OR = {
+							has_holding_type = tribal_holding
+							has_holding_type = herder_holding
+							has_holding_type = nomad_holding
+						}
+					}
+					set_holding_type = castle_holding
+				}
+			}
+			tgp_domicile_conversion_when_changing_government_type = {
+				NEW_DOMICILE_TYPE = east_asian_estate
+				NEW_GOVERNMENT_TYPE = steppe_admin_government
+			}
+			change_government = steppe_admin_government
+		}
+		else_if = {
+			limit = {
+				OR = {
+					scope:governor_liege = { government_has_flag = government_is_meritocratic }
+					tgp_should_become_meritocratic_trigger = yes
+				}
+			}
+			capital_province = {
+				if = {
+					limit = {
+						OR = {
+							has_holding_type = tribal_holding
+							has_holding_type = herder_holding
+							has_holding_type = nomad_holding
+						}
+					}
+					set_holding_type = castle_holding
+				}
+			}
+			tgp_domicile_conversion_when_changing_government_type = {
+				NEW_DOMICILE_TYPE = east_asian_estate
+				NEW_GOVERNMENT_TYPE = meritocratic_government
+			}
+			change_government = meritocratic_government
+		}
+		else = {
+			capital_province = {
+				if = {
+					limit = {
+						OR = {
+							has_holding_type = tribal_holding
+							has_holding_type = herder_holding
+							has_holding_type = nomad_holding
+						}
+					}
+					set_holding_type = castle_holding
+				}
+			}
+			add_character_flag = new_government_is_byz_admin
+			tgp_domicile_conversion_when_changing_government_type = {
+				NEW_DOMICILE_TYPE = estate
+				NEW_GOVERNMENT_TYPE = administrative_government
+			}
+			change_government = administrative_government 
+			remove_character_flag = new_government_is_byz_admin
+		}
+	}
+	if = {
+		limit = {
+			primary_title.tier >= min_appointment_tier
+			liege = {
+				scope:governor_liege = this
+				government_allows = administrative
+			}
+			house.house_head = {
+				top_liege = scope:governor_liege
+				NOT = {
+					any_held_title = { is_noble_family_title = yes }
+				}
+			}
+		}
+		create_noble_family_effect = { GOVERNMENT_GIVER = top_liege }
+	}
+	if = {
+		limit = {
+			primary_title.tier >= min_appointment_tier
+			liege = {
+				scope:governor_liege = this
+				NOT = { government_has_flag = government_is_rd_han_type }
+				government_allows = administrative
+				government_has_flag = government_is_celestial
+			}
+			house.house_head = {
+				top_liege = scope:governor_liege
+				NOT = {
+					any_held_title = { is_noble_family_title = yes }
+				}
+			}
+		}
+		create_noble_family_effect = { GOVERNMENT_GIVER = top_liege }
+	}
+	else_if = {
+		limit = {
+			primary_title.tier >= min_appointment_tier
+			liege = {
+				scope:governor_liege = this
+				government_has_flag = government_is_rd_han_type
+				government_has_flag = government_is_celestial
+			}
+			house.house_head = {
+				top_liege = scope:governor_liege
+				NOT = {
+					any_held_title = { is_noble_family_title = yes }
+				}
+			}
+		}
+		give_noble_family_title = {
+				name = noble_family_name
+				tier = county
+				article = DEFAULT_TITLE_NAME_ARTICLE
+				government = celestial_government
+				save_scope_as = new_title
+			}
+		domicile ?= {
+			set_up_domicile_estate_effect = yes
+		}
+	}
+	hidden_effect = {
+		if = {
+			limit = {
+				is_governor = yes
+				NOT = { has_trait = governor }
+			}
+			add_trait = governor
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:new_admin
+			exists = domicile
+		}
+		domicile ?= {
+			set_up_domicile_estate_effect = yes
+		}
+	}
+}

@@ -1,0 +1,716 @@
+﻿
+imperial_examination_gather_entrants_effect = {
+	scope:activity = {
+		set_variable = {
+			name = num_initial_entrants
+			value = 0
+		}
+		every_attending_character = {
+			limit = {
+				#is_landed = no
+				trigger_if = {
+					limit = {
+						scope:activity = {
+							has_activity_type = activity_imperial_examination
+						}
+					}
+					rd_han_avaliable_to_be_examed = yes
+				}
+				tgp_gender_can_be_exam_entrant_trigger = yes
+				trigger_if = {
+					limit = {
+						exists = primary_title
+					}
+					primary_title = {
+						is_mercenary_company = no
+						is_holy_order = no
+					}
+				}
+				NOR = { 
+					this = scope:host
+					is_in_guest_subset = { name = imperial_examiners }
+					has_court_position = travel_leader_court_position
+					has_court_position = bodyguard_court_position
+					# If you are a player, you should get as many shots at the Palace Exam as you want.
+					has_character_flag = passed_palace_exam
+					has_trait = devoted
+					has_trait = eunuch
+				}
+				# Remove diarchs from the list.
+				bannable_serving_diarch_trigger = no
+				is_adult = yes
+			}
+			save_temporary_scope_as = temp_character
+			scope:activity = {
+				add_to_guest_subset = {
+					name = entrants
+					target = scope:temp_character
+				}
+			}
+			set_variable = {
+				name = imperial_examination_score
+				value = imperial_examination_score_value
+			}
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				set_activity_intent = imperial_exam_taker_intent
+			}
+		}
+		#Run seperately to make sure we include characters added to the entrants subset through edge cases.
+		every_guest_subset = {
+			name = entrants
+			#Record the initial amount of entrants
+			scope:activity = {
+				change_variable = {
+					name = num_initial_entrants
+					add = 1
+				}
+			}
+		}
+		#Set the base amount of failees we expect during the entire activity
+		set_variable = {
+			name = failee_quota
+			value = imperial_examination_failee_quota_value
+		}
+		if = { limit = { exists = var:failee_quota } }
+	}
+}
+
+
+imperial_examination_gather_stray_entrants_effect = {
+	if = {
+		# Before we add anyone to the activity, we have to make sure it is not already full.
+		limit = {
+			scope:activity = {
+				OR = {
+					AND = {
+						has_activity_option = {
+							category = imperial_examination_breadth
+							option = imperial_examination_breadth_exclusive
+						}
+						any_attending_character = {
+							count < exclusive_exam_guests_full_calc
+						}
+					}
+					AND = {
+						has_activity_option = {
+							category = imperial_examination_breadth
+							option = imperial_examination_breadth_restricted
+						}
+						any_attending_character = {
+							count < restricted_exam_guests_full_calc
+						}
+					}
+					AND = {
+						has_activity_option = {
+							category = imperial_examination_breadth
+							option = imperial_examination_breadth_open
+						}
+						any_attending_character = {
+							count < open_exam_guests_full_calc
+						}
+					}
+				}			
+			}
+		}
+		every_courtier = {
+			limit = {
+				involved_activity ?= scope:activity
+				this != root
+				trigger_if = {
+					limit = {
+						scope:activity = {
+							has_activity_type = activity_imperial_examination
+						}
+					}
+					rd_han_avaliable_to_be_examed = yes
+				}
+				
+				is_landed = no
+				trigger_if = {
+					limit = {
+						scope:activity = {
+							has_activity_type = activity_imperial_examination
+						}
+					}
+					NOT = { has_character_flag = passed_palace_exam}
+				}
+				trigger_else = {
+					NOR = {
+						has_character_flag = passed_provincial_exam
+						has_character_flag = passed_metropolitan_exam
+					}
+				}
+				# To make sure no characters appear that shouldn't.
+				NOR = {
+					has_trait = devoted
+					has_trait = eunuch
+				}
+				trigger_if = {
+					limit = {
+						exists = primary_title
+					}
+					primary_title = {
+						is_mercenary_company = no
+						is_holy_order = no
+					}
+				}
+				# Remove diarchs from the list.
+				bannable_serving_diarch_trigger = no
+				tgp_gender_can_be_exam_entrant_trigger = yes
+			}
+			add_to_list = entourage_entrants
+		}
+		current_travel_plan ?= {
+			every_entourage_character = {
+				limit = {
+				trigger_if = {
+					limit = {
+						scope:activity = {
+							has_activity_type = activity_imperial_examination
+						}
+					}
+					rd_han_avaliable_to_be_examed = yes
+				}
+					this != root
+					is_landed = no
+					trigger_if = {
+						limit = {
+							scope:activity = {
+								has_activity_type = activity_imperial_examination
+							}
+						}
+						NOT = { has_character_flag = passed_palace_exam}
+					}
+					trigger_else = {
+						NOR = {
+							has_character_flag = passed_provincial_exam
+							has_character_flag = passed_metropolitan_exam
+						}
+					}
+					# To make sure no characters appear that shouldn't.
+					NOR = {
+						has_trait = devoted
+						has_trait = eunuch
+					}
+					trigger_if = {
+						limit = {
+							exists = primary_title
+						}
+						primary_title = {
+							is_mercenary_company = no
+							is_holy_order = no
+						}
+					}
+					# Remove diarchs from the list.
+					bannable_serving_diarch_trigger = no
+					tgp_gender_can_be_exam_entrant_trigger = yes
+				}
+				add_to_list = entourage_entrants
+			}
+		}
+		every_in_list = {
+			list = entourage_entrants
+			if = {
+				limit = {
+					can_join_activity = scope:activity
+					NOT = {
+						involved_activity ?= scope:activity
+					}
+					location = scope:activity.activity_location
+				}
+				add_to_activity_without_travel = scope:activity
+			}
+			if = {
+				limit = {
+					involved_activity ?= scope:activity
+				}
+				scope:activity = {
+					add_to_guest_subset = {
+						name = entrants
+						target = prev
+					}
+				}
+				set_variable = {
+					name = imperial_examination_score
+					value = imperial_examination_score_value
+				}
+			}
+		}
+	}
+}
+
+
+imperial_examination_disburse_activity_entrant_rewards = {
+	save_temporary_scope_as = entrant
+	#This variable is set to track the loc we show players when notifying them of their family's results.
+
+	#Cheaters
+	if = {
+		limit = { has_variable = been_caught_cheating_longterm }
+		#No influence for cheaters
+		change_merit = {
+			value = imperial_examination_merit_base_reward_value
+			multiply = 0.1
+		}
+	}
+	#Entrants
+	else_if = {
+		limit = {
+			OR = {
+				is_in_guest_subset = { name = entrants }
+				is_in_guest_subset = { name = palace_entrants }
+			}
+		}
+		#Influence based on your score
+		if = {
+			limit = { is_lowborn = yes}
+			create_dynasty = {
+			}
+		}
+		if = {
+			limit = { is_ai = no }
+			#Record it
+			involved_activity = {
+				add_activity_log_entry = {
+					key = imperial_examination_entrant_rewards
+					score = 80
+					tags = { completed }
+					show_in_conclusion = yes
+					character = scope:entrant
+					location = scope:entrant.location
+					scope:entrant = {
+						if = {
+							limit = {
+								NOT = { has_character_modifier = tgp_passed_provincial_exam_modifier }
+							}
+							add_character_flag = passed_provincial_exam
+							add_character_modifier = {
+								modifier = tgp_bypassed_provincial_exam_modifier
+							}
+						}
+						change_influence = imperial_examination_entrant_influence_reward_value
+						#Merit based on your score
+						change_merit = imperial_examination_entrant_merit_reward_value
+						# Gain Prestige if you have the relevant flag
+						if = {
+							limit = { has_character_flag = examination_prestige_reward }
+							remove_character_flag = examination_prestige_reward
+							add_prestige = major_prestige_gain
+						}
+					}
+				}
+			}
+		}
+		else = {
+			if = {
+				limit = {
+					NOT = { has_character_modifier = tgp_passed_provincial_exam_modifier }
+				}
+				add_character_flag = passed_provincial_exam
+				add_character_modifier = {
+					modifier = tgp_bypassed_provincial_exam_modifier
+				}
+				if = {
+					limit = { is_lowborn = no }
+					change_merit = local_examination_merit_base_reward_value
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						is_lowborn = no
+						has_perfect_score_trigger = { SCORE_VAR = imperial_examination_score }
+					}
+					
+				}
+				change_influence = imperial_examination_entrant_influence_reward_value
+				#Merit based on your score
+				change_merit = imperial_examination_entrant_merit_reward_value
+				# Gain Prestige if you have the relevant flag
+				if = {
+					limit = { has_character_flag = examination_prestige_reward }
+					remove_character_flag = examination_prestige_reward
+					add_prestige = major_prestige_gain
+				}
+			}
+		}
+		if = {
+			limit = {
+				is_in_guest_subset = { name = palace_entrants }
+			}
+			if = {
+				limit = {
+					NOT = { has_character_flag = passed_metropolitan_exam }
+				}
+				add_character_flag = passed_metropolitan_exam
+				add_character_modifier = {
+					modifier = tgp_passed_metropolitan_exam_modifier
+				}
+			}
+			add_character_flag = passed_palace_exam
+			add_character_modifier = {
+				modifier = tgp_passed_palace_exam_modifier
+			}
+			create_character_memory = {
+				type = passed_metropolitan_exam_memory
+			}
+			create_character_memory = {
+				type = passed_palace_exam_memory
+			}
+			# Notify close family members
+			every_close_family_member = {
+				# House head is notified separately
+				limit = { is_house_head = no }
+				send_interface_message = {
+					type = event_msg_merit_effect_good
+					title = palace_exam_close_family_passed
+					right_icon = root
+					desc = msg_palace_exam_close_family_passed_desc
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				is_in_guest_subset = { name = entrants }
+			}
+			save_temporary_scope_as = temp_scope
+			add_character_flag = passed_metropolitan_exam
+			add_character_modifier = {
+				modifier = tgp_passed_metropolitan_exam_modifier
+			}
+			if = {
+				limit = {
+					# Let's give metropolitan entrants the chance to pass Palace as well.
+					is_ai = yes
+					is_lowborn = no
+					# We don't mess with any player families
+					NOT = {
+						any_close_or_extended_family_member = { is_ai = no }
+					}
+				}
+				random = {
+					chance = 20
+					add_character_flag = passed_palace_exam
+					add_character_modifier = {
+						modifier = tgp_passed_palace_exam_modifier
+					}
+					change_merit = empire_starting_merit_value
+				}
+			}
+			create_character_memory = {
+				type = passed_metropolitan_exam_memory
+			}
+			# Notify close family members
+			every_close_family_member = {
+				# House head is notified separately
+				limit = { is_house_head = no }
+				send_interface_message = {
+					type = event_msg_merit_effect_good
+					title = metropolitan_exam_close_family_passed
+					right_icon = root
+					desc = msg_metropolitan_exam_close_family_passed_desc
+				}
+			}
+		}
+		#Remove failed_imperial_examination flags for those who have it
+		if = {
+			limit = {
+				has_character_flag = failed_imperial_examination
+			}
+			remove_character_flag = failed_imperial_examination
+		}
+	}
+	#Failees
+	else = {
+		if = {
+			limit = { is_ai = no }
+			#Record it
+			involved_activity = {
+				add_activity_log_entry = {
+					key = imperial_examination_entrant_rewards
+					score = 80
+					tags = { completed }
+					show_in_conclusion = yes
+					character = scope:entrant
+					location = scope:entrant.location
+					scope:entrant = {
+						#Dwindling influence & merit for failees
+						change_influence = imperial_examination_failee_influence_reward_value
+						change_merit = imperial_examination_failee_merit_reward_value
+						# Gain Prestige if you have the relevant flag
+						if = {
+							limit = { has_character_flag = examination_prestige_reward }
+							remove_character_flag = examination_prestige_reward
+							add_prestige = major_prestige_loss
+						}
+					}
+					failee_chance_to_gain_elder_effect = yes
+				}
+			}
+		}
+		else = {
+			#Dwindling influence & merit for failees
+			change_influence = imperial_examination_failee_influence_reward_value
+			change_merit = imperial_examination_failee_merit_reward_value
+			involved_activity = {
+				failee_chance_to_gain_elder_effect = yes
+			}
+			# Gain Prestige if you have the relevant flag
+			if = {
+				limit = { has_character_flag = examination_prestige_reward }
+				remove_character_flag = examination_prestige_reward
+				add_prestige = major_prestige_loss
+			}
+		}
+		#Set "failed examination" flags
+		add_character_flag = failed_imperial_examination
+		create_character_memory = {
+			type = failed_metropolitan_exam_memory
+		}
+		# Notify close family members
+		every_close_family_member = {
+			# House head is notified separately
+			limit = { is_house_head = no }
+			send_interface_message = {
+				type = event_msg_merit_effect_bad
+				title = metropolitan_exam_close_family_failed
+				right_icon = root
+				desc = msg_metropolitan_exam_close_family_failed_desc
+			}
+		}
+	}
+	scope:entrant = { add_to_list = exam_entrants }
+}
+
+
+tribute_mission_invalidation_effect = {
+	if = {
+		limit = { has_variable = tribute_mission_type }
+		if = {
+			limit = { # sanity check to ensure we're still a valid tribute provider
+				OR = {
+					is_independent_ruler = no # if we have a liege we cannot also pay tribute to someone else
+					AND = { # if we're not a tributary we are only valid if we're paying tribute to China
+						is_tributary = no
+						var:tribute_mission_target_scope != title:h_china.holder
+					}
+				}
+				is_tributary_or_independent_neighbor_of_china_trigger = no
+			}
+			#Return home and refund
+			trigger_event = tribute_mission.9800
+		}
+		else_if = { #If our offerings have perished or been imprisoned along the way, maybe swap to gold
+			limit = {
+				has_variable = tribute_mission_type
+				OR = {
+					AND = {
+						has_variable = offered_concubine
+						OR = {
+							var:offered_concubine = { is_alive = no }
+							var:offered_concubine = { is_imprisoned = yes }
+						}
+					}
+					AND = {
+						has_variable = offered_eunuch
+						OR = {
+							var:offered_eunuch = { is_alive = no }
+							var:offered_eunuch = { is_imprisoned = yes }
+						}
+					}
+				}
+			}
+			trigger_event = tribute_mission.9750
+		}
+		else_if = {
+			#We're still a tributary on our way to pay tribute, but our suzerain is not the person we were going to pay tribute to
+			limit = {
+				has_variable = tribute_mission_target_scope
+				OR = {
+					AND = {
+						is_tributary = yes
+						var:tribute_mission_target_scope != suzerain
+					}
+					AND = {
+						is_tributary = no
+						var:tribute_mission_target_scope != title:h_china.holder
+					}	
+				}
+			}
+			var:tribute_mission_target_scope = { save_scope_as = old_overlord }
+			suzerain = { save_scope_as = new_overlord }
+			#Clean up Requested Tribute Mission variables
+			requested_tribute_mission_clean_up_variables_effect = yes
+			#The new Overlord is in the same place and can accept the tribute
+			if = {
+				limit = { 
+					#Make sure they can still accept our offerings; if so, just set the new target
+					current_travel_plan.next_destination_province = scope:new_overlord.capital_province
+					has_variable = tribute_mission_type
+					trigger_if = {
+						limit = {
+							OR = {
+								has_variable = offered_concubine
+								has_variable = offered_eunuch
+							}
+						}
+						OR = {
+							AND = {
+								has_variable = offered_concubine
+								var:offered_concubine = {
+									can_become_concubine_of_character_valid_trigger = { CHARACTER = scope:new_overlord }
+								}
+							}
+							AND = {
+								has_variable = offered_eunuch
+								scope:new_overlord = { 
+									culture = { has_cultural_parameter = can_appoint_chief_eunuch } 
+								}
+							}
+						}
+					}	
+				}
+				send_interface_message = {
+					type = msg_mandala_neutral_text
+					title = tribute_mission_notification.new_overlord.title
+					left_icon = scope:new_overlord
+					desc = tribute_mission_notification.new_overlord.desc		
+				}
+				set_variable = {
+					name = tribute_mission_target_scope
+					value = scope:new_overlord
+				}		
+			}
+			#The Overlord is somewhere else; please try again
+			else_if = {
+				limit = {
+					current_travel_plan.next_destination_province != scope:new_overlord.capital_province
+				}
+				set_variable = new_overlord_somewhere_else
+				#Return home and refund
+				trigger_event = tribute_mission.9800
+			}
+			else = {
+				set_variable = new_overlord_unable_to_accept_tribute
+				#Return home and refund
+				trigger_event = tribute_mission.9800
+			}
+		}
+	}	
+}
+
+
+set_elder_relation_effect = {
+	$DISCIPLE$ = {
+		save_scope_as = new_disciple
+		random_relation = {
+			type = elder
+			save_scope_as = old_elder
+		}
+	}
+	$ELDER$ = {
+		save_scope_as = new_elder
+	}
+		if = {
+		limit = {
+		NOT = { scope:old_elder = scope:new_elder }
+		}
+	if = {
+		limit = {
+		scope:old_elder = {
+			
+			highest_held_title_tier > tier_empire
+			}
+		}
+		scope:new_disciple = {
+		remove_character_modifier = rd_han_tianzi_mensheng_modifier
+		}
+	}
+	if = {
+		limit = {
+		scope:old_elder = {
+			
+			highest_held_title_tier = tier_empire
+			OR = {
+				is_independent_ruler = yes
+				vassal_contract_has_flag = rd_admin_theme_imperial
+			}
+			}
+		}
+		scope:new_disciple = {
+		remove_character_modifier = rd_han_junwang_mensheng_modifier
+		}
+	}
+	if = {
+		limit = {
+		scope:new_elder = {
+			
+			highest_held_title_tier > tier_empire
+			}
+		}
+		scope:new_disciple = {
+		add_character_modifier = rd_han_tianzi_mensheng_modifier
+		}
+	}
+	if = {
+		limit = {
+		scope:new_elder = {
+			
+			highest_held_title_tier = tier_empire
+			OR = {
+				is_independent_ruler = yes
+				vassal_contract_has_flag = rd_admin_theme_imperial
+			}
+			}
+		}
+		scope:new_disciple = {
+		add_character_modifier = rd_han_junwang_mensheng_modifier
+		}
+	}
+	}
+	if = {
+		limit = {
+			# no circular relations please
+			NOT = {
+				scope:new_disciple = {
+					has_relation_elder = scope:new_elder
+				}
+			}
+			# Disciple does not have a higher merit rank than the elder
+			# The elder can have more disciples
+			scope:new_elder = {
+				eligible_for_elder_trigger = {
+					DISCIPLE = scope:new_disciple
+				}
+			}
+		}
+		scope:new_disciple = {
+			# in case you already had an elder, remove the relation and send them a letter
+			if = {
+				limit = {
+					exists = scope:old_elder
+				}
+				remove_relation_elder = scope:old_elder
+				save_scope_as = actor #for loc in tgp_interaction_event.0030
+				scope:old_elder = {
+					add_opinion = {
+						target = scope:new_disciple
+						modifier = refused_to_be_disciple_opinion
+						opinion = -50
+					}
+					save_scope_as = recipient #for loc in tgp_interaction_event.0030
+					trigger_event = tgp_interaction_event.0030
+				}
+			}
+			set_relation_elder = scope:new_elder
+		}
+		scope:new_elder = {
+			add_merit_if_relevant_effect = {
+				MERIT = $MERIT$
+			}
+		}
+	}
+}

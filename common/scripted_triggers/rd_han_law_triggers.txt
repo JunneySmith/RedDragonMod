@@ -1,0 +1,143 @@
+﻿rd_realm_law_use_imperial_bureaucracy = {
+
+OR = {
+government_has_flag = government_has_rd_governor_officials
+			trigger_if = {
+				limit = {
+					is_independent_ruler = no
+				}
+				liege = { government_has_flag = government_has_rd_governor_officials }
+			}
+}
+}
+
+rd_realm_law_use_han_imperial_bureaucracy = {
+
+OR = {
+government_has_flag = government_is_celestial
+			trigger_if = {
+				limit = {
+					is_independent_ruler = no
+				}
+				liege = { government_has_flag = government_is_celestial }
+			}
+}
+}
+rd_realm_law_use_han_junzhen_bureaucracy = {
+
+
+government_has_flag = government_is_rd_han_military
+
+
+}
+rd_vassal_will_become_admin = {
+	#This trigger picks out vassals that automatically convert to Admin.
+	#We convert vassals that are:
+	#Clan or Feudal
+	#De Jure part of the Empire
+	#Have the State Faith
+	#Aren't rivals of the admin liege
+	#Dukes and above must like the main liege at least a little.
+	highest_held_title_tier > tier_barony
+	primary_title = {
+		target_is_de_jure_liege_or_above = scope:administrative_liege.primary_title #We only auto convert de jure vassals
+	}
+	OR = { #We convert only clan and feudal vassals in this decision
+		government_has_flag = government_is_feudal
+		government_has_flag = government_is_clan
+		government_has_flag = government_is_japan_feudal
+	}
+	faith = scope:administrative_liege.faith #The future state faith
+}
+rd_can_potentially_call_ally_trigger = {
+	# Can never call vassals to your own wars (their obligations are met via taxes and levies!)
+	custom_description = {
+		text = cannot_call_vassal_to_war
+		$JOINER$ = {
+			trigger_if = {
+				limit = {
+					NOT = { 
+						# Diarchs can join against other vassals.
+						this ?= $WARRIOR$.diarch 
+						# Confederation members can join the confederation leader's defensive wars
+						AND = {
+							is_confederation_member = yes
+							$WARRIOR$ = {
+								is_member_of_confederation = $JOINER$.confederation
+							}
+						}
+						AND = {
+							has_government = rd_han_military_government
+							$WARRIOR$ = {
+								has_government = rd_han_military_government
+							}
+						}
+					}
+
+				}
+				NOT = {
+					target_is_liege_or_above = $WARRIOR$
+				}
+			}
+		}
+	}
+
+	# Can never call your liege to your own wars (they protect you only from foreign invaders, by being the war target instead of you) -- Unless you have the Nomadic Contract Right
+	custom_description = {
+		text = cannot_call_liege_to_war
+		$JOINER$ = {
+			trigger_if = {
+				limit = {
+					target_is_vassal_or_below = $WARRIOR$
+					$WARRIOR$ = {
+						vassal_contract_has_flag = vassal_contract_liege_forced_war_override
+					}
+				}
+				always = yes
+			}
+			trigger_else_if = {
+				limit = {
+					$JOINER$ = {
+						NOT = {
+							target_is_vassal_or_below = $WARRIOR$
+						}
+					}
+				}
+				always = yes
+			}
+			trigger_else = {
+				always = no
+			}
+		}
+	}
+}
+
+realm_law_use_imperial_bureaucracy = {
+	government_allows = administrative
+	NOT = {has_government = rd_han_administrative_government}
+	NOT = {has_government = rd_han_military_government}
+		NOR = {
+		government_has_flag = government_is_celestial
+		government_has_flag = government_is_meritocratic
+		government_has_flag = government_is_steppe_admin
+		government_has_flag = government_is_japan_administrative
+	}
+}
+
+tgp_dynastic_cycle_offensive_wars_ban_trigger = {
+	trigger_if = {
+		limit = {
+			scope:attacker ?= { has_title = title:h_china }
+			exists = situation:dynastic_cycle
+			has_government = rd_celestial_empire_government
+		}
+		custom_tooltip = {
+			text = dynastic_cycle_offensive_wars_ban_tt
+			scope:attacker = {
+				top_participant_group:dynastic_cycle ?= {
+					NOT = { has_participant_group_parameter = dynastic_cycle_offensive_wars_ban }
+				}
+			}
+		}
+	}
+}

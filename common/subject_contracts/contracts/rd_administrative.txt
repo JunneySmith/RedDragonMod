@@ -1,0 +1,21 @@
+﻿
+
+rd_liege_war_participation_obligation = {
+obligation_levels = {
+default = {
+			flag = vassal_contract_liege_forced_war_override
+
+		}
+		}
+	
+}
+
+rd_han_junzhen_obligations = {
+obligation_levels = {
+default = {
+			flag = celestial_military_appointment
+
+		}
+		}
+
+}

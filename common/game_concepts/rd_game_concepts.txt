@@ -1,0 +1,26 @@
+﻿rd_power_faction = {
+	alias = { rd_power_factions rd_faction_power }
+	parent = faction
+}
+promote_culture_han_rd = {
+	parent = councillor_task
+	texture = "gfx/interface/icons/council_task_types/task_promote_culture_han_rd.dds"
+}
+rd_han_administrative_government = {
+	texture = "gfx/interface/icons/government_types/rd_han_administrative_government.dds"
+	alias = { rd_han_administrative_government_celestial rd_han_administrative_government_celestials rd_han_administrative_government_celestial_i }
+}
+
+rd_celestial_empire_government = {
+	texture = "gfx/interface/icons/government_types/rd_celestial_empire_government.dds"
+	alias = { rd_celestial_empire_government_celestial rd_celestial_empire_government_celestials rd_celestial_empire_government_celestial_i }
+}
+rd_han_military_government = {
+	texture = "gfx/interface/icons/government_types/rd_han_military_government.dds"
+	alias = { rd_han_military_government_holy_orders rd_han_military_government_holy_order_i }
+}
+
+rd_han_governor_government = {
+	texture = "gfx/interface/icons/government_types/rd_han_governor_government.dds"
+	alias = { rd_han_governor_government_celestial rd_han_governor_government_celestials rd_han_governor_government_celestial_i }
+}

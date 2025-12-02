@@ -13,10 +13,13 @@ kol_culture_is_han_trigger = yes
 	}
 	can_pick = {
 		has_cultural_pillar = heritage_chinese
+		NOT = { has_cultural_tradition = tradition_intensive_farming}
 	}
 	parameters = {
+	
+			grants_to_lowborns_bonuses = yes
+		collective_lands_farms_bonuses = yes
 	hard_working_traits_more_valued = yes
-grants_to_lowborns_bonuses = yes
 pastures_building_bonuses = yes
 plantations_building_bonuses = yes
 peat_quarries_building_bonuses = yes
@@ -25,19 +28,21 @@ logging_camps_building_bonuses = yes
 	}
 	character_modifier = {
 	men_at_arms_cap = 1
-	development_growth_factor = 0.2
+	county_fertility_growth_add = 2
+	monthly_income_from_herd_mult = 0.1
 	}
 	county_modifier = {
-		farmlands_development_growth_factor = 0.15
+		farmlands_development_growth_factor = 0.1
 		farmlands_construction_gold_cost = -0.1
-		floodplains_development_growth_factor = 0.15
+		floodplains_development_growth_factor = 0.1
 		floodplains_construction_gold_cost = -0.1
+		
 	}
 	
 	cost = {
 		prestige = {
 			add = {
-				value = tradition_base_cost
+				value = 500
 				desc = BASE
 				format = "BASE_VALUE_FORMAT"
 			}
@@ -75,34 +80,7 @@ logging_camps_building_bonuses = yes
 	}
 	
 	ai_will_do = {
-		value = 100
-		if = {
-			limit = {
-				NOT = {
-					scope:character = {
-						any_sub_realm_county = {
-							count >= 2
-							culture = scope:character.culture
-							any_county_province = {
-								OR = {
-									terrain = farmlands
-									terrain = floodplains
-								}
-							}
-						}
-					}
-				}
-			}
-			multiply = 0
-		}
-		if = {
-			limit = {
-				scope:character = {
-					has_government = tribal_government
-				}
-			}
-			multiply = 0
-		}
+		value = 10000
 	}
 }
 tradition_rd_han_legacy = {
@@ -116,21 +94,24 @@ tradition_rd_han_legacy = {
 	
 	is_shown = {
 		has_cultural_pillar = heritage_chinese
-kol_culture_is_han_trigger = yes
+		kol_culture_is_han_trigger = yes
 	}
 	can_pick = {
 	
 		has_cultural_pillar = heritage_chinese
 	}
 	parameters = {
+		#rd_han_endless_war_on_nomad = yes
+		has_access_to_shieldmaidens = yes
 		strong_traits_more_common = yes
 		martial_education_more_valued = yes
 		prowess_traits_more_valued = yes
 		blademaster_trait_bonuses = yes
 		wanderers_gain_extra_combat_skills = yes
 		can_duel_rivals = yes
+		less_likely_to_culture_convert = yes
 		expensive_convert_to_local_culture = yes
-		harder_to_hybridize = yes
+		#harder_to_hybridize = yes
 		can_host_joust_contests = yes
 	}
 
@@ -138,17 +119,19 @@ kol_culture_is_han_trigger = yes
 		prowess_per_piety_level = 1
 		negate_prowess_penalty_add = 5
 		knight_limit = 2
+		herd_gain_mult = 0.15
 	}
 	
 	cost = {
 		prestige = {
 			add = {
-				value = tradition_base_cost
+				value = 500
 				desc = BASE
 				format = "BASE_VALUE_FORMAT"
 			}
 			if = {
 				limit = {
+					NOT = {this = culture:han}
 					NOR = {
 						any_in_list = { list = traits this = flag:ethos_bellicose }
 						any_in_list = { list = traits this = flag:ethos_courtly }
@@ -162,6 +145,7 @@ kol_culture_is_han_trigger = yes
 			}
 			if = {
 				limit = {
+				NOT = {this = culture:han}
 					NOT = {
 						scope:character = {
 							any_knight = {
@@ -181,5 +165,5 @@ kol_culture_is_han_trigger = yes
 		}
 	}
 
-	ai_will_do = { value = 100 }
+	ai_will_do = { value = 10000 }
 }

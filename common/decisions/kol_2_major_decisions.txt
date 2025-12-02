@@ -1,7 +1,9 @@
-﻿kol_culture_self_identity_decision = { #by Ewan Cowhig Croft
-	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+﻿kol_culture_self_identity_decision = {
+picture = {
+	reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
 	desc = kol_culture_self_identity_decision_desc
-major = yes
+	decision_group_type = dynastic_cycle
 	ai_check_interval = 36
 
 	is_shown = {
@@ -56,6 +58,217 @@ major = yes
 		culture_is_not_historical_hybrid_trigger = yes
 		
 		}
+	}
+
+	ai_will_do = {
+		base = 100
+		
+	}
+}
+rd_reclaim_power_as_emp_decision = {
+picture = {
+	reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	desc = rd_reclaim_power_as_emp_decision_desc
+	decision_group_type = dynastic_cycle
+	ai_check_interval = 36
+
+	is_shown = {
+		
+		has_government = rd_han_administrative_government
+		has_realm_law = acclamation_succession_law
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		prestige_level >= 4
+		custom_description = {
+		text = "no_powerful_vassal_with_negative_opinion"
+		NOT = {
+			any_vassal = {
+				is_powerful_vassal = yes
+				opposes_succession_law_change_trigger = yes
+			}
+		}
+	}
+	any_held_title = {
+	
+	tier = tier_kingdom
+	}
+		
+	}
+
+	cost = {
+		piety = {
+			value = 600
+			
+		}
+		prestige = {
+			value = 50000
+			# scale base value based on number of counties x 100
+		}
+	}
+
+	effect = {
+		remove_realm_law = acclamation_succession_law
+		add_realm_law  = single_heir_succession_law
+	}
+
+	ai_potential = {
+			culture = {
+		culture_is_not_historical_hybrid_trigger = yes
+		
+		}
+	}
+
+	ai_will_do = {
+		base = 100
+		
+	}
+}
+rd_han_type_governor_decision = {
+picture = {
+	reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	desc = rd_han_type_governor_decision_desc
+	decision_group_type = dynastic_cycle
+	ai_check_interval = 36
+
+	is_shown = {
+		is_landed = yes
+		has_government = rd_han_military_government
+								NOT = {
+							any_held_title = {
+								is_nomad_title = yes
+							}
+						}
+	}
+
+	is_valid = {
+						NOT = {
+							any_held_title = {
+								is_nomad_title = yes
+							}
+						}
+		
+	}
+
+	effect = {
+		add_prestige = 50
+		show_as_tooltip = {
+			custom_tooltip = rd_han_type_governor_decision_tooltip
+		}
+		save_scope_as = holder
+						create_nomad_title = {
+					name = RD_CAMP
+					government = rd_han_military_government
+					holder = this
+					save_scope_as = new_title
+				}
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+		
+	}
+}
+rd_han_type_single_heir_law_decision = {
+picture = {
+	reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	desc = rd_han_type_single_heir_law_decision_desc
+	decision_group_type = dynastic_cycle
+	ai_check_interval = 36
+
+	is_shown = {
+	
+		culture = {
+			culture_head = root
+			has_innovation = innovation_rd_han_culture
+			NOT = {has_innovation = innovation_primogeniture }
+		}
+	}
+
+	is_valid = {
+		custom_description = { text =kol_culture_group_tooltip 
+
+		culture = {
+culture_head = root
+}
+		
+		
+		}
+		culture = {
+			has_innovation = innovation_rd_han_culture
+			NOT = {has_innovation = innovation_primogeniture }
+		}
+		
+	}
+
+	cost = {
+		piety = {
+			value = 50
+			# scale base value based on number of counties x 100
+		}
+	}
+
+	effect = {
+		culture = {
+		add_innovation = innovation_primogeniture
+		}
+		add_prestige = 1000
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+		
+	}
+}
+rd_han_DEBUG_governor_decision = {
+picture = {
+	reference = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	}
+	desc = rd_han_type_governor_decision_desc
+	decision_group_type = dynastic_cycle
+	ai_check_interval = 36
+
+	is_shown = {
+	always = no
+		is_ai = no
+	}
+
+	is_valid = {
+	culture:han = {
+						NOT = {
+						has_cultural_pillar = heritage_chinese
+						}
+						}
+		
+	}
+
+	cost = {
+		prestige = {
+			value = 50
+			# scale base value based on number of counties x 100
+		}
+	}
+
+	effect = {
+	culture:han = {
+	set_culture_pillar = heritage_chinese
+	}
+	}
+
+	ai_potential = {
+		always = yes
 	}
 
 	ai_will_do = {

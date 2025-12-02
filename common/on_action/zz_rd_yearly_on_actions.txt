@@ -1,0 +1,1490 @@
+﻿yearly_playable_pulse = {
+	effect = {
+		ai_budget_manipulation_effect = yes
+
+		#Mandala
+		if = {
+			limit = {
+				government_has_flag = government_is_mandala
+				primary_title.tier >= tier_county
+				has_mandala_aspect_trigger = yes
+				house.house_head ?= root
+				is_adult = yes
+				is_at_war = no
+			}
+			ai_chance_to_become_mandala_godking_effect = yes
+			# Mandala Contracts
+			if = {
+				limit = {
+					trigger_if = {
+						limit = { is_ai = yes }
+						is_available = yes
+					}
+					trigger_else = { always = yes }
+				}
+				if = { # Spawn up to three rituals
+					limit = {
+						trigger_if = {
+							limit = { exists = var:available_mandala_rituals }
+							var:available_mandala_rituals < mandala_max_available_rituals_value
+						}
+						trigger_else = { always = yes }
+					}
+					random = {
+						chance = {
+							value = 75
+							if = {
+								limit = {
+									is_ai = no
+									capital_province = {
+										NOT = {
+											has_building_with_flag = mandala_capital_building
+										}
+									}
+								}
+								add = 25
+							}
+							if = {
+								limit = { is_at_war = yes }
+								add = -50
+							}
+							if = {
+								limit = { is_travelling = yes }
+								add = -50
+							}
+							if = {
+								limit = {
+									is_ai = yes
+									OR = {
+										is_tributary = yes
+										top_liege != this
+									}
+								}
+								add = -50
+							}
+						}
+						spawn_mandala_realm_task_contract_effect = yes
+					}
+				}
+				else_if = {
+					limit = {
+						is_travelling = no
+						is_at_war = no
+						is_ai = no
+					}
+					send_interface_message = {
+						type = msg_mandala_bad
+						title = mandala_followers_doubting
+						add_piety = {
+							value = mandala_contract_piety
+							multiply = -2.5
+						}
+						add_piety_experience = {
+							value = mandala_contract_piety
+							multiply = -2.5
+						}
+						add_legitimacy = {
+							value = mandala_contract_legitimacy
+							multiply = -2.5
+						}
+					}
+				}
+			}
+
+		}
+		# Mercenary cultrad
+		else_if = {
+			limit = {
+				government_has_flag = government_is_mercenary
+				culture = {
+					has_cultural_parameter = mercenary_courtiers_gain_extra_skills
+				}
+			}
+			knight_increase_prowess_chance_effect = yes
+			every_courtier = {
+				limit = {
+					is_knight = yes
+				}
+				knight_increase_prowess_chance_effect = yes
+			}
+		}
+		# Independent rulers
+		if = {
+			limit = {
+				this = top_liege
+			}
+			# Treasury update for governments with a treasury
+			if = {
+				limit = {
+					has_treasury = yes
+				}
+				trigger_event = tgp_china_ministry.0100
+			}
+		}
+		# Assign or level up court type trait for courtiers in a royal court
+		if = {
+			limit = {
+				has_royal_court = yes
+				has_dlc_feature = royal_court
+			}
+			assign_court_type_traits_to_courtiers_effect = yes
+		}
+		# Yurt domicile bonuses distribution
+		if = {
+			limit = {
+				government_has_flag = government_is_nomadic
+				exists = domicile
+			}
+			#Dynasty of Many Khans
+			mpo_yearly_dynasty_of_many_khans_effect = yes
+
+			#Yearly yurt rewards
+			domicile ?= {
+				if = {
+					limit = {
+						OR = {
+							has_domicile_building_or_higher = family_yurt_01
+							has_domicile_building_or_higher = mystical_yurt_01
+							has_domicile_building_or_higher = court_yurt_01
+						}
+					}
+					mpo_yearly_yurt_rewards_effect = yes
+				}
+			}
+		}
+
+		# Yearly house head opinion update: to change into only one log maybe?
+		if = {
+			limit = {
+				government_has_flag = government_is_clan
+				exists = house
+				is_house_head = yes
+			}
+			save_scope_as = unity_target
+			if = {
+				limit = {
+					OR = {
+						has_character_flag = steer_unity_towards_harmonious_passive_gain
+						has_character_flag = steer_unity_towards_antagonistic_passive_loss
+					}
+				}
+				house = {
+					add_unity_value = {
+						value = {
+							if = {
+								limit = { root = { has_character_flag = steer_unity_towards_harmonious_passive_gain } }
+								add = medium_unity_gain
+							}
+							else = {
+								add = medium_unity_loss
+							}
+						}
+						character = root
+						desc = clan_unity_steer_direction_passive_change.desc
+					}
+				}
+			}
+			else = {
+				house = {
+					set_variable = {
+						name = house_opinion_unity_impact
+						value = 0
+					}
+					every_house_member = {
+						limit = {
+							is_house_head = no
+							is_adult = yes
+						}
+						if = {
+							limit = {
+								opinion = {
+									target = scope:unity_target
+									value >= low_positive_opinion
+								}
+							}
+							prev = {
+								change_variable = {
+									name = house_opinion_unity_impact
+									add = miniscule_unity_value
+								}
+							}
+							if = {
+								limit = {
+									opinion = {
+										target = scope:unity_target
+										value >= high_positive_opinion
+									}
+								}
+								prev = {
+									change_variable = {
+										name = house_opinion_unity_impact
+										add = minor_unity_value
+									}
+								}
+
+							}
+						}
+						else = {
+							prev = {
+								change_variable = {
+									name = house_opinion_unity_impact
+									subtract = miniscule_unity_value
+								}
+							}
+
+							if = {
+								limit = {
+									opinion = {
+										target = scope:unity_target
+										value <= high_negative_opinion
+									}
+								}
+								prev = {
+									change_variable = {
+										name = house_opinion_unity_impact
+										subtract = minor_unity_value
+									}
+								}
+							}
+						}
+					}
+					if = {
+						limit = { var:house_opinion_unity_impact != 0 }
+						add_unity_value = {
+							value = {
+								if = {
+									limit = { var:house_opinion_unity_impact > 0 }
+									add = minor_unity_gain
+								}
+								else = {
+									add = minor_unity_loss
+								}
+							}
+							character = root
+							desc = clan_unity_generic_average_yearly_opinion_house_head.desc
+						}
+					}
+				}
+			}
+		}
+
+		# ADMINISTRATIVE GOVERNMENT
+		# Governor contract generation
+		if = {
+			limit = {
+				is_governor = yes
+				trigger_if = {
+					limit = { is_ai = yes }
+					is_available = yes
+				}
+				NOT = { has_government = celestial_government }
+			}
+			random = {
+				chance = {
+					value = 70
+					if = {
+						limit = { has_character_flag = admin_governance_frequency_cooldown }
+						subtract = 50
+					}
+				}
+				spawn_governance_contract_effect = yes
+			}
+		}
+
+		# CELESTIAL GOVERNMENT
+		if = {
+			limit = {
+				government_has_flag = government_is_celestial
+			}
+
+			# Governor contract generation
+			if = {
+				limit = {
+					trigger_if = {
+						limit = { is_ai = no }
+						is_governor_or_admin_count = yes
+					}
+					trigger_else = { # The AI only gets contracts if available and of higher tiers
+						is_governor = yes
+						is_available = yes
+					}
+				}
+				random = {
+					chance = {
+						value = 75
+						if = {
+							limit = { has_character_flag = admin_governance_frequency_cooldown }
+							subtract = 40
+						}
+					}
+					spawn_celestial_governance_contract_effect = yes
+				}
+			}
+
+			# Yearly check to see if the hegemon is above the limit for any administration types
+			if = {
+				limit = {
+					is_independent_ruler = yes
+					OR = {
+						any_vassal = {
+							count > celestial_province_protectorate_max_value
+							vassal_contract_has_flag = celestial_province_protectorate
+						}
+						any_vassal = {
+							count > celestial_province_metropolitan_max_value
+							vassal_contract_has_flag = celestial_province_metropolitan
+						}
+					}
+				}
+
+				# If true, this will cost legitimacy
+				send_interface_message = {
+					type = msg_legitimacy_loss
+					title = celestial_province_above_limit_title
+
+					left_icon = root
+
+					add_legitimacy = minor_legitimacy_loss
+				}
+			}
+			if = {
+				limit = {
+					highest_held_title_tier >= tier_empire
+					is_independent_ruler = yes
+					allowed_concubines = yes
+					is_ai = yes
+					number_of_concubines < tgp_ai_concubine_soft_cap
+				}
+				create_character = {
+					template = tgp_concubine_template
+					location = root.location
+					save_scope_as = new_concubine
+				}
+				make_concubine = scope:new_concubine
+			}
+		}
+
+		if = { # Is Admin
+			limit = {
+				government_has_flag = government_is_administrative
+				is_landed = yes
+			}
+			# Failsafe to ensure we don't get independent admin rulers of too low a rank (i.e. below king)
+			if = {
+				limit = {
+					# Is independent
+					liege = root
+					# Is less than King tier
+					administrative_tier_allows_independence = no
+				}
+				admin_change_government_effect = yes
+			}
+			# Failsafe to ensure we don't have a noble family holding land without other titles - Give any held land to liege
+			else_if = {
+				limit = {
+					# They are a Vassal
+					is_independent_ruler = no
+					# They have a Noble Family Title
+					any_held_title = {
+						is_noble_family_title = yes
+						save_temporary_scope_as = nf_title_temp
+					}
+					# And no other high tier Titles
+					trigger_if = {
+						limit = { has_government = japan_administrative_government }
+						NOT = {
+							any_held_title = {
+								tier >= tier_county
+								is_noble_family_title = no
+								is_landless_type_title = no
+							}
+						}
+					}
+					trigger_else = {
+						NOT = {
+							any_held_title = {
+								tier >= tier_duchy
+								is_noble_family_title = no
+								is_landless_type_title = no
+							}
+						}
+					}
+				}
+				create_title_and_vassal_change = {
+					type = stepped_down
+					save_scope_as = change
+					add_claim_on_loss = no
+				}
+				every_held_title = {
+					limit = {
+						is_landless_type_title = no
+						is_noble_family_title = no
+					}
+					add_to_list = revoked_titles
+				}
+				every_in_list = {
+					list = revoked_titles
+					change_title_holder_include_vassals = {
+						holder = root.liege
+						change = scope:change
+					}
+				}
+				resolve_title_and_vassal_change = scope:change
+			}
+		}
+
+		if = {
+			limit = {
+				has_character_flag = tournament_ai_override
+			}
+			ai_attempt_to_host_activity = activity_tournament
+		}
+		else_if = {
+			limit = {
+				has_character_flag = feast_ai_override
+			}
+			ai_attempt_to_host_activity = activity_feast
+		}
+		else_if = {
+			limit = {
+				has_character_flag = examinations_ai_override
+			}
+			ai_attempt_to_host_activity = activity_imperial_examination
+		}
+
+		# Scalable Modifiers which needs to be reapplied
+		hidden_effect = {
+			if = {
+				limit = {
+					has_character_modifier = church_investment_modifier
+				}
+				remove_character_modifier = church_investment_modifier
+				add_character_modifier = church_investment_modifier
+			}
+		}
+		if = {
+			limit = {
+				has_perk = learn_on_the_job_perk
+				has_government = landless_adventurer_government
+			}
+			every_courtier = {
+				limit = {
+					is_physically_able_adult = yes
+					NOT = { exists = inspiration }
+				}
+				random = {
+					chance = {
+						value = 0
+						add = {
+							value = book_inspiration_average_skill_value
+							if = {
+								limit = {
+									has_trait = lazy
+								}
+								multiply = 0.5
+							}
+							if = {
+								limit = {
+									root = {
+										any_courtier = {
+											exists = inspiration
+										}
+									}
+								}
+								multiply = 0.5
+							}
+						}
+					}
+					create_inspiration = book_inspiration
+					save_scope_as = inspired_follower
+					root = {
+						send_interface_message = {
+							type = send_interface_message_good
+							title = adventurers_gather_inspiration_option.title
+							left_icon = scope:inspired_follower
+							scope:inspired_follower = {
+								custom_tooltip = {
+									text = adventurers_gather_inspiration_option.effect
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		# AI Adventurer contract logic setup
+		if = {
+			limit = {
+				ep3_adventurer_ai_logic_valid_trigger = yes
+				NOT = { owns_story_of_type = story_adventurer_ai }
+			}
+			create_story = { type = story_adventurer_ai }
+		}
+		if = { # If a player adventurer manages to glitch in place, save them by moving them to the domicile location
+			limit = {
+				is_ai = no
+				has_government = landless_adventurer_government
+				location != domicile.domicile_location
+				is_imprisoned = no
+				is_travelling = no
+				NOT = {
+					exists = involved_activity
+				}
+				num_taken_task_contracts <= 0
+				is_commanding_army = no
+			}
+			set_location_to_default = yes
+		}
+		if = { # If courtiers get lost between governorship assignments, move them home
+			limit = {
+				government_allows = merit
+			}
+			if = {
+				limit = {
+					is_landed = yes
+				}
+				every_courtier = {
+					limit = {
+						location != root.capital_province
+						is_imprisoned = no
+						is_travelling = no
+						is_commanding_army = no
+						NOR = {
+							exists = involved_activity
+							exists = knight_army
+						}
+					}
+					set_location_to_default = yes
+				}
+			}
+			else_if = {
+				limit = {
+					exists = domicile.domicile_location
+				}
+				every_courtier = {
+					limit = {
+						location != root.domicile.domicile_location
+						is_imprisoned = no
+						is_travelling = no
+						is_commanding_army = no
+						NOR = {
+							exists = involved_activity
+							exists = knight_army
+						}
+					}
+					set_location_to_default = yes
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					top_liege ?= {
+						is_confederation_member = yes
+					}
+				}
+				has_character_modifier = mpo_confederation_member_modifier
+			}
+			remove_character_modifier = mpo_confederation_member_modifier
+		}
+		# Stray player Herders get turned into Nomads
+		if = {
+			limit = {
+				is_ai = no
+				government_has_flag = government_is_herder
+			}
+			every_held_title = {
+				limit = {
+					tier = tier_county
+					title_province = {
+						has_holding_type = herder_holding
+					}
+				}
+				title_province = {
+					set_holding_type = nomad_holding
+				}
+			}
+			change_government = nomad_government
+		}
+
+		######################
+		# Various safeguarding against realm setups with landless participants
+		######################
+		if = {
+			limit = {
+				is_landed = no
+			}
+
+			save_scope_as = scoped_ruler
+
+			######################
+			# Fix Adventurers that end up with a Liege or Noble Family title
+			######################
+
+			if = {
+				limit = {
+					government_has_flag = government_is_landless_adventurer
+				}
+				if = {
+					limit = {
+						this != top_liege
+					}
+					create_title_and_vassal_change = {
+						type = independency
+						save_scope_as = change
+						add_claim_on_loss = no
+					}
+					scope:scoped_ruler = {
+						becomes_independent = { change = scope:change }
+					}
+					resolve_title_and_vassal_change = scope:change
+				}
+				if = {
+					limit = {
+						any_held_title = {
+							is_noble_family_title = yes
+						}
+					}
+					every_held_title = {
+						limit = {
+							is_noble_family_title = yes
+						}
+						scope:scoped_ruler = {
+							destroy_title = prev
+						}
+					}
+				}
+			}
+
+			######################
+			# Repair realms with Landless participants having vassals
+			######################
+
+			if = {
+				limit = {
+					any_sub_realm_county = {
+						is_landless_type_title = no
+					}
+				}
+
+				######################
+				# Landless Lieges with Landed Vassals should take a County from a Vassal
+				######################
+
+				if = {
+					limit = { # Make sure we repair realms in the right order
+						OR = {
+							this = top_liege
+							liege ?= {
+								is_landed = yes
+							}
+						}
+					}
+					create_title_and_vassal_change = {
+						type = revoked
+						save_scope_as = change
+					}
+					random_sub_realm_county = {
+						limit = {
+							is_landless_type_title = no
+						}
+						weight = {
+							modifier = {
+								add = 100
+								this = scope:scoped_ruler.primary_title.title_capital_county
+							}
+							modifier = {
+								add = -100
+								holder = {
+									is_ai = no
+								}
+							}
+						}
+						change_title_holder = {
+							holder = scope:scoped_ruler
+							change = scope:change
+						}
+					}
+					resolve_title_and_vassal_change = scope:change
+
+					######################
+					# Landless vassals with Landed vassals should take something and become landed
+					######################
+
+					every_vassal = {
+						limit = {
+							is_landed = no
+							any_sub_realm_county = {
+								is_landless_type_title = no
+							}
+						}
+						save_scope_as = vassal_ruler
+						create_title_and_vassal_change = {
+							type = revoked
+							save_scope_as = change
+						}
+						random_sub_realm_county = {
+							limit = {
+								is_landless_type_title = no
+							}
+							weight = {
+								modifier = {
+									add = 100
+									this = scope:vassal_ruler.primary_title.title_capital_county
+								}
+								modifier = {
+									add = -100
+									holder = {
+										is_ai = no
+									}
+								}
+							}
+							change_title_holder = {
+								holder = scope:vassal_ruler
+								change = scope:change
+							}
+						}
+						resolve_title_and_vassal_change = scope:change
+					}
+				}
+			}
+
+			######################
+			# Destroy the AI's landless nomad vassals, as they'll just bloat the game for no gain
+			######################
+
+			else_if = {
+				limit = {
+					is_ai = yes
+					top_liege != this
+					government_has_flag = government_is_nomadic
+					is_landed = no
+					liege = { is_ai = yes }
+				}
+				every_held_title = {
+					limit = {
+						is_nomad_title = yes
+					}
+					scope:scoped_ruler = {
+						destroy_title = prev
+					}
+				}
+			}
+			# Players become independent so they can migrate
+			else_if = {
+				limit = {
+					is_ai = no
+					top_liege != this
+					government_has_flag = government_is_nomadic
+					is_landed = no
+					liege = { is_ai = yes }
+				}
+				create_title_and_vassal_change = {
+					type = independency
+					save_scope_as = change
+					add_claim_on_loss = no
+				}
+				becomes_independent = { change = scope:change }
+				resolve_title_and_vassal_change = scope:change
+			}
+
+			######################
+			# AI's with a Nomadic Camp title that somehow end up with the wrong government and landless should be purged
+			######################
+
+			if = {
+				limit = {
+					NOT = { government_has_flag = government_is_nomadic }
+					NOT = { government_has_flag = government_is_rd_han_military }
+					any_held_title = {
+						is_nomad_title = yes
+					}
+				}
+				save_scope_as = scoped_ruler
+				if = {
+					limit = {
+						is_ai = yes
+					}
+					every_held_title = {
+						limit = {
+							is_nomad_title = yes
+						}
+						scope:scoped_ruler = {
+							destroy_title = prev
+						}
+					}
+				}
+				# Players are saved
+				else_if = {
+					limit = {
+						is_ai = no
+					}
+					change_government = nomad_government
+				}
+			}
+
+			######################
+			# Landless nomads outside any migration area? Cleanup.
+			######################
+
+			if = {
+				limit = {
+					is_ai = yes
+					top_liege = this
+					NOT = { government_has_flag = government_is_rd_han_military }
+					NOT = {
+						any_character_situation = {
+							any_participant_group = {
+								participant_group_type = nomad_rulers_capital
+								participant_group_has_character = scope:scoped_ruler
+							}
+						}
+					}
+					any_held_title = {
+						is_nomad_title = yes
+					}
+				}
+				every_held_title = {
+					limit = {
+						is_nomad_title = yes
+					}
+					scope:scoped_ruler = {
+						destroy_title = prev
+					}
+				}
+			}
+		}
+
+		# ACH AI vibe checks
+		if = {
+			limit = {
+				has_realm_law = uncrowned
+				is_ai = yes
+			}
+			# Why are you like this, get rid of the crowned variables
+			if = {
+				limit = {
+					has_variable = crowned_king_var
+				}
+				remove_variable = crowned_king_var
+			}
+			else_if = {
+				limit = {
+					has_variable = crowned_emperor_var
+				}
+				remove_variable = crowned_emperor_var
+			}
+			#Try removing them from their army to make them available
+			if = {
+				limit = {
+					is_in_army = yes
+					martial <= medium_skill_rating
+					location ?= {
+						any_army_in_location = {
+							is_army_in_combat = no
+						}
+					}
+					NOR = {
+						any_war_enemy = {
+							is_ai = no
+						}
+						any_war_ally = {
+							is_ai = no
+						}
+					}
+				}
+				location = {
+					random_army_in_location = {
+						limit = {
+							army_commander = root
+						}
+						remove_commander = yes
+					}
+				}
+			}
+			#Do you need an artifact?
+			if = {
+				limit = {
+					can_host_activity = activity_coronation
+					coronation_has_proper_artifact_trigger = no
+				}
+				random = {
+					chance = coronation_artifact_ai_instant_creation_chance
+					coronation_create_artifact_yearly_effect = yes
+				}
+			}
+
+			#If you need to be anointed...
+			#First step is being un-excommunicated
+			if = {
+				limit = {
+					highest_held_title_tier >= tier_empire
+					has_trait = excommunicated
+					faith = {
+						has_doctrine = doctrine_spiritual_head
+						has_doctrine = doctrine_imperial_anointment
+					}
+					custom_tooltip = {
+						text = anointment_request_already_supported
+						NOT = {
+							is_target_in_variable_list = {
+								name = supported_anointments
+								target = scope:actor
+							}
+						}
+					}
+					is_character_interaction_valid = {
+						recipient = faith.religious_head
+						interaction = declaration_of_repentance_interaction
+					}
+				}
+				run_interaction = {
+					interaction = declaration_of_repentance_interaction
+					actor = this
+					recipient = faith.religious_head
+					execute_threshold = maybe
+				}
+			}
+			#Next step is getting approval
+			else_if = {
+				limit = {
+					exists = faith.religious_head
+					is_character_interaction_valid = {
+						recipient = faith.religious_head
+						interaction = coronation_anointment_request
+					}
+					faith = {
+						has_doctrine = doctrine_spiritual_head
+						has_doctrine = doctrine_imperial_anointment
+					}
+				}
+				run_interaction = {
+					interaction = coronation_anointment_request
+					actor = this
+					recipient = faith.religious_head
+					execute_threshold = maybe
+				}
+			}
+			#Next step is hosting the dang coronation
+			else = {
+				ai_attempt_to_host_activity = activity_coronation
+				debug_log = "AI attempted to host a coronation"
+				debug_log_scopes = yes
+			}
+		}
+	}
+	events = {
+		court_maintenance.0012 # Dynasty banner improves with renown
+		court_maintenance.0013 # Remove duplicate dynasty banners
+	}
+	on_actions = {
+		ai_character_pulse
+		delay = { days = 75 }
+
+		pagan_conversion_pulse
+	}
+}
+
+# Called from code once every three years for "playable" (count+) characters.
+# Root is the character
+three_year_playable_pulse = {
+	events = {
+		adultery.0001 #Suspected spouse/soulmate of cheating (increased chance when there is a lover, but can also trigger otherwise)
+	}
+	random_events = {
+		800 = 0
+		200 = global_culture.3011
+		600 = global_culture.3012
+	}
+	effect = {
+		if = { # Nomadic herd starves if you're landless
+			limit = {
+				is_landed = no
+				government_has_flag = government_is_nomadic
+				exists = domicile
+				is_migrating = no
+				is_at_war = no
+			}
+			if = {
+				limit = {
+					domicile.herd > 500
+				}
+				change_current_weight = -25
+				every_courtier = {
+					change_current_weight = -25
+				}
+				send_interface_toast = {
+					type = event_toast_effect_bad
+					title = herd_starvation_title
+					left_icon = root
+					custom_tooltip = herd_starvation_custom_tooltip
+					domicile ?= {
+						change_herd = {
+							value = root.domicile.herd
+							divide = 3
+							min = 500
+							if = {
+								limit = {
+									root = { is_ai = yes }
+								}
+								min = 1000
+							}
+							multiply = -1
+						}
+					}
+				}
+			}
+			clean_up_ai_nomad_effect = yes
+		}
+		if = { # Various nomadic safeguards
+			limit = {
+				is_landed = yes
+				NOT = { government_has_flag = government_is_rd_han_military }
+				NOR = {
+					government_has_flag = government_is_nomadic
+					government_has_flag = government_is_herder
+				}
+			}
+
+			save_scope_as = scoped_ruler
+
+			######################
+			# Nomadic titles that end up with non-nomadic holders are destroyed
+			######################
+			if = {
+				limit = {
+					any_held_title = {
+						is_nomad_title = yes
+					}
+				}
+				every_held_title = {
+					limit = {
+						is_nomad_title = yes
+					}
+					scope:scoped_ruler = {
+						destroy_title = prev
+					}
+				}
+			}
+
+			######################
+			# Anyone who *only* holds Nomadic lands should become Nomadic
+			######################
+
+			if = {
+				limit = {
+					highest_held_title_tier >= tier_county
+					capital_province = {
+						OR = {
+							has_holding_type = nomad_holding
+							has_holding_type = herder_holding
+						}
+					}
+					NOT = {
+						any_held_title = {
+							tier = tier_county
+							is_landless_type_title = no
+							title_province = {
+								NOR = {
+									has_holding_type = nomad_holding
+									has_holding_type = herder_holding
+								}
+							}
+						}
+					}
+				}
+				every_held_title = {
+					limit = {
+						tier = tier_county
+						title_province = {
+							has_holding_type = herder_holding
+						}
+					}
+					title_province = {
+						set_holding_type = nomad_holding
+					}
+				}
+				change_government = nomad_government
+
+				# We don't want overly-funky nomad camps to spring up, so set an appropriate culture/faith
+				if = {
+					limit = {
+						domicile.domicile_culture != capital_county.culture
+					}
+					domicile = {
+						set_domicile_culture = scope:scoped_ruler.capital_county.culture
+					}
+				}
+				if = {
+					limit = {
+						domicile.domicile_faith != capital_county.faith
+					}
+					domicile = {
+						set_domicile_faith = scope:scoped_ruler.capital_county.faith
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				government_has_flag = government_is_nomadic
+				is_ruler = yes
+			}
+
+			save_scope_as = scoped_ruler
+
+			######################
+			# If you end up losing your Nomadic Capital, get a new one
+			######################
+
+			if = {
+				limit = {
+					NOT = {
+						any_held_title = {
+							is_nomad_title = yes
+						}
+					}
+				}
+				create_nomad_title = {
+					name = nomad_title_name
+					holder = scope:scoped_ruler
+					government = nomad_government
+					save_scope_as = new_nomad_title
+				}
+				domicile ?= {
+					add_domicile_building = yurt_main_02
+					add_domicile_building = yurt_main_03
+					add_random_yurt_external_building_effect = yes
+					add_random_yurt_external_building_effect = yes
+					upgrade_random_yurt_external_building_effect = yes
+					upgrade_random_yurt_external_building_effect = yes
+				}
+			}
+
+			######################
+			# If your nomadic capital domicile somehow gets lost, move it to your capital province
+			######################
+
+			if = {
+				limit = {
+					is_at_war = no
+					exists = domicile
+					domicile.domicile_location != capital_province
+				}
+				domicile = { move_domicile = scope:scoped_ruler.capital_province }
+			}
+		}
+		if = { # Inspirations for courtiers of Advancement Movement rulers
+			limit = {
+				has_dlc_feature = all_under_heaven
+				top_participant_group:dynastic_cycle ?= {
+					participant_group_type = advancement_movement
+				}
+				any_courtier_or_guest = {
+					is_physically_able_adult = yes
+					ep1_is_valid_character_for_inspiration_trigger = yes
+					save_temporary_scope_as = inspired_courtier
+				}
+			}
+			grant_inspiration_to_character_no_court_artifacts_effect = {
+				CHARACTER = scope:inspired_courtier
+			}
+			send_interface_toast = {
+				type = msg_court_inspiration
+				left_icon = scope:inspired_courtier
+				title = courtier_inspired_message
+				desc = courtier_inspired_effect
+			}
+		}
+	}
+}
+
+dynastic_cycle_yearly_pulse = {
+	effect = {
+		if = {
+			limit = {
+				situation_current_phase = situation_dynastic_cycle_phase_chaos
+				any_situation_participant = {
+					is_valid_for_legitimacy_change = yes
+				}
+			}
+			every_situation_participant = {
+				limit = {
+					is_valid_for_legitimacy_change = yes
+				}
+				# for holding the chinese capital
+				if = {
+					limit = {
+						has_title = title:h_china.title_capital_county
+					}
+					add_legitimacy = 1
+				}
+				# for holding any kingdom or higher tier title
+				every_held_title = {
+					limit = {
+						hegemony = title:h_china
+						tier >= tier_kingdom
+					}
+					prev = {
+						add_legitimacy = prev.tier
+					}
+				}
+				# for having meritorious court positions
+				if = {
+					limit = {
+						any_court_position_holder = {
+							percent >= 0.5
+							merit_level >= 6
+						}
+					}
+					add_legitimacy = 1
+				}
+				# for having meritorious councilors
+				if = {
+					limit = {
+						any_councillor = {
+							percent >= 0.5
+							merit_level >= 6
+						}
+					}
+					add_legitimacy = 1
+				}
+				# for having meritorious governors
+				if = {
+					limit = {
+						any_vassal = {
+							percent >= 0.5
+							is_governor = yes
+							merit_level >= 6
+						}
+					}
+					add_legitimacy = 1
+				}
+			}
+		}
+		# Based on which movement is in power
+		if = {
+			limit = {
+				situation_top_has_catalyst = catalyst_expansion_movement_yearly
+				is_movement_in_power = { MOVEMENT = expansion_movement }
+				tgp_dynastic_cycle_yearly_drift_blocked_trigger = yes
+			}
+			trigger_situation_catalyst = catalyst_expansion_movement_yearly
+		}
+		if = {
+			limit = {
+				situation_top_has_catalyst = catalyst_advancement_movement_yearly
+				is_movement_in_power = { MOVEMENT = advancement_movement }
+				tgp_dynastic_cycle_yearly_drift_blocked_trigger = yes
+			}
+			trigger_situation_catalyst = catalyst_advancement_movement_yearly
+		}
+		if = {
+			limit = {
+				situation_top_has_catalyst = catalyst_conservative_movement_yearly
+				is_movement_in_power = { MOVEMENT = conservative_movement }
+				tgp_dynastic_cycle_yearly_drift_blocked_trigger = yes
+			}
+			trigger_situation_catalyst = catalyst_conservative_movement_yearly
+		}
+		if = {
+			limit = {
+				situation_top_has_catalyst = catalyst_pro_hegemon_movement_advancement_yearly
+				is_movement_in_power = { MOVEMENT = pro_hegemon_movement }
+				tgp_dynastic_cycle_yearly_drift_blocked_trigger = yes
+				hegemon_favors_advancement_trigger = yes
+			}
+			trigger_situation_catalyst = catalyst_pro_hegemon_movement_advancement_yearly
+		}
+		if = {
+			limit = {
+				situation_top_has_catalyst = catalyst_pro_hegemon_movement_expansion_yearly
+				is_movement_in_power = { MOVEMENT = pro_hegemon_movement }
+				tgp_dynastic_cycle_yearly_drift_blocked_trigger = yes
+				hegemon_favors_expansion_trigger = yes
+			}
+			trigger_situation_catalyst = catalyst_pro_hegemon_movement_expansion_yearly
+		}
+		# Update years since imperial examination counter
+		title:h_china = {
+			save_scope_as = hegemon_title
+			if = {
+				limit = { exists = holder }
+				if = {
+					limit = { exists = var:years_since_imperial_examination }
+					change_variable = {
+						name = years_since_imperial_examination
+						add = 1
+					}
+				}
+				else = {
+					set_variable = {
+						name = years_since_imperial_examination
+						value = 0
+					}
+				}
+			}
+		}
+		# Hegemon time-based catalysts.
+		if = {
+			limit = { exists = scope:hegemon_title.holder }
+			scope:hegemon_title.holder = { save_scope_as = hegemon }
+			# STABILITY
+			### MaA size
+			if = {
+				limit = {
+					situation_top_has_catalyst = catalyst_hegemon_above_maa_limit_yearly
+					scope:hegemon.maa_regiments_count > scope:hegemon.maa_regiments_max_count
+				}
+				trigger_situation_catalyst = catalyst_hegemon_above_maa_limit_yearly
+			}
+			else_if = {
+				limit = {
+					situation_top_has_catalyst = catalyst_hegemon_below_maa_limit_yearly
+					scope:hegemon.maa_regiments_count < scope:hegemon.maa_regiments_max_count
+				}
+				trigger_situation_catalyst = catalyst_hegemon_below_maa_limit_yearly
+			}
+			# CORRUPTION
+			### Natural Disasters
+			if = {
+				limit = {
+					situation_top_has_catalyst = catalyst_hegemon_natural_disaster
+				}
+				scope:hegemon = {
+					every_character_situation = {
+						limit = {
+							OR = {
+								situation_type = natural_disaster_earthquake
+								situation_type = natural_disaster_flood
+							}
+						}
+						situation:dynastic_cycle = {
+							trigger_situation_catalyst = catalyst_hegemon_natural_disaster
+						}
+					}
+				}
+			}
+			### Legitimacy/Mandate of Heaven
+			# Move towards Instability if you are below legitimacy expectations
+			if = {
+				limit = {
+					situation_top_has_catalyst = catalyst_hegemon_below_legitimacy_yearly
+					scope:hegemon = {
+						legitimacy_level < dynastic_cycle_legitimacy_expectation
+					}
+				}
+				trigger_situation_catalyst = catalyst_hegemon_below_legitimacy_yearly
+			}
+			# Move towards Instability if you still have no legitimacy
+			if = {
+				limit = {
+					situation_top_has_catalyst = catalyst_hegemon_mandate_of_heaven_at_0
+					scope:hegemon.legitimacy_level < 1
+				}
+				trigger_situation_catalyst = {
+					catalyst = catalyst_hegemon_mandate_of_heaven_at_0
+					character = scope:hegemon
+				}
+			}
+			# Move towards Stability if you meet legitimacy expectations
+			if = {
+				limit = {
+					situation_top_has_catalyst = catalyst_hegemon_above_legitimacy_yearly
+					scope:hegemon = {
+						legitimacy_level >= dynastic_cycle_legitimacy_expectation
+					}
+					situation:dynastic_cycle ?= {
+						trigger_if = {
+							limit = {
+								OR = {
+									situation_current_phase = situation_dynastic_cycle_phase_stability_advancement
+									situation_current_phase = situation_dynastic_cycle_phase_stability_expansion
+								}
+							}
+							situation_top_sub_region = {
+								phase_takeover_points:situation_dynastic_cycle_phase_instability >= 0
+							}
+						}
+						trigger_else_if = {
+							limit = {
+								OR = {
+									situation_current_phase = situation_dynastic_cycle_phase_instability_conquest
+									situation_current_phase = situation_dynastic_cycle_phase_instability
+								}
+							}
+							situation_top_sub_region = {
+								phase_takeover_points:situation_dynastic_cycle_phase_chaos >= 0
+							}
+						}
+						trigger_else = {
+							always = yes
+						}
+					}
+				}
+				trigger_situation_catalyst = catalyst_hegemon_above_legitimacy_yearly
+			}
+			### Hegemon holds FAR too few de jure lands (similar to loss of mandate)
+			if = {
+				limit = {
+					situation_top_has_catalyst = catalyst_hegemony_far_too_few_lands
+					scope:hegemon_title = {
+						holder = {
+						has_government = rd_celestial_empire_government
+						
+						}
+						any_de_jure_county = {
+							percent < catalyst_hegemony_far_too_few_lands_value
+							holder.top_liege = scope:hegemon
+						}
+					}
+				}
+				trigger_situation_catalyst = catalyst_hegemony_far_too_few_lands
+			}
+			### Hegemon holds too few de jure lands
+			if = {
+				limit = {
+					situation_top_has_catalyst = catalyst_hegemony_too_few_lands
+					scope:hegemon_title = {
+						holder = {
+						has_government = rd_celestial_empire_government
+						
+						}
+						any_de_jure_county = {
+							percent < catalyst_hegemony_too_few_lands_value
+							holder.top_liege = scope:hegemon
+						}
+					}
+				}
+				trigger_situation_catalyst = catalyst_hegemony_too_few_lands
+			}
+			### Examinations
+			if = {
+				limit = {
+					situation_top_has_catalyst = catalyst_imperial_examinations_gap_short_yearly
+					years_from_game_start >= 6
+					exists = scope:hegemon_title.var:years_since_imperial_examination
+					scope:hegemon_title.var:years_since_imperial_examination >= catalyst_imperial_examinations_gap_short_yearly_value
+				}
+				trigger_situation_catalyst = catalyst_imperial_examinations_gap_short_yearly
+			}
+			if = {
+				limit = {
+					situation_top_has_catalyst = catalyst_imperial_examinations_gap_long_yearly
+					years_from_game_start >= 6
+					exists = scope:hegemon_title.var:years_since_imperial_examination
+					scope:hegemon_title.var:years_since_imperial_examination >= catalyst_imperial_examinations_gap_long_yearly_value
+				}
+				trigger_situation_catalyst = catalyst_imperial_examinations_gap_long_yearly
+			}
+			### Treasury
+			if = {
+				limit = {
+					situation_top_has_catalyst = catalyst_imperial_treasury_debt
+					scope:hegemon = { treasury < 0 }
+				}
+				trigger_situation_catalyst = catalyst_imperial_treasury_debt
+			}
+		}
+	}
+}
