@@ -1049,7 +1049,10 @@ rd_unite_the_western_han_decision = { #重建西域都护府
 
 	is_shown = {
 		custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}
+				title:e_rdwestchina = {
+is_title_created = no
 		
+		}
 		NOT = {
 			is_target_in_global_variable_list = {
 				name = unavailable_unique_decisions
