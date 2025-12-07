@@ -750,7 +750,7 @@ tgp_claim_mandate_of_heaven_effect = {
 					}
 				}
 			}
-			change_to_administrative_effect = yes
+			rd_backup_change_to_administrative_effect = yes
 			# Give characters some merit and exams based on their position
 			change_merit = {
 				value = assign_merit_based_on_tier_value
@@ -802,7 +802,7 @@ tgp_claim_mandate_of_heaven_effect = {
 		}
 		resolve_title_and_vassal_change = scope:mandate_vassalize_celestial_families_change
 		# Ensure that we get a family title and a domicile if we don't
-		change_to_administrative_effect = yes
+		rd_backup_change_to_administrative_effect = yes
 		# Make sure ministers are assigned correctly
 		fill_the_ministry_effect = yes
 	}
@@ -1302,7 +1302,7 @@ tgp_chaos_shattering_effect = {
 	}
 }
 
-change_to_administrative_effect = {
+rd_backup_change_to_administrative_effect = {
 	save_scope_as = governor
 	top_liege = { save_scope_as = governor_liege }
 	if = {

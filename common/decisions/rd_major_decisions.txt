@@ -1110,32 +1110,38 @@ is_title_created = no
 		set_de_jure_liege_title = title:e_rdwestchina
 		
 		}
-		every_held_title = { #Completely Controlled Kingdoms as well.
+		if = {
 			limit = {
-				tier = tier_kingdom
-				
-					NOR = {
-							target_is_de_jure_liege_or_above = title:e_rdwestchina_emp
-							target_is_de_jure_liege_or_above = title:e_rdsouthchina
-							target_is_de_jure_liege_or_above = title:e_rdnorthchina
-							target_is_de_jure_liege_or_above = title:e_rdeastchina
-							target_is_de_jure_liege_or_above = title:e_china
-							target_is_de_jure_liege_or_above = title:h_rdwestchina
-							target_is_de_jure_liege_or_above = title:h_rdsouthchina
-							target_is_de_jure_liege_or_above = title:h_rdnorthchina
-							target_is_de_jure_liege_or_above = title:h_rdeastchina
-							target_is_de_jure_liege_or_above = title:h_china
-							target_is_de_jure_liege_or_above = 	title:e_liangyi 
-							target_is_de_jure_liege_or_above = 	 title:e_yongliang
-							target_is_de_jure_liege_or_above =  title:e_zhongyuan 
-							target_is_de_jure_liege_or_above =  title:e_jingyang 
-							target_is_de_jure_liege_or_above = 	title:e_lingnan
-							target_is_de_jure_liege_or_above = title:e_tibet
-					}
-				root = { completely_controls = prev }
+				NOT = { has_title = title:h_china}
 			}
-			set_de_jure_liege_title = title:e_rdwestchina
+			every_held_title = { #Completely Controlled Kingdoms as well.
+				limit = {
+					tier = tier_kingdom
+					
+						NOR = {
+								target_is_de_jure_liege_or_above = title:e_rdwestchina_emp
+								target_is_de_jure_liege_or_above = title:e_rdsouthchina
+								target_is_de_jure_liege_or_above = title:e_rdnorthchina
+								target_is_de_jure_liege_or_above = title:e_rdeastchina
+								target_is_de_jure_liege_or_above = title:e_china
+								target_is_de_jure_liege_or_above = title:h_rdwestchina
+								target_is_de_jure_liege_or_above = title:h_rdsouthchina
+								target_is_de_jure_liege_or_above = title:h_rdnorthchina
+								target_is_de_jure_liege_or_above = title:h_rdeastchina
+								target_is_de_jure_liege_or_above = title:h_china
+								target_is_de_jure_liege_or_above = 	title:e_liangyi 
+								target_is_de_jure_liege_or_above = 	 title:e_yongliang
+								target_is_de_jure_liege_or_above =  title:e_zhongyuan 
+								target_is_de_jure_liege_or_above =  title:e_jingyang 
+								target_is_de_jure_liege_or_above = 	title:e_lingnan
+								target_is_de_jure_liege_or_above = title:e_tibet
+						}
+					root = { completely_controls = prev }
+				}
+				set_de_jure_liege_title = title:e_rdwestchina
+			}
 		}
+
 		create_title_and_vassal_change = {
 			type = created
 			save_scope_as = change
