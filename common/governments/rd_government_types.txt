@@ -161,6 +161,7 @@ rd_han_military_government = {
 	 		government_uses_domicile_but_not_adventurer
 			 government_has_rd_governor_officials
 			 government_has_merit
+		# government_rd_han_mil_herd
 	
 	}
 	# These flags only exist for loc and in-game descriptions

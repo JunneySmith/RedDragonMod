@@ -8,7 +8,7 @@
  DIVERGE_NAME_FORMAT_2:0 "新[CULTURE.GetNameNoTooltip]"
  DIVERGE_COLLECTIVE_NOUN_FORMAT_2:0 "新[CULTURE.GetCollectiveNounNoTooltip]"
  DIVERGE_PREFIX_FORMAT_2:0 "新[CULTURE.GetPrefixNoTooltip]"
-
+realm_flag_rd_han_mil_herd: "牧群规模：[herd_i]#V [Character.GetHerdAndRaisedHorde|0]#!"
  dynastic_cycle_participant_group_other_rulers: "群雄"
  dynastic_cycle_participant_group_other_rulers_desc: "所有处于[GetSituation('dynastic_cycle').GetTopSubRegion.GetName]内的华夏文化[independent_rulers|E]"
  dynastic_cycle_participant_group_rd_foreign_rulers: "搅局者"

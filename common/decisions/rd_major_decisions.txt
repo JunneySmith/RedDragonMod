@@ -93,12 +93,6 @@ rd_crush_the_rubo_land_decision = {
 		has_title = title:e_tibet
 		prestige >= 5000
 		gold >= 1000
-		OR = {
-		has_title = title:e_rdwestchina
-		has_title = title:e_liangyi
-		has_title = title:e_china
-		has_title = title:h_china
-		}
 	}
 	cost = {
 		piety = {
@@ -108,49 +102,184 @@ rd_crush_the_rubo_land_decision = {
 			value = massive_gold_value
 		}
 	}
-	effect = {
-	custom_tooltip = rd_crush_the_rubo_land_decision_tooltip
-	if = {
-		limit = {
-					is_target_in_global_variable_list = {
-				name = unavailable_unique_decisions
-				target = flag:rd_new_huaxia_combined_united_decision
+	
+	widget = {
+		gui = "decision_view_widget_generic_multichoice_with_effects"
+		controller = decision_option_list_controller
+		decision_to_second_step_button = "SELECT_ACTION"
+		show_from_start = yes
+
+		item = { # 王畿直辖
+			value = rd_china_assimilation
+			is_valid = {
+				has_title = title:e_china
+				has_title = title:h_china
+				}
+			current_description = rd_china_assimilation_desc
+			localization = rd_china_assimilation_name
+			icon = "gfx/interface/icons/government_types/celestial_government.dds"
+			ai_chance = {
+				value = 10
 			}
 		}
-		title:e_tibet = {
-		every_in_de_jure_hierarchy = {
+		item = { # 行台流官
+			value = rd_china_burr
+			is_valid = {
+				has_title = title:e_tibet
+			}
+			current_description = rd_china_burr_desc
+			localization = rd_china_burr_name
+			icon = "gfx/interface/icons/government_types/administrative_government.dds"
+			ai_chance = {
+				value = 100
+			}
+		}
+		item = { # 西南总督
+			value = rd_china_liangyi
+			is_valid = {
+			custom_description = { text = rd_china_xinan_tooltip
+								NOT = {
+						is_target_in_global_variable_list = {
+							name = unavailable_unique_decisions
+							target = flag:rd_new_huaxia_combined_united_decision
+						}
+					}
+					
+					}
+
+					OR = {
+						has_title = title:h_china
+						has_title = title:e_liangyi
+					}
+
+			}
+			current_description = rd_china_liangyi_desc
+			localization = rd_china_liangyi_name
+			icon = "gfx/interface/icons/government_types/meritocratic_government.dds"
+			ai_chance = {
+				value = 50
+			}
+		}
+		item = { # 都护府方案
+			value = rd_china_duhu
+			is_valid = {
+				has_title = title:e_rdwestchina
+
+			}
+			current_description = rd_china_duhu_desc
+			localization = rd_china_duhu_name
+			icon = "gfx/interface/icons/government_types/government_type_holy_order.dds"
+			ai_chance = {
+				value = 50
+			}
+		}
+	}
+
+	
+	effect = {
+		
+			if = {
+			limit = {
+				scope:rd_china_assimilation = yes
+			}
+			custom_tooltip = rd_china_assimilation_tooltip
+			hidden_effect = {
+						title:e_tibet = {
+				every_in_de_jure_hierarchy = {
+						limit = {
+						tier = tier_kingdom
+
+					}
+
+				set_de_jure_liege_title = title:e_china
+						}
+
+			}
+			}
+				title:e_tibet = {
+				root = { destroy_title = prev }
+
+				}
+		}
+		else_if = {
+			limit = { scope:rd_china_burr = yes }
+				title:d_xining = { set_de_jure_liege_title = title:k_hexi } #西宁归河西
+				title:e_tibet = { set_de_jure_liege_title = title:h_china } # 西藏帝国头衔归属至中华（h_china）
+				title:e_tibet = { root = { destroy_title = prev } } # 销毁西藏帝国头衔
+		}
+		else_if = {
+			limit = { scope:rd_china_liangyi = yes }
+				custom_tooltip = rd_china_liangyi_tooltip
+			hidden_effect = {
+			title:d_conyi = { set_de_jure_liege_title = title:k_amdo } #错尼归安多
+			title:d_malho = { set_de_jure_liege_title = title:k_amdo } #玛洛归安多
+			title:d_golog = { set_de_jure_liege_title = title:k_amdo } #果洛归安多
+			title:d_chakla = { set_de_jure_liege_title = title:k_kham } #甲拉归康
+			title:d_dzayul = { set_de_jure_liege_title = title:k_kham } #察隅归康
+			title:d_nyingchi = { set_de_jure_liege_title = title:k_u } #尼池归卫
+		
+			
+			title:e_tibet = {
+			every_in_de_jure_hierarchy = {
 				limit = {
 				tier = tier_kingdom
 
 			}
-	
-set_de_jure_liege_title = title:e_china
-				}
-		
-	}
-	}
-	else = {
-			title:e_tibet = {
-		every_in_de_jure_hierarchy = {
-				limit = {
-				tier = tier_kingdom
+
+				set_de_jure_liege_title = title:e_liangyi
+			}
 
 			}
-	
-set_de_jure_liege_title = title:e_liangyi
-				}
-		
-	}
-	
-	}
+			}
 			title:e_tibet = {
-	root = { destroy_title = prev }
+				root = { destroy_title = prev }
+
+			}
+		}
+				else_if = {
+			limit = { scope:rd_china_duhu = yes }
+			custom_tooltip = rd_china_duhu_tooltip
+			#hidden_effect = {
+				if = { # 已整合天子王畿，是西域都护
+					limit = {
+					is_target_in_global_variable_list = {
+					name = unavailable_unique_decisions
+					target = flag:rd_new_huaxia_combined_united_decision
+					}
+					has_title = title:e_rdwestchina
+					}
+					
+					title:d_aksay = { set_de_jure_liege_title = title:k_hexi } #阿克赛归河西
+					title:c_ziting = { set_de_jure_liege_title = title:d_aksay } #紫亭划给阿克赛
+					title:d_xining = { set_de_jure_liege_title = title:k_hexi } #西宁归河西
+					title:k_gyalrong = { set_de_jure_liege_title = title:e_china } #良嘉归王畿（）
+					}
+							else_if = { # 西域都护触发
+					limit = {
+					NOT = {
+					is_target_in_global_variable_list = {
+					name = unavailable_unique_decisions
+					target = flag:rd_new_huaxia_combined_united_decision
+					}
+					}
+					has_title = title:e_rdwestchina
+					}
+					title:e_tibet = { set_de_jure_liege_title = title:h_china } # 西藏帝国头衔归属至中华（h_china）
+					title:d_aksay = { set_de_jure_liege_title = title:k_hexi } #阿克赛归河西
+					title:c_ziting = { set_de_jure_liege_title = title:d_aksay } #紫亭划给阿克赛
+					title:d_gainlho = { set_de_jure_liege_title = title:k_hexi } #甘洛归河西
+					title:d_xining = { set_de_jure_liege_title = title:k_hexi } #西宁归河西
+				}
+			#}
+				
+		}
 	
-	}
+
 			add_to_global_variable_list = {
 			name = unavailable_unique_decisions
 			target = flag:rd_unite_the_western_han_decision_tib
 		}
+		
 	}
 	
 

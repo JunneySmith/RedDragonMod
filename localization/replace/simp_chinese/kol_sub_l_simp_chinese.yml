@@ -47,13 +47,23 @@ rd_han_administrative_government_with_icon: "@government_type_feudal!$rd_han_adm
 rd_han_administrative_government_adjective: "郡国制"
 rd_han_administrative_government_realm: "高等行政领地"
 rd_han_administrative_government_vassals_label: "封建[obligations|E]基于每个[vassal|E]的[vassal_contract|E]，[celestial|E][obligations|E]取决于[GetPlayer.Custom('GetProvinceAdministrationConcept')]"
-
-
+rd_china_assimilation_tooltip: "所有王国将成为王畿的法理王国"
+rd_china_liangyi_tooltip: "以西南行台主导高原行政，所有法理王国将并入梁益帝国。"
+rd_china_duhu_tooltip: "西域都护府承担了大部分的作战和善后工作，大都护可以将一些地区并入自己的法理王国。"
 rd_han_administrative_government_xianneng_decision: "建立贤能行政制"
 rd_han_administrative_government_xianneng_decision_desc: "贤能制是一种由高度发达农业、商业社会衍生出来的流官统治制度，取士准则、央地分权决定着该制度施政的成败。"
 rd_han_administrative_government_xianneng_decision_confirm: "选贤任能，废经术造士。"
 rd_han_administrative_government_xianneng_decision_tooltip: "建立贤能行政制。"
-
+rd_china_xinan_tooltip: "未整合中原为王畿"
+rd_china_burr_name: "高原行台"
+rd_china_burr_desc: "保留原行政区划，以行台建制整合入中原行政机构。"
+rd_china_burr_tooltip: "保留原行政区划，以行台建制整合入中原行政机构。"
+rd_china_assimilation_name: "王畿直辖"
+rd_china_assimilation_desc: "所有王国将成为王畿的法理王国。"
+rd_china_liangyi_name: "西南总督"
+rd_china_liangyi_desc: "以西南行台主导高原行政，所有法理王国将并入梁益帝国。"
+rd_china_duhu_name: "大都护府方案"
+rd_china_duhu_desc: "西域都护府承担了大部分的作战和善后工作，大都护可以将一些地区并入自己的法理王国。"
 
 rd_han_chinese_government_decision: "废除品级制"
 rd_han_chinese_government_decision_desc: "品级制对民间人才的入仕有着有着大量不合时宜的限制，应当采用更加完整和高效的官僚制度。"
