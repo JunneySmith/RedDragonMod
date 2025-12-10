@@ -15,10 +15,10 @@
 ### Camp Main Building - Pavilion
 
 ### Supply Tent - Smithing & Provisions
-supply_tent_01 = {
+rd_supply_tent_01 = {
 	internal_slots = 1
 	construction_time = @camp_building_main_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
+	allowed_domicile_types = { rd_mil_camp }
 
 	cost = { gold = supply_tent_01_domicile_building_gold_cost_value }
 	refund = {
@@ -63,10 +63,10 @@ supply_tent_01 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_supply_tent"
 	}
 }
-supply_tent_02 = {
+rd_supply_tent_02 = {
 	construction_time = @camp_building_main_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = supply_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_supply_tent_01
 	internal_slots = 2
 
 	cost = { gold = supply_tent_02_domicile_building_gold_cost_value }
@@ -113,10 +113,10 @@ supply_tent_02 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_supply_tent"
 	}
 }
-supply_tent_03 = {
+rd_supply_tent_03 = {
 	construction_time = @camp_building_main_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = supply_tent_02
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_supply_tent_02
 	internal_slots = 3
 
 	cost = { gold = supply_tent_03_domicile_building_gold_cost_value }
@@ -164,10 +164,10 @@ supply_tent_03 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_supply_tent"
 	}
 }
-supply_tent_04 = {
+rd_supply_tent_04 = {
 	construction_time = @camp_building_main_slot_construction_duration_t4
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = supply_tent_03
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_supply_tent_03
 	internal_slots = 4
 
 	cost = { gold = supply_tent_04_domicile_building_gold_cost_value }
@@ -216,10 +216,10 @@ supply_tent_04 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_supply_tent"
 	}
 }
-supply_tent_05 = {
+rd_supply_tent_05 = {
 	construction_time = @camp_building_main_slot_construction_duration_t5
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = supply_tent_04
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_supply_tent_04
 	internal_slots = 5
 
 	cost = { gold = supply_tent_05_domicile_building_gold_cost_value }
@@ -269,10 +269,10 @@ supply_tent_05 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_supply_tent"
 	}
 }
-supply_tent_06 = {
+rd_supply_tent_06 = {
 	construction_time = @camp_building_main_slot_construction_duration_t6
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = supply_tent_05
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_supply_tent_05
 	internal_slots = 6
 
 	cost = { gold = supply_tent_06_domicile_building_gold_cost_value }
@@ -324,11 +324,11 @@ supply_tent_06 = {
 	}
 }
 # Upgrades
-supply_tent_sutler = { # Sutler
+rd_supply_tent_sutler = { # Sutler
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = supply_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_supply_tent_01
 
 	cost = { gold = supply_tent_sutler_domicile_building_gold_cost_value }
 	refund = {
@@ -378,11 +378,11 @@ supply_tent_sutler = { # Sutler
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_supply_tent"
 	}
 }
-supply_tent_mender = { # Mender
+rd_supply_tent_mender = { # Mender
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = supply_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_supply_tent_01
 
 	cost = { gold = supply_tent_mender_domicile_building_gold_cost_value }
 	refund = {
@@ -433,11 +433,11 @@ supply_tent_mender = { # Mender
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_supply_tent"
 	}
 }
-supply_tent_smithy = { # Smithy
+rd_supply_tent_smithy = { # Smithy
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = supply_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_supply_tent_01
 
 	cost = { gold = supply_tent_smithy_domicile_building_gold_cost_value }
 	refund = {
@@ -501,11 +501,11 @@ supply_tent_smithy = { # Smithy
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_supply_tent"
 	}
 }
-supply_tent_arsenal = { # Arsenal
+rd_supply_tent_arsenal = { # Arsenal
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = supply_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_supply_tent_01
 
 	cost = { gold = supply_tent_arsenal_domicile_building_gold_cost_value }
 	refund = {
@@ -558,11 +558,11 @@ supply_tent_arsenal = { # Arsenal
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_supply_tent"
 	}
 }
-supply_tent_reserve_provisions = { # Reserve Provisions
+rd_supply_tent_reserve_provisions = { # Reserve Provisions
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = supply_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_supply_tent_01
 
 	cost = { gold = supply_tent_reserve_provisions_domicile_building_gold_cost_value }
 	refund = {
@@ -626,11 +626,11 @@ supply_tent_reserve_provisions = { # Reserve Provisions
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_supply_tent"
 	}
 }
-supply_tent_reserve_water = { # Reserve Water
+rd_supply_tent_reserve_water = { # Reserve Water
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = supply_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_supply_tent_01
 
 	cost = { gold = supply_tent_reserve_water_domicile_building_gold_cost_value }
 	refund = {
@@ -693,11 +693,11 @@ supply_tent_reserve_water = { # Reserve Water
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_supply_tent"
 	}
 }
-supply_tent_climbing_gear = { # Climbing Gear
+rd_supply_tent_climbing_gear = { # Climbing Gear
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = supply_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_supply_tent_01
 
 	cost = { gold = supply_tent_climbing_gear_domicile_building_gold_cost_value }
 	refund = {
@@ -757,11 +757,11 @@ supply_tent_climbing_gear = { # Climbing Gear
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_supply_tent"
 	}
 }
-supply_tent_subdued_gear = { # Subdued Gear
+rd_supply_tent_subdued_gear = { # Subdued Gear
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = supply_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_supply_tent_01
 
 	cost = { gold = supply_tent_subdued_gear_domicile_building_gold_cost_value }
 	refund = {
@@ -822,10 +822,10 @@ supply_tent_subdued_gear = { # Subdued Gear
 	}
 }
 ### Barber Tent - Remedies & Torture
-barber_tent_01 = {
+rd_barber_tent_01 = {
 	internal_slots = 1
 	construction_time = @camp_building_main_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
+	allowed_domicile_types = { rd_mil_camp }
 
 	cost = { gold = barber_tent_01_domicile_building_gold_cost_value }
 	refund = {
@@ -872,10 +872,10 @@ barber_tent_01 = {
 
 	}
 }
-barber_tent_02 = {
+rd_barber_tent_02 = {
 	construction_time = @camp_building_main_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = barber_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_barber_tent_01
 	internal_slots = 2
 
 	cost = { gold = barber_tent_02_domicile_building_gold_cost_value }
@@ -923,10 +923,10 @@ barber_tent_02 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_barber_tent"
 	}
 }
-barber_tent_03 = {
+rd_barber_tent_03 = {
 	construction_time = @camp_building_main_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = barber_tent_02
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_barber_tent_02
 	internal_slots = 3
 
 	cost = { gold = barber_tent_03_domicile_building_gold_cost_value }
@@ -975,10 +975,10 @@ barber_tent_03 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_barber_tent"
 	}
 }
-barber_tent_04 = {
+rd_barber_tent_04 = {
 	construction_time = @camp_building_main_slot_construction_duration_t4
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = barber_tent_03
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_barber_tent_03
 	internal_slots = 3
 
 	cost = { gold = barber_tent_04_domicile_building_gold_cost_value }
@@ -1028,10 +1028,10 @@ barber_tent_04 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_barber_tent"
 	}
 }
-barber_tent_05 = {
+rd_barber_tent_05 = {
 	construction_time = @camp_building_main_slot_construction_duration_t5
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = barber_tent_04
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_barber_tent_04
 	internal_slots = 3
 
 	cost = { gold = barber_tent_05_domicile_building_gold_cost_value }
@@ -1082,10 +1082,10 @@ barber_tent_05 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_barber_tent"
 	}
 }
-barber_tent_06 = {
+rd_barber_tent_06 = {
 	construction_time = @camp_building_main_slot_construction_duration_t6
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = barber_tent_05
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_barber_tent_05
 	internal_slots = 3
 
 	cost = { gold = barber_tent_06_domicile_building_gold_cost_value }
@@ -1138,11 +1138,11 @@ barber_tent_06 = {
 	}
 }
 # Upgrades
-barber_tent_surgeons_tools = { # Surgeon's Tools
+rd_barber_tent_surgeons_tools = { # Surgeon's Tools
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = barber_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_barber_tent_01
 
 	cost = { gold = barber_tent_surgeons_tools_domicile_building_gold_cost_value }
 	refund = {
@@ -1195,11 +1195,11 @@ barber_tent_surgeons_tools = { # Surgeon's Tools
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_barber_tent"
 	}
 }
-barber_tent_dentists_tools = { # Dentist's Tools
+rd_barber_tent_dentists_tools = { # Dentist's Tools
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = barber_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_barber_tent_01
 
 	cost = { gold = barber_tent_dentists_tools_domicile_building_gold_cost_value }
 	refund = {
@@ -1248,11 +1248,11 @@ barber_tent_dentists_tools = { # Dentist's Tools
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_barber_tent"
 	}
 }
-barber_tent_torturers_tools = { # Torturer's Tools
+rd_barber_tent_torturers_tools = { # Torturer's Tools
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = barber_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_barber_tent_01
 
 	cost = { gold = barber_tent_torturers_tools_domicile_building_gold_cost_value }
 	refund = {
@@ -1313,11 +1313,11 @@ barber_tent_torturers_tools = { # Torturer's Tools
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_barber_tent"
 	}
 }
-barber_tent_reference_corpus = { # Reference Corpus
+rd_barber_tent_reference_corpus = { # Reference Corpus
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = barber_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_barber_tent_01
 
 	cost = { gold = barber_tent_reference_corpus_domicile_building_gold_cost_value }
 	refund = {
@@ -1374,11 +1374,11 @@ barber_tent_reference_corpus = { # Reference Corpus
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_barber_tent"
 	}
 }
-barber_tent_morticians_tools = { # Mortician's Tools
+rd_barber_tent_morticians_tools = { # Mortician's Tools
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = barber_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_barber_tent_01
 
 	cost = { gold = barber_tent_morticians_tools_domicile_building_gold_cost_value }
 	refund = {
@@ -1438,10 +1438,10 @@ barber_tent_morticians_tools = { # Mortician's Tools
 	}
 }
 ### Baggage Train - Travel & Escorting
-baggage_train_01 = {
+rd_baggage_train_01 = {
 	internal_slots = 1
 	construction_time = @camp_building_main_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
+	allowed_domicile_types = { rd_mil_camp }
 
 	cost = { gold = baggage_train_01_domicile_building_gold_cost_value }
 	refund = {
@@ -1489,10 +1489,10 @@ baggage_train_01 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_baggage_train"
 	}
 }
-baggage_train_02 = {
+rd_baggage_train_02 = {
 	construction_time = @camp_building_main_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = baggage_train_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_baggage_train_01
 	internal_slots = 2
 
 	cost = { gold = baggage_train_02_domicile_building_gold_cost_value }
@@ -1542,10 +1542,10 @@ baggage_train_02 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_baggage_train"
 	}
 }
-baggage_train_03 = {
+rd_baggage_train_03 = {
 	construction_time = @camp_building_main_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = baggage_train_02
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_baggage_train_02
 	internal_slots = 3
 
 	cost = { gold = baggage_train_03_domicile_building_gold_cost_value }
@@ -1596,10 +1596,10 @@ baggage_train_03 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_baggage_train"
 	}
 }
-baggage_train_04 = {
+rd_baggage_train_04 = {
 	construction_time = @camp_building_main_slot_construction_duration_t4
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = baggage_train_03
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_baggage_train_03
 	internal_slots = 4
 
 	cost = { gold = baggage_train_04_domicile_building_gold_cost_value }
@@ -1651,10 +1651,10 @@ baggage_train_04 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_baggage_train"
 	}
 }
-baggage_train_05 = {
+rd_baggage_train_05 = {
 	construction_time = @camp_building_main_slot_construction_duration_t5
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = baggage_train_04
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_baggage_train_04
 	internal_slots = 5
 
 	cost = { gold = baggage_train_05_domicile_building_gold_cost_value }
@@ -1707,10 +1707,10 @@ baggage_train_05 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_baggage_train"
 	}
 }
-baggage_train_06 = {
+rd_baggage_train_06 = {
 	construction_time = @camp_building_main_slot_construction_duration_t6
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = baggage_train_05
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_baggage_train_05
 	internal_slots = 6
 
 	cost = { gold = baggage_train_06_domicile_building_gold_cost_value }
@@ -1765,11 +1765,11 @@ baggage_train_06 = {
 	}
 }
 # Upgrades
-baggage_train_ample_steeds = { # Ample Steeds
+rd_baggage_train_ample_steeds = { # Ample Steeds
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = baggage_train_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_baggage_train_01
 
 	cost = { gold = baggage_train_ample_steeds_domicile_building_gold_cost_value }
 	refund = {
@@ -1832,11 +1832,11 @@ baggage_train_ample_steeds = { # Ample Steeds
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_baggage_train"
 	}
 }
-baggage_train_porters = { # Porters
+rd_baggage_train_porters = { # Porters
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = baggage_train_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_baggage_train_01
 
 	cost = { gold = baggage_train_porters_domicile_building_gold_cost_value }
 	refund = {
@@ -1896,11 +1896,11 @@ baggage_train_porters = { # Porters
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_baggage_train"
 	}
 }
-baggage_train_trackers = { # Trackers
+rd_baggage_train_trackers = { # Trackers
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = baggage_train_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_baggage_train_01
 
 	cost = { gold = baggage_train_trackers_domicile_building_gold_cost_value }
 	refund = {
@@ -1959,11 +1959,11 @@ baggage_train_trackers = { # Trackers
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_baggage_train"
 	}
 }
-baggage_train_kennel = { # Kennel
+rd_baggage_train_kennel = { # Kennel
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = baggage_train_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_baggage_train_01
 
 	cost = { gold = baggage_train_kennel_domicile_building_gold_cost_value }
 	refund = {
@@ -2016,11 +2016,11 @@ baggage_train_kennel = { # Kennel
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_baggage_train"
 	}
 }
-baggage_train_siege_engineers = { # Siege Engineers
+rd_baggage_train_siege_engineers = { # Siege Engineers
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = baggage_train_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_baggage_train_01
 
 	cost = { gold = baggage_train_siege_engineers_domicile_building_gold_cost_value }
 	refund = {
@@ -2079,11 +2079,11 @@ baggage_train_siege_engineers = { # Siege Engineers
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_baggage_train"
 	}
 }
-baggage_train_shrine = { # Shrine
+rd_baggage_train_shrine = { # Shrine
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = baggage_train_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_baggage_train_01
 
 	cost = { gold = baggage_train_shrine_domicile_building_gold_cost_value }
 	refund = {
@@ -2147,11 +2147,11 @@ baggage_train_shrine = { # Shrine
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_baggage_train"
 	}
 }
-baggage_train_scribes = { # Scribes
+rd_baggage_train_scribes = { # Scribes
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = baggage_train_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_baggage_train_01
 
 	cost = { gold = baggage_train_scribes_domicile_building_gold_cost_value }
 	refund = {
@@ -2210,11 +2210,11 @@ baggage_train_scribes = { # Scribes
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_baggage_train"
 	}
 }
-baggage_train_bartering_grounds = { # Bartering Grounds
+rd_baggage_train_bartering_grounds = { # Bartering Grounds
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = baggage_train_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_baggage_train_01
 
 	cost = { gold = baggage_train_bartering_grounds_domicile_building_gold_cost_value }
 	refund = {
@@ -2267,11 +2267,11 @@ baggage_train_bartering_grounds = { # Bartering Grounds
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_baggage_train"
 	}
 }
-baggage_train_proof_of_claims = { # Proof of Claims
+rd_baggage_train_proof_of_claims = { # Proof of Claims
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = baggage_train_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_baggage_train_01
 
 	cost = { gold = baggage_train_proof_of_claims_domicile_building_gold_cost_value }
 	refund = {
@@ -2330,11 +2330,11 @@ baggage_train_proof_of_claims = { # Proof of Claims
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_baggage_train"
 	}
 }
-baggage_train_ransom_cages = { # Ransom Cages
+rd_baggage_train_ransom_cages = { # Ransom Cages
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = baggage_train_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_baggage_train_01
 
 	cost = { gold = baggage_train_ransom_cages_domicile_building_gold_cost_value }
 	refund = {
@@ -2393,11 +2393,11 @@ baggage_train_ransom_cages = { # Ransom Cages
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_baggage_train"
 	}
 }
-baggage_train_negotiators = { # Negotiators
+rd_baggage_train_negotiators = { # Negotiators
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = baggage_train_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_baggage_train_01
 
 	cost = { gold = baggage_train_negotiators_domicile_building_gold_cost_value }
 	refund = {
@@ -2456,11 +2456,11 @@ baggage_train_negotiators = { # Negotiators
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_baggage_train"
 	}
 }
-baggage_train_ascetics = { # Ascetics
+rd_baggage_train_ascetics = { # Ascetics
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = baggage_train_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_baggage_train_01
 
 	cost = { gold = baggage_train_ascetics_domicile_building_gold_cost_value }
 	refund = {
@@ -2517,11 +2517,11 @@ baggage_train_ascetics = { # Ascetics
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_baggage_train"
 	}
 }
-baggage_train_pleasure_tents = { # Pleasure Tents
+rd_baggage_train_pleasure_tents = { # Pleasure Tents
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = baggage_train_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_baggage_train_01
 
 	cost = { gold = baggage_train_pleasure_tents_domicile_building_gold_cost_value }
 	refund = {
@@ -2574,10 +2574,10 @@ baggage_train_pleasure_tents = { # Pleasure Tents
 	}
 }
 ### Mess Tent - Morsels & Morale
-mess_tent_01 = {
+rd_mess_tent_01 = {
 	internal_slots = 1
 	construction_time = @camp_building_main_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
+	allowed_domicile_types = { rd_mil_camp }
 
 	cost = { gold = mess_tent_01_domicile_building_gold_cost_value }
 	refund = {
@@ -2624,10 +2624,10 @@ mess_tent_01 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_mess_tent"
 	}
 }
-mess_tent_02 = {
+rd_mess_tent_02 = {
 	construction_time = @camp_building_main_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = mess_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_mess_tent_01
 	internal_slots = 1
 
 	cost = { gold = mess_tent_02_domicile_building_gold_cost_value }
@@ -2676,10 +2676,10 @@ mess_tent_02 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_mess_tent"
 	}
 }
-mess_tent_03 = {
+rd_mess_tent_03 = {
 	construction_time = @camp_building_main_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = mess_tent_02
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_mess_tent_02
 	internal_slots = 2
 
 	cost = { gold = mess_tent_03_domicile_building_gold_cost_value }
@@ -2729,10 +2729,10 @@ mess_tent_03 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_mess_tent"
 	}
 }
-mess_tent_04 = {
+rd_mess_tent_04 = {
 	construction_time = @camp_building_main_slot_construction_duration_t4
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = mess_tent_03
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_mess_tent_03
 	internal_slots = 2
 
 	cost = { gold = mess_tent_04_domicile_building_gold_cost_value }
@@ -2783,10 +2783,10 @@ mess_tent_04 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_mess_tent"
 	}
 }
-mess_tent_05 = {
+rd_mess_tent_05 = {
 	construction_time = @camp_building_main_slot_construction_duration_t5
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = mess_tent_04
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_mess_tent_04
 	internal_slots = 3
 
 	cost = { gold = mess_tent_05_domicile_building_gold_cost_value }
@@ -2838,10 +2838,10 @@ mess_tent_05 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_mess_tent"
 	}
 }
-mess_tent_06 = {
+rd_mess_tent_06 = {
 	construction_time = @camp_building_main_slot_construction_duration_t6
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = mess_tent_05
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_mess_tent_05
 	internal_slots = 3
 
 	cost = { gold = mess_tent_06_domicile_building_gold_cost_value }
@@ -2895,11 +2895,11 @@ mess_tent_06 = {
 	}
 }
 # Upgrades
-mess_tent_herbalists = { # Herbalists
+rd_mess_tent_herbalists = { # Herbalists
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = mess_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_mess_tent_01
 
 	cost = { gold = mess_tent_herbalists_domicile_building_gold_cost_value }
 	refund = {
@@ -2953,11 +2953,11 @@ mess_tent_herbalists = { # Herbalists
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_mess_tent"
 	}
 }
-mess_tent_brewers = { # Brewers
+rd_mess_tent_brewers = { # Brewers
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = mess_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_mess_tent_01
 
 	cost = { gold = mess_tent_brewers_domicile_building_gold_cost_value }
 	refund = {
@@ -3012,11 +3012,11 @@ mess_tent_brewers = { # Brewers
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_mess_tent"
 	}
 }
-mess_tent_curers = { # Curers
+rd_mess_tent_curers = { # Curers
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = mess_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_mess_tent_01
 
 	cost = { gold = mess_tent_curers_domicile_building_gold_cost_value }
 	refund = {
@@ -3066,11 +3066,11 @@ mess_tent_curers = { # Curers
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_mess_tent"
 	}
 }
-mess_tent_bakers = { # Bakers
+rd_mess_tent_bakers = { # Bakers
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = mess_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_mess_tent_01
 
 	cost = { gold = mess_tent_bakers_domicile_building_gold_cost_value }
 	refund = {
@@ -3122,11 +3122,11 @@ mess_tent_bakers = { # Bakers
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_mess_tent"
 	}
 }
-mess_tent_cooks = { # Cooks
+rd_mess_tent_cooks = { # Cooks
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = mess_tent_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_mess_tent_01
 
 	cost = { gold = mess_tent_cooks_domicile_building_gold_cost_value }
 	refund = {
@@ -3182,10 +3182,10 @@ mess_tent_cooks = { # Cooks
 	}
 }
 ### Campfire - Entertainment & Intrigue
-camp_fire_01 = {
+rd_camp_fire_01 = {
 	internal_slots = 1
 	construction_time = @camp_building_main_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
+	allowed_domicile_types = { rd_mil_camp }
 
 	cost = { gold = camp_fire_01_domicile_building_gold_cost_value }
 	refund = {
@@ -3231,10 +3231,10 @@ camp_fire_01 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_campfire"
 	}
 }
-camp_fire_02 = {
+rd_camp_fire_02 = {
 	construction_time = @camp_building_main_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_fire_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_fire_01
 	internal_slots = 1
 
 	cost = { gold = camp_fire_02_domicile_building_gold_cost_value }
@@ -3281,10 +3281,10 @@ camp_fire_02 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_campfire"
 	}
 }
-camp_fire_03 = {
+rd_camp_fire_03 = {
 	construction_time = @camp_building_main_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_fire_02
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_fire_02
 	internal_slots = 2
 
 	cost = { gold = camp_fire_03_domicile_building_gold_cost_value }
@@ -3332,10 +3332,10 @@ camp_fire_03 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_campfire"
 	}
 }
-camp_fire_04 = {
+rd_camp_fire_04 = {
 	construction_time = @camp_building_main_slot_construction_duration_t4
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_fire_03
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_fire_03
 	internal_slots = 2
 
 	cost = { gold = camp_fire_04_domicile_building_gold_cost_value }
@@ -3385,10 +3385,10 @@ camp_fire_04 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_campfire"
 	}
 }
-camp_fire_05 = {
+rd_camp_fire_05 = {
 	construction_time = @camp_building_main_slot_construction_duration_t5
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_fire_04
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_fire_04
 	internal_slots = 3
 
 	cost = { gold = camp_fire_05_domicile_building_gold_cost_value }
@@ -3438,10 +3438,10 @@ camp_fire_05 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_campfire"
 	}
 }
-camp_fire_06 = {
+rd_camp_fire_06 = {
 	construction_time = @camp_building_main_slot_construction_duration_t6
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_fire_05
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_fire_05
 	internal_slots = 3
 
 	cost = { gold = camp_fire_06_domicile_building_gold_cost_value }
@@ -3493,11 +3493,11 @@ camp_fire_06 = {
 	}
 }
 # Upgrades
-camp_fire_trailing_musicians = { # Trailing Musicians
+rd_camp_fire_trailing_musicians = { # Trailing Musicians
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_fire_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_fire_01
 
 	cost = { gold = camp_fire_trailing_musicians_domicile_building_gold_cost_value }
 	refund = {
@@ -3550,11 +3550,11 @@ camp_fire_trailing_musicians = { # Trailing Musicians
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_campfire"
 	}
 }
-camp_fire_wandering_poets = { # Wandering Poets
+rd_camp_fire_wandering_poets = { # Wandering Poets
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_fire_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_fire_01
 
 	cost = { gold = camp_fire_wandering_poets_domicile_building_gold_cost_value }
 	refund = {
@@ -3608,11 +3608,11 @@ camp_fire_wandering_poets = { # Wandering Poets
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_campfire"
 	}
 }
-camp_fire_capering_fools = { # Capering Fools
+rd_camp_fire_capering_fools = { # Capering Fools
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_fire_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_fire_01
 
 	cost = { gold = camp_fire_capering_fools_domicile_building_gold_cost_value }
 	refund = {
@@ -3665,11 +3665,11 @@ camp_fire_capering_fools = { # Capering Fools
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_campfire"
 	}
 }
-camp_fire_libations_for_the_lost = { # Libations for the Lost
+rd_camp_fire_libations_for_the_lost = { # Libations for the Lost
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_fire_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_fire_01
 
 	cost = { gold = camp_fire_libations_for_the_lost_domicile_building_gold_cost_value }
 	refund = {
@@ -3720,11 +3720,11 @@ camp_fire_libations_for_the_lost = { # Libations for the Lost
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_campfire"
 	}
 }
-camp_fire_local_hangers_on = { # Local Hangers-On
+rd_camp_fire_local_hangers_on = { # Local Hangers-On
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_fire_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_fire_01
 
 	cost = { gold = camp_fire_local_hangers_on_domicile_building_gold_cost_value }
 	refund = {
@@ -3784,11 +3784,11 @@ camp_fire_local_hangers_on = { # Local Hangers-On
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_campfire"
 	}
 }
-camp_fire_future_dreams = { # Future Dreams
+rd_camp_fire_future_dreams = { # Future Dreams
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_fire_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_fire_01
 
 	cost = { gold = camp_fire_future_dreams_domicile_building_gold_cost_value }
 	refund = {
@@ -3848,11 +3848,11 @@ camp_fire_future_dreams = { # Future Dreams
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_campfire"
 	}
 }
-camp_fire_nightly_debates = { # Nightly Debates
+rd_camp_fire_nightly_debates = { # Nightly Debates
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_fire_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_fire_01
 
 	cost = { gold = camp_fire_nightly_debates_domicile_building_gold_cost_value }
 	refund = {
@@ -3908,11 +3908,11 @@ camp_fire_nightly_debates = { # Nightly Debates
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_campfire"
 	}
 }
-camp_fire_juicy_rumors = { # Juicy Rumors
+rd_camp_fire_juicy_rumors = { # Juicy Rumors
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_fire_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_fire_01
 
 	cost = { gold = camp_fire_juicy_rumors_domicile_building_gold_cost_value }
 	refund = {
@@ -3972,10 +3972,10 @@ camp_fire_juicy_rumors = { # Juicy Rumors
 	}
 }
 ### Proving Grounds - Training & Recruitment
-proving_grounds_01 = {
+rd_proving_grounds_01 = {
 	internal_slots = 1
 	construction_time = @camp_building_main_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
+	allowed_domicile_types = { rd_mil_camp }
 
 	cost = { gold = proving_grounds_01_domicile_building_gold_cost_value }
 	refund = {
@@ -4019,10 +4019,10 @@ proving_grounds_01 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_proving_ground"
 	}
 }
-proving_grounds_02 = {
+rd_proving_grounds_02 = {
 	construction_time = @camp_building_main_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = proving_grounds_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_proving_grounds_01
 	internal_slots = 2
 
 	cost = { gold = proving_grounds_02_domicile_building_gold_cost_value }
@@ -4068,10 +4068,10 @@ proving_grounds_02 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_proving_ground"
 	}
 }
-proving_grounds_03 = {
+rd_proving_grounds_03 = {
 	construction_time = @camp_building_main_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = proving_grounds_02
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_proving_grounds_02
 	internal_slots = 3
 
 	cost = { gold = proving_grounds_03_domicile_building_gold_cost_value }
@@ -4117,10 +4117,10 @@ proving_grounds_03 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_proving_ground"
 	}
 }
-proving_grounds_04 = {
+rd_proving_grounds_04 = {
 	construction_time = @camp_building_main_slot_construction_duration_t4
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = proving_grounds_03
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_proving_grounds_03
 	internal_slots = 4
 
 	cost = { gold = proving_grounds_04_domicile_building_gold_cost_value }
@@ -4169,10 +4169,10 @@ proving_grounds_04 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_proving_ground"
 	}
 }
-proving_grounds_05 = {
+rd_proving_grounds_05 = {
 	construction_time = @camp_building_main_slot_construction_duration_t5
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = proving_grounds_04
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_proving_grounds_04
 	internal_slots = 5
 
 	cost = { gold = proving_grounds_05_domicile_building_gold_cost_value }
@@ -4220,10 +4220,10 @@ proving_grounds_05 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_proving_ground"
 	}
 }
-proving_grounds_06 = {
+rd_proving_grounds_06 = {
 	construction_time = @camp_building_main_slot_construction_duration_t6
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = proving_grounds_05
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_proving_grounds_05
 	internal_slots = 6
 
 	cost = { gold = proving_grounds_06_domicile_building_gold_cost_value }
@@ -4274,11 +4274,11 @@ proving_grounds_06 = {
 	}
 }
 # Upgrades
-proving_grounds_horse_run = { # Horse Run
+rd_proving_grounds_horse_run = { # Horse Run
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = proving_grounds_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_proving_grounds_01
 
 	cost = { gold = proving_grounds_horse_run_domicile_building_gold_cost_value }
 	refund = {
@@ -4339,11 +4339,11 @@ proving_grounds_horse_run = { # Horse Run
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_proving_ground"
 	}
 }
-proving_grounds_camel_run = { # Camel Run
+rd_proving_grounds_camel_run = { # Camel Run
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = proving_grounds_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_proving_grounds_01
 
 	cost = { gold = proving_grounds_camel_run_domicile_building_gold_cost_value }
 	refund = {
@@ -4408,11 +4408,11 @@ proving_grounds_camel_run = { # Camel Run
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_proving_ground"
 	}
 }
-proving_grounds_elephantry_reserve = { # Elephantry Reserve
+rd_proving_grounds_elephantry_reserve = { # Elephantry Reserve
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = proving_grounds_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_proving_grounds_01
 
 	cost = { gold = proving_grounds_elephantry_reserve_domicile_building_gold_cost_value }
 	refund = {
@@ -4471,11 +4471,11 @@ proving_grounds_elephantry_reserve = { # Elephantry Reserve
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_proving_ground"
 	}
 }
-proving_grounds_nightly_barding_drills = { # Nightly Barding Drills
+rd_proving_grounds_nightly_barding_drills = { # Nightly Barding Drills
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = proving_grounds_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_proving_grounds_01
 
 	cost = { gold = proving_grounds_nightly_barding_drills_domicile_building_gold_cost_value }
 	refund = {
@@ -4536,11 +4536,11 @@ proving_grounds_nightly_barding_drills = { # Nightly Barding Drills
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_proving_ground"
 	}
 }
-proving_grounds_life_in_the_saddle = { # Life in the Saddle
+rd_proving_grounds_life_in_the_saddle = { # Life in the Saddle
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = proving_grounds_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_proving_grounds_01
 
 	cost = { gold = proving_grounds_life_in_the_saddle_domicile_building_gold_cost_value }
 	refund = {
@@ -4614,11 +4614,11 @@ proving_grounds_life_in_the_saddle = { # Life in the Saddle
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_proving_ground"
 	}
 }
-proving_grounds_the_stump = { # The Stump
+rd_proving_grounds_the_stump = { # The Stump
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = proving_grounds_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_proving_grounds_01
 
 	cost = { gold = proving_grounds_the_stump_domicile_building_gold_cost_value }
 	refund = {
@@ -4679,11 +4679,11 @@ proving_grounds_the_stump = { # The Stump
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_proving_ground"
 	}
 }
-proving_grounds_personal_bouts = { # Personal Bouts
+rd_proving_grounds_personal_bouts = { # Personal Bouts
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = proving_grounds_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_proving_grounds_01
 
 	cost = { gold = proving_grounds_personal_bouts_domicile_building_gold_cost_value }
 	refund = {
@@ -4745,11 +4745,11 @@ proving_grounds_personal_bouts = { # Personal Bouts
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_proving_ground"
 	}
 }
-proving_grounds_training_circle = { # Training Circle
+rd_proving_grounds_training_circle = { # Training Circle
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = proving_grounds_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_proving_grounds_01
 
 	cost = { gold = proving_grounds_training_circle_domicile_building_gold_cost_value }
 	refund = {
@@ -4811,11 +4811,11 @@ proving_grounds_training_circle = { # Training Circle
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_proving_ground"
 	}
 }
-proving_grounds_mock_battle_drills = { # Mock Battle Drills
+rd_proving_grounds_mock_battle_drills = { # Mock Battle Drills
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = proving_grounds_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_proving_grounds_01
 
 	cost = { gold = proving_grounds_mock_battle_drills_domicile_building_gold_cost_value }
 	refund = {
@@ -4876,11 +4876,11 @@ proving_grounds_mock_battle_drills = { # Mock Battle Drills
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_proving_ground"
 	}
 }
-proving_grounds_lockwagon = { # Lockwagon
+rd_proving_grounds_lockwagon = { # Lockwagon
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = proving_grounds_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_proving_grounds_01
 
 	cost = { gold = proving_grounds_lockwagon_domicile_building_gold_cost_value }
 	refund = {
@@ -4941,11 +4941,11 @@ proving_grounds_lockwagon = { # Lockwagon
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_proving_ground"
 	}
 }
-proving_grounds_martial_study = { # Martial Study
+rd_proving_grounds_martial_study = { # Martial Study
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = proving_grounds_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_proving_grounds_01
 
 	cost = { gold = proving_grounds_martial_study_domicile_building_gold_cost_value }
 	refund = {
@@ -5003,11 +5003,11 @@ proving_grounds_martial_study = { # Martial Study
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_proving_ground"
 	}
 }
-proving_grounds_the_stick_game = { # The Stick Game
+rd_proving_grounds_the_stick_game = { # The Stick Game
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = proving_grounds_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_proving_grounds_01
 
 	cost = { gold = proving_grounds_the_stick_game_domicile_building_gold_cost_value }
 	refund = {
@@ -5063,11 +5063,11 @@ proving_grounds_the_stick_game = { # The Stick Game
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_proving_ground"
 	}
 }
-proving_grounds_bodyguard_drills = { # Bodyguard Drills
+rd_proving_grounds_bodyguard_drills = { # Bodyguard Drills
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = proving_grounds_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_proving_grounds_01
 
 	cost = { gold = proving_grounds_bodyguard_drills_domicile_building_gold_cost_value }
 	refund = {
@@ -5128,10 +5128,10 @@ proving_grounds_bodyguard_drills = { # Bodyguard Drills
 	}
 }
 ### Perimeter - Defence & Counter-espionage
-camp_perimeter_01 = {
+rd_camp_perimeter_01 = {
 	internal_slots = 1
 	construction_time = @camp_building_main_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
+	allowed_domicile_types = { rd_mil_camp }
 
 	cost = { gold = camp_perimeter_01_domicile_building_gold_cost_value }
 	refund = {
@@ -5177,10 +5177,10 @@ camp_perimeter_01 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_perimeter"
 	}
 }
-camp_perimeter_02 = {
+rd_camp_perimeter_02 = {
 	construction_time = @camp_building_main_slot_construction_duration_t2
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_perimeter_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_perimeter_01
 	internal_slots = 2
 
 	cost = { gold = camp_perimeter_02_domicile_building_gold_cost_value }
@@ -5228,10 +5228,10 @@ camp_perimeter_02 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_perimeter"
 	}
 }
-camp_perimeter_03 = {
+rd_camp_perimeter_03 = {
 	construction_time = @camp_building_main_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_perimeter_02
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_perimeter_02
 	internal_slots = 3
 
 	cost = { gold = camp_perimeter_03_domicile_building_gold_cost_value }
@@ -5280,10 +5280,10 @@ camp_perimeter_03 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_perimeter"
 	}
 }
-camp_perimeter_04 = {
+rd_camp_perimeter_04 = {
 	construction_time = @camp_building_main_slot_construction_duration_t4
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_perimeter_03
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_perimeter_03
 	internal_slots = 3
 
 	cost = { gold = camp_perimeter_04_domicile_building_gold_cost_value }
@@ -5333,10 +5333,10 @@ camp_perimeter_04 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_perimeter"
 	}
 }
-camp_perimeter_05 = {
+rd_camp_perimeter_05 = {
 	construction_time = @camp_building_main_slot_construction_duration_t5
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_perimeter_04
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_perimeter_04
 	internal_slots = 3
 
 	cost = { gold = camp_perimeter_05_domicile_building_gold_cost_value }
@@ -5387,10 +5387,10 @@ camp_perimeter_05 = {
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_perimeter"
 	}
 }
-camp_perimeter_06 = {
+rd_camp_perimeter_06 = {
 	construction_time = @camp_building_main_slot_construction_duration_t6
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_perimeter_05
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_perimeter_05
 	internal_slots = 3
 
 	cost = { gold = camp_perimeter_06_domicile_building_gold_cost_value }
@@ -5443,11 +5443,11 @@ camp_perimeter_06 = {
 	}
 }
 # Upgrades
-camp_perimeter_good_siting = { # Good Siting
+rd_camp_perimeter_good_siting = { # Good Siting
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_perimeter_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_perimeter_01
 
 	cost = { gold = camp_perimeter_good_siting_domicile_building_gold_cost_value }
 	refund = {
@@ -5496,11 +5496,11 @@ camp_perimeter_good_siting = { # Good Siting
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_perimeter"
 	}
 }
-camp_perimeter_fixed_layout = { # Fixed Layout
+rd_camp_perimeter_fixed_layout = { # Fixed Layout
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_perimeter_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_perimeter_01
 
 	cost = { gold = camp_perimeter_fixed_layout_domicile_building_gold_cost_value }
 	refund = {
@@ -5549,11 +5549,11 @@ camp_perimeter_fixed_layout = { # Fixed Layout
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_perimeter"
 	}
 }
-camp_perimeter_extra_watch = { # Extra Watch
+rd_camp_perimeter_extra_watch = { # Extra Watch
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_perimeter_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_perimeter_01
 
 	cost = { gold = camp_perimeter_extra_watch_domicile_building_gold_cost_value }
 	refund = {
@@ -5611,11 +5611,11 @@ camp_perimeter_extra_watch = { # Extra Watch
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_perimeter"
 	}
 }
-camp_perimeter_palisade = { # Palisade
+rd_camp_perimeter_palisade = { # Palisade
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_perimeter_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_perimeter_01
 
 	cost = { gold = camp_perimeter_palisade_domicile_building_gold_cost_value }
 	refund = {
@@ -5672,11 +5672,11 @@ camp_perimeter_palisade = { # Palisade
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_perimeter"
 	}
 }
-camp_perimeter_ditch = { # Ditch
+rd_camp_perimeter_ditch = { # Ditch
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t3
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_perimeter_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_perimeter_01
 
 	cost = { gold = camp_perimeter_ditch_domicile_building_gold_cost_value }
 	refund = {
@@ -5732,11 +5732,11 @@ camp_perimeter_ditch = { # Ditch
 		soundeffect = "event:/DLC/EP3/SFX/UI/camp_buildings/ep3_ui_domicile_buildings_perimeter"
 	}
 }
-camp_perimeter_camp_hygiene = { # Camp Hygiene
+rd_camp_perimeter_camp_hygiene = { # Camp Hygiene
 	slot_type = internal
 	construction_time = @camp_building_internal_slot_construction_duration_t1
-	allowed_domicile_types = { camp rd_mil_camp }
-	previous_building = camp_perimeter_01
+	allowed_domicile_types = { rd_mil_camp }
+	previous_building = rd_camp_perimeter_01
 
 	cost = { gold = camp_perimeter_camp_hygiene_domicile_building_gold_cost_value }
 	refund = {
