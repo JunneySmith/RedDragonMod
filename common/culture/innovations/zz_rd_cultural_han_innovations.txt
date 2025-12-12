@@ -1,0 +1,96 @@
+﻿@rd_han_inventions = "gfx/interface/icons/culture_innovations/innovation_rd_compound_bows.dds"
+@rd_han_inventions_2 = "gfx/interface/icons/culture_innovations/innovation_rd_han_culture.dds"
+@special_maa_01 = "gfx/interface/icons/culture_innovations/innovation_special_maa_01.dds"
+
+innovation_rd_compound_bows = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @rd_han_inventions
+
+	potential = {
+
+kol_culture_is_han_trigger = yes
+
+	}
+	
+	unlock_maa = rd_light_calary_archers
+	unlock_maa = rd_han_palace_guards
+	unlock_maa = rd_han_shenwu_army
+	unlock_maa = rd_huaishang_light_cavalry
+
+	custom = doctrine_rd_han_allow_special_soldier
+	custom = doctrine_rd_han_allow_han_war_1
+	flag = global_maa
+}
+innovation_rd_han_culture = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @rd_han_inventions_2
+
+	potential = {
+
+kol_culture_is_han_trigger = yes
+	}
+		culture_modifier = {
+		mercenary_count_mult = 0.5
+	}
+	custom = innovation_rd_han_gov_allow_job
+	
+			unlock_law = single_heir_succession_law
+		custom = doctrine_rd_han_allow_job
+	custom = doctrine_rd_han_allow_han_war
+	flag = global_maa
+}
+
+innovation_rd_han_gov = {
+	group = culture_group_regional
+	culture_era = culture_era_early_medieval
+	region = ghw_region_khotan
+	icon = @rd_han_inventions_2
+	
+	custom = innovation_rd_han_gov_allow_job
+
+	flag = global_maa
+}
+
+innovation_tiefutu = {
+	skill = martial
+	group = culture_group_military
+	culture_era = culture_era_tribal
+	icon = @special_maa_01
+	region = world_asia_china
+	
+	can_progress = {
+
+			custom_description = {
+				text = "rd_10_culture_county_in_north_east_trigger"
+				any_county_in_region = {
+
+						region = world_asia_north_east
+													count >= 10
+						
+						culture = ROOT
+				}
+
+			}
+
+
+	}
+
+	unlock_maa = tiefutu
+
+	flag = global_regional
+	flag = global_maa
+	
+	ai_weight_for_fascination = {
+		value = 100
+		if = {
+			limit = {
+				NOT = {
+					has_cultural_era_or_later = culture_era_high_medieval
+				}
+			}
+			multiply = 0
+		}
+	}
+}

@@ -34,7 +34,6 @@ rd_mil_can_be_granted_titles_interaction_tt: "只有军镇制政体可将[GetGov
 government_is_rd_han_administrative_obligation: "行政制封臣的税收和征召兵减少#N 50%#!，受总督效率影响\n"
 government_is_rd_han_administrative_herd_grant: "可以将草原省份授予无地庭臣\n文化有“中华军制”革新的庭臣可转化为[GetGovernment('rd_han_military_government').GetName]而非[GetGovernment( 'nomad_government' ).GetName]封臣\n\n"
 hegemony_of_rd_dejuer_desc: "[recipient.GetPrimaryTitle.GetBaseNameNoTier]是[actor.GetPrimaryTitle.GetAdjective]的霸权[de_jure|E][vassal|E]：$VALUE|+0=$"
-
 rd_demand_admin_interaction: "要求行政制政体"
 rd_supply_tent_01_domicile_building: "补给帐篷"
 rd_supply_tent_01_domicile_building_desc: "有一处集中储存地点对管理非常重要，在不停移动的情况下更是如此。"

@@ -185,7 +185,7 @@ picture = {
 	ai_check_interval = 36
 
 	is_shown = {
-	
+		always = no
 		culture = {
 			culture_head = root
 			has_innovation = innovation_rd_han_culture

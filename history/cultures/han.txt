@@ -61,7 +61,6 @@
 	discover_innovation = innovation_armilary_sphere
 	discover_innovation = innovation_royal_prerogative
 	discover_innovation = innovation_chronicle_writing
-	discover_innovation = innovation_horseshoes
 	discover_innovation = innovation_heraldry
 	discover_innovation = innovation_currency_03
 	discover_innovation = innovation_development_03

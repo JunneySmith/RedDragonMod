@@ -1,0 +1,6 @@
+﻿
+
+rd_10_culture_county_in_north_east_trigger = {
+	global = rd_10_culture_county_in_north_east_tooltip
+	global_not = rd_10_culture_county_in_north_east_tooltip
+}

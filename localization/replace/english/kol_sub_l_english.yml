@@ -3,7 +3,7 @@ rd_demand_feud_interaction: "Demand Feudal Government"
 rd_demand_feud_interaction_desc: "Demand [recipient.GetShortUIName|U] allow you abandon [THIS.Char.GetGovernment.GetAdjective][government|E], and become [GetGovernment('feudal_government').GetName][vassal|E]"
 rd_demand_feud_interaction_accept: "[recipient.GetShortUIName] Accepted"
 rd_demand_feud_interaction_refuse: "[recipient.GetShortUIName] Rejected"
-
+rd_10_culture_county_in_north_east_tooltip: "Culture has 10 or more counties in north east asia"
 rd_asia.9002.t: "Administrative Vassals"
 rd_asia.9002.desc: "We can demand our vassals becoming Administrative Vassals."
 rd_asia.9002.a: "Send the message!"

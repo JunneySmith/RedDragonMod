@@ -9,7 +9,9 @@ rd_asia.9002.desc: "在创制的特殊时间点，皇帝可以要求忠诚的封
 rd_asia.9002.a: "派出信使！"
 rd_asia.9002.b: "没有必要。"
 rd_mil_adm_contracts: "军镇义务"
-
+ tiefutu: "铁浮屠"
+ tiefutu_flavor: "#F 重装骑兵在中原军事序列中历来都有着重要的位置，直到宋朝摧毁了乡村的骑士文化。封建时代的人类诸国几乎没有出现过可以长期脱离社会来养育重甲、良马、利刃所武装精锐骑兵的特例。\n    这些被称为“铁浮屠”的重装骑兵是由占领了开封武库的金国女真人引入中原，以宋军步人甲武装骑兵，战法适应山地和丛林作战。\n 部落武士为主的骑兵虽然在训练和精锐部队对抗中存在明显的劣势，但初代骑士的组织度、合格的武艺配以厚重的盔甲，对文人压制下的乡勇、禁军来说依然是非常强大的敌人。#!"
+ rd_10_culture_county_in_north_east_tooltip: "文化出现在东北亚，且拥有超过10个省份"
  rd_celestial_send_military_aid_interaction: "命武职官员加入战争"
   rd_celestial_send_military_aid_interaction_desc: "命一位武职[governor|E]加入[recipient.GetShortUINamePossessive]的[wars|E]"
   rd_recipient_secondary_celestial_send_military_aid_interaction: "武职官员"
