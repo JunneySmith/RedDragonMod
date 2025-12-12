@@ -57,7 +57,7 @@ black_armor_cavalry = {
 	high_maintenance_cost = { gold = tiefutu_high_maint_cost }
 	provision_cost = @provisions_cost_cavalry_bankrupting
 	
-	stack = 100
+	stack = 50
 	ai_quality = { value = @cultural_maa_extra_ai_score }
 
 	icon = black_armor_cavalry
@@ -66,10 +66,10 @@ black_armor_cavalry = {
 tiefutu = {
 	type = heavy_cavalry
 	
-	damage = 85
-	toughness = 40
-	pursuit = 25
-	screen = 25
+	damage = 45
+	toughness = 25
+	pursuit = 15
+	screen = 10
 	
 	terrain_bonus = {
 		plains = { damage = 15 toughness = 2 }
@@ -78,9 +78,10 @@ tiefutu = {
 		terraced_hills = { damage = 5 }
 		mountains = { damage = 25 }
 		desert_mountains = { damage = -15 }
-		wetlands = { damage = -80 toughness = -15 pursuit = -10 }
-		jungle = { damage = -10 toughness = 5 pursuit = 10 }
+		wetlands = { toughness = -25 pursuit = -10 }
+		jungle = { damage = 10 toughness = 5 pursuit = 10 }
 	}
+
 
 	counters = {
 		archers = 1
@@ -97,7 +98,7 @@ tiefutu = {
 	high_maintenance_cost = { gold = black_armor_cavalry_high_maint_cost }
 	provision_cost = @provisions_cost_cavalry_bankrupting
 	
-	stack = 50
+	stack = 100
 	ai_quality = { value = @cultural_maa_extra_ai_score }
 
 	icon = tiefutu_cavalry
