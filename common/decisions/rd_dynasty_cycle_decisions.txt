@@ -11,6 +11,7 @@
 
 	is_shown = {
 		has_tgp_dlc_trigger = yes
+		always = no
 		top_participant_group:dynastic_cycle ?= {
 			participant_group_type = other_rulers
 		}

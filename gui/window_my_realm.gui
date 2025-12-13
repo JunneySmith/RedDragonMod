@@ -572,31 +572,44 @@ types MyRealmWindow
 									max_width = 140
 									tooltip = "REALM_WINDOW_SIZE_TT"
 								}
-							text_single = {
-								datacontext = "[GetPlayer]"
-								datacontext = "[Character.GetDomicile]"
-								layoutpolicy_horizontal = expanding
-								visible = "[GetPlayer.GetGovernment.IsType( 'rd_han_military_government' )]"
-								text = "realm_flag_rd_han_mil_herd"
-								align = nobaseline
-								#default_format = "#Weak"
-								max_width = 210
+							
 
-								tooltipwidget = {
-									herd_breakdown_hud_toolip = {
+ 
+
+				
+				
+									text_single = {
+										datacontext = "[GetPlayer]"
 										datacontext = "[GetPlayer.GetDomicile]"
+										layoutpolicy_horizontal = expanding
+										visible = "[GetPlayer.GetGovernment.IsType( 'rd_han_military_government' )]"
+										text = "realm_flag_rd_han_mil_herd"
+										align = nobaseline
+										#default_format = "#Weak"
+										max_width = 210
+											hbox = {	
+ 
+										tooltipwidget = {
+											
+											herd_breakdown_hud_toolip = {
+												datacontext = "[GetPlayer.GetDomicile]"
 
-										blockoverride "herd_limit_breakdown"
-										{
-											datacontext = "[Domicile.Self]"
-										}
-										blockoverride "herd_change_breakdown"
-										{
-											datacontext = "[GetPlayer.Self]"
+												blockoverride "herd_limit_breakdown"
+												{
+													datacontext = "[MyRealmWindow.GetCharacter.AccessHerdLimitBreakdown( Domicile.Self )]"
+												}
+												blockoverride "herd_change_breakdown"
+												{
+													datacontext = "[MyRealmWindow.GetCharacter.AccessHerdChangeBreakdown( GetPlayer.Self )]"
+												}
+												blockoverride "herd_conversion_breakdown"
+												{
+													datacontext = "[MyRealmWindow.GetCharacter.AccessHerdConversionBreakdown( Domicile.Self )]"
+												}
+											}
 										}
 									}
 								}
-							}
 							}
 						}
 
