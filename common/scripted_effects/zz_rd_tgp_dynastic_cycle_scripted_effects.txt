@@ -534,10 +534,11 @@ tgp_chaos_shattering_effect = {
 						any_in_de_jure_hierarchy = {
 						OR = {
 							this = title:e_china
-							this = title:e_rdwestchina_emp
-							this = title:e_rdsouthchina
-							this = title:e_rdnorthchina
-							this = title:e_rdeastchina
+										this = 		title:e_liangyi 
+											this = 	 title:e_yongliang
+										this =  title:e_zhongyuan 
+										 this =  title:e_jingyang 
+										this = 	title:e_lingnan
 						}
 						is_title_created = yes
 						NOT = { holder = scope:old_emperor_temp}

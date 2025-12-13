@@ -1358,11 +1358,49 @@ dynastic_cycle_yearly_pulse = {
 								situation_type = natural_disaster_earthquake
 								situation_type = natural_disaster_flood
 							}
+							situation_sub_region:disaster_area = {
+								any_situation_sub_region_county = {
+									OR = {
+										title_province = { geographical_region = world_asia_china }
+										holder = {
+											is_vassal_or_below_of = scope:hegemon
+											government_allows = administrative
+										}
+									}
+								}
+							}
 						}
 						situation:dynastic_cycle = {
 							trigger_situation_catalyst = catalyst_hegemon_natural_disaster
 						}
 					}
+				}
+			}
+			# Civil wars
+			if = {
+				limit = {
+					situation_top_has_catalyst = catalyst_hegemon_in_defensive_war_yearly
+					scope:hegemon = {
+						is_at_war_as_defender = yes
+						any_character_war = {
+							is_defender = scope:hegemon
+							is_civil_war = yes
+							is_war_leader = scope:hegemon
+							any_war_attacker = {
+								is_leader_in_war = prev
+								OR = {
+								government_allows = administrative
+									AND = {
+									exists = primary_title.title_capital_county
+									primary_title.title_capital_county.hegemony = title:h_china
+									}
+								}
+							}
+						}
+					}
+				}
+				situation:dynastic_cycle = {
+					trigger_situation_catalyst = catalyst_hegemon_in_defensive_war_yearly
 				}
 			}
 			### Legitimacy/Mandate of Heaven
@@ -1429,10 +1467,6 @@ dynastic_cycle_yearly_pulse = {
 				limit = {
 					situation_top_has_catalyst = catalyst_hegemony_far_too_few_lands
 					scope:hegemon_title = {
-						holder = {
-						has_government = rd_celestial_empire_government
-						
-						}
 						any_de_jure_county = {
 							percent < catalyst_hegemony_far_too_few_lands_value
 							holder.top_liege = scope:hegemon
@@ -1446,10 +1480,6 @@ dynastic_cycle_yearly_pulse = {
 				limit = {
 					situation_top_has_catalyst = catalyst_hegemony_too_few_lands
 					scope:hegemon_title = {
-						holder = {
-						has_government = rd_celestial_empire_government
-						
-						}
 						any_de_jure_county = {
 							percent < catalyst_hegemony_too_few_lands_value
 							holder.top_liege = scope:hegemon
@@ -1485,6 +1515,32 @@ dynastic_cycle_yearly_pulse = {
 				}
 				trigger_situation_catalyst = catalyst_imperial_treasury_debt
 			}
+		}
+		# De jure drift
+		situation_sub_region:core = {
+	        save_scope_as = china_core
+			every_situation_sub_region_county = {
+				limit = {
+					hegemony != title:h_china
+				}
+				scope:china_core = {
+					remove_dejure_title_from_sub_region = prev
+				}
+			}
+	    }
+		title:h_china = {
+		    every_de_jure_county = {
+		        limit = {
+		            NOT = {
+		                any_county_situation = {
+		                	this = situation:dynastic_cycle
+		                }
+		            }
+		        }
+				scope:china_core = {
+					add_dejure_title_to_sub_region = prev
+				}
+		    }
 		}
 	}
 }

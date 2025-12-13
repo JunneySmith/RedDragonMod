@@ -572,12 +572,6 @@ types MyRealmWindow
 									max_width = 140
 									tooltip = "REALM_WINDOW_SIZE_TT"
 								}
-							
-
- 
-
-				
-				
 									text_single = {
 										datacontext = "[GetPlayer]"
 										datacontext = "[GetPlayer.GetDomicile]"
@@ -587,28 +581,27 @@ types MyRealmWindow
 										align = nobaseline
 										#default_format = "#Weak"
 										max_width = 210
-											hbox = {	
+										
  
 										tooltipwidget = {
-											
 											herd_breakdown_hud_toolip = {
-												datacontext = "[GetPlayer.GetDomicile]"
+												datacontext = "[Character.GetDomicile]"
 
 												blockoverride "herd_limit_breakdown"
 												{
-													datacontext = "[MyRealmWindow.GetCharacter.AccessHerdLimitBreakdown( Domicile.Self )]"
+													datacontext = "[SteppeWindow.AccessHerdLimitBreakdown( Domicile.Self )]"
 												}
 												blockoverride "herd_change_breakdown"
 												{
-													datacontext = "[MyRealmWindow.GetCharacter.AccessHerdChangeBreakdown( GetPlayer.Self )]"
+													datacontext = "[SteppeWindow.AccessHerdChangeBreakdown( Character.Self )]"
 												}
 												blockoverride "herd_conversion_breakdown"
 												{
-													datacontext = "[MyRealmWindow.GetCharacter.AccessHerdConversionBreakdown( Domicile.Self )]"
+													datacontext = "[SteppeWindow.AccessHerdConversionBreakdown( Domicile.Self )]"
 												}
 											}
 										}
-									}
+									
 								}
 							}
 						}
