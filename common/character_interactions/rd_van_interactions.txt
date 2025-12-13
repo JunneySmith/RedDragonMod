@@ -1382,7 +1382,19 @@ grant_governorship_interaction = {
 	can_be_picked_title = {
 		scope:target = {
 			is_leased_out = no
-
+			OR = {
+				scope:actor = {
+					is_ai = no
+				}
+				scope:actor = {
+					NOT = { government_has_flag = government_is_rd_han_type }
+				}
+				AND = {
+					this != scope:actor.capital_province.duchy
+					this != scope:actor.capital_province.kingdom
+					this != scope:actor.capital_province.empire
+				} 
+			}
 			scope:recipient = {
 				trigger_if = { # Governors can only be appointed to certain titles
 					limit = {
