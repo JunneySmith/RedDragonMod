@@ -1389,7 +1389,16 @@ dynastic_cycle_yearly_pulse = {
 							any_war_attacker = {
 								is_leader_in_war = prev
 								OR = {
-								government_allows = administrative
+									government_allows = administrative
+									AND = {
+										joined_faction = {
+											any_faction_county_member = {
+												holder = {
+													primary_title.title_capital_county.hegemony = title:h_china
+												}
+											}
+										}
+									}
 									AND = {
 									exists = primary_title.title_capital_county
 									primary_title.title_capital_county.hegemony = title:h_china

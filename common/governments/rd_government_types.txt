@@ -53,6 +53,15 @@
 		vassal_limit = 50
 		character_max_merit_level_add = 1
 	}
+	ai_ruler_desired_kingdom_titles = {
+		value = -1 # Keep all
+		if = {
+			limit = {
+				highest_held_title_tier >= tier_empire
+			}
+			add = 2 # Is 0 == Don't keep any Kingdoms - they should all be circuits
+		}
+	}
 	flags = {
 		government_is_celestial
 		government_is_rd_han_administrative
@@ -238,7 +247,7 @@ celestial_government = {  # e.g. Common Chinese
 			limit = {
 				highest_held_title_tier >= tier_empire
 			}
-			add = 1 # Is 0 == Don't keep any Kingdoms - they should all be circuits
+			add = 2 # Is 0 == Don't keep any Kingdoms - they should all be circuits
 		}
 	}
 	ai_ruler_desired_empire_titles = {
@@ -247,7 +256,7 @@ celestial_government = {  # e.g. Common Chinese
 			limit = {
 				highest_held_title_tier = tier_hegemony
 			}
-			add = 1 # Is 0 == Don't keep any Empires - they should all be 'great circuits'
+			add = 2 # Is 0 == Don't keep any Empires - they should all be 'great circuits'
 		}
 	}
 

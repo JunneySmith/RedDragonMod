@@ -764,7 +764,15 @@ ai_check_interval = 120
 	}
 
 	is_valid = {
-
+		trigger_if = {
+			limit = {
+				is_ai = yes
+			}
+			has_trait = conqueror
+		}
+		trigger_else = {
+			prestige_level >= 4
+		}
 		highest_held_title_tier > tier_empire
 		custom_description = { text =kol_you_are_han_tooltip   kol_is_han_trigger = yes}
 		
