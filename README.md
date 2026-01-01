@@ -85,3 +85,6 @@ https://steamcommunity.com/sharedfiles/filedetails/?edit=true&id=3459950195
 4.新的整合中华决议，将华夏霸权下四个区域帝国合并为一个中华头衔。
 5.东、南、西、北四华的建立决议翻新，现在可以由相应区域的角色和完成了中原整合的天子完成。
 6.道教教改，可通过事件进行不创建新信仰的宗教改革。可变更宗教领袖，婚姻传统，教产直辖权三项。
+
+Licenses
+This project is licensed under CC BY-NC-SA 4.0.
